@@ -1,1 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AEON Mall BSD City | Reports and Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f4f5;--surface:#fff;--ink:#1d1a1c;--muted:#6b6468;--line:#e4dfe2;--brand:#b0105f;--brand-ink:#fff;--soft:#fbe8f1;--ok:#1b7a4b;--warn:#b86e00;--bad:#c0262d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171316;--surface:#221d21;--ink:#f3eef1;--muted:#a89fa4;--line:#3a3237;--brand:#e0488e;--brand-ink:#1a0711;--soft:#3a1c2c;--ok:#4cc58a;--warn:#f0a33a;--bad:#ff7075;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171316;--surface:#221d21;--ink:#f3eef1;--muted:#a89fa4;--line:#3a3237;--brand:#e0488e;--brand-ink:#1a0711;--soft:#3a1c2c;--ok:#4cc58a;--warn:#f0a33a;--bad:#ff7075;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.bar{max-width:980px;margin:0 auto;padding:12px 16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{font-size:18px;margin:0;font-weight:800;letter-spacing:-.01em}
+h1 small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+h2{font-size:20px;margin:0 0 4px;font-weight:800;letter-spacing:-.01em}
+h3{font-size:15px;margin:0 0 8px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,input,textarea,button{font:inherit;color:inherit}
+select,input[type=text],textarea{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+textarea{min-height:84px;resize:vertical}
+.ctl select{width:auto;max-width:100%}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:8px 14px;cursor:pointer;font-weight:700}
+.seg button[aria-pressed=true]{background:var(--brand);color:var(--brand-ink)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.btn{background:var(--brand);color:var(--brand-ink);border:0;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer}
+.btn.alt{background:transparent;color:var(--brand);border:1px solid var(--brand)}
+.btn.sm{padding:6px 10px;font-size:13px}
+main{max-width:980px;margin:0 auto;padding:20px 16px 48px}
+.grid{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:820px){.grid.two{grid-template-columns:340px 1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+label{display:block;font-weight:700;font-size:13px;margin:12px 0 4px}
+.muted{color:var(--muted);font-size:13px}
+.ticket{border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:10px;background:var(--surface)}
+.ticket.urgent{border-left:5px solid var(--bad)}.ticket.high{border-left:5px solid var(--warn)}.ticket.normal{border-left:5px solid var(--line)}
+.row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.id{font-weight:800}
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:2px 10px;background:var(--soft);color:var(--brand)}
+.badge.Completed{background:transparent;color:var(--ok);border:1px solid var(--ok)}
+.steps{display:flex;gap:4px;margin:10px 0 4px}
+.steps i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.steps i.on{background:var(--brand)}
+.steplabels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.acts select{width:auto}
+.note{border-bottom:1px solid var(--line);padding:8px 0;font-size:14px}
+.note:last-child{border:0}
+.bell{position:relative}
+.dot{position:absolute;top:-6px;right:-6px;background:var(--bad);color:#fff;border-radius:99px;font-size:11px;min-width:18px;height:18px;line-height:18px;text-align:center;font-weight:700}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.stat div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface)}
+.stat b{display:block;font-size:22px}
+.bars div{display:grid;grid-template-columns:90px 1fr 24px;gap:8px;align-items:center;font-size:13px;margin:6px 0}
+.bars span.b{height:10px;border-radius:5px;background:var(--brand);display:block}
+img.ph{max-width:140px;border-radius:8px;margin-top:8px;display:block}
+.err{color:var(--bad);font-size:13px;margin-top:6px;min-height:18px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:700;z-index:9}
+.pick{position:relative;min-width:260px;max-width:100%;flex:1 1 260px}.pick input{width:100%}.res{position:absolute;left:0;right:0;top:100%;margin:4px 0 0;padding:4px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:10px;max-height:320px;overflow:auto;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.18)}.res li{padding:8px 10px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;gap:8px}.res li[data-id]:hover,.res li[aria-selected=true]{background:var(--soft)}.res small{color:var(--muted);white-space:nowrap}.res li.muted{cursor:default}
+.hidden{display:none}
+button{touch-action:manipulation}.pk{display:grid;grid-template-columns:64px 1fr 84px;gap:10px;align-items:center;margin:12px 0;font-size:14px}.pk input{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 8px}.trk{height:10px;border-radius:5px;background:var(--line);overflow:hidden;display:block}.trk i{display:block;height:100%}.btn[data-act=gsubmit]{width:100%}.toast{max-width:calc(100% - 24px);text-align:center}
+@media(max-width:640px){header{position:static}.bar{padding:10px 12px;gap:10px}h1{font-size:16px}h2{font-size:18px}.ctl{width:100%;gap:8px}.seg{width:100%}.seg button{flex:1;padding:12px 8px;font-size:15px}.pick{flex:1 1 100%;min-width:0}.bell{flex:1 1 100%;min-height:44px}select,input[type=text],textarea{font-size:16px;padding:12px}.btn{padding:12px 16px;min-height:44px}.btn.sm{padding:10px 12px;font-size:14px;min-height:40px}.btn[data-act=submit]{width:100%}main{padding:14px 12px 40px}.panel{padding:14px}.acts select,.acts .btn{flex:1 1 100%;width:100%}.res{max-height:55vh}.res li{padding:12px 10px}.stat{grid-template-columns:repeat(2,1fr)}.stat b{font-size:20px}.steplabels{font-size:10px}.bars div{grid-template-columns:78px 1fr 20px}img.ph{max-width:100%}.dot{right:-2px}}
+@media(prefers-reduced-motion:no-preference){.toast{animation:in .2s ease-out}@keyframes in{from{opacity:0}to{opacity:1}}}
+</style>
+<style>
+input[type=password],input[type=number]{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%}
+.btn[data-act=send]{width:100%}
+.setup{max-width:640px;margin:0 auto}.setup code{background:var(--soft);padding:2px 6px;border-radius:4px;word-break:break-all}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<h1>AEON Mall BSD City<small>Reports and admin panel</small></h1>
+<div class="seg" role="group" aria-label="Switch view"><button data-act="view" data-v="report">Report</button><button data-act="view" data-v="account">Sign in</button></div>
+</div></header>
+<main id="app"><div class="panel">Loading...</div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+/* 1. Paste your own values from Supabase: Project Settings > API */
+const SB_URL = "https://smgxmflhgdrubmyufxft.supabase.co";
+const SB_KEY = "sb_publishable_ADxUBk5XdjwSgicntwWFgg_BJIcNwsh";
 
+const RAW="180 SPM|GF;Ace Hardware|n/a;Adidas|GF;AEON BSD CITY Dept Store 1F|1F;AEON BSD CITY Dept Store 2F|2F;AEON BSD CITY Supermarket GF|GF;Asics|GF;ATM CENTER (3F)|3F;ATM CENTER (GF)|GF;Auntie Anne's|GF;B-Quik|GF;Baby Shop|2F;Bakmi Ayam Alok|3F;Bakmi GM|2F;Bakso Afung|3F;Bakso Malang Cak Rosso|3F;Ban ban|GF;Bank Mandiri|GF;BASGOR 89|3F;Bath & Body Works|GF;BCA|GF;Beard Papa|GF;Beatrice Clothing|2F;Beauty Scent|GF;Bellamama|GF;Beluga Jewellery|1F;Bijin Nabe|GF;Birkenstock|1F;Blibli|3F;BNI|GF;Bobo Tokyo|1F;Boost Juice|GF;Botanical Essentials|1F;BRANZ (Property)|GF;Bugatea|3F;Bugatea (2nd outlet)|3F;Bungeoppang|3F;Burger King|3F;Burger King|3MF;Buttonscarves|2F;C&F perfumery|GF;Calvin Klein|GF;Casio|1F;Chagee|GF;Charles & Keith|1F;Châteraisé|GF;Chatime|GF;CIMB Niaga Digital Lounge|GF;Cindy|2F;Cinema XXI|3F;Cold Stone|GF;Colorbox|2F;Converse|GF;COWAY|1F;Crocs|1F;D'Crepes|2F;Daniel Wellington|1F;Dapur Solo|2F;De Wasz Laundry|GF;Dear Butter|3F;Di Bawah Tangga|2F;Digimap|GF;Doner Kebab|3F;DORE by LeTAO|GF;Dough Lab|GF;Dparis|1F;Dum Dum Thai Tea|3F;Dwidaya Tour|3F;Edogawa Sushi|n/a;Eka Karya Orchid|GF;Eprise|2F;Erafone|3F;Erha Store|GF;Et Cetera|1F;Everbest|1F;Executive|1F;Expat Roasters|GF;Eyes Spice|1F;Facility|2F;Fan Fries|3F;Fat Duck|GF;Fitflop|1F;Flying Tiger Copenhagen|1F;Foot Locker|GF;Frank & Co|GF;Fruitylicious|3F;Garmin|1F;Ginza Nail|1F;Gion Sushi|GF;Giordano|1F;Glam On|2F;GMS BSD|1F;Gococo|3F;Golden Lamian|3F;Gramedia|2F;Greyhound|GF;GS Shop|2F;Guardian|GF;Guess|GF;Guldens Mice|3F;Gyukaku|GF;Gyukatsu Kyoto Katsugyu|GF;H&M|1F;Haagen-Dazs|3F;Haircode|2F;Happy Dental Clinic|n/a;Havaianas|1F;Huawei|3F;Hush Puppies|1F;I Love Emas|2F;Ice Gentong|3F;Ichiro|3F;Ikkudo Ichi|3F;Imperial Kitchen|3F;Iqos|GF;Itsu|3F;Jewel Cafe|1F;Jittlada Thai Cuisine|GF;Jolly Time|3F;Kaneko Hannosuke|GF;KFC|3F;KFC|3MF;Kiddycuts|2F;Kidz Station|2F;Kimukatsu|3F;Kluk Sandal|GF;Koi Cafe|1F;Kokuo Reflexology|3MF;Kopi Kenangan|1F;Krispy Kreme|GF;L'Occitane|GF;Lacoste|GF;Laxmi Tailor|1F;LEGO|1F;Levi's|1F;Lewis Emma|2F;Lock & Lock with Hello, Bebe|2F;Loly Poly|3F;Love, Bonito|1F;M&G Life|2F;Maison Tatsuya|GF;Mama Roz|1F;Mandalika Parfum|2F;Marco Chop Shop|2F;Max Fashions|2F;McDonald's|3F;Megane Prince|2F;Megaze Coffee|3F;Melissa|1F;Menya Sakura|3F;Mi Home|3F;Minoshe|2F;Miss Thai Boat Noodle|3F;Moo Chuu|2F;Mooimom|2F;Mothercare & Early Learning Center|2F;My Feet|2F;Nanny's Pavillon|GF;Nasgor Randang One|3F;Nespresso|GF;New Balance|GF;New Era|1F;Nike|GF;Noodle King|3F;Noodle King|3MF;Nuansa Musik|3MF;Oh! Some|2F;Ootoya|GF;Oppo|3F;Optik Melawai|1F;Optik Seis|1F;OWL Eyewear|2F;Owndays|2F;Pedro|1F;Pempek Hoi|3F;Pepperlunch|3F;Pho Baba|GF;Pika Piku Ice Cream|3F;Pizza Marzano|GF;Planet Sports. Asia|1F;Playtopia|3F;Playworks|3F;Pokemon Mezastar|3F;Polo|1F;Puyo|2F;Ramen Seirock-ya|3F;Rejuve|3F;Relx|1F;Remboelan|GF;Rempah Bistro|GF;Rockstar Academy|3F;Rokurenya|3F;Rujak Kolam Medan|3F;Sai Ramen|3F;Sate Padang Mak Syukur|3F;Saturdays|1F;Scandia|2F;Secret Garden|1F;Selfie Time|n/a;Sephora|1F;Shake Shake|3F;Shihlin Taiwan Street Snacks|GF;Shortcut Barbershop|2F;Shu Shu|3F;Simply|3F;Skechers|GF;Skin+|2F;Skinfood|GF;Smart Hand DIY|2F;Smiggle|2F;Social Affair|GF;Sociolla|GF;Soes Lelo|3F;Solaria|3F;Sop Ikan Batam|3F;Sop Konro Cendana|3F;Soto Betawi H. Mamat|3F;Staccato|1F;Starbucks Coffee|GF;Steak 21|3F;Steve Madden|1F;Stop n Go|GF;Sukiya|3F;Susu Mbok Darmi|3F;Taucy|3F;Tawan|3F;The Bath Box|GF;The Body Shop|GF;The Chicken Rice Shop|3F;The Palace|GF;The RR Chocolate|GF;This Is April|2F;Tiga Semut|3F;Tokio Sushi|3F;Tokyo Belle|3F;Tommy Hilfiger|GF;Toys City|2F;Umeda|2F;UNIQLO|1F;Urban & Co|2F;Urban Beats|3F;Vans|GF;Vines|GF;VIVAIA|1F;Wacoal|2F;Wardah|1F;Waroeng Teh Kotjok|3F;Watson|2F;White Noise|GF;YEN PAO|3F;Yole|GF;Yoshinoya|2F;Yves Rocher|GF;Zenbu|GF;Zoomoov|2F";
+const ok = /^https:\/\//.test(SB_URL) && SB_KEY.length > 20;
+const sb = ok ? supabase.createClient(SB_URL, SB_KEY) : null;
+const GT = ["Toilet or cleanliness","Escalator or elevator","Spill or safety","Air conditioning","Electrical","Plumbing","Lighting","Other facility problem","Lost item","Found item"];
+const STAGES = ["Submitted","Assigned","In Progress","Completed"];
+const STORES = RAW.split(";").map(x => { const p = x.split("|"); return p[0] + (p[1] === "n/a" ? "" : " (" + p[1] + ")"); }).sort((a, b) => a.localeCompare(b));
+const rank = {Urgent:0, High:1, Normal:2};
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ago = t => { const h = Math.round((Date.now() - new Date(t)) / 36e5); return h < 1 ? "just now" : h < 48 ? h + " h ago" : Math.round(h / 24) + " d ago"; };
+const codes = () => { try { return JSON.parse(localStorage.getItem("aeon_codes") || "[]"); } catch (e) { return []; } };
+let view = "report", user = null, role = "none", profile = null, D = {tickets:[], techs:[], parking:[], profiles:[]};
+
+function toast(m) { const d = document.createElement("div"); d.className = "toast"; d.textContent = m; document.body.appendChild(d); setTimeout(() => d.remove(), 2400); }
+
+const SETUP = "<div class='panel setup'><h2>Connect your Supabase project</h2><p>This page needs two values before it can save data.</p><ol><li>Run <code>supabase-setup.sql</code> in the Supabase SQL Editor.</li><li>In Project Settings, then API, copy the <b>Project URL</b> and the <b>anon public key</b>.</li><li>Open this HTML file in a text editor and paste them into <code>SB_URL</code> and <code>SB_KEY</code> near the top of the script.</li><li>Save and reload this page.</li></ol></div>";
+
+/* ---------- Parking ---------- */
+function parkRow(l, ed) {
+  const r = l.capacity ? l.free / l.capacity : 0, c = l.free === 0 ? "var(--bad)" : r < .15 ? "var(--warn)" : "var(--ok)";
+  return "<div class='pk'><b>" + esc(l.level) + "</b><span class='trk'><i style='width:" + Math.round(r * 100) + "%;background:" + c + "'></i></span>" +
+    (ed ? "<input type='number' min='0' max='" + l.capacity + "' value='" + l.free + "' data-act='park' data-id='" + esc(l.level) + "' aria-label='Free spaces on " + esc(l.level) + "'>" : "<span>" + (l.free === 0 ? "Full" : l.free + " free") + "</span>") + "</div>";
+}
+
+/* ---------- Public report view ---------- */
+function myCard(t) {
+  const pend = t.verification === "pending", rej = t.verification === "rejected";
+  return "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (pend ? "Awaiting review" : rej ? "Could not be confirmed" : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" +
+    (!pend && !rej && t.kind === "fac" ? "<div class='muted'>Technician: " + (t.technician ? esc(t.technician) : "not assigned yet") + "</div>" : "") + "</div>";
+}
+async function reportView() {
+  const [pk, mine] = await Promise.all([sb.from("parking").select("*").order("level"), codes().length ? sb.rpc("my_tickets", {p_codes: codes()}) : Promise.resolve({data: []})]);
+  const P = pk.data || [], M = mine.data || [], best = P.slice().sort((a, b) => b.free - a.free)[0];
+  let h = "<div class='grid two'><div><div class='panel'><h2>Parking availability</h2><div class='muted'>Free spaces on each level.</div>" +
+    (best && best.free ? "<div style='margin-top:8px'><b>Most space: " + esc(best.level) + "</b> (" + best.free + " free)</div>" : "") +
+    (P.length ? P.map(l => parkRow(l, false)).join("") : "<div class='muted'>No parking data yet.</div>") + "</div><div style='height:20px'></div>";
+  h += "<div class='panel'><h2>Send a report</h2><div class='muted'>Staff check every report before acting on it.</div>" +
+    (role === "tenant" ? "<div class='muted' style='margin-top:8px'>Reporting as tenant: <b>" + esc(profile.store) + "</b>. Your reports go straight to mall staff.</div>" : "<label for='store'>Which store is it at? (optional)</label><input type='text' id='store' list='stores' placeholder='Start typing a store name'><datalist id='stores'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist>") +
+    "<label for='cat'>What are you reporting?</label><select id='cat'>" + GT.map(c => "<option>" + c + "</option>").join("") + "</select>" +
+    "<label for='loc'>Where? (floor, shop or area)</label><input type='text' id='loc' placeholder='For example: 2F near Gramedia'>" +
+    "<label for='desc'>Details</label><textarea id='desc' placeholder='Describe the problem, or the item and when you lost or found it'></textarea>" +
+    "<label for='con'>Contact number (optional)</label><input type='text' id='con' inputmode='tel'>" +
+    "<div class='err' id='err' role='alert'></div><button class='btn' data-act='send'>Send report</button></div></div>";
+  h += "<div><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div>" + (M.length ? M.map(myCard).join("") : "<div class='panel' style='margin-top:10px'>No reports yet. Use the form to send your first one.</div>") + "</div></div>";
+  return h;
+}
+async function send() {
+  const d = $("desc").value.trim(), store = role === "tenant" ? "" : $("store").value.trim();
+  if (d.length < 10) { $("err").textContent = "Add at least 10 characters so staff can check your report."; return; }
+  if (store && !STORES.includes(store)) { $("err").textContent = "Pick the store from the list, or leave it empty."; return; }
+  const {data, error} = await sb.rpc("submit_ticket", {p_category: $("cat").value, p_store: store, p_location: $("loc").value.trim(), p_description: d, p_contact: $("con").value.trim()});
+  if (error) { $("err").textContent = "Could not send: " + error.message; return; }
+  try { localStorage.setItem("aeon_codes", JSON.stringify([data, ...codes()].slice(0, 50))); } catch (e) {}
+  toast("Report " + data + " sent"); render();
+}
+
+/* ---------- Admin ---------- */
+const loginView = () => "<div class='grid two'><div class='panel'><h2>Log in</h2><div class='muted'>For mall staff and tenants.</div><label for='em'>Email</label><input type='text' id='em' inputmode='email' autocomplete='username'><label for='pw'>Password</label><input type='password' id='pw' autocomplete='current-password'><div class='err' id='lerr' role='alert'></div><button class='btn' data-act='login'>Log in</button></div>" +
+  "<div class='panel'><h2>New tenant? Create an account</h2><div class='muted'>Pick your store. A mall admin approves your account before you can see reports for it.</div><label for='sstore'>Your store</label><input type='text' id='sstore' list='stores2' placeholder='Start typing your store name'><datalist id='stores2'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist><label for='sem'>Email</label><input type='text' id='sem' inputmode='email' autocomplete='email'><label for='spw'>Password (6+ characters)</label><input type='password' id='spw' autocomplete='new-password'><div class='err' id='serr' role='alert'></div><button class='btn' data-act='signup'>Create tenant account</button></div></div>";
+const reload = () => role === "admin" ? loadAdmin() : role === "tenant" ? loadTenant() : Promise.resolve();
+async function checkRole() {
+  const {data: {session}} = await sb.auth.getSession();
+  user = session ? session.user : null; role = "none"; profile = null;
+  if (!user) return;
+  const a = await sb.from("admins").select("user_id").eq("user_id", user.id);
+  if (a.data && a.data.length) { role = "admin"; await loadAdmin(); return; }
+  const pr = await sb.from("profiles").select("*").eq("user_id", user.id);
+  profile = (pr.data && pr.data[0]) || null;
+  role = profile && profile.approved ? "tenant" : "pending";
+  if (role === "tenant") await loadTenant();
+}
+async function loadAdmin() {
+  const [t, te, p, pr, ad] = await Promise.all([sb.from("tickets").select("*").order("created_at", {ascending: false}), sb.from("technicians").select("*").order("name"), sb.from("parking").select("*").order("level"), sb.from("profiles").select("*").order("created_at", {ascending: false}), sb.from("admins").select("user_id")]);
+  D = {tickets: t.data || [], techs: te.data || [], parking: p.data || [], profiles: pr.data || [], admins: ad.data || []};
+}
+async function rpcAdmin(fn, id, msg) { const {error} = await sb.rpc(fn, {p_user: id}); if (error) toast("Failed: " + error.message); else { await reload(); render(); toast(msg); } }
+async function loadTenant() { const t = await sb.from("tickets").select("*").order("created_at", {ascending: false}); D.tickets = t.data || []; }
+async function login() {
+  const {error} = await sb.auth.signInWithPassword({email: $("em").value.trim(), password: $("pw").value});
+  if (error) { $("lerr").textContent = error.message; return; }
+  await checkRole(); render();
+}
+async function signup() {
+  const store = $("sstore").value.trim(), em = $("sem").value.trim(), pw = $("spw").value, err = $("serr");
+  if (!STORES.includes(store)) { err.textContent = "Pick your store from the list."; return; }
+  if (!em || pw.length < 6) { err.textContent = "Enter an email and a password of at least 6 characters."; return; }
+  const {data, error} = await sb.auth.signUp({email: em, password: pw, options: {data: {store}}});
+  if (error) { err.textContent = error.message; return; }
+  if (data.session) { await checkRole(); render(); toast("Account created"); }
+  else { err.style.color = "var(--ok)"; err.textContent = "Account created. Check your email to confirm it, then log in."; }
+}
+const topbar = (title, sub) => "<div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'><div><h2 style='margin:0'>" + title + "</h2><div class='muted'>" + sub + "</div></div><span class='ctl'><button class='btn alt sm' data-act='refresh'>Refresh</button><button class='btn alt sm' data-act='logout'>Log out</button></span></div>";
+function pendingView() {
+  return "<div class='panel' style='max-width:520px;margin:0 auto'><h2>" + (profile && profile.store ? "Waiting for approval" : "No access yet") + "</h2><p>" + (profile && profile.store ? "Your tenant account for <b>" + esc(profile.store) + "</b> is waiting for a mall admin to approve it. Until then you can still send reports as a guest." : "This account is not an admin or an approved tenant yet. An admin can promote it from the admin panel.") + "</p><p class='muted'>Setting this system up for the first time? The first account to claim admin access becomes the admin. This only works while no admin exists.</p><div class='acts'><button class='btn sm' data-act='claim'>Claim admin access</button><button class='btn alt sm' data-act='logout'>Log out</button></div></div>";
+}
+function tcard(t, can) {
+  const lost = t.kind === "lost", done = t.status === "Resolved" || t.status === "Completed";
+  return "<div class='ticket " + t.urgency.toLowerCase() + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (done ? (lost ? "Resolved" : "Done") : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" +
+    (can && t.contact ? "<div class='muted'>Reporter contact: " + esc(t.contact) + "</div>" : "") + (!can && !lost && t.technician ? "<div class='muted'>Technician: " + esc(t.technician) + "</div>" : "") +
+    (can && !done ? "<div class='acts'><button class='btn sm' data-act='tresolve' data-id='" + t.id + "'>Mark as done</button></div>" : "") + "</div>";
+}
+function tenantView() {
+  const pub = D.tickets.filter(t => t.source === "guest"), mine = D.tickets.filter(t => t.reporter_id === user.id), open = pub.filter(t => t.status !== "Resolved" && t.status !== "Completed").length;
+  return topbar(esc(profile.store), esc(user.email)) +
+    "<div class='panel' style='margin-bottom:20px'><h2>Reports from the public (" + open + " open)</h2><div class='muted'>Visitor reports about your store that mall staff confirmed. Mark one as done once it is handled, for example when a lost item is returned.</div>" + (pub.length ? pub.map(t => tcard(t, true)).join("") : "<div class='muted' style='margin-top:10px'>Nothing yet. Confirmed reports about your store appear here.</div>") + "</div>" +
+    "<div class='panel'><h2>Your reports to mall staff</h2><div class='muted'>Use the Report tab to send a new one.</div>" + (mine.length ? mine.map(t => tcard(t, false)).join("") : "<div class='muted' style='margin-top:10px'>No reports yet.</div>") + "</div>";
+}
+const isAd = id => (D.admins || []).some(x => x.user_id === id);
+const tenantAccounts = () => "<div class='panel' style='margin-bottom:20px'><h2>Accounts (" + D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length + " waiting)</h2><div class='muted'>Every account you add in Supabase, or that signs up on the site, shows here. Approve tenants so they can see public reports for their store, or make someone an admin.</div>" +
+  D.profiles.map(x => { const ad = isAd(x.user_id), id = "data-id='" + x.user_id + "'"; return "<div class='row note' style='align-items:center'><span>" + (ad ? "<span class='badge'>Admin</span> " : "") + esc(x.store || "(no store)") + " <span class='muted'>" + esc(x.email || "") + "</span></span><span class='ctl'>" +
+    (ad ? (x.user_id === user.id ? "" : "<button class='btn alt sm' data-act='rmadmin' " + id + ">Remove admin</button>") : (x.approved ? "<button class='btn alt sm' data-act='revoke' " + id + ">Revoke tenant</button>" : "<button class='btn sm' data-act='approve' " + id + ">Approve tenant</button>") + "<button class='btn alt sm' data-act='mkadmin' " + id + ">Make admin</button>") + "</span></div>"; }).join("") +
+  (D.profiles.length ? "" : "<div class='muted' style='margin-top:10px'>No accounts yet.</div>") + "</div>";
+function card(t) {
+  const lost = t.kind === "lost", pend = t.verification === "pending", rej = t.verification === "rejected";
+  let h = "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (pend ? "Awaiting review" : rej ? "Rejected" : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div>";
+  h += "<div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + (t.urgency !== "Normal" ? ", priority " + t.urgency : "") + "</div><div>" + esc(t.description) + "</div>";
+  h += "<div class='muted'>" + (t.source === "tenant" ? "Tenant" : "Guest") + (t.store ? ", store: " + esc(t.store) : "") + (t.contact ? " | Contact: " + esc(t.contact) : "") + (!lost && t.technician ? " | Technician: " + esc(t.technician) : "") + "</div>";
+  let a = "";
+  if (pend) a = "<button class='btn sm' data-act='verify' data-id='" + t.id + "'>Real report</button><button class='btn sm alt' data-act='reject' data-id='" + t.id + "'>Fake report</button>";
+  else if (!rej && !lost && !t.technician) a = D.techs.length ? "<select data-act='assign' data-id='" + t.id + "' aria-label='Assign technician'><option value=''>Assign technician</option>" + D.techs.map(x => "<option value='" + esc(x.name) + "'>" + esc(x.name) + (x.specialty ? " (" + esc(x.specialty) + ")" : "") + "</option>").join("") + "</select>" : "<span class='muted'>Add a technician first.</span>";
+  else if (!rej && !lost && t.status !== "Completed") a = "<button class='btn sm' data-act='advance' data-id='" + t.id + "'>Mark " + STAGES[STAGES.indexOf(t.status) + 1] + "</button>";
+  else if (lost && !rej && t.status !== "Resolved") a = "<button class='btn sm' data-act='resolve' data-id='" + t.id + "'>Mark resolved</button>";
+  a += "<button class='btn sm alt' data-act='del' data-id='" + t.id + "'>Delete</button>";
+  return h + "<div class='acts'>" + a + "</div></div>";
+}
+const panel = (t, s, list) => "<div class='panel' style='margin-bottom:20px'><h2>" + t + "</h2><div class='muted'>" + s + "</div>" + (list.length ? list.map(card).join("") : "<div class='muted' style='margin-top:10px'>Nothing here yet.</div>") + "</div>";
+const techPanel = () => "<div class='panel'><h2>Technicians</h2>" + (D.techs.length ? D.techs.map(t => "<div class='row note' style='align-items:center'><span>" + esc(t.name) + " <span class='muted'>" + esc(t.specialty || "") + "</span></span><button class='btn alt sm' data-act='deltech' data-id='" + t.id + "'>Remove</button></div>").join("") : "<div class='muted'>No technicians yet.</div>") + "<label for='tn'>Add technician</label><input type='text' id='tn' placeholder='Name'><input type='text' id='ts' placeholder='Specialty' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addtech'>Add</button></div>";
+const parkEditor = () => "<div class='panel'><h2>Parking levels</h2><div class='muted'>Guests see these numbers live.</div>" + D.parking.map(l => parkRow(l, true) + "<div style='text-align:right;margin-top:-6px'><button class='btn alt sm' data-act='dellevel' data-id='" + esc(l.level) + "'>Remove " + esc(l.level) + "</button></div>").join("") + "<label for='pl'>Add level</label><input type='text' id='pl' placeholder='Level name, for example P4'><input type='number' id='pc' placeholder='Total spaces' min='0' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addlevel'>Add level</button></div>";
+function adminView() {
+  const T = D.tickets, q = T.filter(t => t.verification === "pending"), fac = T.filter(t => t.kind === "fac" && t.verification === "verified"), lf = T.filter(t => t.kind === "lost" && t.verification === "verified"), rej = T.filter(t => t.verification === "rejected");
+  const act = fac.filter(t => t.status !== "Completed").sort((a, b) => rank[a.urgency] - rank[b.urgency] || new Date(a.created_at) - new Date(b.created_at));
+  const as = fac.filter(t => t.assigned_at), avg = as.length ? as.reduce((s, t) => s + (new Date(t.assigned_at) - new Date(t.created_at)), 0) / as.length / 36e5 : 0;
+  let h = "<div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'><h2 style='margin:0'>Admin panel</h2><span class='ctl'><span class='muted'>" + esc(user.email) + "</span><button class='btn alt sm' data-act='refresh'>Refresh</button><button class='btn alt sm' data-act='logout'>Log out</button></span></div>";
+  h += "<div class='stat'><div><b>" + q.length + "</b>Waiting for review</div><div><b>" + act.length + "</b>Open facility jobs</div><div><b>" + act.filter(t => !t.technician).length + "</b>Need a technician</div><div><b>" + avg.toFixed(1) + " h</b>Average time to assign</div></div>";
+  h += panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports.", q);
+  h += panel("Open facility jobs", "Sorted by priority, then by waiting time.", act);
+  h += tenantAccounts(); h += "<div class='grid two'><div>" + techPanel() + "<div style='height:20px'></div>" + parkEditor() + "</div><div>" + panel("Lost and found log", "Confirmed lost and found reports.", lf) + panel("Rejected reports", "Kept for your records. Delete to remove.", rej) + "</div></div>";
+  return h;
+}
+async function mut(p) { const {error} = await p; if (error) { toast("Failed: " + error.message); return false; } await reload(); render(); return true; }
+const upd = (id, patch) => mut(sb.from("tickets").update(patch).eq("id", id));
+
+/* ---------- Render and events ---------- */
+async function render() {
+  document.querySelectorAll("[data-act=view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === view));
+  const ab = document.querySelector("[data-v=account]"); if (ab) ab.textContent = user ? "Dashboard" : "Sign in";
+  if (!sb) { $("app").innerHTML = SETUP; return; }
+  if (view === "report") $("app").innerHTML = await reportView();
+  else $("app").innerHTML = !user ? loginView() : role === "admin" ? adminView() : role === "tenant" ? tenantView() : pendingView();
+}
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const a = b.dataset.act, id = b.dataset.id, t = D.tickets.find(x => String(x.id) === id);
+  if (a === "view") { view = b.dataset.v; if (view === "account" && sb && !user) await checkRole(); render(); }
+  else if (a === "send") send();
+  else if (a === "login") login();
+  else if (a === "signup") signup();
+  else if (a === "logout") { await sb.auth.signOut(); user = null; role = "none"; profile = null; D = {tickets:[], techs:[], parking:[], profiles:[]}; render(); }
+  else if (a === "refresh") { await reload(); render(); toast("Refreshed"); }
+  else if (a === "claim" && user) { const {data, error} = await sb.rpc("claim_first_admin"); if (error) toast("Failed: " + error.message); else if (data) { await checkRole(); render(); toast("You are now the admin"); } else toast("An admin already exists. Ask them to approve you."); }
+  else if (a === "tresolve" && role === "tenant") { const {error} = await sb.rpc("tenant_resolve", {p_id: +id}); if (error) toast("Failed: " + error.message); else { await reload(); render(); toast("Marked as done"); } }
+  else if (role !== "admin") return;
+  else if (a === "mkadmin") rpcAdmin("make_admin", id, "Admin added");
+  else if (a === "rmadmin") { if (confirm("Remove this admin?")) rpcAdmin("remove_admin", id, "Admin removed"); }
+  else if (a === "approve") mut(sb.from("profiles").update({approved: true}).eq("user_id", id));
+  else if (a === "revoke") mut(sb.from("profiles").update({approved: false}).eq("user_id", id));
+  else if (a === "verify" && t) upd(t.id, {verification: "verified", urgency: {Normal: "High", High: "Urgent", Urgent: "Urgent"}[t.urgency], status: t.kind === "lost" ? "Verified" : t.status});
+  else if (a === "reject" && t) upd(t.id, {verification: "rejected"});
+  else if (a === "advance" && t) upd(t.id, {status: STAGES[STAGES.indexOf(t.status) + 1]});
+  else if (a === "resolve" && t) upd(t.id, {status: "Resolved"});
+  else if (a === "del" && t) { if (confirm("Delete " + t.code + "? This cannot be undone.")) mut(sb.from("tickets").delete().eq("id", t.id)); }
+  else if (a === "addtech") { const n = $("tn").value.trim(); if (n) mut(sb.from("technicians").insert({name: n, specialty: $("ts").value.trim()})); }
+  else if (a === "deltech") { if (confirm("Remove this technician?")) mut(sb.from("technicians").delete().eq("id", id)); }
+  else if (a === "addlevel") { const n = $("pl").value.trim(), c = parseInt($("pc").value, 10); if (n && c >= 0) mut(sb.from("parking").insert({level: n, capacity: c, free: c})); }
+  else if (a === "dellevel") { if (confirm("Remove parking level " + id + "?")) mut(sb.from("parking").delete().eq("level", id)); }
+});
+document.addEventListener("change", async e => {
+  const b = e.target, a = b.dataset ? b.dataset.act : null;
+  if (role !== "admin") return;
+  if (a === "assign" && b.value) upd(b.dataset.id, {technician: b.value, status: "Assigned", assigned_at: new Date().toISOString()});
+  else if (a === "park") mut(sb.from("parking").update({free: Math.max(0, Math.min(+b.max, parseInt(b.value, 10) || 0)), updated_at: new Date().toISOString()}).eq("level", b.dataset.id));
+});
+setInterval(() => { if ((role === "admin" || role === "tenant") && view === "account" && !document.activeElement.matches("input,textarea,select")) reload().then(render); }, 30000);
+(async () => { if (sb) await checkRole(); render(); })();
+</script>
+</body>
+</html>
