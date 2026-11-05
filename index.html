@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AEON Mall BSD City | Reports and Admin</title>
+<script>try{var t=localStorage.getItem("aeon_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#a3005f">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14,11 +15,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f2f5;--surface:#fff;--ink:#221a20;--muted:#7a6f76;--line:#e9e2e7;--brand:#a3005f;--brand-dark:#6e003f;--soft:#fbe6f1;--gold:#f2b01e;--ok:#1e9e62;--warn:#d98200;--bad:#d6303f;color-scheme:light}
+:root{--bg:#f6f2f5;--surface:#fff;--ink:#221a20;--muted:#7a6f76;--line:#e9e2e7;--field:#f3eff2;--brand:#a3005f;--brand-dark:#6e003f;--soft:#fbe6f1;--gold:#f2b01e;--ok:#1e9e62;--warn:#d98200;--bad:#d6303f;--hdr1:#a3005f;--hdr2:#6e003f;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#150f14;--surface:#221a20;--ink:#f4edf1;--muted:#b4a7ae;--line:#3a2e36;--field:#2e232b;--brand:#d62b8c;--soft:#3d1a2d;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#7a0047;--hdr2:#3a0023;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#150f14;--surface:#221a20;--ink:#f4edf1;--muted:#b4a7ae;--line:#3a2e36;--field:#2e232b;--brand:#d62b8c;--soft:#3d1a2d;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#7a0047;--hdr2:#3a0023;color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "Nunito","Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
-header{background:linear-gradient(135deg,var(--brand),var(--brand-dark));color:#fff;padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:5;box-shadow:0 2px 14px rgba(110,0,63,.3)}
+header{background:linear-gradient(135deg,var(--hdr1),var(--hdr2));color:#fff;padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:5;box-shadow:0 2px 14px rgba(110,0,63,.3)}
 .bar{max-width:980px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px}
 .logo{width:42px;height:42px;border-radius:12px;border:2px solid rgba(255,255,255,.85);flex:none}
 h1{font-size:19px;margin:0;font-weight:800;line-height:1.2}
@@ -36,8 +39,8 @@ main{max-width:980px;margin:0 auto;padding:16px 14px 24px}
 .hero .trk{background:#3ddc97!important}.hero .trk i{background:#ff5d6c!important}.hero .pk span[style]{color:#ffb3bb!important}
 .hero .best{color:var(--gold)}
 label{display:block;font-weight:800;font-size:13px;margin:14px 0 6px}
-select,input[type=text],input[type=password],input[type=number],textarea{width:100%;background:#f3eff2;border:1.5px solid transparent;border-radius:12px;padding:13px 14px;font:inherit;font-size:16px;color:var(--ink)}
-select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brand);background:#fff}
+select,input[type=text],input[type=password],input[type=number],textarea{width:100%;background:var(--field);border:1.5px solid transparent;border-radius:12px;padding:13px 14px;font:inherit;font-size:16px;color:var(--ink)}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brand);background:var(--surface)}
 textarea{min-height:96px;resize:vertical}
 .btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;min-height:46px;letter-spacing:.02em}
 .btn:active{transform:scale(.98)}
@@ -45,7 +48,7 @@ textarea{min-height:96px;resize:vertical}
 .btn.sm{padding:9px 14px;font-size:13px;min-height:38px;border-radius:10px}
 .btn[data-act=send]{width:100%}
 button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.ticket{border-radius:14px;padding:14px;margin-top:12px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--line)}
+.ticket{border-radius:14px;padding:14px;margin-top:12px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--line)}
 .ticket.urgent{border-left-color:var(--bad)}.ticket.high{border-left-color:var(--gold)}
 .row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
 .id{font-weight:800}
@@ -57,32 +60,54 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .acts select{width:auto;min-width:200px}
 .ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
-.stat div{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 14px rgba(60,20,45,.07);color:var(--muted);font-size:13px;font-weight:700}
+.stat div{background:var(--surface);border-radius:16px;padding:14px;box-shadow:0 2px 14px rgba(60,20,45,.07);color:var(--muted);font-size:13px;font-weight:700}
 .stat b{display:block;font-size:26px;color:var(--brand);font-weight:800;line-height:1.2}
 .pk{display:grid;grid-template-columns:56px 1fr 84px;gap:12px;align-items:center;margin:14px 0;font-size:15px}
 .pk input{padding:8px 10px}
 .trk{height:12px;border-radius:6px;overflow:hidden;display:block}.trk i{display:block;height:100%}
-.tabs{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:10;box-shadow:0 -4px 16px rgba(60,20,45,.08)}
-.tabs button{flex:1;max-width:260px;border:0;background:none;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font:inherit;font-weight:800;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#2b2229;cursor:pointer}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:10;box-shadow:0 -4px 16px rgba(60,20,45,.08)}
+.tabs button{flex:1;max-width:260px;border:0;background:none;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font:inherit;font-weight:800;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);cursor:pointer}
 .tabs button[aria-pressed=true]{color:var(--brand)}
 .tabs svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom,0px));background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;z-index:20;max-width:calc(100% - 24px);text-align:center}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom,0px));background:#2b2229;color:#fff;border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:12px;font-weight:700;z-index:20;max-width:calc(100% - 24px);text-align:center}
 .hidden{display:none}
 .setup{max-width:640px;margin:0 auto}.setup code{background:var(--soft);padding:2px 6px;border-radius:4px;word-break:break-all}
 @media(max-width:640px){.acts select,.acts .btn{flex:1 1 100%;width:100%}.panel{padding:16px}}
+.bar h1{min-width:0}
+.hbtns{margin-left:auto;display:flex;gap:8px;align-items:center}
+.hbtn{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:12px;min-height:40px;min-width:40px;padding:0 11px;font:inherit;font-weight:800;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.hbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:480px){.hlabel{display:none}h1{font-size:17px}}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;z-index:30}
+.sheet-card{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));width:100%;max-width:480px}
+.sheet-card ol{padding-left:20px;margin:10px 0 16px;line-height:1.9}
+.hidden{display:none!important}
+.notice{background:var(--surface);border-radius:16px;padding:14px 16px;margin-bottom:16px;border-left:6px solid var(--brand);box-shadow:0 2px 14px rgba(60,20,45,.07)}
+.notice.closure{border-left-color:var(--bad)}.notice.event{border-left-color:var(--gold)}
+.ticket.overdue{background:rgba(214,48,63,.08);border-color:var(--bad);border-left-color:var(--bad)}
+.badge.bad{background:var(--bad);color:#fff}.badge.warn{background:var(--gold);color:#2a1a00}
+.ph{max-width:100%;max-height:240px;border-radius:12px;margin-top:8px;display:block}
+.cm{border-top:1px dashed var(--line);padding:8px 0;margin-top:8px;font-size:14px}
+.chart{display:flex;align-items:flex-end;gap:8px;height:140px;margin-top:12px}
+.chart>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;font-size:11px;color:var(--muted)}
+.chart i{display:block;width:100%;background:var(--brand);border-radius:6px 6px 0 0}
+.hb{display:grid;grid-template-columns:140px 1fr 28px;gap:8px;align-items:center;margin:8px 0;font-size:13px}
+.hb .b{height:10px;border-radius:5px;background:var(--brand);display:block}
+#langtxt{font-size:12px}
+@media(max-width:420px){.logo{width:36px;height:36px}.bar{gap:8px;padding:12px}.hbtns{gap:6px}.hb{grid-template-columns:100px 1fr 24px}}
 </style>
 </head>
 <body>
-<header><div class="bar"><img class="logo" src="icon-192.png" alt=""><h1>AEON Mall BSD City<small>Reports, parking and lost and found</small></h1></div></header>
+<header><div class="bar"><img class="logo" src="icon-192.png" alt=""><h1>AEON Mall BSD City<small>Reports and parking</small></h1><div class="hbtns"><button class="hbtn hidden" id="installbtn" data-act="install" aria-label="Install the app"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span class="hlabel">Install</span></button><button class="hbtn" id="langbtn" data-act="lang" aria-label="Change language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span id="langtxt">EN</span></button><button class="hbtn" id="themebtn" data-act="theme" aria-label="Switch theme"></button></div></div></header>
 <div id="offline" class="hidden" style="background:var(--warn);color:#1a1a1a;text-align:center;padding:8px;font-weight:700">You are offline. Parking and reports need an internet connection.</div>
 <main id="app"><div class="panel">Loading...</div></main>
+<div id="sheet" class="sheet hidden" role="dialog" aria-modal="true" aria-label="Install the app"><div class="sheet-card"><h2>Install the app</h2><ol id="sheetbody"></ol><button class="btn" style="width:100%" data-act="closesheet">Got it</button></div></div>
 <nav class="tabs" aria-label="Main">
 <button data-act="view" data-v="report"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Report</span></button>
 <button data-act="view" data-v="account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Sign in</span></button>
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
-/* 1. Paste your own values from Supabase: Project Settings > API */
 const SB_URL = "https://smgxmflhgdrubmyufxft.supabase.co";
 const SB_KEY = "sb_publishable_ADxUBk5XdjwSgicntwWFgg_BJIcNwsh";
 
@@ -93,56 +118,166 @@ const GT = ["Toilet or cleanliness","Escalator or elevator","Spill or safety","A
 const STAGES = ["Submitted","Assigned","In Progress","Completed"];
 const STORES = RAW.split(";").map(x => { const p = x.split("|"); return p[0] + (p[1] === "n/a" ? "" : " (" + p[1] + ")"); }).sort((a, b) => a.localeCompare(b));
 const rank = {Urgent:0, High:1, Normal:2};
+const SLA = {Urgent:4, High:24, Normal:48}, REVIEW_SLA = 12; // hours before a report counts as overdue
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const ago = t => { const h = Math.round((Date.now() - new Date(t)) / 36e5); return h < 1 ? "just now" : h < 48 ? h + " h ago" : Math.round(h / 24) + " d ago"; };
+const fmtH = h => h < 48 ? Math.max(1, Math.round(h)) + " h" : Math.round(h / 24) + " d";
 const codes = () => { try { return JSON.parse(localStorage.getItem("aeon_codes") || "[]"); } catch (e) { return []; } };
-let view = "report", user = null, role = "none", profile = null, D = {tickets:[], techs:[], parking:[], profiles:[]};
+const DEV = (() => { try { let d = localStorage.getItem("aeon_device"); if (!d) { d = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2)); localStorage.setItem("aeon_device", d); } return d; } catch (e) { return ""; } })();
+const typing = () => document.activeElement && document.activeElement.matches && document.activeElement.matches("input,textarea,select");
+let view = "report", user = null, role = "none", profile = null, LANG = "en";
+let D = {tickets:[], techs:[], parking:[], profiles:[], admins:[], comments:[], activity:[], notices:[]};
+const openN = new Set();
+try { LANG = localStorage.getItem("aeon_lang") === "id" ? "id" : "en"; } catch (e) {}
 
-function toast(m) { const d = document.createElement("div"); d.className = "toast"; d.textContent = m; document.body.appendChild(d); setTimeout(() => d.remove(), 2400); }
+/* ---------- Bahasa Indonesia (public screens; staff screens stay in English) ---------- */
+const ID = {
+"Reports and parking":"Laporan dan parkir","Report":"Lapor","Sign in":"Masuk","Dashboard":"Dasbor",
+"Parking availability":"Ketersediaan parkir","Free spaces on each level. Red is taken, green is free.":"Ruang kosong di tiap lantai. Merah terisi, hijau kosong.","Full":"Penuh","No parking data yet.":"Belum ada data parkir.",
+"Send a report":"Kirim laporan","Staff check every report before acting on it.":"Petugas memeriksa setiap laporan sebelum ditindaklanjuti.",
+"Which store is it at? (optional)":"Di toko mana? (opsional)","Start typing a store name":"Ketik nama toko","What are you reporting?":"Apa yang ingin Anda laporkan?",
+"Toilet or cleanliness":"Toilet atau kebersihan","Escalator or elevator":"Eskalator atau lift","Spill or safety":"Tumpahan atau keselamatan","Air conditioning":"AC","Electrical":"Listrik","Plumbing":"Pipa air","Lighting":"Pencahayaan","Other facility problem":"Masalah fasilitas lainnya","Lost item":"Barang hilang","Found item":"Barang ditemukan",
+"Where? (floor, shop or area)":"Di mana? (lantai, toko atau area)","For example: 2F near Gramedia":"Contoh: 2F dekat Gramedia","Details":"Detail",
+"Describe the problem, or the item and when you lost or found it":"Jelaskan masalahnya, atau barangnya dan kapan hilang atau ditemukan",
+"Contact number (optional)":"Nomor kontak (opsional)","Photo (optional)":"Foto (opsional)","Send report":"Kirim laporan","Sending...":"Mengirim...",
+"Add at least 10 characters so staff can check your report.":"Tambahkan minimal 10 karakter agar petugas dapat memeriksa laporan Anda.","Pick the store from the list, or leave it empty.":"Pilih toko dari daftar, atau kosongkan.","That photo is too large. Choose one under 15 MB.":"Foto terlalu besar. Pilih yang di bawah 15 MB.",
+"Your reports":"Laporan Anda","Reports are saved in this browser. Confirmed reports get higher priority.":"Laporan tersimpan di browser ini. Laporan yang dikonfirmasi mendapat prioritas lebih tinggi.","No reports yet. Use the form to send your first one.":"Belum ada laporan. Gunakan formulir untuk mengirim laporan pertama Anda.",
+"Awaiting review":"Menunggu pemeriksaan","Could not be confirmed":"Tidak dapat dikonfirmasi","Submitted":"Terkirim","Assigned":"Ditugaskan","In Progress":"Sedang dikerjakan","Completed":"Selesai","Reported":"Dilaporkan","Verified":"Terverifikasi","Resolved":"Selesai","Done":"Selesai",
+"Technician: not assigned yet":"Teknisi: belum ditugaskan","just now":"baru saja","Mall staff":"Petugas mal","Closure":"Penutupan","Event":"Acara","Notice":"Pengumuman",
+"Log in":"Masuk","For mall staff and tenants.":"Untuk petugas mal dan penyewa.","Email":"Email","Password":"Kata sandi","New tenant? Create an account":"Penyewa baru? Buat akun",
+"Pick your store. A mall admin approves your account before you can see reports for it.":"Pilih toko Anda. Admin mal menyetujui akun Anda sebelum Anda dapat melihat laporan toko.","Your store":"Toko Anda","Start typing your store name":"Ketik nama toko Anda","Password (6+ characters)":"Kata sandi (min. 6 karakter)","Create tenant account":"Buat akun penyewa","Log out":"Keluar","Refresh":"Muat ulang",
+"Install the app":"Pasang aplikasi","Got it":"Mengerti","You are offline. Parking and reports need an internet connection.":"Anda sedang offline. Parkir dan laporan membutuhkan koneksi internet.","App installed":"Aplikasi terpasang","Waiting for approval":"Menunggu persetujuan"
+};
+const RX = [
+ [/^(\d+) free$/, m => m[1] + " kosong"], [/^\((\d+) free\)$/, m => "(" + m[1] + " kosong)"], [/^Most space: (.+)$/, m => "Paling lega: " + m[1]],
+ [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], [/^at (.+)$/, m => "di " + m[1]],
+ [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-\d+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]]
+];
+function tr(s) { const k = s.trim(); if (!k) return s; let o = ID[k]; if (!o) for (const [re, f] of RX) { const m = k.match(re); if (m) { o = f(m); break; } } return o ? s.replace(k, o) : s; }
+const ORIG = new WeakMap();
+function applyLang() {
+  const id = LANG === "id"; document.documentElement.lang = id ? "id" : "en";
+  document.querySelectorAll("option:not([value])").forEach(o => o.setAttribute("value", o.textContent));
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) {
+    const p = n.parentNode; if (p && (p.tagName === "SCRIPT" || p.tagName === "STYLE")) continue;
+    if (id) { const o = ORIG.has(n) ? ORIG.get(n) : n.data; ORIG.set(n, o); const v = tr(o); if (v !== n.data) n.data = v; }
+    else if (ORIG.has(n)) { n.data = ORIG.get(n); ORIG.delete(n); }
+  }
+  document.querySelectorAll("[placeholder],[aria-label]").forEach(el => ["placeholder", "aria-label"].forEach(a => {
+    if (!el.hasAttribute(a)) return; const k = "data-o-" + a;
+    if (id) { const o = el.hasAttribute(k) ? el.getAttribute(k) : el.getAttribute(a); el.setAttribute(k, o); el.setAttribute(a, tr(o)); }
+    else if (el.hasAttribute(k)) { el.setAttribute(a, el.getAttribute(k)); el.removeAttribute(k); }
+  }));
+  const lb = $("langtxt"); if (lb) lb.textContent = id ? "ID" : "EN";
+}
+function toast(m) { const d = document.createElement("div"); d.className = "toast"; d.textContent = LANG === "id" ? tr(m) : m; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
 
-const SETUP = "<div class='panel setup'><h2>Connect your Supabase project</h2><p>This page needs two values before it can save data.</p><ol><li>Run <code>supabase-setup.sql</code> in the Supabase SQL Editor.</li><li>In Project Settings, then API, copy the <b>Project URL</b> and the <b>anon public key</b>.</li><li>Open this HTML file in a text editor and paste them into <code>SB_URL</code> and <code>SB_KEY</code> near the top of the script.</li><li>Save and reload this page.</li></ol></div>";
+const SETUP = "<div class='panel setup'><h2>Connect your Supabase project</h2><p>This page needs two values before it can save data. Paste your Project URL and anon key into <code>SB_URL</code> and <code>SB_KEY</code> near the top of the script.</p></div>";
 
-/* ---------- Parking ---------- */
+/* ---------- Helpers: overdue, repeat flag, matching, CSV ---------- */
+function overdue(t) {
+  if (t.verification === "rejected" || t.status === "Completed" || t.status === "Resolved") return 0;
+  const age = (Date.now() - new Date(t.created_at)) / 36e5, lim = t.verification === "pending" ? REVIEW_SLA : SLA[t.urgency];
+  return age > lim ? age - lim : 0;
+}
+const prior = t => D.tickets.filter(x => x.id !== t.id && x.verification === "rejected" && ((t.device_id && x.device_id === t.device_id) || (t.contact && x.contact === t.contact))).length;
+const STOP = new Set("the and for with from near this that have has had was were are been lost found item there here some very got can please yang dan di ke dari ini itu saya ada dengan untuk".split(" "));
+const words = t => new Set((t.description + " " + (t.location || "")).toLowerCase().replace(/[^a-z0-9\u00c0-\u024f ]/g, " ").split(/\s+/).filter(w => w.length > 2 && !STOP.has(w)));
+function matches(t) {
+  const mine = words(t), opp = t.category === "Lost item" ? "Found item" : "Lost item";
+  return D.tickets.filter(x => x.id !== t.id && x.kind === "lost" && x.category === opp && x.verification !== "rejected" && x.status !== "Resolved").map(x => {
+    const w = words(x); let n = 0; mine.forEach(k => { if (w.has(k)) n++; });
+    return {x, n, sc: n + (t.store && t.store === x.store ? 2 : 0)};
+  }).filter(m => m.n >= 1 && m.sc >= 2).sort((a, b) => b.sc - a.sc).slice(0, 3);
+}
+function csv(rows, cols) {
+  const q = v => { v = v == null ? "" : String(v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
+  return [cols.join(",")].concat(rows.map(r => cols.map(c => q(r[c])).join(","))).join("\r\n");
+}
+function download(name, text) { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["\ufeff" + text], {type: "text/csv"})); a.download = name; document.body.appendChild(a); a.click(); a.remove(); }
+
+/* ---------- Shared pieces ---------- */
 function parkRow(l, ed) {
   const taken = l.capacity ? Math.min(100, Math.round((l.capacity - l.free) / l.capacity * 100)) : 100, full = l.free === 0;
   return "<div class='pk'><b>" + esc(l.level) + "</b><span class='trk' style='background:var(--ok)'><i style='width:" + taken + "%;background:var(--bad)'></i></span>" +
     (ed ? "<input type='number' min='0' max='" + l.capacity + "' value='" + l.free + "' data-act='park' data-id='" + esc(l.level) + "' aria-label='Free spaces on " + esc(l.level) + "'>" : "<span" + (full ? " style='color:var(--bad);font-weight:700'>Full" : ">" + l.free + " free") + "</span>") + "</div>";
 }
+const parkBox = P => { const best = P.slice().sort((a, b) => b.free - a.free)[0]; return "<div class='panel hero'><h2>Parking availability</h2><div class='muted'>Free spaces on each level. Red is taken, green is free.</div>" + (best && best.free ? "<div class='best' style='margin-top:8px'><b>Most space: " + esc(best.level) + "</b> (" + best.free + " free)</div>" : "") + (P.length ? P.map(l => parkRow(l, false)).join("") : "<div class='muted'>No parking data yet.</div>") + "</div>"; };
+const KIND = {info:"Notice", closure:"Closure", event:"Event"};
+const noticesBox = N => N.map(n => "<div class='notice " + esc(n.kind) + "'><span class='badge'>" + KIND[n.kind] + "</span> <b>" + esc(n.title) + "</b>" + (n.body ? "<div>" + esc(n.body) + "</div>" : "") + (n.expires_at ? "<div class='muted'>Until " + new Date(n.expires_at).toLocaleDateString() + "</div>" : "") + "</div>").join("");
+const photoHtml = t => t.photo_url ? "<a href='" + esc(t.photo_url) + "' target='_blank' rel='noopener'><img class='ph' loading='lazy' alt='Attached photo' src='" + esc(t.photo_url) + "'></a>" : "";
+function notesBlock(t) {
+  const cs = D.comments.filter(c => c.ticket_id === t.id), op = openN.has(t.id);
+  let h = cs.map(c => "<div class='cm'><b>" + esc(c.author_label || "Staff") + "</b>" + (c.show_reporter ? " <span class='badge'>Visible to reporter</span>" : "") + " <span class='muted'>" + ago(c.created_at) + "</span><div>" + esc(c.body) + "</div></div>").join("");
+  h += op ? "<div class='cm'><textarea id='cm-" + t.id + "' maxlength='500' placeholder='Add a note, for example: the wallet is at our counter' style='min-height:70px'></textarea><label style='display:flex;gap:8px;align-items:center;font-weight:600;margin:8px 0'><input type='checkbox' id='cs-" + t.id + "' style='width:auto'> Show this note to the reporter</label><div class='acts'><button class='btn sm' data-act='addnote' data-id='" + t.id + "'>Save note</button><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Cancel</button></div></div>"
+    : "<div class='acts'><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Add note" + (cs.length ? " (" + cs.length + ")" : "") + "</button></div>";
+  return h;
+}
 
 /* ---------- Public report view ---------- */
-function myCard(t) {
-  const pend = t.verification === "pending", rej = t.verification === "rejected";
-  return "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (pend ? "Awaiting review" : rej ? "Could not be confirmed" : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" +
-    (!pend && !rej && t.kind === "fac" ? "<div class='muted'>Technician: " + (t.technician ? esc(t.technician) : "not assigned yet") + "</div>" : "") + "</div>";
+function myCard(t, MC) {
+  const pend = t.verification === "pending", rej = t.verification === "rejected", cm = MC.filter(c => c.code === t.code);
+  return "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (pend ? "Awaiting review" : rej ? "Could not be confirmed" : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t) +
+    (!pend && !rej && t.kind === "fac" ? "<div class='muted'>Technician: " + (t.technician ? esc(t.technician) : "not assigned yet") + "</div>" : "") +
+    cm.map(c => "<div class='cm'><b>" + esc(c.author_label) + "</b> <span class='muted'>" + ago(c.created_at) + "</span><div>" + esc(c.body) + "</div></div>").join("") + "</div>";
 }
+async function pubData() {
+  const c = codes(), none = Promise.resolve({data: []});
+  const [pk, nt, mine, mc] = await Promise.all([sb.from("parking").select("*").order("level"), sb.from("notices").select("*").order("created_at", {ascending: false}), c.length ? sb.rpc("my_tickets", {p_codes: c}) : none, c.length ? sb.rpc("my_comments", {p_codes: c}) : none]);
+  return {P: pk.data || [], N: nt.data || [], M: mine.data || [], MC: mc.data || []};
+}
+const myList = d => d.M.length ? d.M.map(t => myCard(t, d.MC)).join("") : "<div class='panel' style='margin-top:10px'>No reports yet. Use the form to send your first one.</div>";
 async function reportView() {
-  const [pk, mine] = await Promise.all([sb.from("parking").select("*").order("level"), codes().length ? sb.rpc("my_tickets", {p_codes: codes()}) : Promise.resolve({data: []})]);
-  const P = pk.data || [], M = mine.data || [], best = P.slice().sort((a, b) => b.free - a.free)[0];
-  let h = "<div class='grid two'><div><div class='panel hero'><h2>Parking availability</h2><div class='muted'>Free spaces on each level. Red is taken, green is free.</div>" +
-    (best && best.free ? "<div class='best' style='margin-top:8px'><b>Most space: " + esc(best.level) + "</b> (" + best.free + " free)</div>" : "") +
-    (P.length ? P.map(l => parkRow(l, false)).join("") : "<div class='muted'>No parking data yet.</div>") + "</div><div style='height:20px'></div>";
-  h += "<div class='panel'><h2>Send a report</h2><div class='muted'>Staff check every report before acting on it.</div>" +
+  const d = await pubData();
+  return "<div class='grid two'><div><div id='noticebox'>" + noticesBox(d.N) + "</div><div id='parkbox'>" + parkBox(d.P) + "</div><div style='height:16px'></div>" +
+    "<div class='panel'><h2>Send a report</h2><div class='muted'>Staff check every report before acting on it.</div>" +
     (role === "tenant" ? "<div class='muted' style='margin-top:8px'>Reporting as tenant: <b>" + esc(profile.store) + "</b>. Your reports go straight to mall staff.</div>" : "<label for='store'>Which store is it at? (optional)</label><input type='text' id='store' list='stores' placeholder='Start typing a store name'><datalist id='stores'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist>") +
     "<label for='cat'>What are you reporting?</label><select id='cat'>" + GT.map(c => "<option>" + c + "</option>").join("") + "</select>" +
     "<label for='loc'>Where? (floor, shop or area)</label><input type='text' id='loc' placeholder='For example: 2F near Gramedia'>" +
     "<label for='desc'>Details</label><textarea id='desc' placeholder='Describe the problem, or the item and when you lost or found it'></textarea>" +
+    "<label for='ph'>Photo (optional)</label><input type='file' id='ph' accept='image/*'>" +
     "<label for='con'>Contact number (optional)</label><input type='text' id='con' inputmode='tel'>" +
-    "<div class='err' id='err' role='alert'></div><button class='btn' data-act='send'>Send report</button></div></div>";
-  h += "<div><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div>" + (M.length ? M.map(myCard).join("") : "<div class='panel' style='margin-top:10px'>No reports yet. Use the form to send your first one.</div>") + "</div></div>";
-  return h;
+    "<input type='text' id='website' tabindex='-1' autocomplete='off' aria-hidden='true' style='position:absolute;left:-9999px;width:1px;height:1px'>" +
+    "<div class='err' id='err' role='alert'></div><button class='btn' id='sendbtn' data-act='send'>Send report</button></div></div>" +
+    "<div><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div><div id='mybox'>" + myList(d) + "</div></div></div>";
+}
+async function refreshPublic() {
+  if (view !== "report" || !$("parkbox")) return;
+  const d = await pubData(); if (view !== "report" || !$("parkbox")) return;
+  $("noticebox").innerHTML = noticesBox(d.N); $("parkbox").innerHTML = parkBox(d.P); $("mybox").innerHTML = myList(d); applyLang();
+}
+function compress(file) {
+  return new Promise((res, rej) => {
+    const img = new Image(), u = URL.createObjectURL(file);
+    img.onload = () => { const k = Math.min(1, 1280 / Math.max(img.width, img.height)), c = document.createElement("canvas"); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(u); c.toBlob(b => b ? res(b) : rej(new Error("Could not read the photo")), "image/jpeg", .8); };
+    img.onerror = () => rej(new Error("Could not read the photo")); img.src = u;
+  });
+}
+async function uploadPhoto(file) {
+  const blob = await compress(file), path = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2)) + ".jpg";
+  const {error} = await sb.storage.from("report-photos").upload(path, blob, {contentType: "image/jpeg"});
+  if (error) throw error; return sb.storage.from("report-photos").getPublicUrl(path).data.publicUrl;
 }
 async function send() {
-  const d = $("desc").value.trim(), store = role === "tenant" ? "" : $("store").value.trim();
-  if (d.length < 10) { $("err").textContent = "Add at least 10 characters so staff can check your report."; return; }
-  if (store && !STORES.includes(store)) { $("err").textContent = "Pick the store from the list, or leave it empty."; return; }
-  const {data, error} = await sb.rpc("submit_ticket", {p_category: $("cat").value, p_store: store, p_location: $("loc").value.trim(), p_description: d, p_contact: $("con").value.trim()});
-  if (error) { $("err").textContent = "Could not send: " + error.message; return; }
-  try { localStorage.setItem("aeon_codes", JSON.stringify([data, ...codes()].slice(0, 50))); } catch (e) {}
-  toast("Report " + data + " sent"); render();
+  const d = $("desc").value.trim(), store = role === "tenant" ? "" : $("store").value.trim(), f = $("ph").files[0], err = $("err"), btn = $("sendbtn");
+  err.textContent = "";
+  if (d.length < 10) { err.textContent = tr2("Add at least 10 characters so staff can check your report."); return; }
+  if (store && !STORES.includes(store)) { err.textContent = tr2("Pick the store from the list, or leave it empty."); return; }
+  if (f && f.size > 15e6) { err.textContent = tr2("That photo is too large. Choose one under 15 MB."); return; }
+  btn.disabled = true; btn.textContent = tr2("Sending...");
+  try {
+    const photo = f ? await uploadPhoto(f) : "";
+    const {data, error} = await sb.rpc("submit_ticket", {p_category: $("cat").value, p_store: store, p_location: $("loc").value.trim(), p_description: d, p_contact: $("con").value.trim(), p_photo: photo, p_device: DEV, p_hp: $("website").value});
+    if (error) throw error;
+    try { localStorage.setItem("aeon_codes", JSON.stringify([data, ...codes()].slice(0, 50))); } catch (e) {}
+    toast("Report " + data + " sent"); render();
+  } catch (e) { err.textContent = "Could not send: " + (e.message || e); btn.disabled = false; btn.textContent = tr2("Send report"); }
 }
+const tr2 = s => LANG === "id" ? tr(s) : s;
 
-/* ---------- Admin ---------- */
+/* ---------- Login, roles ---------- */
 const loginView = () => "<div class='grid two'><div class='panel'><h2>Log in</h2><div class='muted'>For mall staff and tenants.</div><label for='em'>Email</label><input type='text' id='em' inputmode='email' autocomplete='username'><label for='pw'>Password</label><input type='password' id='pw' autocomplete='current-password'><div class='err' id='lerr' role='alert'></div><button class='btn' data-act='login'>Log in</button></div>" +
   "<div class='panel'><h2>New tenant? Create an account</h2><div class='muted'>Pick your store. A mall admin approves your account before you can see reports for it.</div><label for='sstore'>Your store</label><input type='text' id='sstore' list='stores2' placeholder='Start typing your store name'><datalist id='stores2'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist><label for='sem'>Email</label><input type='text' id='sem' inputmode='email' autocomplete='email'><label for='spw'>Password (6+ characters)</label><input type='password' id='spw' autocomplete='new-password'><div class='err' id='serr' role='alert'></div><button class='btn' data-act='signup'>Create tenant account</button></div></div>";
 const reload = () => role === "admin" ? loadAdmin() : role === "tenant" ? loadTenant() : Promise.resolve();
@@ -153,20 +288,25 @@ async function checkRole() {
   const a = await sb.from("admins").select("user_id").eq("user_id", user.id);
   if (a.data && a.data.length) { role = "admin"; await loadAdmin(); return; }
   const pr = await sb.from("profiles").select("*").eq("user_id", user.id);
-  profile = (pr.data && pr.data[0]) || null;
-  role = profile && profile.approved ? "tenant" : "pending";
+  profile = (pr.data && pr.data[0]) || null; role = profile && profile.approved ? "tenant" : "pending";
   if (role === "tenant") await loadTenant();
 }
 async function loadAdmin() {
-  const [t, te, p, pr, ad] = await Promise.all([sb.from("tickets").select("*").order("created_at", {ascending: false}), sb.from("technicians").select("*").order("name"), sb.from("parking").select("*").order("level"), sb.from("profiles").select("*").order("created_at", {ascending: false}), sb.from("admins").select("user_id")]);
-  D = {tickets: t.data || [], techs: te.data || [], parking: p.data || [], profiles: pr.data || [], admins: ad.data || []};
+  const [t, te, p, pr, ad, cm, ac, nt] = await Promise.all([
+    sb.from("tickets").select("*").order("created_at", {ascending: false}), sb.from("technicians").select("*").order("name"), sb.from("parking").select("*").order("level"),
+    sb.from("profiles").select("*").order("created_at", {ascending: false}), sb.from("admins").select("user_id"), sb.from("comments").select("*").order("created_at"),
+    sb.from("activity").select("*").order("created_at", {ascending: false}).limit(200), sb.from("notices").select("*").order("created_at", {ascending: false})]);
+  D = {tickets: t.data || [], techs: te.data || [], parking: p.data || [], profiles: pr.data || [], admins: ad.data || [], comments: cm.data || [], activity: ac.data || [], notices: nt.data || []};
+}
+async function loadTenant() {
+  const [t, cm] = await Promise.all([sb.from("tickets").select("*").order("created_at", {ascending: false}), sb.from("comments").select("*").order("created_at")]);
+  D.tickets = t.data || []; D.comments = cm.data || [];
 }
 async function rpcAdmin(fn, id, msg) { const {error} = await sb.rpc(fn, {p_user: id}); if (error) toast("Failed: " + error.message); else { await reload(); render(); toast(msg); } }
-async function loadTenant() { const t = await sb.from("tickets").select("*").order("created_at", {ascending: false}); D.tickets = t.data || []; }
 async function login() {
   const {error} = await sb.auth.signInWithPassword({email: $("em").value.trim(), password: $("pw").value});
   if (error) { $("lerr").textContent = error.message; return; }
-  await checkRole(); render();
+  await checkRole(); subscribe(); render();
 }
 async function signup() {
   const store = $("sstore").value.trim(), em = $("sem").value.trim(), pw = $("spw").value, err = $("serr");
@@ -177,103 +317,190 @@ async function signup() {
   if (data.session) { await checkRole(); render(); toast("Account created"); }
   else { err.style.color = "var(--ok)"; err.textContent = "Account created. Check your email to confirm it, then log in."; }
 }
-const topbar = (title, sub) => "<div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'><div><h2 style='margin:0'>" + title + "</h2><div class='muted'>" + sub + "</div></div><span class='ctl'><button class='btn alt sm' data-act='refresh'>Refresh</button><button class='btn alt sm' data-act='logout'>Log out</button></span></div>";
+const topbar = (title, sub, extra) => "<div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'><div><h2 style='margin:0'>" + title + "</h2><div class='muted'>" + sub + "</div></div><span class='ctl'>" + (extra || "") + "<button class='btn alt sm' data-act='refresh'>Refresh</button><button class='btn alt sm' data-act='logout'>Log out</button></span></div>";
 function pendingView() {
   return "<div class='panel' style='max-width:520px;margin:0 auto'><h2>" + (profile && profile.store ? "Waiting for approval" : "No access yet") + "</h2><p>" + (profile && profile.store ? "Your tenant account for <b>" + esc(profile.store) + "</b> is waiting for a mall admin to approve it. Until then you can still send reports as a guest." : "This account is not an admin or an approved tenant yet. An admin can promote it from the admin panel.") + "</p><p class='muted'>Setting this system up for the first time? The first account to claim admin access becomes the admin. This only works while no admin exists.</p><div class='acts'><button class='btn sm' data-act='claim'>Claim admin access</button><button class='btn alt sm' data-act='logout'>Log out</button></div></div>";
 }
-function tcard(t, can) {
+
+/* ---------- Tenant view ---------- */
+function tcard(t, mine) {
   const lost = t.kind === "lost", done = t.status === "Resolved" || t.status === "Completed";
-  return "<div class='ticket " + t.urgency.toLowerCase() + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (done ? (lost ? "Resolved" : "Done") : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" +
-    (can && t.contact ? "<div class='muted'>Reporter contact: " + esc(t.contact) + "</div>" : "") + (!can && !lost && t.technician ? "<div class='muted'>Technician: " + esc(t.technician) + "</div>" : "") +
-    (can && !done ? "<div class='acts'><button class='btn sm' data-act='tresolve' data-id='" + t.id + "'>Mark as done</button></div>" : "") + "</div>";
+  return "<div class='ticket " + t.urgency.toLowerCase() + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (done ? (lost ? "Resolved" : "Done") : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t) +
+    (!mine && t.contact ? "<div class='muted'>Reporter contact: " + esc(t.contact) + "</div>" : "") + (mine && !lost && t.technician ? "<div class='muted'>Technician: " + esc(t.technician) + "</div>" : "") +
+    notesBlock(t) + (!mine && !done ? "<div class='acts'><button class='btn sm' data-act='tresolve' data-id='" + t.id + "'>Mark as done</button></div>" : "") + "</div>";
 }
 function tenantView() {
   const pub = D.tickets.filter(t => t.source === "guest"), mine = D.tickets.filter(t => t.reporter_id === user.id), open = pub.filter(t => t.status !== "Resolved" && t.status !== "Completed").length;
   return topbar(esc(profile.store), esc(user.email)) +
-    "<div class='panel' style='margin-bottom:20px'><h2>Reports from the public (" + open + " open)</h2><div class='muted'>Visitor reports about your store that mall staff confirmed. Mark one as done once it is handled, for example when a lost item is returned.</div>" + (pub.length ? pub.map(t => tcard(t, true)).join("") : "<div class='muted' style='margin-top:10px'>Nothing yet. Confirmed reports about your store appear here.</div>") + "</div>" +
-    "<div class='panel'><h2>Your reports to mall staff</h2><div class='muted'>Use the Report tab to send a new one.</div>" + (mine.length ? mine.map(t => tcard(t, false)).join("") : "<div class='muted' style='margin-top:10px'>No reports yet.</div>") + "</div>";
+    "<div class='panel' style='margin-bottom:20px'><h2>Reports from the public (" + open + " open)</h2><div class='muted'>Visitor reports about your store that mall staff confirmed. Add a note to tell the reporter what is happening, and mark it done once handled, for example when a lost item is returned.</div>" + (pub.length ? pub.map(t => tcard(t, false)).join("") : "<div class='muted' style='margin-top:10px'>Nothing yet. Confirmed reports about your store appear here.</div>") + "</div>" +
+    "<div class='panel'><h2>Your reports to mall staff</h2><div class='muted'>Use the Report tab to send a new one.</div>" + (mine.length ? mine.map(t => tcard(t, true)).join("") : "<div class='muted' style='margin-top:10px'>No reports yet.</div>") + "</div>";
 }
-const isAd = id => (D.admins || []).some(x => x.user_id === id);
-const tenantAccounts = () => "<div class='panel' style='margin-bottom:20px'><h2>Accounts (" + D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length + " waiting)</h2><div class='muted'>Every account you add in Supabase, or that signs up on the site, shows here. Approve tenants so they can see public reports for their store, or make someone an admin.</div>" +
-  D.profiles.map(x => { const ad = isAd(x.user_id), id = "data-id='" + x.user_id + "'"; return "<div class='row note' style='align-items:center'><span>" + (ad ? "<span class='badge'>Admin</span> " : "") + esc(x.store || "(no store)") + " <span class='muted'>" + esc(x.email || "") + "</span></span><span class='ctl'>" +
-    (ad ? (x.user_id === user.id ? "" : "<button class='btn alt sm' data-act='rmadmin' " + id + ">Remove admin</button>") : (x.approved ? "<button class='btn alt sm' data-act='revoke' " + id + ">Revoke tenant</button>" : "<button class='btn sm' data-act='approve' " + id + ">Approve tenant</button>") + "<button class='btn alt sm' data-act='mkadmin' " + id + ">Make admin</button><button class='btn alt sm' data-act='rmuser' " + id + ">Remove</button>") + "</span></div>"; }).join("") +
-  (D.profiles.length ? "" : "<div class='muted' style='margin-top:10px'>No accounts yet.</div>") + "</div>";
+
+/* ---------- Admin view ---------- */
 function card(t) {
-  const lost = t.kind === "lost", pend = t.verification === "pending", rej = t.verification === "rejected";
-  let h = "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (pend ? "Awaiting review" : rej ? "Rejected" : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div>";
-  h += "<div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + (t.urgency !== "Normal" ? ", priority " + t.urgency : "") + "</div><div>" + esc(t.description) + "</div>";
+  const lost = t.kind === "lost", pend = t.verification === "pending", rej = t.verification === "rejected", ov = overdue(t), pr = prior(t);
+  let h = "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + (ov ? " overdue" : "") + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (pend ? "Awaiting review" : rej ? "Rejected" : t.status) + "</span>" + (ov ? " <span class='badge bad'>Overdue " + fmtH(ov) + "</span>" : "") + (pr ? " <span class='badge warn'>Repeat flag: " + pr + " rejected before</span>" : "") + "</span><span class='muted'>" + ago(t.created_at) + "</span></div>";
+  h += "<div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + (t.urgency !== "Normal" ? ", priority " + t.urgency : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t);
   h += "<div class='muted'>" + (t.source === "tenant" ? "Tenant" : "Guest") + (t.store ? ", store: " + esc(t.store) : "") + (t.contact ? " | Contact: " + esc(t.contact) : "") + (!lost && t.technician ? " | Technician: " + esc(t.technician) : "") + "</div>";
+  if (lost && !rej && t.status !== "Resolved") {
+    const m = matches(t);
+    if (m.length) h += "<div class='cm'><b>Possible match" + (m.length > 1 ? "es" : "") + "</b>" + m.map(({x}) => "<div class='row' style='align-items:center;margin-top:6px'><span>" + x.code + ": " + esc(x.category) + (x.store ? " at " + esc(x.store) : "") + ", " + esc(x.description.slice(0, 60)) + "</span><button class='btn alt sm' data-act='both' data-id='" + t.id + "' data-b='" + x.id + "'>Resolve both</button></div>").join("") + "</div>";
+  }
   let a = "";
   if (pend) a = "<button class='btn sm' data-act='verify' data-id='" + t.id + "'>Real report</button><button class='btn sm alt' data-act='reject' data-id='" + t.id + "'>Fake report</button>";
   else if (!rej && !lost && !t.technician) a = D.techs.length ? "<select data-act='assign' data-id='" + t.id + "' aria-label='Assign technician'><option value=''>Assign technician</option>" + D.techs.map(x => "<option value='" + esc(x.name) + "'>" + esc(x.name) + (x.specialty ? " (" + esc(x.specialty) + ")" : "") + "</option>").join("") + "</select>" : "<span class='muted'>Add a technician first.</span>";
   else if (!rej && !lost && t.status !== "Completed") a = "<button class='btn sm' data-act='advance' data-id='" + t.id + "'>Mark " + STAGES[STAGES.indexOf(t.status) + 1] + "</button>";
   else if (lost && !rej && t.status !== "Resolved") a = "<button class='btn sm' data-act='resolve' data-id='" + t.id + "'>Mark resolved</button>";
   a += "<button class='btn sm alt' data-act='del' data-id='" + t.id + "'>Delete</button>";
-  return h + "<div class='acts'>" + a + "</div></div>";
+  return h + notesBlock(t) + "<div class='acts'>" + a + "</div></div>";
 }
 const panel = (t, s, list) => "<div class='panel' style='margin-bottom:20px'><h2>" + t + "</h2><div class='muted'>" + s + "</div>" + (list.length ? list.map(card).join("") : "<div class='muted' style='margin-top:10px'>Nothing here yet.</div>") + "</div>";
 const techPanel = () => "<div class='panel'><h2>Technicians</h2>" + (D.techs.length ? D.techs.map(t => "<div class='row note' style='align-items:center'><span>" + esc(t.name) + " <span class='muted'>" + esc(t.specialty || "") + "</span></span><button class='btn alt sm' data-act='deltech' data-id='" + t.id + "'>Remove</button></div>").join("") : "<div class='muted'>No technicians yet.</div>") + "<label for='tn'>Add technician</label><input type='text' id='tn' placeholder='Name'><input type='text' id='ts' placeholder='Specialty' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addtech'>Add</button></div>";
 const parkEditor = () => "<div class='panel'><h2>Parking levels</h2><div class='muted'>Guests see these numbers live. Red is taken, green is free.</div>" + D.parking.map(l => parkRow(l, true) + "<div style='text-align:right;margin-top:-6px'><button class='btn alt sm' data-act='dellevel' data-id='" + esc(l.level) + "'>Remove " + esc(l.level) + "</button></div>").join("") + "<label for='pl'>Add level</label><input type='text' id='pl' placeholder='Level name, for example P4'><input type='number' id='pc' placeholder='Total spaces' min='0' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addlevel'>Add level</button></div>";
+const isAd = id => (D.admins || []).some(x => x.user_id === id);
+const tenantAccounts = () => "<div class='panel' style='margin-bottom:20px'><h2>Accounts (" + D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length + " waiting)</h2><div class='muted'>Every account you add in Supabase, or that signs up on the site, shows here. Approve tenants so they can see public reports for their store, or make someone an admin.</div>" +
+  D.profiles.map(x => { const ad = isAd(x.user_id), id = "data-id='" + x.user_id + "'"; return "<div class='row note' style='align-items:center'><span>" + (ad ? "<span class='badge'>Admin</span> " : "") + esc(x.store || "(no store)") + " <span class='muted'>" + esc(x.email || "") + "</span></span><span class='ctl'>" +
+    (ad ? (x.user_id === user.id ? "" : "<button class='btn alt sm' data-act='rmadmin' " + id + ">Remove admin</button>") : (x.approved ? "<button class='btn alt sm' data-act='revoke' " + id + ">Revoke tenant</button>" : "<button class='btn sm' data-act='approve' " + id + ">Approve tenant</button>") + "<button class='btn alt sm' data-act='mkadmin' " + id + ">Make admin</button><button class='btn alt sm' data-act='rmuser' " + id + ">Remove</button>") + "</span></div>"; }).join("") +
+  (D.profiles.length ? "" : "<div class='muted' style='margin-top:10px'>No accounts yet.</div>") + "</div>";
+const noticeAdmin = () => "<div class='panel' style='margin-bottom:20px'><h2>Notice board</h2><div class='muted'>Notices show at the top of the Report tab for every visitor.</div>" +
+  (D.notices.length ? D.notices.map(n => "<div class='row note' style='align-items:center'><span><span class='badge'>" + KIND[n.kind] + "</span> <b>" + esc(n.title) + "</b>" + (n.expires_at ? " <span class='muted'>until " + new Date(n.expires_at).toLocaleDateString() + "</span>" : "") + "</span><button class='btn alt sm' data-act='delnotice' data-id='" + n.id + "'>Delete</button></div>").join("") : "<div class='muted' style='margin-top:10px'>No notices yet.</div>") +
+  "<label for='nt'>Title</label><input type='text' id='nt' maxlength='80' placeholder='For example: Parking P3 closed on Saturday'><label for='nb'>Message (optional)</label><textarea id='nb' maxlength='300' style='min-height:70px'></textarea><label for='nk'>Type</label><select id='nk'><option value='info'>Notice</option><option value='closure'>Closure</option><option value='event'>Event</option></select><label for='nd'>Show for how many days? (empty = until you delete it)</label><input type='number' id='nd' min='1' placeholder='7'><button class='btn sm' style='margin-top:12px' data-act='addnotice'>Post notice</button></div>";
+const activityPanel = () => "<div class='panel' style='margin-bottom:20px'><h2>Activity log</h2><div class='muted'>Who did what to each report. Written by the database, so it cannot be edited here.</div>" +
+  (D.activity.length ? D.activity.slice(0, 40).map(a => "<div class='row note'><span><b>" + esc(a.actor_email || "system") + "</b> " + esc(a.action) + " <b>" + esc(a.ticket_code) + "</b>" + (a.detail ? " <span class='muted'>(" + esc(a.detail) + ")</span>" : "") + "</span><span class='muted'>" + ago(a.created_at) + "</span></div>").join("") : "<div class='muted' style='margin-top:10px'>No activity yet.</div>") + "</div>";
+function insights() {
+  const T = D.tickets, wk = 7 * 864e5, mon = new Date(); mon.setHours(0, 0, 0, 0); mon.setDate(mon.getDate() - ((mon.getDay() + 6) % 7));
+  const weeks = []; for (let i = 7; i >= 0; i--) weeks.push({s: new Date(mon.getTime() - i * wk), n: 0});
+  T.forEach(t => { const c = new Date(t.created_at); for (let i = weeks.length - 1; i >= 0; i--) if (c >= weeks[i].s) { weeks[i].n++; break; } });
+  const mx = Math.max(1, ...weeks.map(w => w.n)), cats = {}; T.forEach(t => { cats[t.category] = (cats[t.category] || 0) + 1; });
+  const top = Object.entries(cats).sort((a, b) => b[1] - a[1]).slice(0, 6), cm = Math.max(1, ...top.map(x => x[1]));
+  const hrs = (a, b) => (new Date(b) - new Date(a)) / 36e5, avg = a => a.length ? a.reduce((s, x) => s + x, 0) / a.length : 0;
+  const asg = avg(T.filter(t => t.assigned_at).map(t => hrs(t.created_at, t.assigned_at))), res = avg(T.filter(t => t.resolved_at).map(t => hrs(t.created_at, t.resolved_at)));
+  const rv = T.filter(t => t.source === "guest" && t.verification !== "pending"), real = rv.filter(t => t.verification === "verified").length, guests = T.filter(t => t.source === "guest").length;
+  return "<div class='panel' style='margin-bottom:20px'><h2>Insights</h2><div class='stat'><div><b>" + asg.toFixed(1) + " h</b>Average time to assign</div><div><b>" + res.toFixed(1) + " h</b>Average time to finish</div><div><b>" + (T.length ? Math.round(guests / T.length * 100) : 0) + "%</b>Reports from guests</div><div><b>" + (rv.length ? Math.round(real / rv.length * 100) : 0) + "%</b>Guest reports confirmed real</div></div>" +
+    "<h3>Reports per week</h3><div class='chart'>" + weeks.map(w => "<div><span>" + w.n + "</span><i style='height:" + Math.max(2, Math.round(w.n / mx * 90)) + "px'></i><span>" + w.s.getDate() + "/" + (w.s.getMonth() + 1) + "</span></div>").join("") + "</div>" +
+    "<h3 style='margin-top:18px'>Most common faults</h3>" + (top.length ? top.map(([k, v]) => "<div class='hb'><span>" + esc(k) + "</span><span class='b' style='width:" + Math.round(v / cm * 100) + "%'></span><b>" + v + "</b></div>").join("") : "<div class='muted'>No reports yet.</div>") + "</div>";
+}
 function adminView() {
-  const T = D.tickets, q = T.filter(t => t.verification === "pending"), fac = T.filter(t => t.kind === "fac" && t.verification === "verified"), lf = T.filter(t => t.kind === "lost" && t.verification === "verified"), rej = T.filter(t => t.verification === "rejected");
-  const act = fac.filter(t => t.status !== "Completed").sort((a, b) => rank[a.urgency] - rank[b.urgency] || new Date(a.created_at) - new Date(b.created_at));
-  const as = fac.filter(t => t.assigned_at), avg = as.length ? as.reduce((s, t) => s + (new Date(t.assigned_at) - new Date(t.created_at)), 0) / as.length / 36e5 : 0;
-  let h = "<div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'><h2 style='margin:0'>Admin panel</h2><span class='ctl'><span class='muted'>" + esc(user.email) + "</span><button class='btn alt sm' data-act='refresh'>Refresh</button><button class='btn alt sm' data-act='logout'>Log out</button></span></div>";
-  h += "<div class='stat'><div><b>" + q.length + "</b>Waiting for review</div><div><b>" + act.length + "</b>Open facility jobs</div><div><b>" + act.filter(t => !t.technician).length + "</b>Need a technician</div><div><b>" + avg.toFixed(1) + " h</b>Average time to assign</div></div>";
-  h += panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports.", q);
-  h += panel("Open facility jobs", "Sorted by priority, then by waiting time.", act);
-  h += tenantAccounts(); h += "<div class='grid two'><div>" + techPanel() + "<div style='height:20px'></div>" + parkEditor() + "</div><div>" + panel("Lost and found log", "Confirmed lost and found reports.", lf) + panel("Rejected reports", "Kept for your records. Delete to remove.", rej) + "</div></div>";
-  return h;
+  const T = D.tickets, q = T.filter(t => t.verification === "pending").sort((a, b) => new Date(a.created_at) - new Date(b.created_at)), fac = T.filter(t => t.kind === "fac" && t.verification === "verified"), lf = T.filter(t => t.kind === "lost" && t.verification === "verified"), rej = T.filter(t => t.verification === "rejected");
+  const act = fac.filter(t => t.status !== "Completed").sort((a, b) => (!!overdue(b) - !!overdue(a)) || rank[a.urgency] - rank[b.urgency] || new Date(a.created_at) - new Date(b.created_at));
+  const late = T.filter(t => overdue(t) > 0).length;
+  return topbar("Admin panel", esc(user.email), "<button class='btn alt sm' data-act='exp'>Export CSV</button><button class='btn alt sm' data-act='expact'>Export log</button>") +
+    "<div class='stat'><div><b>" + q.length + "</b>Waiting for review</div><div><b style='" + (late ? "color:var(--bad)" : "") + "'>" + late + "</b>Overdue</div><div><b>" + act.length + "</b>Open facility jobs</div><div><b>" + act.filter(t => !t.technician).length + "</b>Need a technician</div></div>" +
+    panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports. Reviews are overdue after " + REVIEW_SLA + " h.", q) +
+    panel("Open facility jobs", "Overdue limits: Urgent " + SLA.Urgent + " h, High " + SLA.High + " h, Normal " + SLA.Normal + " h. Overdue jobs show first.", act) +
+    insights() + noticeAdmin() + tenantAccounts() +
+    "<div class='grid two'><div>" + techPanel() + "<div style='height:20px'></div>" + parkEditor() + "</div><div>" + panel("Lost and found log", "Confirmed lost and found reports, with suggested matches.", lf) + panel("Rejected reports", "Kept for your records. Delete to remove.", rej) + "</div></div>" + activityPanel();
 }
 async function mut(p) { const {error} = await p; if (error) { toast("Failed: " + error.message); return false; } await reload(); render(); return true; }
 const upd = (id, patch) => mut(sb.from("tickets").update(patch).eq("id", id));
+async function addNote(id) {
+  const ta = $("cm-" + id), body = ta ? ta.value.trim() : ""; if (!body) return;
+  const {error} = await sb.from("comments").insert({ticket_id: +id, author_id: user.id, body, show_reporter: $("cs-" + id).checked});
+  if (error) toast("Failed: " + error.message); else { openN.delete(+id); await reload(); render(); toast("Note saved"); }
+}
 
 /* ---------- Render and events ---------- */
 async function render() {
   document.querySelectorAll("[data-act=view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === view));
   const ab = document.querySelector("[data-v=account]"); if (ab) ab.querySelector("span").textContent = user ? "Dashboard" : "Sign in";
-  if (!sb) { $("app").innerHTML = SETUP; return; }
+  if (!sb) { $("app").innerHTML = SETUP; applyLang(); return; }
   if (view === "report") $("app").innerHTML = await reportView();
   else $("app").innerHTML = !user ? loginView() : role === "admin" ? adminView() : role === "tenant" ? tenantView() : pendingView();
+  applyLang();
 }
 document.addEventListener("click", async e => {
+  if (e.target.id === "sheet") { $("sheet").classList.add("hidden"); return; }
   const b = e.target.closest("[data-act]"); if (!b) return;
   const a = b.dataset.act, id = b.dataset.id, t = D.tickets.find(x => String(x.id) === id);
   if (a === "view") { view = b.dataset.v; if (view === "account" && sb && !user) await checkRole(); render(); }
   else if (a === "send") send();
   else if (a === "login") login();
   else if (a === "signup") signup();
-  else if (a === "logout") { await sb.auth.signOut(); user = null; role = "none"; profile = null; D = {tickets:[], techs:[], parking:[], profiles:[]}; render(); }
+  else if (a === "logout") { await sb.auth.signOut(); user = null; role = "none"; profile = null; D = {tickets:[], techs:[], parking:[], profiles:[], admins:[], comments:[], activity:[], notices:[]}; render(); }
   else if (a === "refresh") { await reload(); render(); toast("Refreshed"); }
   else if (a === "claim" && user) { const {data, error} = await sb.rpc("claim_first_admin"); if (error) toast("Failed: " + error.message); else if (data) { await checkRole(); render(); toast("You are now the admin"); } else toast("An admin already exists. Ask them to approve you."); }
+  else if (a === "togglenote") { const k = +id; if (openN.has(k)) openN.delete(k); else openN.add(k); render(); }
+  else if (a === "addnote" && user) addNote(id);
   else if (a === "tresolve" && role === "tenant") { const {error} = await sb.rpc("tenant_resolve", {p_id: +id}); if (error) toast("Failed: " + error.message); else { await reload(); render(); toast("Marked as done"); } }
   else if (role !== "admin") return;
-  else if (a === "rmuser") { if (confirm("Remove this account? They will no longer be able to log in.")) rpcAdmin("delete_account", id, "Account removed"); }
-  else if (a === "mkadmin") rpcAdmin("make_admin", id, "Admin added");
-  else if (a === "rmadmin") { if (confirm("Remove this admin?")) rpcAdmin("remove_admin", id, "Admin removed"); }
   else if (a === "approve") mut(sb.from("profiles").update({approved: true}).eq("user_id", id));
   else if (a === "revoke") mut(sb.from("profiles").update({approved: false}).eq("user_id", id));
+  else if (a === "mkadmin") rpcAdmin("make_admin", id, "Admin added");
+  else if (a === "rmadmin") { if (confirm("Remove this admin?")) rpcAdmin("remove_admin", id, "Admin removed"); }
+  else if (a === "rmuser") { if (confirm("Remove this account? They will no longer be able to log in.")) rpcAdmin("delete_account", id, "Account removed"); }
   else if (a === "verify" && t) upd(t.id, {verification: "verified", urgency: {Normal: "High", High: "Urgent", Urgent: "Urgent"}[t.urgency], status: t.kind === "lost" ? "Verified" : t.status});
   else if (a === "reject" && t) upd(t.id, {verification: "rejected"});
   else if (a === "advance" && t) upd(t.id, {status: STAGES[STAGES.indexOf(t.status) + 1]});
   else if (a === "resolve" && t) upd(t.id, {status: "Resolved"});
-  else if (a === "del" && t) { if (confirm("Delete " + t.code + "? This cannot be undone.")) mut(sb.from("tickets").delete().eq("id", t.id)); }
+  else if (a === "both" && t) { const o = b.dataset.b; mut(Promise.all([upd0(t.id), upd0(o)]).then(rs => rs.find(r => r.error) || {error: null})); }
+  else if (a === "del" && t) { if (confirm("Delete " + t.code + "? This cannot be undone.")) { const m = (t.photo_url || "").match(/report-photos\/(.+)$/); if (m) sb.storage.from("report-photos").remove([decodeURIComponent(m[1])]); mut(sb.from("tickets").delete().eq("id", t.id)); } }
   else if (a === "addtech") { const n = $("tn").value.trim(); if (n) mut(sb.from("technicians").insert({name: n, specialty: $("ts").value.trim()})); }
   else if (a === "deltech") { if (confirm("Remove this technician?")) mut(sb.from("technicians").delete().eq("id", id)); }
   else if (a === "addlevel") { const n = $("pl").value.trim(), c = parseInt($("pc").value, 10); if (n && c >= 0) mut(sb.from("parking").insert({level: n, capacity: c, free: c})); }
   else if (a === "dellevel") { if (confirm("Remove parking level " + id + "?")) mut(sb.from("parking").delete().eq("level", id)); }
+  else if (a === "addnotice") { const ti = $("nt").value.trim(), d = parseInt($("nd").value, 10); if (ti) mut(sb.from("notices").insert({title: ti, body: $("nb").value.trim() || null, kind: $("nk").value, expires_at: d > 0 ? new Date(Date.now() + d * 864e5).toISOString() : null})); }
+  else if (a === "delnotice") { if (confirm("Delete this notice?")) mut(sb.from("notices").delete().eq("id", id)); }
+  else if (a === "exp") download("aeon-reports-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.tickets, ["code","created_at","source","store","kind","category","location","description","contact","urgency","status","verification","technician","assigned_at","resolved_at","photo_url"]));
+  else if (a === "expact") download("aeon-activity-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.activity, ["created_at","ticket_code","actor_email","action","detail"]));
 });
+const upd0 = id => sb.from("tickets").update({status: "Resolved", verification: "verified"}).eq("id", id);
 document.addEventListener("change", async e => {
   const b = e.target, a = b.dataset ? b.dataset.act : null;
   if (role !== "admin") return;
   if (a === "assign" && b.value) upd(b.dataset.id, {technician: b.value, status: "Assigned", assigned_at: new Date().toISOString()});
   else if (a === "park") mut(sb.from("parking").update({free: Math.max(0, Math.min(+b.max, parseInt(b.value, 10) || 0)), updated_at: new Date().toISOString()}).eq("level", b.dataset.id));
 });
-setInterval(() => { if ((role === "admin" || role === "tenant") && view === "account" && !document.activeElement.matches("input,textarea,select")) reload().then(render); }, 30000);
-(async () => { if (sb) await checkRole(); render(); })();
+
+/* ---------- Live updates ---------- */
+let ch = null;
+function subscribe() {
+  if (!sb || ch) return; let tm;
+  const go = () => { clearTimeout(tm); tm = setTimeout(live, 600); };
+  ch = sb.channel("aeon-live"); ["tickets", "parking", "notices", "comments"].forEach(tb => ch.on("postgres_changes", {event: "*", schema: "public", table: tb}, go)); ch.subscribe();
+}
+async function live() {
+  if (view === "report") await refreshPublic();
+  else if ((role === "admin" || role === "tenant") && !typing()) { await reload(); render(); }
+}
+setInterval(() => { if (!typing()) live(); }, 30000);
+(async () => { if (sb) { await checkRole(); subscribe(); } render(); })();
+
+/* ---------- Theme, language and install button ---------- */
+const SUN = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const MOON = '<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+function savedTheme() { try { return localStorage.getItem("aeon_theme"); } catch (e) { return null; } }
+function isDark() { const t = savedTheme(); return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
+function applyTheme() {
+  const t = savedTheme(); if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#5a0035" : "#a3005f";
+  const b = $("themebtn"); b.innerHTML = d ? SUN : MOON; b.setAttribute("aria-label", d ? "Switch to light mode" : "Switch to dark mode");
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+applyTheme();
+let dip = null;
+const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent), isAndroid = /android/i.test(navigator.userAgent);
+function showInstall() { $("installbtn").classList.toggle("hidden", standalone() || !(dip || isIOS || isAndroid)); }
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); dip = e; showInstall(); });
+addEventListener("appinstalled", () => { dip = null; showInstall(); toast("App installed"); });
+showInstall();
 function net() { $("offline").classList.toggle("hidden", navigator.onLine); }
 addEventListener("online", () => { net(); render(); }); addEventListener("offline", net); net();
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return; const a = b.dataset.act;
+  if (a === "theme") { try { localStorage.setItem("aeon_theme", isDark() ? "light" : "dark"); } catch (x) {} applyTheme(); }
+  else if (a === "lang") { LANG = LANG === "id" ? "en" : "id"; try { localStorage.setItem("aeon_lang", LANG); } catch (x) {} render(); }
+  else if (a === "install") {
+    if (dip) { dip.prompt(); await dip.userChoice; dip = null; showInstall(); }
+    else {
+      const en = isIOS ? ["Tap the <b>Share</b> button in Safari.", "Scroll down and tap <b>Add to Home Screen</b>.", "Tap <b>Add</b>."] : ["Tap the <b>three dots</b> menu in Chrome.", "Tap <b>Install app</b> or <b>Add to Home screen</b>.", "Tap <b>Install</b>."];
+      const idn = isIOS ? ["Ketuk tombol <b>Bagikan</b> di Safari.", "Gulir ke bawah lalu ketuk <b>Tambah ke Layar Utama</b>.", "Ketuk <b>Tambah</b>."] : ["Ketuk menu <b>tiga titik</b> di Chrome.", "Ketuk <b>Instal aplikasi</b> atau <b>Tambahkan ke layar utama</b>.", "Ketuk <b>Instal</b>."];
+      $("sheetbody").innerHTML = (LANG === "id" ? idn : en).map(x => "<li>" + x + "</li>").join(""); $("sheet").classList.remove("hidden"); applyLang();
+    }
+  } else if (a === "closesheet") $("sheet").classList.add("hidden");
+});
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+
 </script>
 </body>
 </html>
