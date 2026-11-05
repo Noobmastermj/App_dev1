@@ -105,9 +105,9 @@ const SETUP = "<div class='panel setup'><h2>Connect your Supabase project</h2><p
 
 /* ---------- Parking ---------- */
 function parkRow(l, ed) {
-  const r = l.capacity ? l.free / l.capacity : 0, c = l.free === 0 ? "var(--bad)" : r < .15 ? "var(--warn)" : "var(--ok)";
-  return "<div class='pk'><b>" + esc(l.level) + "</b><span class='trk'><i style='width:" + Math.round(r * 100) + "%;background:" + c + "'></i></span>" +
-    (ed ? "<input type='number' min='0' max='" + l.capacity + "' value='" + l.free + "' data-act='park' data-id='" + esc(l.level) + "' aria-label='Free spaces on " + esc(l.level) + "'>" : "<span>" + (l.free === 0 ? "Full" : l.free + " free") + "</span>") + "</div>";
+  const taken = l.capacity ? Math.min(100, Math.round((l.capacity - l.free) / l.capacity * 100)) : 100, full = l.free === 0;
+  return "<div class='pk'><b>" + esc(l.level) + "</b><span class='trk' style='background:var(--ok)'><i style='width:" + taken + "%;background:var(--bad)'></i></span>" +
+    (ed ? "<input type='number' min='0' max='" + l.capacity + "' value='" + l.free + "' data-act='park' data-id='" + esc(l.level) + "' aria-label='Free spaces on " + esc(l.level) + "'>" : "<span" + (full ? " style='color:var(--bad);font-weight:700'>Full" : ">" + l.free + " free") + "</span>") + "</div>";
 }
 
 /* ---------- Public report view ---------- */
@@ -119,7 +119,7 @@ function myCard(t) {
 async function reportView() {
   const [pk, mine] = await Promise.all([sb.from("parking").select("*").order("level"), codes().length ? sb.rpc("my_tickets", {p_codes: codes()}) : Promise.resolve({data: []})]);
   const P = pk.data || [], M = mine.data || [], best = P.slice().sort((a, b) => b.free - a.free)[0];
-  let h = "<div class='grid two'><div><div class='panel'><h2>Parking availability</h2><div class='muted'>Free spaces on each level.</div>" +
+  let h = "<div class='grid two'><div><div class='panel'><h2>Parking availability</h2><div class='muted'>Free spaces on each level. Red is taken, green is free.</div>" +
     (best && best.free ? "<div style='margin-top:8px'><b>Most space: " + esc(best.level) + "</b> (" + best.free + " free)</div>" : "") +
     (P.length ? P.map(l => parkRow(l, false)).join("") : "<div class='muted'>No parking data yet.</div>") + "</div><div style='height:20px'></div>";
   h += "<div class='panel'><h2>Send a report</h2><div class='muted'>Staff check every report before acting on it.</div>" +
@@ -213,7 +213,7 @@ function card(t) {
 }
 const panel = (t, s, list) => "<div class='panel' style='margin-bottom:20px'><h2>" + t + "</h2><div class='muted'>" + s + "</div>" + (list.length ? list.map(card).join("") : "<div class='muted' style='margin-top:10px'>Nothing here yet.</div>") + "</div>";
 const techPanel = () => "<div class='panel'><h2>Technicians</h2>" + (D.techs.length ? D.techs.map(t => "<div class='row note' style='align-items:center'><span>" + esc(t.name) + " <span class='muted'>" + esc(t.specialty || "") + "</span></span><button class='btn alt sm' data-act='deltech' data-id='" + t.id + "'>Remove</button></div>").join("") : "<div class='muted'>No technicians yet.</div>") + "<label for='tn'>Add technician</label><input type='text' id='tn' placeholder='Name'><input type='text' id='ts' placeholder='Specialty' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addtech'>Add</button></div>";
-const parkEditor = () => "<div class='panel'><h2>Parking levels</h2><div class='muted'>Guests see these numbers live.</div>" + D.parking.map(l => parkRow(l, true) + "<div style='text-align:right;margin-top:-6px'><button class='btn alt sm' data-act='dellevel' data-id='" + esc(l.level) + "'>Remove " + esc(l.level) + "</button></div>").join("") + "<label for='pl'>Add level</label><input type='text' id='pl' placeholder='Level name, for example P4'><input type='number' id='pc' placeholder='Total spaces' min='0' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addlevel'>Add level</button></div>";
+const parkEditor = () => "<div class='panel'><h2>Parking levels</h2><div class='muted'>Guests see these numbers live. Red is taken, green is free.</div>" + D.parking.map(l => parkRow(l, true) + "<div style='text-align:right;margin-top:-6px'><button class='btn alt sm' data-act='dellevel' data-id='" + esc(l.level) + "'>Remove " + esc(l.level) + "</button></div>").join("") + "<label for='pl'>Add level</label><input type='text' id='pl' placeholder='Level name, for example P4'><input type='number' id='pc' placeholder='Total spaces' min='0' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addlevel'>Add level</button></div>";
 function adminView() {
   const T = D.tickets, q = T.filter(t => t.verification === "pending"), fac = T.filter(t => t.kind === "fac" && t.verification === "verified"), lf = T.filter(t => t.kind === "lost" && t.verification === "verified"), rej = T.filter(t => t.verification === "rejected");
   const act = fac.filter(t => t.status !== "Completed").sort((a, b) => rank[a.urgency] - rank[b.urgency] || new Date(a.created_at) - new Date(b.created_at));
