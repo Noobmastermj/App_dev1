@@ -9,9 +9,10 @@
 <meta name="theme-color" content="#a3005f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="AEON Reports">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2048%2048%22%3E%3Crect%20width=%2248%22%20height=%2248%22%20rx=%2212%22%20fill=%22%23a3005f%22/%3E%3Cpath%20d=%22M15%2020h18l-1%2016a2%202%200%200%201-2%202h-12a2%202%200%200%201-2-2z%22%20fill=%22%23fff%22/%3E%3Cpath%20d=%22M18.5%2020v-2.5a5.5%205.5%200%200%201%2011%200V20%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%222.5%22/%3E%3Cpath%20d=%22M19.5%2029l3.3%203.3L29%2026%22%20fill=%22none%22%20stroke=%22%23a3005f%22%20stroke-width=%222.6%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -39,8 +40,8 @@ main{max-width:980px;margin:0 auto;padding:16px 14px 24px}
 .hero .trk{background:#3ddc97!important}.hero .trk i{background:#ff5d6c!important}.hero .pk span[style]{color:#ffb3bb!important}
 .hero .best{color:var(--gold)}
 label{display:block;font-weight:800;font-size:13px;margin:14px 0 6px}
-select,input[type=text],input[type=password],input[type=number],textarea{width:100%;background:var(--field);border:1.5px solid transparent;border-radius:12px;padding:13px 14px;font:inherit;font-size:16px;color:var(--ink)}
-select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brand);background:var(--surface)}
+select,input[type=text],input[type=password],input[type=number],textarea{width:100%;background-color:var(--field);border:1.5px solid transparent;border-radius:12px;padding:13px 14px;font:inherit;font-size:16px;color:var(--ink)}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brand);background-color:var(--surface)}
 textarea{min-height:96px;resize:vertical}
 .btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;min-height:46px;letter-spacing:.02em}
 .btn:active{transform:scale(.98)}
@@ -95,10 +96,37 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .hb .b{height:10px;border-radius:5px;background:var(--brand);display:block}
 #langtxt{font-size:12px}
 @media(max-width:420px){.logo{width:36px;height:36px}.bar{gap:8px;padding:12px}.hbtns{gap:6px}.hb{grid-template-columns:100px 1fr 24px}}
+main,.bar{max-width:1240px}
+svg.logo{border:0;border-radius:0}
+button{-webkit-tap-highlight-color:transparent}
+select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%238a7d85' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.btn:hover{filter:brightness(1.1)}.btn.alt:hover{background:var(--soft);filter:none}.hbtn:hover{background:rgba(255,255,255,.28)}
+.grid.eq{grid-template-columns:1fr}
+.rv{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);grid-template-areas:"a" "b" "c"}
+.rv-a{grid-area:a;min-width:0}.rv-b{grid-area:b;min-width:0}.rv-c{grid-area:c;min-width:0}
+.adm{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+.adm-main>.panel,.adm-side>.panel{margin-bottom:20px}
+@media(min-width:760px){.grid.eq{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){
+ .rv{grid-template-columns:380px minmax(0,1fr);grid-template-areas:"a b" "c b";align-items:start;gap:20px}
+ body{padding-bottom:32px}
+ .tabs{top:0;bottom:auto;left:50%;right:auto;transform:translateX(-50%);height:70px;width:auto;background:none;border:0;box-shadow:none;padding:0;gap:6px;align-items:center;z-index:6}
+ .tabs button{flex:none;flex-direction:row;gap:8px;padding:0 18px;height:44px;border-radius:12px;color:#fff;opacity:.85}
+ .tabs button[aria-pressed=true]{color:#fff;background:rgba(255,255,255,.2);opacity:1}
+ .tabs button:hover{opacity:1;background:rgba(255,255,255,.12)}
+ .tabs svg{width:20px;height:20px}
+ .toast{bottom:28px}
+}
+@media(min-width:1000px){.adm{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}}
+@media(min-width:1240px){.rv{grid-template-columns:360px minmax(0,1fr) 360px;grid-template-areas:"a b c"}}
+input[type=file]{padding:9px 10px;font-size:14px}
+input[type=file]::file-selector-button{background:var(--soft);color:var(--brand);border:0;border-radius:9px;padding:8px 14px;margin-right:12px;font:inherit;font-weight:800;cursor:pointer}
+input[type=checkbox]{accent-color:var(--brand)}
+@media(hover:hover){.btn:hover{filter:brightness(1.1)}.btn.alt:hover{background:var(--soft);filter:none}.hbtn:hover{background:rgba(255,255,255,.28)}}
 </style>
 </head>
 <body>
-<header><div class="bar"><img class="logo" src="icon-192.png" alt=""><h1>AEON Mall BSD City<small>Reports and parking</small></h1><div class="hbtns"><button class="hbtn hidden" id="installbtn" data-act="install" aria-label="Install the app"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span class="hlabel">Install</span></button><button class="hbtn" id="langbtn" data-act="lang" aria-label="Change language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span id="langtxt">EN</span></button><button class="hbtn" id="themebtn" data-act="theme" aria-label="Switch theme"></button></div></div></header>
+<header><div class="bar"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><rect x="1.5" y="1.5" width="45" height="45" rx="12" fill="#a3005f" stroke="#fff" stroke-opacity=".85" stroke-width="2"/><path d="M15 20h18a1.5 1.5 0 0 1 1.5 1.6l-1 15A2 2 0 0 1 31.5 38h-15a2 2 0 0 1-2-1.9l-1-15A1.5 1.5 0 0 1 15 20z" fill="#fff"/><path d="M18.5 20v-2.5a5.5 5.5 0 0 1 11 0V20" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M19.5 29l3.3 3.3L29 26" fill="none" stroke="#a3005f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>AEON Mall BSD City<small>Reports and parking</small></h1><div class="hbtns"><button class="hbtn hidden" id="installbtn" data-act="install" aria-label="Install the app"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span class="hlabel">Install</span></button><button class="hbtn" id="langbtn" data-act="lang" aria-label="Change language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span id="langtxt">EN</span></button><button class="hbtn" id="themebtn" data-act="theme" aria-label="Switch theme"></button></div></div></header>
 <div id="offline" class="hidden" style="background:var(--warn);color:#1a1a1a;text-align:center;padding:8px;font-weight:700">You are offline. Parking and reports need an internet connection.</div>
 <main id="app"><div class="panel">Loading...</div></main>
 <div id="sheet" class="sheet hidden" role="dialog" aria-modal="true" aria-label="Install the app"><div class="sheet-card"><h2>Install the app</h2><ol id="sheetbody"></ol><button class="btn" style="width:100%" data-act="closesheet">Got it</button></div></div>
@@ -147,14 +175,51 @@ const ID = {
 "Technician: not assigned yet":"Teknisi: belum ditugaskan","just now":"baru saja","Mall staff":"Petugas mal","Closure":"Penutupan","Event":"Acara","Notice":"Pengumuman",
 "Log in":"Masuk","For mall staff and tenants.":"Untuk petugas mal dan penyewa.","Email":"Email","Password":"Kata sandi","New tenant? Create an account":"Penyewa baru? Buat akun",
 "Pick your store. A mall admin approves your account before you can see reports for it.":"Pilih toko Anda. Admin mal menyetujui akun Anda sebelum Anda dapat melihat laporan toko.","Your store":"Toko Anda","Start typing your store name":"Ketik nama toko Anda","Password (6+ characters)":"Kata sandi (min. 6 karakter)","Create tenant account":"Buat akun penyewa","Log out":"Keluar","Refresh":"Muat ulang",
-"Install the app":"Pasang aplikasi","Got it":"Mengerti","You are offline. Parking and reports need an internet connection.":"Anda sedang offline. Parkir dan laporan membutuhkan koneksi internet.","App installed":"Aplikasi terpasang","Waiting for approval":"Menunggu persetujuan"
+"Install the app":"Pasang aplikasi","Got it":"Mengerti","You are offline. Parking and reports need an internet connection.":"Anda sedang offline. Parkir dan laporan membutuhkan koneksi internet.","App installed":"Aplikasi terpasang","Waiting for approval":"Menunggu persetujuan",
+"Admin panel":"Panel admin","Export CSV":"Ekspor CSV","Export log":"Ekspor log","Waiting for review":"Menunggu pemeriksaan","Overdue":"Terlambat","Open facility jobs":"Pekerjaan fasilitas terbuka","Need a technician":"Butuh teknisi",
+"Lost and found log":"Log barang hilang dan ditemukan","Confirmed lost and found reports, with suggested matches.":"Laporan barang hilang dan ditemukan yang dikonfirmasi, dengan saran kecocokan.","Rejected reports":"Laporan ditolak","Kept for your records. Delete to remove.":"Disimpan sebagai arsip. Hapus untuk menghilangkan.","Nothing here yet.":"Belum ada apa-apa.","Rejected":"Ditolak",
+"Real report":"Laporan asli","Fake report":"Laporan palsu","Delete":"Hapus","Remove":"Hapus","Add note":"Tambah catatan","Save note":"Simpan catatan","Cancel":"Batal","Show this note to the reporter":"Tampilkan catatan ini ke pelapor","Visible to reporter":"Terlihat oleh pelapor",
+"Add a note, for example: the wallet is at our counter":"Tambahkan catatan, contoh: dompet ada di konter kami","Assign technician":"Tugaskan teknisi","Add a technician first.":"Tambahkan teknisi dulu.","Mark resolved":"Tandai selesai","Mark as done":"Tandai selesai","Resolve both":"Selesaikan keduanya","Possible match":"Kemungkinan cocok","Possible matches":"Kemungkinan cocok",
+"Insights":"Wawasan","Average time to assign":"Rata-rata waktu penugasan","Average time to finish":"Rata-rata waktu selesai","Reports from guests":"Laporan dari tamu","Guest reports confirmed real":"Laporan tamu yang terbukti asli","Reports per week":"Laporan per minggu","Most common faults":"Masalah paling sering","No reports yet.":"Belum ada laporan.",
+"Notice board":"Papan pengumuman","Notices show at the top of the Report tab for every visitor.":"Pengumuman tampil di bagian atas tab Lapor untuk semua pengunjung.","No notices yet.":"Belum ada pengumuman.","Title":"Judul","Message (optional)":"Pesan (opsional)","Type":"Jenis","Show for how many days? (empty = until you delete it)":"Tampil berapa hari? (kosong = sampai Anda hapus)","Post notice":"Posting pengumuman","For example: Parking P3 closed on Saturday":"Contoh: Parkir P3 ditutup hari Sabtu",
+"Every account you add in Supabase, or that signs up on the site, shows here. Approve tenants so they can see public reports for their store, or make someone an admin.":"Setiap akun yang Anda tambahkan di Supabase, atau yang mendaftar di situs, tampil di sini. Setujui penyewa agar dapat melihat laporan publik untuk toko mereka, atau jadikan seseorang admin.",
+"(no store)":"(tanpa toko)","Approve tenant":"Setujui penyewa","Revoke tenant":"Cabut penyewa","Make admin":"Jadikan admin","Remove admin":"Hapus admin","No accounts yet.":"Belum ada akun.",
+"Technicians":"Teknisi","No technicians yet.":"Belum ada teknisi.","Add technician":"Tambah teknisi","Name":"Nama","Specialty":"Keahlian","Add":"Tambah",
+"Parking levels":"Lantai parkir","Guests see these numbers live. Red is taken, green is free.":"Tamu melihat angka ini secara langsung. Merah terisi, hijau kosong.","Add level":"Tambah lantai","Level name, for example P4":"Nama lantai, contoh P4","Total spaces":"Total tempat",
+"Activity log":"Log aktivitas","Who did what to each report. Written by the database, so it cannot be edited here.":"Siapa melakukan apa pada setiap laporan. Ditulis oleh database sehingga tidak dapat diedit di sini.","No activity yet.":"Belum ada aktivitas.",
+"submitted":"mengirim","confirmed as real":"mengonfirmasi sebagai asli","rejected as fake":"menolak sebagai palsu","assigned":"menugaskan","changed status":"mengubah status","changed priority":"mengubah prioritas","deleted":"menghapus","set to pending":"mengatur ke menunggu",
+"Reports from the public":"Laporan dari publik","Visitor reports about your store that mall staff confirmed. Add a note to tell the reporter what is happening, and mark it done once handled, for example when a lost item is returned.":"Laporan pengunjung tentang toko Anda yang sudah dikonfirmasi petugas mal. Tambahkan catatan untuk memberi tahu pelapor, dan tandai selesai setelah ditangani, misalnya saat barang hilang dikembalikan.",
+"Nothing yet. Confirmed reports about your store appear here.":"Belum ada. Laporan terkonfirmasi tentang toko Anda muncul di sini.","Your reports to mall staff":"Laporan Anda ke petugas mal","Use the Report tab to send a new one.":"Gunakan tab Lapor untuk mengirim yang baru.","No reports yet.":"Belum ada laporan.",
+"No access yet":"Belum ada akses","Your tenant account for":"Akun penyewa Anda untuk","is waiting for a mall admin to approve it. Until then you can still send reports as a guest.":"sedang menunggu persetujuan admin mal. Sampai saat itu Anda tetap dapat mengirim laporan sebagai tamu.",
+"This account is not an admin or an approved tenant yet. An admin can promote it from the admin panel.":"Akun ini belum menjadi admin atau penyewa yang disetujui. Admin dapat mempromosikannya dari panel admin.",
+"Setting this system up for the first time? The first account to claim admin access becomes the admin. This only works while no admin exists.":"Menyiapkan sistem ini untuk pertama kali? Akun pertama yang mengklaim akses admin menjadi admin. Ini hanya berlaku selama belum ada admin.","Claim admin access":"Klaim akses admin",
+"Refreshed":"Dimuat ulang","Admin added":"Admin ditambahkan","Admin removed":"Admin dihapus","Account removed":"Akun dihapus","Note saved":"Catatan disimpan","Marked as done":"Ditandai selesai","You are now the admin":"Anda sekarang admin","An admin already exists. Ask them to approve you.":"Sudah ada admin. Minta mereka menyetujui Anda.","Account created":"Akun dibuat",
+"Pick your store from the list.":"Pilih toko Anda dari daftar.","Enter an email and a password of at least 6 characters.":"Masukkan email dan kata sandi minimal 6 karakter.","Account created. Check your email to confirm it, then log in.":"Akun dibuat. Periksa email Anda untuk konfirmasi, lalu masuk.",
+"Remove this admin?":"Hapus admin ini?","Remove this account? They will no longer be able to log in.":"Hapus akun ini? Mereka tidak dapat masuk lagi.","Remove this technician?":"Hapus teknisi ini?","Delete this notice?":"Hapus pengumuman ini?"
 };
 const RX = [
  [/^(\d+) free$/, m => m[1] + " kosong"], [/^\((\d+) free\)$/, m => "(" + m[1] + " kosong)"], [/^Most space: (.+)$/, m => "Paling lega: " + m[1]],
- [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], [/^at (.+)$/, m => "di " + m[1]],
- [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-\d+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]]
+ [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], 
+ [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-\d+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]],
+ [/^until (.+)$/, m => "sampai " + m[1]], [/^Reports to review \((\d+)\)$/, m => "Laporan untuk diperiksa (" + m[1] + ")"],
+ [/^Confirm real reports to raise their priority, or reject trolls and fake reports\. Reviews are overdue after (\d+) h\.$/, m => "Konfirmasi laporan asli untuk menaikkan prioritasnya, atau tolak laporan iseng dan palsu. Pemeriksaan terlambat setelah " + m[1] + " jam."],
+ [/^Overdue limits: Urgent (\d+) h, High (\d+) h, Normal (\d+) h\. Overdue jobs show first\.$/, m => "Batas keterlambatan: Mendesak " + m[1] + " jam, Tinggi " + m[2] + " jam, Normal " + m[3] + " jam. Pekerjaan terlambat tampil lebih dulu."],
+ [/^Overdue (\d+) h$/, m => "Terlambat " + m[1] + " jam"], [/^Overdue (\d+) d$/, m => "Terlambat " + m[1] + " hari"],
+ [/^Repeat flag: (\d+) rejected before$/, m => "Tanda berulang: " + m[1] + " ditolak sebelumnya"], [/^Add note \((\d+)\)$/, m => "Tambah catatan (" + m[1] + ")"],
+ [/^Mark (.+)$/, m => "Tandai " + (ID[m[1]] || m[1]).toLowerCase()], [/^(\d+(?:\.\d+)?) h$/, m => m[1] + " jam"],
+ [/^Accounts \((\d+) waiting\)$/, m => "Akun (" + m[1] + " menunggu)"], [/^Remove (.+)$/, m => "Hapus " + m[1]], [/^Free spaces on (.+)$/, m => "Ruang kosong di " + m[1]],
+ [/^Reports from the public \((\d+) open\)$/, m => "Laporan dari publik (" + m[1] + " terbuka)"], [/^Failed: (.+)$/, m => "Gagal: " + m[1]],
+ [/^\((.+) to (.+)\)$/, m => "(" + (ID[m[1]] || m[1]) + " menjadi " + (ID[m[2]] || m[2]) + ")"],
+ [/^Delete (MR-\d+)\? This cannot be undone\.$/, m => "Hapus " + m[1] + "? Tindakan ini tidak dapat dibatalkan."], [/^Remove parking level (.+)\?$/, m => "Hapus lantai parkir " + m[1] + "?"]
 ];
-function tr(s) { const k = s.trim(); if (!k) return s; let o = ID[k]; if (!o) for (const [re, f] of RX) { const m = k.match(re); if (m) { o = f(m); break; } } return o ? s.replace(k, o) : s; }
+function tr(s) { const k = s.trim(); if (!k) return s; let o = ID[k]; if (!o) for (const [re, f] of RX) { const m = k.match(re); if (m) { o = f(m); break; } } if (!o) { const v = frag(k); if (v !== k) o = v; } return o ? s.replace(k, o) : s; }
+const PR = {Urgent: "Mendesak", High: "Tinggi", Normal: "Normal"};
+function frag(k) {
+  return k.replace(/^at /, "di ").replace(/, priority (Urgent|High|Normal)/, (m, p) => ", prioritas " + PR[p]).replace(/^Guest(?=,| \||$)/, "Tamu").replace(/^Tenant(?=,| \||$)/, "Penyewa")
+    .replace(", store: ", ", toko: ").replace(" | Contact: ", " | Kontak: ").replace(" | Technician: ", " | Teknisi: ").replace(/^Reporter contact: /, "Kontak pelapor: ")
+    .replace(/^(MR-\d+): (Lost item|Found item)( at )?/, (m, c, k, a) => c + ": " + ID[k] + (a ? " di " : ""));
+}
+const ask = s => window.confirm(LANG === "id" ? tr(s) : s);
 const ORIG = new WeakMap();
 function applyLang() {
   const id = LANG === "id"; document.documentElement.lang = id ? "id" : "en";
@@ -231,7 +296,7 @@ async function pubData() {
 const myList = d => d.M.length ? d.M.map(t => myCard(t, d.MC)).join("") : "<div class='panel' style='margin-top:10px'>No reports yet. Use the form to send your first one.</div>";
 async function reportView() {
   const d = await pubData();
-  return "<div class='grid two'><div><div id='noticebox'>" + noticesBox(d.N) + "</div><div id='parkbox'>" + parkBox(d.P) + "</div><div style='height:16px'></div>" +
+  return "<div class='rv'><div class='rv-a'><div id='noticebox'>" + noticesBox(d.N) + "</div><div id='parkbox'>" + parkBox(d.P) + "</div></div><div class='rv-b'>" +
     "<div class='panel'><h2>Send a report</h2><div class='muted'>Staff check every report before acting on it.</div>" +
     (role === "tenant" ? "<div class='muted' style='margin-top:8px'>Reporting as tenant: <b>" + esc(profile.store) + "</b>. Your reports go straight to mall staff.</div>" : "<label for='store'>Which store is it at? (optional)</label><input type='text' id='store' list='stores' placeholder='Start typing a store name'><datalist id='stores'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist>") +
     "<label for='cat'>What are you reporting?</label><select id='cat'>" + GT.map(c => "<option>" + c + "</option>").join("") + "</select>" +
@@ -241,7 +306,7 @@ async function reportView() {
     "<label for='con'>Contact number (optional)</label><input type='text' id='con' inputmode='tel'>" +
     "<input type='text' id='website' tabindex='-1' autocomplete='off' aria-hidden='true' style='position:absolute;left:-9999px;width:1px;height:1px'>" +
     "<div class='err' id='err' role='alert'></div><button class='btn' id='sendbtn' data-act='send'>Send report</button></div></div>" +
-    "<div><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div><div id='mybox'>" + myList(d) + "</div></div></div>";
+    "<div class='rv-c'><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div><div id='mybox'>" + myList(d) + "</div></div></div>";
 }
 async function refreshPublic() {
   if (view !== "report" || !$("parkbox")) return;
@@ -278,7 +343,7 @@ async function send() {
 const tr2 = s => LANG === "id" ? tr(s) : s;
 
 /* ---------- Login, roles ---------- */
-const loginView = () => "<div class='grid two'><div class='panel'><h2>Log in</h2><div class='muted'>For mall staff and tenants.</div><label for='em'>Email</label><input type='text' id='em' inputmode='email' autocomplete='username'><label for='pw'>Password</label><input type='password' id='pw' autocomplete='current-password'><div class='err' id='lerr' role='alert'></div><button class='btn' data-act='login'>Log in</button></div>" +
+const loginView = () => "<div class='grid eq' style='max-width:900px;margin:0 auto'><div class='panel'><h2>Log in</h2><div class='muted'>For mall staff and tenants.</div><label for='em'>Email</label><input type='text' id='em' inputmode='email' autocomplete='username'><label for='pw'>Password</label><input type='password' id='pw' autocomplete='current-password'><div class='err' id='lerr' role='alert'></div><button class='btn' data-act='login'>Log in</button></div>" +
   "<div class='panel'><h2>New tenant? Create an account</h2><div class='muted'>Pick your store. A mall admin approves your account before you can see reports for it.</div><label for='sstore'>Your store</label><input type='text' id='sstore' list='stores2' placeholder='Start typing your store name'><datalist id='stores2'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist><label for='sem'>Email</label><input type='text' id='sem' inputmode='email' autocomplete='email'><label for='spw'>Password (6+ characters)</label><input type='password' id='spw' autocomplete='new-password'><div class='err' id='serr' role='alert'></div><button class='btn' data-act='signup'>Create tenant account</button></div></div>";
 const reload = () => role === "admin" ? loadAdmin() : role === "tenant" ? loadTenant() : Promise.resolve();
 async function checkRole() {
@@ -310,12 +375,12 @@ async function login() {
 }
 async function signup() {
   const store = $("sstore").value.trim(), em = $("sem").value.trim(), pw = $("spw").value, err = $("serr");
-  if (!STORES.includes(store)) { err.textContent = "Pick your store from the list."; return; }
-  if (!em || pw.length < 6) { err.textContent = "Enter an email and a password of at least 6 characters."; return; }
+  if (!STORES.includes(store)) { err.textContent = tr2("Pick your store from the list."); return; }
+  if (!em || pw.length < 6) { err.textContent = tr2("Enter an email and a password of at least 6 characters."); return; }
   const {data, error} = await sb.auth.signUp({email: em, password: pw, options: {data: {store}}});
   if (error) { err.textContent = error.message; return; }
   if (data.session) { await checkRole(); render(); toast("Account created"); }
-  else { err.style.color = "var(--ok)"; err.textContent = "Account created. Check your email to confirm it, then log in."; }
+  else { err.style.color = "var(--ok)"; err.textContent = tr2("Account created. Check your email to confirm it, then log in."); }
 }
 const topbar = (title, sub, extra) => "<div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'><div><h2 style='margin:0'>" + title + "</h2><div class='muted'>" + sub + "</div></div><span class='ctl'>" + (extra || "") + "<button class='btn alt sm' data-act='refresh'>Refresh</button><button class='btn alt sm' data-act='logout'>Log out</button></span></div>";
 function pendingView() {
@@ -386,10 +451,10 @@ function adminView() {
   const late = T.filter(t => overdue(t) > 0).length;
   return topbar("Admin panel", esc(user.email), "<button class='btn alt sm' data-act='exp'>Export CSV</button><button class='btn alt sm' data-act='expact'>Export log</button>") +
     "<div class='stat'><div><b>" + q.length + "</b>Waiting for review</div><div><b style='" + (late ? "color:var(--bad)" : "") + "'>" + late + "</b>Overdue</div><div><b>" + act.length + "</b>Open facility jobs</div><div><b>" + act.filter(t => !t.technician).length + "</b>Need a technician</div></div>" +
-    panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports. Reviews are overdue after " + REVIEW_SLA + " h.", q) +
+    "<div class='adm'><div class='adm-main'>" + panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports. Reviews are overdue after " + REVIEW_SLA + " h.", q) +
     panel("Open facility jobs", "Overdue limits: Urgent " + SLA.Urgent + " h, High " + SLA.High + " h, Normal " + SLA.Normal + " h. Overdue jobs show first.", act) +
-    insights() + noticeAdmin() + tenantAccounts() +
-    "<div class='grid two'><div>" + techPanel() + "<div style='height:20px'></div>" + parkEditor() + "</div><div>" + panel("Lost and found log", "Confirmed lost and found reports, with suggested matches.", lf) + panel("Rejected reports", "Kept for your records. Delete to remove.", rej) + "</div></div>" + activityPanel();
+    panel("Lost and found log", "Confirmed lost and found reports, with suggested matches.", lf) + panel("Rejected reports", "Kept for your records. Delete to remove.", rej) +
+    "</div><div class='adm-side'>" + insights() + parkEditor() + techPanel() + noticeAdmin() + tenantAccounts() + activityPanel() + "</div></div>";
 }
 async function mut(p) { const {error} = await p; if (error) { toast("Failed: " + error.message); return false; } await reload(); render(); return true; }
 const upd = (id, patch) => mut(sb.from("tickets").update(patch).eq("id", id));
@@ -405,7 +470,7 @@ async function render() {
   const ab = document.querySelector("[data-v=account]"); if (ab) ab.querySelector("span").textContent = user ? "Dashboard" : "Sign in";
   if (!sb) { $("app").innerHTML = SETUP; applyLang(); return; }
   if (view === "report") $("app").innerHTML = await reportView();
-  else $("app").innerHTML = !user ? loginView() : role === "admin" ? adminView() : role === "tenant" ? tenantView() : pendingView();
+  else $("app").innerHTML = !user ? loginView() : role === "admin" ? adminView() : role === "tenant" ? "<div style='max-width:860px;margin:0 auto'>" + tenantView() + "</div>" : pendingView();
   applyLang();
 }
 document.addEventListener("click", async e => {
@@ -426,20 +491,20 @@ document.addEventListener("click", async e => {
   else if (a === "approve") mut(sb.from("profiles").update({approved: true}).eq("user_id", id));
   else if (a === "revoke") mut(sb.from("profiles").update({approved: false}).eq("user_id", id));
   else if (a === "mkadmin") rpcAdmin("make_admin", id, "Admin added");
-  else if (a === "rmadmin") { if (confirm("Remove this admin?")) rpcAdmin("remove_admin", id, "Admin removed"); }
-  else if (a === "rmuser") { if (confirm("Remove this account? They will no longer be able to log in.")) rpcAdmin("delete_account", id, "Account removed"); }
+  else if (a === "rmadmin") { if (ask("Remove this admin?")) rpcAdmin("remove_admin", id, "Admin removed"); }
+  else if (a === "rmuser") { if (ask("Remove this account? They will no longer be able to log in.")) rpcAdmin("delete_account", id, "Account removed"); }
   else if (a === "verify" && t) upd(t.id, {verification: "verified", urgency: {Normal: "High", High: "Urgent", Urgent: "Urgent"}[t.urgency], status: t.kind === "lost" ? "Verified" : t.status});
   else if (a === "reject" && t) upd(t.id, {verification: "rejected"});
   else if (a === "advance" && t) upd(t.id, {status: STAGES[STAGES.indexOf(t.status) + 1]});
   else if (a === "resolve" && t) upd(t.id, {status: "Resolved"});
   else if (a === "both" && t) { const o = b.dataset.b; mut(Promise.all([upd0(t.id), upd0(o)]).then(rs => rs.find(r => r.error) || {error: null})); }
-  else if (a === "del" && t) { if (confirm("Delete " + t.code + "? This cannot be undone.")) { const m = (t.photo_url || "").match(/report-photos\/(.+)$/); if (m) sb.storage.from("report-photos").remove([decodeURIComponent(m[1])]); mut(sb.from("tickets").delete().eq("id", t.id)); } }
+  else if (a === "del" && t) { if (ask("Delete " + t.code + "? This cannot be undone.")) { const m = (t.photo_url || "").match(/report-photos\/(.+)$/); if (m) sb.storage.from("report-photos").remove([decodeURIComponent(m[1])]); mut(sb.from("tickets").delete().eq("id", t.id)); } }
   else if (a === "addtech") { const n = $("tn").value.trim(); if (n) mut(sb.from("technicians").insert({name: n, specialty: $("ts").value.trim()})); }
-  else if (a === "deltech") { if (confirm("Remove this technician?")) mut(sb.from("technicians").delete().eq("id", id)); }
+  else if (a === "deltech") { if (ask("Remove this technician?")) mut(sb.from("technicians").delete().eq("id", id)); }
   else if (a === "addlevel") { const n = $("pl").value.trim(), c = parseInt($("pc").value, 10); if (n && c >= 0) mut(sb.from("parking").insert({level: n, capacity: c, free: c})); }
-  else if (a === "dellevel") { if (confirm("Remove parking level " + id + "?")) mut(sb.from("parking").delete().eq("level", id)); }
+  else if (a === "dellevel") { if (ask("Remove parking level " + id + "?")) mut(sb.from("parking").delete().eq("level", id)); }
   else if (a === "addnotice") { const ti = $("nt").value.trim(), d = parseInt($("nd").value, 10); if (ti) mut(sb.from("notices").insert({title: ti, body: $("nb").value.trim() || null, kind: $("nk").value, expires_at: d > 0 ? new Date(Date.now() + d * 864e5).toISOString() : null})); }
-  else if (a === "delnotice") { if (confirm("Delete this notice?")) mut(sb.from("notices").delete().eq("id", id)); }
+  else if (a === "delnotice") { if (ask("Delete this notice?")) mut(sb.from("notices").delete().eq("id", id)); }
   else if (a === "exp") download("aeon-reports-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.tickets, ["code","created_at","source","store","kind","category","location","description","contact","urgency","status","verification","technician","assigned_at","resolved_at","photo_url"]));
   else if (a === "expact") download("aeon-activity-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.activity, ["created_at","ticket_code","actor_email","action","detail"]));
 });
