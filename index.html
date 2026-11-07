@@ -195,12 +195,17 @@ const ID = {
 "Setting this system up for the first time? The first account to claim admin access becomes the admin. This only works while no admin exists.":"Menyiapkan sistem ini untuk pertama kali? Akun pertama yang mengklaim akses admin menjadi admin. Ini hanya berlaku selama belum ada admin.","Claim admin access":"Klaim akses admin",
 "Refreshed":"Dimuat ulang","Admin added":"Admin ditambahkan","Admin removed":"Admin dihapus","Account removed":"Akun dihapus","Note saved":"Catatan disimpan","Marked as done":"Ditandai selesai","You are now the admin":"Anda sekarang admin","An admin already exists. Ask them to approve you.":"Sudah ada admin. Minta mereka menyetujui Anda.","Account created":"Akun dibuat",
 "Pick your store from the list.":"Pilih toko Anda dari daftar.","Enter an email and a password of at least 6 characters.":"Masukkan email dan kata sandi minimal 6 karakter.","Account created. Check your email to confirm it, then log in.":"Akun dibuat. Periksa email Anda untuk konfirmasi, lalu masuk.",
+"Have a tracking code? Paste it here":"Punya kode pelacakan? Tempel di sini","Find":"Cari","Tracking code:":"Kode pelacakan:","Report found":"Laporan ditemukan",
+"That does not look like a tracking code. It looks like MR-1001-A1B2C3D4E5.":"Itu bukan kode pelacakan yang valid. Contohnya MR-1001-A1B2C3D4E5.","No report found for that code.":"Laporan dengan kode itu tidak ditemukan.",
+"Photos and contact details are used only to handle your report. Please do not include people's faces or ID cards.":"Foto dan kontak hanya digunakan untuk menangani laporan Anda. Mohon jangan menyertakan wajah orang atau kartu identitas.",
+"Forgot password?":"Lupa kata sandi?","Type your email above first.":"Ketik email Anda di atas dulu.","If that email has an account, we sent a reset link. Check your inbox.":"Jika email itu terdaftar, kami telah mengirim tautan reset. Periksa kotak masuk Anda.",
+"Set a new password":"Atur kata sandi baru","Choose a new password for your account.":"Pilih kata sandi baru untuk akun Anda.","New password (6+ characters)":"Kata sandi baru (min. 6 karakter)","Repeat the new password":"Ulangi kata sandi baru","Save new password":"Simpan kata sandi baru","Passwords do not match.":"Kata sandi tidak sama.","Password updated":"Kata sandi diperbarui","Password must be at least 6 characters.":"Kata sandi minimal 6 karakter.",
 "Remove this admin?":"Hapus admin ini?","Remove this account? They will no longer be able to log in.":"Hapus akun ini? Mereka tidak dapat masuk lagi.","Remove this technician?":"Hapus teknisi ini?","Delete this notice?":"Hapus pengumuman ini?"
 };
 const RX = [
  [/^(\d+) free$/, m => m[1] + " kosong"], [/^\((\d+) free\)$/, m => "(" + m[1] + " kosong)"], [/^Most space: (.+)$/, m => "Paling lega: " + m[1]],
  [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], 
- [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-\d+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]],
+ [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-[\w-]+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]],
  [/^until (.+)$/, m => "sampai " + m[1]], [/^Reports to review \((\d+)\)$/, m => "Laporan untuk diperiksa (" + m[1] + ")"],
  [/^Confirm real reports to raise their priority, or reject trolls and fake reports\. Reviews are overdue after (\d+) h\.$/, m => "Konfirmasi laporan asli untuk menaikkan prioritasnya, atau tolak laporan iseng dan palsu. Pemeriksaan terlambat setelah " + m[1] + " jam."],
  [/^Overdue limits: Urgent (\d+) h, High (\d+) h, Normal (\d+) h\. Overdue jobs show first\.$/, m => "Batas keterlambatan: Mendesak " + m[1] + " jam, Tinggi " + m[2] + " jam, Normal " + m[3] + " jam. Pekerjaan terlambat tampil lebih dulu."],
@@ -283,6 +288,10 @@ function notesBlock(t) {
 
 /* ---------- Public report view ---------- */
 function myCard(t, MC) {
+  const full = codes().find(c => c.startsWith(t.code + "-")) || t.code;
+  return myCard0(t, MC).slice(0, -6) + "<div class='muted' style='margin-top:8px'>Tracking code:</div><div><b style='user-select:all;word-break:break-all'>" + esc(full) + "</b></div></div>";
+}
+function myCard0(t, MC) {
   const pend = t.verification === "pending", rej = t.verification === "rejected", cm = MC.filter(c => c.code === t.code);
   return "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge'>" + (pend ? "Awaiting review" : rej ? "Could not be confirmed" : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t) +
     (!pend && !rej && t.kind === "fac" ? "<div class='muted'>Technician: " + (t.technician ? esc(t.technician) : "not assigned yet") + "</div>" : "") +
@@ -303,10 +312,10 @@ async function reportView() {
     "<label for='loc'>Where? (floor, shop or area)</label><input type='text' id='loc' placeholder='For example: 2F near Gramedia'>" +
     "<label for='desc'>Details</label><textarea id='desc' placeholder='Describe the problem, or the item and when you lost or found it'></textarea>" +
     "<label for='ph'>Photo (optional)</label><input type='file' id='ph' accept='image/*'>" +
-    "<label for='con'>Contact number (optional)</label><input type='text' id='con' inputmode='tel'>" +
+    "<label for='con'>Contact number (optional)</label><input type='text' id='con' inputmode='tel'><div class='muted' style='margin-top:8px'>Photos and contact details are used only to handle your report. Please do not include people's faces or ID cards.</div>" +
     "<input type='text' id='website' tabindex='-1' autocomplete='off' aria-hidden='true' style='position:absolute;left:-9999px;width:1px;height:1px'>" +
     "<div class='err' id='err' role='alert'></div><button class='btn' id='sendbtn' data-act='send'>Send report</button></div></div>" +
-    "<div class='rv-c'><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div><div id='mybox'>" + myList(d) + "</div></div></div>";
+    "<div class='rv-c'><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div><div style='display:flex;gap:8px;margin-top:10px'><input type='text' id='track' placeholder='Have a tracking code? Paste it here' autocomplete='off' style='flex:1;min-width:0'><button class='btn sm' data-act='lookup'>Find</button></div><div class='err' id='terr' role='alert'></div><div id='mybox'>" + myList(d) + "</div></div></div>";
 }
 async function refreshPublic() {
   if (view !== "report" || !$("parkbox")) return;
@@ -341,9 +350,35 @@ async function send() {
   } catch (e) { err.textContent = "Could not send: " + (e.message || e); btn.disabled = false; btn.textContent = tr2("Send report"); }
 }
 const tr2 = s => LANG === "id" ? tr(s) : s;
+let recovery = false;
+async function lookup() {
+  const v = $("track").value.trim().toUpperCase(), er = $("terr"); er.textContent = "";
+  if (!/^MR-\d+-[0-9A-F]{10}$/.test(v)) { er.textContent = tr2("That does not look like a tracking code. It looks like MR-1001-A1B2C3D4E5."); return; }
+  const {data, error} = await sb.rpc("my_tickets", {p_codes: [v]});
+  if (error || !data || !data.length) { er.textContent = tr2("No report found for that code."); return; }
+  try { localStorage.setItem("aeon_codes", JSON.stringify([v, ...codes().filter(c => c !== v)].slice(0, 50))); } catch (e) {}
+  toast("Report found"); refreshPublic();
+}
+async function forgot() {
+  const em = $("em").value.trim(), el = $("lerr"); el.style.color = "";
+  if (!em) { el.textContent = tr2("Type your email above first."); return; }
+  const {error} = await sb.auth.resetPasswordForEmail(em, {redirectTo: location.origin + location.pathname});
+  if (error) { el.textContent = error.message; return; }
+  el.style.color = "var(--ok)"; el.textContent = tr2("If that email has an account, we sent a reset link. Check your inbox.");
+}
+const resetView = () => "<div class='panel' style='max-width:460px;margin:0 auto'><h2>Set a new password</h2><div class='muted'>Choose a new password for your account.</div><label for='np'>New password (6+ characters)</label><input type='password' id='np' autocomplete='new-password'><label for='np2'>Repeat the new password</label><input type='password' id='np2' autocomplete='new-password'><div class='err' id='rerr' role='alert'></div><button class='btn' data-act='setpw'>Save new password</button></div>";
+async function setpw() {
+  const a = $("np").value, b = $("np2").value, er = $("rerr");
+  if (a.length < 6) { er.textContent = tr2("Password must be at least 6 characters."); return; }
+  if (a !== b) { er.textContent = tr2("Passwords do not match."); return; }
+  const {error} = await sb.auth.updateUser({password: a});
+  if (error) { er.textContent = error.message; return; }
+  recovery = false; try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  await checkRole(); render(); toast("Password updated");
+}
 
 /* ---------- Login, roles ---------- */
-const loginView = () => "<div class='grid eq' style='max-width:900px;margin:0 auto'><div class='panel'><h2>Log in</h2><div class='muted'>For mall staff and tenants.</div><label for='em'>Email</label><input type='text' id='em' inputmode='email' autocomplete='username'><label for='pw'>Password</label><input type='password' id='pw' autocomplete='current-password'><div class='err' id='lerr' role='alert'></div><button class='btn' data-act='login'>Log in</button></div>" +
+const loginView = () => "<div class='grid eq' style='max-width:900px;margin:0 auto'><div class='panel'><h2>Log in</h2><div class='muted'>For mall staff and tenants.</div><label for='em'>Email</label><input type='text' id='em' inputmode='email' autocomplete='username'><label for='pw'>Password</label><input type='password' id='pw' autocomplete='current-password'><div class='err' id='lerr' role='alert'></div><div class='acts'><button class='btn' data-act='login'>Log in</button><button class='btn alt sm' data-act='forgot'>Forgot password?</button></div></div>" +
   "<div class='panel'><h2>New tenant? Create an account</h2><div class='muted'>Pick your store. A mall admin approves your account before you can see reports for it.</div><label for='sstore'>Your store</label><input type='text' id='sstore' list='stores2' placeholder='Start typing your store name'><datalist id='stores2'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist><label for='sem'>Email</label><input type='text' id='sem' inputmode='email' autocomplete='email'><label for='spw'>Password (6+ characters)</label><input type='password' id='spw' autocomplete='new-password'><div class='err' id='serr' role='alert'></div><button class='btn' data-act='signup'>Create tenant account</button></div></div>";
 const reload = () => role === "admin" ? loadAdmin() : role === "tenant" ? loadTenant() : Promise.resolve();
 async function checkRole() {
@@ -470,7 +505,7 @@ async function render() {
   const ab = document.querySelector("[data-v=account]"); if (ab) ab.querySelector("span").textContent = user ? "Dashboard" : "Sign in";
   if (!sb) { $("app").innerHTML = SETUP; applyLang(); return; }
   if (view === "report") $("app").innerHTML = await reportView();
-  else $("app").innerHTML = !user ? loginView() : role === "admin" ? adminView() : role === "tenant" ? "<div style='max-width:860px;margin:0 auto'>" + tenantView() + "</div>" : pendingView();
+  else $("app").innerHTML = recovery ? resetView() : !user ? loginView() : role === "admin" ? adminView() : role === "tenant" ? "<div style='max-width:860px;margin:0 auto'>" + tenantView() + "</div>" : pendingView();
   applyLang();
 }
 document.addEventListener("click", async e => {
@@ -481,6 +516,9 @@ document.addEventListener("click", async e => {
   else if (a === "send") send();
   else if (a === "login") login();
   else if (a === "signup") signup();
+  else if (a === "forgot") forgot();
+  else if (a === "setpw") setpw();
+  else if (a === "lookup") lookup();
   else if (a === "logout") { await sb.auth.signOut(); user = null; role = "none"; profile = null; D = {tickets:[], techs:[], parking:[], profiles:[], admins:[], comments:[], activity:[], notices:[]}; render(); }
   else if (a === "refresh") { await reload(); render(); toast("Refreshed"); }
   else if (a === "claim" && user) { const {data, error} = await sb.rpc("claim_first_admin"); if (error) toast("Failed: " + error.message); else if (data) { await checkRole(); render(); toast("You are now the admin"); } else toast("An admin already exists. Ask them to approve you."); }
@@ -528,6 +566,7 @@ async function live() {
   else if ((role === "admin" || role === "tenant") && !typing()) { await reload(); render(); }
 }
 setInterval(() => { if (!typing()) live(); }, 30000);
+if (sb) sb.auth.onAuthStateChange(ev => { if (ev === "PASSWORD_RECOVERY") { recovery = true; view = "account"; setTimeout(async () => { await checkRole(); render(); }, 0); } });
 (async () => { if (sb) { await checkRole(); subscribe(); } render(); })();
 
 /* ---------- Theme, language and install button ---------- */
