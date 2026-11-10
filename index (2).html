@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AEON Mall BSD City | Reports and Admin</title>
+<script>try{var t=localStorage.getItem("aeon_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#a3005f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AEON Reports">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2048%2048%22%3E%3Crect%20width=%2248%22%20height=%2248%22%20rx=%2212%22%20fill=%22%23a3005f%22/%3E%3Cpath%20d=%22M15%2020h18l-1%2016a2%202%200%200%201-2%202h-12a2%202%200%200%201-2-2z%22%20fill=%22%23fff%22/%3E%3Cpath%20d=%22M18.5%2020v-2.5a5.5%205.5%200%200%201%2011%200V20%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%222.5%22/%3E%3Cpath%20d=%22M19.5%2029l3.3%203.3L29%2026%22%20fill=%22none%22%20stroke=%22%23a3005f%22%20stroke-width=%222.6%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f2f5;--surface:#fff;--ink:#221a20;--muted:#7a6f76;--line:#e9e2e7;--field:#f3eff2;--brand:#a3005f;--brand-dark:#6e003f;--soft:#fbe6f1;--gold:#f2b01e;--ok:#1e9e62;--warn:#d98200;--bad:#d6303f;--hdr1:#a3005f;--hdr2:#6e003f;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#150f14;--surface:#221a20;--ink:#f4edf1;--muted:#b4a7ae;--line:#3a2e36;--field:#2e232b;--brand:#d62b8c;--soft:#3d1a2d;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#7a0047;--hdr2:#3a0023;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#150f14;--surface:#221a20;--ink:#f4edf1;--muted:#b4a7ae;--line:#3a2e36;--field:#2e232b;--brand:#d62b8c;--soft:#3d1a2d;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#7a0047;--hdr2:#3a0023;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "Nunito","Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+header{background:linear-gradient(135deg,var(--hdr1),var(--hdr2));color:#fff;padding-top:env(safe-area-inset-top,0px);position:sticky;top:0;z-index:5;box-shadow:0 2px 14px rgba(110,0,63,.3)}
+.bar{max-width:980px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;border-radius:12px;border:2px solid rgba(255,255,255,.85);flex:none}
+h1{font-size:19px;margin:0;font-weight:800;line-height:1.2}
+h1 small{display:block;font-weight:600;font-size:12px;opacity:.85}
+h2{font-size:19px;margin:0 0 4px;font-weight:800}
+h3{font-size:15px;margin:0 0 8px}
+main{max-width:980px;margin:0 auto;padding:16px 14px 24px}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:820px){.grid.two{grid-template-columns:360px 1fr;gap:20px}}
+.panel{background:var(--surface);border-radius:18px;padding:18px;box-shadow:0 2px 14px rgba(60,20,45,.07)}
+.hero{background:linear-gradient(145deg,#b8006c 0%,#7a0047 55%,#2a0018 100%);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 2px,transparent 2px 6px);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero .muted{color:rgba(255,255,255,.78)}
+.hero .trk{background:#3ddc97!important}.hero .trk i{background:#ff5d6c!important}.hero .pk span[style]{color:#ffb3bb!important}
+.hero .best{color:var(--gold)}
+label{display:block;font-weight:800;font-size:13px;margin:14px 0 6px}
+select,input[type=text],input[type=password],input[type=number],textarea{width:100%;background-color:var(--field);border:1.5px solid transparent;border-radius:12px;padding:13px 14px;font:inherit;font-size:16px;color:var(--ink)}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--brand);background-color:var(--surface)}
+textarea{min-height:96px;resize:vertical}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;min-height:46px;letter-spacing:.02em}
+.btn:active{transform:scale(.98)}
+.btn.alt{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.btn.sm{padding:9px 14px;font-size:13px;min-height:38px;border-radius:10px}
+.btn[data-act=send]{width:100%}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.ticket{border-radius:14px;padding:14px;margin-top:12px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--line)}
+.ticket.urgent{border-left-color:var(--bad)}.ticket.high{border-left-color:var(--gold)}
+.row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.id{font-weight:800}
+.badge{display:inline-block;font-size:12px;font-weight:800;border-radius:99px;padding:3px 11px;background:var(--soft);color:var(--brand)}
+.muted{color:var(--muted);font-size:13px}
+.note{border-bottom:1px solid var(--line);padding:10px 0}.note:last-child{border:0}
+.err{color:var(--bad);font-size:13px;min-height:18px;margin-top:6px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.acts select{width:auto;min-width:200px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px}
+.stat div{background:var(--surface);border-radius:16px;padding:14px;box-shadow:0 2px 14px rgba(60,20,45,.07);color:var(--muted);font-size:13px;font-weight:700}
+.stat b{display:block;font-size:26px;color:var(--brand);font-weight:800;line-height:1.2}
+.pk{display:grid;grid-template-columns:56px 1fr 84px;gap:12px;align-items:center;margin:14px 0;font-size:15px}
+.pk input{padding:8px 10px}
+.trk{height:12px;border-radius:6px;overflow:hidden;display:block}.trk i{display:block;height:100%}
+.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:10;box-shadow:0 -4px 16px rgba(60,20,45,.08)}
+.tabs button{flex:1;max-width:260px;border:0;background:none;padding:10px 8px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font:inherit;font-weight:800;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);cursor:pointer}
+.tabs button[aria-pressed=true]{color:var(--brand)}
+.tabs svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom,0px));background:#2b2229;color:#fff;border:1px solid rgba(255,255,255,.25);padding:10px 16px;border-radius:12px;font-weight:700;z-index:20;max-width:calc(100% - 24px);text-align:center}
+.hidden{display:none}
+.setup{max-width:640px;margin:0 auto}.setup code{background:var(--soft);padding:2px 6px;border-radius:4px;word-break:break-all}
+@media(max-width:640px){.acts select,.acts .btn{flex:1 1 100%;width:100%}.panel{padding:16px}}
+.bar h1{min-width:0}
+.hbtns{margin-left:auto;display:flex;gap:8px;align-items:center}
+.hbtn{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:12px;min-height:40px;min-width:40px;padding:0 11px;font:inherit;font-weight:800;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.hbtn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:480px){.hlabel{display:none}h1{font-size:17px}}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;z-index:30}
+.sheet-card{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));width:100%;max-width:480px}
+.sheet-card ol{padding-left:20px;margin:10px 0 16px;line-height:1.9}
+.hidden{display:none!important}
+.notice{background:var(--surface);border-radius:16px;padding:14px 16px;margin-bottom:16px;border-left:6px solid var(--brand);box-shadow:0 2px 14px rgba(60,20,45,.07)}
+.notice.closure{border-left-color:var(--bad)}.notice.event{border-left-color:var(--gold)}
+.ticket.overdue{background:rgba(214,48,63,.08);border-color:var(--bad);border-left-color:var(--bad)}
+.badge.bad{background:var(--bad);color:#fff}.badge.warn{background:var(--gold);color:#2a1a00}
+.ph{max-width:100%;max-height:240px;border-radius:12px;margin-top:8px;display:block}
+.cm{border-top:1px dashed var(--line);padding:8px 0;margin-top:8px;font-size:14px}
+.chart{display:flex;align-items:flex-end;gap:8px;height:140px;margin-top:12px}
+.chart>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;font-size:11px;color:var(--muted)}
+.chart i{display:block;width:100%;background:var(--brand);border-radius:6px 6px 0 0}
+.hb{display:grid;grid-template-columns:140px 1fr 28px;gap:8px;align-items:center;margin:8px 0;font-size:13px}
+.hb .b{height:10px;border-radius:5px;background:var(--brand);display:block}
+#langtxt{font-size:12px}
+@media(max-width:420px){.logo{width:36px;height:36px}.bar{gap:8px;padding:12px}.hbtns{gap:6px}.hb{grid-template-columns:100px 1fr 24px}}
+main,.bar{max-width:1240px}
+svg.logo{border:0;border-radius:0}
+button{-webkit-tap-highlight-color:transparent}
+select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%238a7d85' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.btn:hover{filter:brightness(1.1)}.btn.alt:hover{background:var(--soft);filter:none}.hbtn:hover{background:rgba(255,255,255,.28)}
+.grid.eq{grid-template-columns:1fr}
+.rv{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);grid-template-areas:"a" "b" "c"}
+.rv-a{grid-area:a;min-width:0}.rv-b{grid-area:b;min-width:0}.rv-c{grid-area:c;min-width:0}
+.adm{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+.adm-main>.panel,.adm-side>.panel{margin-bottom:20px}
+@media(min-width:760px){.grid.eq{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){
+ .rv{grid-template-columns:380px minmax(0,1fr);grid-template-areas:"a b" "c b";align-items:start;gap:20px}
+ body{padding-bottom:32px}
+ .tabs{top:0;bottom:auto;left:50%;right:auto;transform:translateX(-50%);height:70px;width:auto;background:none;border:0;box-shadow:none;padding:0;gap:6px;align-items:center;z-index:6}
+ .tabs button{flex:none;flex-direction:row;gap:8px;padding:0 18px;height:44px;border-radius:12px;color:#fff;opacity:.85}
+ .tabs button[aria-pressed=true]{color:#fff;background:rgba(255,255,255,.2);opacity:1}
+ .tabs button:hover{opacity:1;background:rgba(255,255,255,.12)}
+ .tabs svg{width:20px;height:20px}
+ .toast{bottom:28px}
+}
+@media(min-width:1000px){.adm{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}}
+@media(min-width:1240px){.rv{grid-template-columns:360px minmax(0,1fr) 360px;grid-template-areas:"a b c"}}
+input[type=file]{padding:9px 10px;font-size:14px}
+input[type=file]::file-selector-button{background:var(--soft);color:var(--brand);border:0;border-radius:9px;padding:8px 14px;margin-right:12px;font:inherit;font-weight:800;cursor:pointer}
+input[type=checkbox]{accent-color:var(--brand)}
+@media(hover:hover){.btn:hover{filter:brightness(1.1)}.btn.alt:hover{background:var(--soft);filter:none}.hbtn:hover{background:rgba(255,255,255,.28)}}
+.welcome{background:linear-gradient(135deg,var(--hdr1),var(--hdr2));color:#fff;border-radius:22px;padding:26px 22px;position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(110,0,63,.28)}
+.welcome::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 2px,transparent 2px 6px);pointer-events:none}
+.welcome>*{position:relative;z-index:1}.hello{font-weight:800;color:var(--gold);letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+.welcome h2{font-size:27px;margin:4px 0 6px;line-height:1.2}.wsub{opacity:.92}.who{margin-top:10px;opacity:.92;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+@media(min-width:760px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tile,.dcard{background:var(--surface);border:0;border-radius:18px;padding:16px;text-align:left;cursor:pointer;color:var(--ink);font:inherit;box-shadow:0 2px 14px rgba(60,20,45,.07)}
+.tile{display:flex;flex-direction:column;gap:6px;min-height:138px}
+.tile b{font-size:16px}.tdesc{color:var(--muted);font-size:13px;line-height:1.35}.tdesc b{font-size:13px;color:var(--brand)}
+.ticon{width:44px;height:44px;border-radius:14px;background:var(--soft);color:var(--brand);display:grid;place-items:center}
+.ticon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dcard{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;margin-top:10px}
+.drow{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:8px;cursor:pointer;color:var(--ink);font:inherit;text-align:left}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:6px 14px;font:inherit;font-weight:800;font-size:13px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--brand);color:#fff;border-color:var(--brand)}
+.crumbs{margin:14px 0 4px;font-size:13px;color:var(--muted)}.crumbs button{background:none;border:0;color:var(--brand);font:inherit;font-weight:800;cursor:pointer;padding:0}
+.badge.floor{background:var(--brand);color:#fff;min-width:34px;text-align:center}
+.bigfloor{font-size:44px;font-weight:800;color:var(--brand);line-height:1.1;margin-top:10px}
+@media(hover:hover){.tile:hover,.dcard:hover,.drow:hover{box-shadow:0 4px 18px rgba(60,20,45,.14)}}
+@media(max-width:480px){.tabs button{font-size:10px;letter-spacing:0;padding:10px 2px 8px}.tabs svg{width:24px;height:24px}.welcome h2{font-size:23px}}
+@media(min-width:900px) and (max-width:1180px){.tabs svg{display:none}.tabs button{padding:9px 12px}}
+.pk{grid-template-columns:84px 1fr 84px}
+.dtag{font-size:11px;font-weight:800;color:var(--brand);letter-spacing:.02em}.hero .dtag{color:var(--gold)}
+.pbld{font-weight:800;margin-top:18px;font-size:15px}.pveh{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.8;margin-top:8px}
+.gl{margin:8px 0 0;padding-left:20px;line-height:1.6}.gl li+li{margin-top:6px}
+.mapframe{width:100%;height:280px;border:0;border-radius:18px;margin-top:14px;box-shadow:0 2px 14px rgba(60,20,45,.07);background:var(--line)}
+a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center}
+.sk{border-radius:18px;background:linear-gradient(90deg,var(--line) 25%,var(--field) 50%,var(--line) 75%);background-size:200% 100%}
+@keyframes shimmer{to{background-position:-200% 0}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:no-preference){.sk{animation:shimmer 1.3s linear infinite}#app.enter>*{animation:rise .32s ease both}#app.enter>*:nth-child(2){animation-delay:.04s}#app.enter>*:nth-child(3){animation-delay:.08s}.tile,.dcard,.drow,.btn{transition:transform .12s,box-shadow .15s,filter .15s}.tile:active,.dcard:active,.drow:active{transform:scale(.98)}}
+.badge.s-ok{background:rgba(30,158,98,.16);color:var(--ok)}.badge.s-info{background:rgba(61,111,224,.15);color:#3d6fe0}.badge.s-mute{background:var(--field);color:var(--muted)}.badge.s-bad{background:rgba(214,48,63,.14);color:var(--bad)}
+.bignum{font-size:44px;font-weight:800;line-height:1.1;margin-top:10px}.bigsub{opacity:.85;font-size:13px}
+.f-GF{--fc:#a3005f}.f-1F{--fc:#d98200}.f-2F{--fc:#1e9e62}.f-3F{--fc:#3d6fe0}.f-3MF{--fc:#7b3fe4}.f-na{--fc:#7a6f76}
+.badge.floor{background:var(--fc,var(--brand))}.bigfloor{color:var(--fc,var(--brand))}.chip[aria-pressed=true]{background:var(--fc,var(--brand));border-color:var(--fc,var(--brand))}
+.dcard .ticon{flex:none}
+.empty{display:flex;gap:14px;align-items:center;margin-top:10px;color:var(--muted)}
+.sent{border:2px solid var(--ok);margin-bottom:16px}.ticon.ok{background:rgba(30,158,98,.16);color:var(--ok)}
+.codebox{display:flex;gap:10px;align-items:center;justify-content:space-between;background:var(--field);border-radius:12px;padding:10px 12px;margin:10px 0;word-break:break-all}
+.hsearch{display:flex;gap:8px;margin-top:16px}.hsearch input{flex:1;min-width:0;background:rgba(255,255,255,.96);color:#221a20;border-radius:14px;padding:13px 14px}.hsearch input::placeholder{color:#8a7f86}
+.hsearch button{width:52px;border:0;border-radius:14px;background:var(--gold);color:#2a1a00;cursor:pointer;display:grid;place-items:center}.hsearch svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
+@media(max-width:899px){.tabs button{position:relative}.tabs button[aria-pressed=true]::before{content:"";position:absolute;top:0;left:28%;right:28%;height:3px;border-radius:0 0 4px 4px;background:var(--brand)}}
+.serif{font-family:"Playfair Display",Georgia,"Times New Roman",serif;letter-spacing:-.01em}
+.welcome::before{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(242,176,30,.38),transparent 68%)}
+.welcome h2{font-size:30px;font-weight:700}
+.hchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.hchips button{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.14);color:#fff;border-radius:99px;padding:7px 14px;font:inherit;font-weight:800;font-size:13px;cursor:pointer}
+@media(hover:hover){.hchips button:hover{background:rgba(255,255,255,.26)}}
+.cta{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);border-radius:20px;padding:20px;margin-top:16px;border-left:6px solid var(--gold);box-shadow:0 2px 14px rgba(60,20,45,.07)}
+.cta h3{font-size:22px}.cta .muted{max-width:520px}
+.sec{margin-top:30px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}.sech{font-size:24px;margin:2px 0 12px;font-weight:700}
+.hscroll{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 14px;padding:4px 14px 12px;margin:0 -14px;scrollbar-width:none}.hscroll::-webkit-scrollbar{display:none}.hscroll>*{flex:none;scroll-snap-align:start}
+.ncard{width:270px;min-height:170px;border-radius:20px;padding:18px;color:#fff;display:flex;flex-direction:column;gap:6px;background:linear-gradient(145deg,#b8006c,#5a0035);box-shadow:0 4px 18px rgba(60,20,45,.18)}
+.ncard.closure{background:linear-gradient(145deg,#d6303f,#7a1020)}.ncard.event{background:linear-gradient(145deg,#f2b01e,#c4630a);color:#2a1a00}
+.ncard .kind{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.85}.ncard h4{font-size:21px;margin:0;line-height:1.2;font-weight:700}.ncard .nb{font-size:14px;opacity:.92}.ncard .nd{margin-top:auto;font-size:12px;opacity:.85;font-weight:700}
+.pcard,.ccard{width:168px;background:var(--surface);border:0;border-radius:18px;padding:14px;text-align:left;color:var(--ink);font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 14px rgba(60,20,45,.07)}
+.pcard{min-height:128px}.pcard b{font-size:15px;line-height:1.25}.pcard .badge{align-self:flex-start}.ccard{width:150px}
+.floors{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.fcard{background:var(--surface);border:0;border-left:5px solid var(--fc,var(--brand));border-radius:16px;padding:14px;text-align:left;color:var(--ink);font:inherit;cursor:pointer;display:flex;flex-direction:column;gap:3px;box-shadow:0 2px 14px rgba(60,20,45,.07)}.fbig{font-size:34px;font-weight:800;line-height:1;color:var(--fc,var(--brand))}
+.segx{display:flex;background:var(--field);border-radius:14px;padding:4px;gap:4px;margin-bottom:16px}.segx button{flex:1;border:0;background:none;border-radius:11px;padding:10px;font:inherit;font-weight:800;color:var(--muted);cursor:pointer}.segx button[aria-pressed=true]{background:var(--surface);color:var(--brand);box-shadow:0 1px 6px rgba(60,20,45,.14)}
+.pstep{background:var(--surface);border-radius:18px;padding:16px;margin-bottom:12px;box-shadow:0 2px 14px rgba(60,20,45,.07)}.pstep h3{margin:0 0 4px}
+.chip.big{padding:10px 16px;font-size:14px}
+.planbox{margin-bottom:12px;border-left:6px solid var(--gold)}.planbox ol{margin:10px 0 0;padding:0;list-style:none}.planbox li{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.linkbtn{background:none;border:0;padding:0;color:var(--ink);font:inherit;font-weight:800;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line)}
+.wk{font-size:11px;font-weight:800;color:var(--warn);margin-left:4px}.pgh{font-weight:800;margin:18px 0 4px}
+</style>
+</head>
+<body>
+<header><div class="bar"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><rect x="1.5" y="1.5" width="45" height="45" rx="12" fill="#a3005f" stroke="#fff" stroke-opacity=".85" stroke-width="2"/><path d="M15 20h18a1.5 1.5 0 0 1 1.5 1.6l-1 15A2 2 0 0 1 31.5 38h-15a2 2 0 0 1-2-1.9l-1-15A1.5 1.5 0 0 1 15 20z" fill="#fff"/><path d="M18.5 20v-2.5a5.5 5.5 0 0 1 11 0V20" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M19.5 29l3.3 3.3L29 26" fill="none" stroke="#a3005f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>AEON Mall BSD City<small>Reports and parking</small></h1><div class="hbtns"><button class="hbtn" data-act="view" data-v="account" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span class="hlabel">Sign in</span></button><button class="hbtn" id="langbtn" data-act="lang" aria-label="Change language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span id="langtxt">EN</span></button><button class="hbtn" id="themebtn" data-act="theme" aria-label="Switch theme"></button></div></div></header>
+<div id="offline" class="hidden" style="background:var(--warn);color:#1a1a1a;text-align:center;padding:8px;font-weight:700">You are offline. Parking and reports need an internet connection.</div>
+<main id="app"><div class="sk" style="height:150px"></div><div class="sk" style="height:96px;margin-top:14px"></div><div class="sk" style="height:96px;margin-top:14px"></div></main>
+<div id="sheet" class="sheet hidden" role="dialog" aria-modal="true" aria-label="Install the app"><div class="sheet-card"><h2>Install the app</h2><ol id="sheetbody"></ol><div id="sheetnote" class="muted" style="margin-bottom:12px"></div><button class="btn" style="width:100%" data-act="closesheet">Got it</button></div></div>
+<nav class="tabs" aria-label="Main">
+<button data-act="view" data-v="home"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg><span>Home</span></button>
+<button data-act="view" data-v="parking"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M9.5 17V7.5h3.2a2.8 2.8 0 0 1 0 5.6H9.5"/></svg><span>Parking</span></button>
+<button data-act="view" data-v="report"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Report</span></button>
+<button data-act="view" data-v="lost"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><span>Lost &amp; Found</span></button>
+<button data-act="view" data-v="plan"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Explore</span></button>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SB_URL = "https://smgxmflhgdrubmyufxft.supabase.co";
+const SB_KEY = "sb_publishable_ADxUBk5XdjwSgicntwWFgg_BJIcNwsh";
+
+const STORE_DATA = "180 SPM|FASHION|GF;Ace Hardware|GOODS|n/a;Adidas|FASHION|GF;AEON BSD CITY Dept Store 1F|FASHION|1F;AEON BSD CITY Dept Store 2F|FASHION|2F;AEON BSD CITY Supermarket GF|FOOD|GF;Asics|FASHION|GF;ATM CENTER (3F)|SERVICE|3F;ATM CENTER (GF)|SERVICE|GF;Auntie Anne's|FOOD|GF;B-Quik|SERVICE|GF;Baby Shop|FASHION|2F;Bakmi Ayam Alok|FOOD|3F;Bakmi GM|FOOD|2F;Bakso Afung|FOOD|3F;Bakso Malang Cak Rosso|FOOD|3F;Ban ban|FOOD|GF;Bank Mandiri|SERVICE|GF;BASGOR 89|FOOD|3F;Bath & Body Works|GOODS|GF;BCA|SERVICE|GF;Beard Papa|FOOD|GF;Beatrice Clothing|FASHION|2F;Beauty Scent|GOODS|GF;Bellamama|FOOD|GF;Beluga Jewellery|GOODS|1F;Bijin Nabe|FOOD|GF;Birkenstock|FASHION|1F;Blibli|GOODS|3F;BNI|SERVICE|GF;Bobo Tokyo|FASHION|1F;Boost Juice|FOOD|GF;Botanical Essentials|GOODS|1F;BRANZ (Property)|SERVICE|GF;Bugatea|FOOD|3F;Bugatea (2nd outlet)|FOOD|3F;Bungeoppang|FOOD|3F;Burger King|FOOD|3F;Burger King|FOOD|3MF;Buttonscarves|FASHION|2F;C&F perfumery|GOODS|GF;Calvin Klein|FASHION|GF;Casio|GOODS|1F;Chagee|FOOD|GF;Charles & Keith|FASHION|1F;Châteraisé|FOOD|GF;Chatime|FOOD|GF;CIMB Niaga Digital Lounge|SERVICE|GF;Cindy|GOODS|2F;Cinema XXI|ENTERTAINMENT|3F;Cold Stone|FOOD|GF;Colorbox|FASHION|2F;Converse|FASHION|GF;COWAY|GOODS|1F;Crocs|FASHION|1F;D'Crepes|FOOD|2F;Daiso Japan|GOODS|2F;Daniel Wellington|GOODS|1F;Dapur Solo|FOOD|2F;De Wasz Laundry|SERVICE|GF;Di Bawah Tangga|FOOD|2F;Digimap|GOODS|GF;Doner Kebab|FOOD|3F;DORE by LeTAO|FOOD|GF;Dough Lab|FOOD|GF;Dparis|GOODS|1F;Dum Dum Thai Tea|FOOD|3F;Dwidaya Tour|SERVICE|3F;Edogawa Sushi|FOOD|n/a;Eka Karya Orchid|GOODS|GF;Eprise|FASHION|2F;Erafone|GOODS|3F;Erha Store|GOODS|GF;Et Cetera|FASHION|1F;Everbest|FASHION|1F;Executive|FASHION|1F;Expat Roasters|FOOD|GF;Eyes Spice|GOODS|1F;Facility|FASHION|2F;Fan Fries|FOOD|3F;Fat Duck|FOOD|GF;Fitflop|GOODS|1F;Flying Tiger Copenhagen|GOODS|1F;Frank & Co|GOODS|GF;Fruitylicious|FOOD|3F;Garmin|GOODS|1F;Ginza Nail|SERVICE|1F;Gion Sushi|FOOD|GF;Giordano|FASHION|1F;Glam On|GOODS|2F;GMS BSD|SERVICE|1F;Gococo|FOOD|3F;Gramedia|GOODS|2F;Greyhound|FOOD|GF;GS Shop|GOODS|2F;Guardian|GOODS|GF;Guess|FASHION|GF;Guldens Mice|FOOD|3F;Gyukaku|FOOD|GF;Gyukatsu Kyoto Katsugyu|FOOD|GF;H&M|FASHION|1F;Haagen-Dazs|FOOD|3F;Haircode|SERVICE|2F;Happy Dental Clinic|SERVICE|n/a;Havaianas|GOODS|1F;Huawei|GOODS|3F;Hush Puppies|FASHION|1F;I Love Emas|SERVICE|2F;Ice Gentong|FOOD|3F;Ichiro|FOOD|3F;Ikkudo Ichi|FOOD|3F;Imperial Kitchen|FOOD|3F;Iqos|GOODS|GF;Itsu|GOODS|3F;Jewel Cafe|SERVICE|1F;Jittlada Thai Cuisine|FOOD|GF;Jolly Time|FOOD|3F;Kaneko Hannosuke|FOOD|GF;KFC|FOOD|3F;KFC|FOOD|3MF;Kiddycuts|SERVICE|2F;Kidz Station|GOODS|2F;Kimukatsu|FOOD|3F;Kluk Sandal|FASHION|GF;Koi Cafe|FOOD|1F;Kokuo Reflexology|SERVICE|3MF;Kopi Kenangan|FOOD|1F;Krispy Kreme|FOOD|GF;L'Occitane|GOODS|GF;Lacoste|FASHION|GF;Laxmi Tailor|FASHION|1F;LEGO|GOODS|1F;Levi's|FASHION|1F;Lewis Emma|FASHION|2F;Lock & Lock with Hello, Bebe|GOODS|2F;Loly Poly|GOODS|3F;Love, Bonito|FASHION|1F;M&G Life|GOODS|2F;Maison Tatsuya|FOOD|GF;Mama Roz|FOOD|1F;Mandalika Parfum|GOODS|2F;Marco Chop Shop|SERVICE|2F;Max Fashions|FASHION|2F;McDonald's|FOOD|3F;Megane Prince|GOODS|2F;Megaze Coffee|FOOD|3F;Melissa|FASHION|1F;Menya Sakura|FOOD|3F;Mi Home|GOODS|3F;Miniso|GOODS|2F;Minoshe|FASHION|2F;Miss Thai Boat Noodle|FOOD|3F;Moo Chuu|GOODS|2F;Mooimom|FASHION|2F;Mothercare & Early Learning Center|FASHION|2F;My Feet|FASHION|2F;Nanny's Pavillon|FOOD|GF;Nasgor Randang One|FOOD|3F;Nespresso|GOODS|GF;New Balance|FASHION|GF;New Era|FASHION|1F;Nike|FASHION|GF;Noodle King|FOOD|3F;Noodle King|FOOD|3MF;Nuansa Musik|SERVICE|3MF;Oh! Some|GOODS|2F;Ootoya|FOOD|GF;Oppo|GOODS|3F;Optik Melawai|GOODS|1F;Optik Seis|GOODS|1F;OWL Eyewear|GOODS|2F;Owndays|FASHION|2F;Paradise Dynasty|FOOD|GF;Pedro|FASHION|1F;Pempek Hoi|FOOD|3F;Pepperlunch|FOOD|3F;Pho Baba|FOOD|GF;Pika Piku Ice Cream|FOOD|3F;Pizza Marzano|FOOD|GF;Planet Sports. Asia|FASHION|1F;Playtopia|ENTERTAINMENT|3F;Playworks|GOODS|3F;Pokemon Mezastar|ENTERTAINMENT|3F;Polo|FASHION|1F;Puyo|FOOD|2F;Ramen Seirock-ya|FOOD|3F;Rejuve|FOOD|3F;Relx|GOODS|1F;Remboelan|FOOD|GF;Rempah Bistro|FOOD|GF;Rockstar Academy|SERVICE|3F;Rujak Kolam Medan|FOOD|3F;Sai Ramen|FOOD|3F;Samsonite|GOODS|1F;Samsung|GOODS|3F;Sate Dombud|FOOD|3F;Sate Padang Mak Syukur|FOOD|3F;Saturdays|GOODS|1F;Scandia|GOODS|2F;Secret Garden|GOODS|1F;Sephora|GOODS|1F;Shake Shake|FOOD|3F;Shihlin Taiwan Street Snacks|FOOD|GF;Shortcut Barbershop|SERVICE|2F;Shu Shu|FOOD|3F;Simply|FOOD|3F;Skechers|FASHION|GF;Skin+|SERVICE|2F;Skinfood|GOODS|GF;Smart Hand DIY|ENTERTAINMENT|2F;Smiggle|GOODS|2F;Social Affair|FOOD|GF;Sociolla|GOODS|GF;Soes Lelo|FOOD|3F;Solaria|FOOD|3F;Sop Ikan Batam|FOOD|3F;Sop Konro Cendana|FOOD|3F;Soto Betawi H. Mamat|FOOD|3F;Soto Mie Pak Kadir|FOOD|3F;Staccato|FASHION|1F;Starbucks Coffee|FOOD|GF;Steak 21|FOOD|3F;Steve Madden|FASHION|1F;Stop n Go|SERVICE|GF;Sukiya|FOOD|3F;Susu Mbok Darmi|FOOD|3F;Taucy|FOOD|3F;Tawan|FOOD|3F;The Bath Box|GOODS|GF;The Body Shop|GOODS|GF;The Chicken Rice Shop|FOOD|3F;The Palace|GOODS|GF;The RR Chocolate|FOOD|GF;This Is April|FASHION|2F;Tiga Semut|FOOD|3F;Tokio Sushi|FOOD|3F;Tokyo Belle|SERVICE|3F;Tommy Hilfiger|FASHION|GF;Toys City|GOODS|2F;Urban & Co|FASHION|2F;Urban Beats|GOODS|3F;Vans|GOODS|GF;Vines|FOOD|GF;VIVAIA|FASHION|1F;Wacoal|FASHION|2F;Wardah|GOODS|1F;Waroeng Teh Kotjok|FOOD|3F;Watson|GOODS|2F;White Noise|GOODS|GF;Wingstop|FOOD|3F;Wood|FASHION|1F;Yamada Best|GOODS|3F;Yayang|FASHION|2F;YEN PAO|FOOD|3F;Yole|FOOD|GF;Yoshinoya|FOOD|2F;Yves Rocher|GOODS|GF;Zenbu|FOOD|GF;Zoomoov|SERVICE|2F;UNIQLO|FASHION|1F;Foot Locker|FASHION|GF;Golden Lamian|FOOD|3F;Rokurenya|FOOD|3F;Dear Butter|FOOD|3F".split(";").map(x => x.split("|"));
+const ok = /^https:\/\//.test(SB_URL) && SB_KEY.length > 20;
+const sb = ok ? supabase.createClient(SB_URL, SB_KEY) : null;
+const GT_FAC = ["Toilet or cleanliness","Escalator or elevator","Spill or safety","Air conditioning","Electrical","Plumbing","Lighting","Other facility problem"];
+const STAGES = ["Submitted","Assigned","In Progress","Completed"];
+const STORES = STORE_DATA.map(([n, c, f]) => n + (f === "n/a" ? "" : " (" + f + ")")).sort((a, b) => a.localeCompare(b));
+const rank = {Urgent:0, High:1, Normal:2};
+const SLA = {Urgent:4, High:24, Normal:48}, REVIEW_SLA = 12; // hours before a report counts as overdue
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ago = t => { const h = Math.round((Date.now() - new Date(t)) / 36e5); return h < 1 ? "just now" : h < 48 ? h + " h ago" : Math.round(h / 24) + " d ago"; };
+const fmtH = h => h < 48 ? Math.max(1, Math.round(h)) + " h" : Math.round(h / 24) + " d";
+const codes = () => { try { return JSON.parse(localStorage.getItem("aeon_codes") || "[]"); } catch (e) { return []; } };
+const DEV = (() => { try { let d = localStorage.getItem("aeon_device"); if (!d) { d = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2)); localStorage.setItem("aeon_device", d); } return d; } catch (e) { return ""; } })();
+const typing = () => document.activeElement && document.activeElement.matches && document.activeElement.matches("input,textarea,select");
+let view = "home", user = null, role = "none", profile = null, LANG = "en";
+let D = {tickets:[], techs:[], parking:[], profiles:[], admins:[], comments:[], activity:[], notices:[]};
+const openN = new Set();
+try { LANG = localStorage.getItem("aeon_lang") === "id" ? "id" : "en"; } catch (e) {}
+
+/* ---------- Bahasa Indonesia (public screens; staff screens stay in English) ---------- */
+const ID = {
+"Reports and parking":"Laporan dan parkir","Report":"Lapor","Sign in":"Masuk","Dashboard":"Dasbor",
+"Parking availability":"Ketersediaan parkir","Free spaces on each level. Red is taken, green is free.":"Ruang kosong di tiap lantai. Merah terisi, hijau kosong.","Full":"Penuh","No parking data yet.":"Belum ada data parkir.",
+"Send a report":"Kirim laporan","Staff check every report before acting on it.":"Petugas memeriksa setiap laporan sebelum ditindaklanjuti.",
+"Which store is it at? (optional)":"Di toko mana? (opsional)","Start typing a store name":"Ketik nama toko","What are you reporting?":"Apa yang ingin Anda laporkan?",
+"Toilet or cleanliness":"Toilet atau kebersihan","Escalator or elevator":"Eskalator atau lift","Spill or safety":"Tumpahan atau keselamatan","Air conditioning":"AC","Electrical":"Listrik","Plumbing":"Pipa air","Lighting":"Pencahayaan","Other facility problem":"Masalah fasilitas lainnya","Lost item":"Barang hilang","Found item":"Barang ditemukan",
+"Where? (floor, shop or area)":"Di mana? (lantai, toko atau area)","For example: 2F near Gramedia":"Contoh: 2F dekat Gramedia","Details":"Detail",
+"Describe the problem, or the item and when you lost or found it":"Jelaskan masalahnya, atau barangnya dan kapan hilang atau ditemukan",
+"Contact number (optional)":"Nomor kontak (opsional)","Photo (optional)":"Foto (opsional)","Send report":"Kirim laporan","Sending...":"Mengirim...",
+"Add at least 10 characters so staff can check your report.":"Tambahkan minimal 10 karakter agar petugas dapat memeriksa laporan Anda.","Pick the store from the list, or leave it empty.":"Pilih toko dari daftar, atau kosongkan.","That photo is too large. Choose one under 15 MB.":"Foto terlalu besar. Pilih yang di bawah 15 MB.",
+"Your reports":"Laporan Anda","Reports are saved in this browser. Confirmed reports get higher priority.":"Laporan tersimpan di browser ini. Laporan yang dikonfirmasi mendapat prioritas lebih tinggi.","No reports yet. Use the form to send your first one.":"Belum ada laporan. Gunakan formulir untuk mengirim laporan pertama Anda.",
+"Awaiting review":"Menunggu pemeriksaan","Could not be confirmed":"Tidak dapat dikonfirmasi","Submitted":"Terkirim","Assigned":"Ditugaskan","In Progress":"Sedang dikerjakan","Completed":"Selesai","Reported":"Dilaporkan","Verified":"Terverifikasi","Resolved":"Selesai","Done":"Selesai",
+"Technician: not assigned yet":"Teknisi: belum ditugaskan","just now":"baru saja","Mall staff":"Petugas mal","Closure":"Penutupan","Event":"Acara","Notice":"Pengumuman",
+"Log in":"Masuk","For mall staff and tenants.":"Untuk petugas mal dan penyewa.","Email":"Email","Password":"Kata sandi","New tenant? Create an account":"Penyewa baru? Buat akun",
+"Pick your store. A mall admin approves your account before you can see reports for it.":"Pilih toko Anda. Admin mal menyetujui akun Anda sebelum Anda dapat melihat laporan toko.","Your store":"Toko Anda","Start typing your store name":"Ketik nama toko Anda","Password (6+ characters)":"Kata sandi (min. 6 karakter)","Create tenant account":"Buat akun penyewa","Log out":"Keluar","Refresh":"Muat ulang",
+"Install the app":"Pasang aplikasi","Got it":"Mengerti","You are offline. Parking and reports need an internet connection.":"Anda sedang offline. Parkir dan laporan membutuhkan koneksi internet.","App installed":"Aplikasi terpasang","Waiting for approval":"Menunggu persetujuan",
+"Admin panel":"Panel admin","Export CSV":"Ekspor CSV","Export log":"Ekspor log","Waiting for review":"Menunggu pemeriksaan","Overdue":"Terlambat","Open facility jobs":"Pekerjaan fasilitas terbuka","Need a technician":"Butuh teknisi",
+"Lost and found log":"Log barang hilang dan ditemukan","Confirmed lost and found reports, with suggested matches.":"Laporan barang hilang dan ditemukan yang dikonfirmasi, dengan saran kecocokan.","Rejected reports":"Laporan ditolak","Kept for your records. Delete to remove.":"Disimpan sebagai arsip. Hapus untuk menghilangkan.","Nothing here yet.":"Belum ada apa-apa.","Rejected":"Ditolak",
+"Real report":"Laporan asli","Fake report":"Laporan palsu","Delete":"Hapus","Remove":"Hapus","Add note":"Tambah catatan","Save note":"Simpan catatan","Cancel":"Batal","Show this note to the reporter":"Tampilkan catatan ini ke pelapor","Visible to reporter":"Terlihat oleh pelapor",
+"Add a note, for example: the wallet is at our counter":"Tambahkan catatan, contoh: dompet ada di konter kami","Assign technician":"Tugaskan teknisi","Add a technician first.":"Tambahkan teknisi dulu.","Mark resolved":"Tandai selesai","Mark as done":"Tandai selesai","Resolve both":"Selesaikan keduanya","Possible match":"Kemungkinan cocok","Possible matches":"Kemungkinan cocok",
+"Insights":"Wawasan","Average time to assign":"Rata-rata waktu penugasan","Average time to finish":"Rata-rata waktu selesai","Reports from guests":"Laporan dari tamu","Guest reports confirmed real":"Laporan tamu yang terbukti asli","Reports per week":"Laporan per minggu","Most common faults":"Masalah paling sering","No reports yet.":"Belum ada laporan.",
+"Notice board":"Papan pengumuman","Notices show at the top of the Report tab for every visitor.":"Pengumuman tampil di bagian atas tab Lapor untuk semua pengunjung.","No notices yet.":"Belum ada pengumuman.","Title":"Judul","Message (optional)":"Pesan (opsional)","Type":"Jenis","Show for how many days? (empty = until you delete it)":"Tampil berapa hari? (kosong = sampai Anda hapus)","Post notice":"Posting pengumuman","For example: Parking P3 closed on Saturday":"Contoh: Parkir P3 ditutup hari Sabtu",
+"Every account you add in Supabase, or that signs up on the site, shows here. Approve tenants so they can see public reports for their store, or make someone an admin.":"Setiap akun yang Anda tambahkan di Supabase, atau yang mendaftar di situs, tampil di sini. Setujui penyewa agar dapat melihat laporan publik untuk toko mereka, atau jadikan seseorang admin.",
+"(no store)":"(tanpa toko)","Approve tenant":"Setujui penyewa","Revoke tenant":"Cabut penyewa","Make admin":"Jadikan admin","Remove admin":"Hapus admin","No accounts yet.":"Belum ada akun.",
+"Technicians":"Teknisi","No technicians yet.":"Belum ada teknisi.","Add technician":"Tambah teknisi","Name":"Nama","Specialty":"Keahlian","Add":"Tambah",
+"Parking levels":"Lantai parkir","Guests see these numbers live. Red is taken, green is free.":"Tamu melihat angka ini secara langsung. Merah terisi, hijau kosong.","Add level":"Tambah lantai","Level name, for example P4":"Nama lantai, contoh P4","Total spaces":"Total tempat",
+"Activity log":"Log aktivitas","Who did what to each report. Written by the database, so it cannot be edited here.":"Siapa melakukan apa pada setiap laporan. Ditulis oleh database sehingga tidak dapat diedit di sini.","No activity yet.":"Belum ada aktivitas.",
+"submitted":"mengirim","confirmed as real":"mengonfirmasi sebagai asli","rejected as fake":"menolak sebagai palsu","assigned":"menugaskan","changed status":"mengubah status","changed priority":"mengubah prioritas","deleted":"menghapus","set to pending":"mengatur ke menunggu",
+"Reports from the public":"Laporan dari publik","Visitor reports about your store that mall staff confirmed. Add a note to tell the reporter what is happening, and mark it done once handled, for example when a lost item is returned.":"Laporan pengunjung tentang toko Anda yang sudah dikonfirmasi petugas mal. Tambahkan catatan untuk memberi tahu pelapor, dan tandai selesai setelah ditangani, misalnya saat barang hilang dikembalikan.",
+"Nothing yet. Confirmed reports about your store appear here.":"Belum ada. Laporan terkonfirmasi tentang toko Anda muncul di sini.","Your reports to mall staff":"Laporan Anda ke petugas mal","Use the Report tab to send a new one.":"Gunakan tab Lapor untuk mengirim yang baru.","No reports yet.":"Belum ada laporan.",
+"No access yet":"Belum ada akses","Your tenant account for":"Akun penyewa Anda untuk","is waiting for a mall admin to approve it. Until then you can still send reports as a guest.":"sedang menunggu persetujuan admin mal. Sampai saat itu Anda tetap dapat mengirim laporan sebagai tamu.",
+"This account is not an admin or an approved tenant yet. An admin can promote it from the admin panel.":"Akun ini belum menjadi admin atau penyewa yang disetujui. Admin dapat mempromosikannya dari panel admin.",
+"Setting this system up for the first time? The first account to claim admin access becomes the admin. This only works while no admin exists.":"Menyiapkan sistem ini untuk pertama kali? Akun pertama yang mengklaim akses admin menjadi admin. Ini hanya berlaku selama belum ada admin.","Claim admin access":"Klaim akses admin",
+"Refreshed":"Dimuat ulang","Admin added":"Admin ditambahkan","Admin removed":"Admin dihapus","Account removed":"Akun dihapus","Note saved":"Catatan disimpan","Marked as done":"Ditandai selesai","You are now the admin":"Anda sekarang admin","An admin already exists. Ask them to approve you.":"Sudah ada admin. Minta mereka menyetujui Anda.","Account created":"Akun dibuat",
+"Pick your store from the list.":"Pilih toko Anda dari daftar.","Enter an email and a password of at least 6 characters.":"Masukkan email dan kata sandi minimal 6 karakter.","Account created. Check your email to confirm it, then log in.":"Akun dibuat. Periksa email Anda untuk konfirmasi, lalu masuk.",
+"Have a tracking code? Paste it here":"Punya kode pelacakan? Tempel di sini","Find":"Cari","Tracking code:":"Kode pelacakan:","Report found":"Laporan ditemukan",
+"That does not look like a tracking code. It looks like MR-1001-A1B2C3D4E5.":"Itu bukan kode pelacakan yang valid. Contohnya MR-1001-A1B2C3D4E5.","No report found for that code.":"Laporan dengan kode itu tidak ditemukan.",
+"Photos and contact details are used only to handle your report. Please do not include people's faces or ID cards.":"Foto dan kontak hanya digunakan untuk menangani laporan Anda. Mohon jangan menyertakan wajah orang atau kartu identitas.",
+"Forgot password?":"Lupa kata sandi?","Type your email above first.":"Ketik email Anda di atas dulu.","If that email has an account, we sent a reset link. Check your inbox.":"Jika email itu terdaftar, kami telah mengirim tautan reset. Periksa kotak masuk Anda.",
+"Set a new password":"Atur kata sandi baru","Choose a new password for your account.":"Pilih kata sandi baru untuk akun Anda.","New password (6+ characters)":"Kata sandi baru (min. 6 karakter)","Repeat the new password":"Ulangi kata sandi baru","Save new password":"Simpan kata sandi baru","Passwords do not match.":"Kata sandi tidak sama.","Password updated":"Kata sandi diperbarui","Password must be at least 6 characters.":"Kata sandi minimal 6 karakter.",
+"Remove this admin?":"Hapus admin ini?","Remove this account? They will no longer be able to log in.":"Hapus akun ini? Mereka tidak dapat masuk lagi.","Remove this technician?":"Hapus teknisi ini?","Delete this notice?":"Hapus pengumuman ini?"
+};
+Object.assign(ID, {"Home": "Beranda", "Stores": "Toko", "Lost & Found": "Hilang/Temu", "Account": "Akun", "Updated": "Diperbarui", "Welcome to AEON Mall BSD City": "Selamat datang di AEON Mall BSD City", "What would you like to do today?": "Apa yang ingin Anda lakukan hari ini?", "Welcome back,": "Selamat datang kembali,", "Good morning": "Selamat pagi", "Good afternoon": "Selamat siang", "Good evening": "Selamat malam", "Parking": "Parkir", "Report a problem": "Laporkan masalah", "Toilets, escalators, spills, AC and more": "Toilet, eskalator, tumpahan, AC dan lainnya", "Lost and found": "Barang hilang dan ditemukan", "Lost or found something? Tell us": "Kehilangan atau menemukan sesuatu? Beri tahu kami", "Store directory": "Direktori toko", "Find a store and its floor": "Temukan toko dan lantainya", "Staff and tenants": "Petugas dan penyewa", "Add it to your home screen": "Tambahkan ke layar utama", "All levels are full": "Semua lantai penuh", "See which level has free spaces before you drive in.": "Lihat lantai mana yang masih kosong sebelum masuk.", "Numbers are updated by mall staff, so they can be a few minutes behind.": "Angka diperbarui oleh petugas mal, jadi bisa tertinggal beberapa menit.", "Tell mall staff about a problem such as a broken escalator, a spill or a dirty toilet. We check every report.": "Beri tahu petugas mal tentang masalah seperti eskalator rusak, tumpahan atau toilet kotor. Kami memeriksa setiap laporan.", "Lost something, or found something someone may be looking for? Tell mall staff here. We check every report.": "Kehilangan sesuatu, atau menemukan barang yang mungkin dicari orang? Beri tahu petugas mal di sini. Kami memeriksa setiap laporan.", "What happened?": "Apa yang terjadi?", "I lost something": "Saya kehilangan sesuatu", "I found something": "Saya menemukan sesuatu", "Describe the item (colour, brand) and when you lost or found it": "Jelaskan barangnya (warna, merek) dan kapan hilang atau ditemukan", "Describe the problem": "Jelaskan masalahnya", "Contact number (so staff can reach you)": "Nomor kontak (agar petugas dapat menghubungi Anda)", "Find a store and see which floor it is on.": "Temukan toko dan lihat di lantai berapa.", "Search a store name": "Cari nama toko", "All categories": "Semua kategori", "Back to the list": "Kembali ke daftar", "Show everything in this category": "Tampilkan semua di kategori ini", "All floors": "Semua lantai", "Also on this floor in this group:": "Juga di lantai ini dalam kelompok yang sama:", "The mall website lists the floor only. It does not give a unit number or a spot on the floor, so use the directory boards in the mall or ask at the information desk to find the exact position.": "Situs mal hanya mencantumkan lantai. Tidak ada nomor unit atau posisi di lantai, jadi gunakan papan direktori di mal atau tanya di meja informasi untuk menemukan posisi pastinya.", "This store was on the website list earlier but not in the latest copy. Check that it is still open.": "Toko ini ada di daftar situs sebelumnya tetapi tidak di salinan terbaru. Pastikan toko masih buka.", "Report a problem here": "Laporkan masalah di sini", "Lost or found something here": "Kehilangan atau menemukan sesuatu di sini", "Open the official store guide": "Buka panduan toko resmi", "Store names, categories and floors come from the AEON Mall BSD City website (collected in November 2026). The groups inside each category are our own, and the website does not give exact positions on a floor.": "Nama toko, kategori dan lantai berasal dari situs AEON Mall BSD City (dikumpulkan November 2026). Pengelompokan di dalam setiap kategori adalah buatan kami, dan situs tidak memberi posisi pasti di lantai.", "No store found. Try a shorter name.": "Toko tidak ditemukan. Coba nama yang lebih pendek.", "Fashion": "Fashion", "Goods": "Barang", "Food and drink": "Makanan dan minuman", "Services": "Layanan", "Entertainment": "Hiburan", "Clothing, shoes, bags and accessories": "Pakaian, sepatu, tas dan aksesori", "Beauty, electronics, books, toys and home items": "Kecantikan, elektronik, buku, mainan dan perlengkapan rumah", "Restaurants, cafes, bakeries and groceries": "Restoran, kafe, toko roti dan bahan makanan", "Banks, salons, laundry and other services": "Bank, salon, laundry dan layanan lainnya", "Cinema, games and play": "Bioskop, permainan dan bermain", "Clothing and department stores": "Pakaian dan department store", "Shoes, bags and sports": "Sepatu, tas dan olahraga", "Kids and baby": "Anak dan bayi", "Eyewear": "Kacamata", "Beauty and health": "Kecantikan dan kesehatan", "Phones and electronics": "Ponsel dan elektronik", "Watches, jewellery and eyewear": "Jam, perhiasan dan kacamata", "Books, toys and stationery": "Buku, mainan dan alat tulis", "Home and lifestyle": "Rumah dan gaya hidup", "Other goods": "Barang lainnya", "Supermarket": "Supermarket", "Cafes and drinks": "Kafe dan minuman", "Desserts, bakery and snacks": "Makanan penutup, roti dan camilan", "Japanese and Korean": "Masakan Jepang dan Korea", "Indonesian": "Masakan Indonesia", "Chinese and Southeast Asian": "Masakan Tiongkok dan Asia Tenggara", "Western and fast food": "Masakan Barat dan cepat saji", "Other restaurants": "Restoran lainnya", "Banks and ATMs": "Bank dan ATM", "Health, beauty and wellness": "Kesehatan, kecantikan dan kebugaran", "Other services": "Layanan lainnya", "Cinema": "Bioskop", "Games and play": "Permainan dan bermain", "Ground floor": "Lantai dasar", "1st floor": "Lantai 1", "2nd floor": "Lantai 2", "3rd floor": "Lantai 3", "Mezzanine near 3F": "Mezanin dekat 3F", "Floor not listed on the website": "Lantai tidak tercantum di situs"});
+Object.assign(ID, {"Cars": "Mobil", "Motorbikes": "Motor", "Direct to mall": "Langsung ke mal", "Main parking building": "Gedung parkir utama", "New parking building": "Gedung parkir baru", "Direct access to the mall": "Akses langsung ke mal", "Building, for example New parking building": "Gedung, contoh Gedung parkir baru", "How to get here": "Cara menuju ke sini", "Getting here": "Menuju ke sini", "Directions, toll, train and shuttle": "Petunjuk arah, tol, kereta dan shuttle", "How to reach AEON Mall BSD City by car, train, shuttle or taxi.": "Cara menuju AEON Mall BSD City dengan mobil, kereta, shuttle atau taksi.", "Directions in Google Maps": "Petunjuk arah di Google Maps", "Apple Maps": "Apple Maps", "By car and toll road": "Dengan mobil dan jalan tol", "By train (KRL Commuter Line)": "Dengan kereta (KRL Commuter Line)", "BSD Link shuttle bus (free)": "Bus shuttle BSD Link (gratis)", "Taxi and online taxi": "Taksi dan taksi online", "From South and Central Jakarta: take the Jakarta Outer Ring Road (JORR), then the Jakarta to Serpong toll, and exit at BSD Timur 2 (Serbaraja toll).": "Dari Jakarta Selatan dan Pusat: lewat Jakarta Outer Ring Road (JORR), lalu Tol Jakarta - Serpong, dan keluar di BSD Timur 2 (Tol Serbaraja).", "From West, East and North Jakarta: use the Jakarta to Tangerang toll (reached through the inner-city toll via Tomang from the east, or via Cawang from the north) and exit at Alam Sutera. Then follow Jalan Raya Serpong towards Jalan Pahlawan Seribu.": "Dari Jakarta Barat, Timur dan Utara: gunakan Tol Jakarta - Tangerang (lewat tol dalam kota via Tomang dari timur, atau via Cawang dari utara) dan keluar di Alam Sutera. Lanjutkan di Jalan Raya Serpong menuju Jalan Pahlawan Seribu.", "Two stations are near the mall: Cisauk, about 3.5 km away, and Rawa Buntu, about 6 km away.": "Ada dua stasiun di dekat mal: Cisauk, sekitar 3,5 km, dan Rawa Buntu, sekitar 6 km.", "From either station, take a taxi or an online taxi to the mall.": "Dari kedua stasiun, naik taksi atau taksi online menuju mal.", "A free shuttle run by Sinarmas Land. The shelter is across from Lobby Natsu, near the North parking.": "Shuttle gratis yang dikelola Sinarmas Land. Halte berada di seberang Lobby Natsu, dekat Parkir Utara.", "It also stops at The Breeze and ICE BSD City.": "Shuttle juga berhenti di The Breeze dan ICE BSD City.", "The Blue Bird taxi shelter is across from Lobby Natsu, near the North parking.": "Pangkalan taksi Blue Bird berada di seberang Lobby Natsu, dekat Parkir Utara.", "Go-Car pickup and drop-off points are at several mall lobbies.": "Titik jemput dan antar Go-Car ada di beberapa lobi mal.", "Cars and motorbikes park in the main or the new parking building. Levels marked Direct to mall connect straight to the mall.": "Mobil dan motor parkir di gedung parkir utama atau gedung parkir baru. Lantai bertanda Langsung ke mal terhubung langsung ke mal.", "See free parking spaces": "Lihat tempat parkir kosong", "Contact and opening hours": "Kontak dan jam buka", "Call 021 2916 8585": "Telepon 021 2916 8585", "Email customer service": "Email layanan pelanggan", "Opening hours (official site)": "Jam buka (situs resmi)", "Contact": "Kontak", "Information from the official AEON Mall BSD City website (checked in November 2026). Routes and shuttle details can change, so check the official site before you travel.": "Informasi dari situs resmi AEON Mall BSD City (dicek November 2026). Rute dan detail shuttle dapat berubah, jadi periksa situs resmi sebelum berangkat."});
+Object.assign(ID, {"Report sent": "Laporan terkirim", "Keep this tracking code. You can use it to check your report from any device.": "Simpan kode pelacakan ini. Anda dapat memakainya untuk memeriksa laporan dari perangkat mana pun.", "Copy": "Salin", "Copied": "Disalin", "Staff will review your report. Confirmed reports get higher priority.": "Petugas akan memeriksa laporan Anda. Laporan yang dikonfirmasi mendapat prioritas lebih tinggi.", "Search": "Cari"});
+Object.assign(ID, {"Explore": "Jelajahi", "Plan my visit": "Rencanakan kunjungan", "Plan your visit": "Rencanakan kunjungan Anda", "Tell us what you feel like and we will suggest where to go.": "Beri tahu apa yang Anda inginkan dan kami sarankan ke mana.", "Not sure where to go?": "Belum tahu mau ke mana?", "Tell us what you feel like, such as dessert, a savoury meal or some shopping, and we will suggest stores and show you the floor.": "Beri tahu apa yang Anda inginkan, misalnya makanan penutup, makanan gurih atau belanja, dan kami sarankan toko beserta lantainya.", "Dessert": "Makanan penutup", "Savoury": "Gurih", "Salty snack": "Camilan asin", "Drinks": "Minuman", "Movies": "Film", "Top picks": "Pilihan teratas", "Well-known stores": "Toko terkenal", "Browse by category": "Jelajahi menurut kategori", "Find your way": "Temukan jalan Anda", "Browse by floor": "Jelajahi menurut lantai", "Visit info": "Info kunjungan", "Help and visit info": "Bantuan dan info kunjungan", "What's on": "Sedang berlangsung", "Notices and events": "Pengumuman dan acara", "Mostly": "Sebagian besar", "Posted": "Diposting", "Browse by floor ": "Jelajahi menurut lantai", "1. What are you planning to do today?": "1. Apa rencana Anda hari ini?", "You can pick more than one.": "Anda dapat memilih lebih dari satu.", "2. What do you feel like?": "2. Anda ingin yang mana?", "Which cuisine?": "Masakan apa?", "Eat or drink": "Makan atau minum", "Beauty and health": "Kecantikan dan kesehatan", "Phones and electronics": "Ponsel dan elektronik", "Kids and family": "Anak dan keluarga", "Movies and games": "Film dan permainan", "Banks and services": "Bank dan layanan", "Groceries and home": "Bahan makanan dan rumah", "Dessert (sweet)": "Makanan penutup (manis)", "Savoury meal": "Makanan gurih", "Drinks and coffee": "Minuman dan kopi", "Surprise me": "Kejutkan saya", "Any cuisine": "Semua masakan", "Western": "Barat", "Pick at least one activity to get suggestions.": "Pilih minimal satu kegiatan untuk mendapat saran.", "Choose what you feel like above to see food suggestions.": "Pilih yang Anda inginkan di atas untuk melihat saran makanan.", "No match found for this choice.": "Tidak ada yang cocok untuk pilihan ini.", "Your visit plan": "Rencana kunjungan Anda", "The top pick for each thing you chose, grouped by floor so you walk less.": "Pilihan teratas untuk setiap hal yang Anda pilih, dikelompokkan per lantai agar Anda tidak banyak berjalan.", "Well known": "Terkenal", "Well-known places are listed first. The mall website has no ratings, prices or opening hours, so suggestions are based on the type of store only.": "Tempat terkenal ditampilkan lebih dulu. Situs mal tidak punya penilaian, harga atau jam buka, jadi saran hanya berdasarkan jenis toko.", "Setup problem: these files are missing from the website: ": "Masalah pengaturan: file ini tidak ada di situs: "});
+const RX = [
+ [/^(\d+) free$/, m => m[1] + " kosong"], [/^\((\d+) free\)$/, m => "(" + m[1] + " kosong)"], [/^Most space: (.+)$/, m => "Paling lega: " + m[1]], [/^car spaces free of (.+)$/, m => "tempat parkir mobil kosong dari " + m[1]], [/^Most car space: (.+)$/, m => "Mobil paling lega: " + m[1]],
+ [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], 
+ [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-[\w-]+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]], [/^Posted (.+)$/, m => "Diposting " + tr(m[1])], [/^(\d+) stores$/, m => m[1] + " toko"], [/^Show all (\d+)$/, m => "Tampilkan semua " + m[1]],
+ [/^until (.+)$/, m => "sampai " + m[1]], [/^Reports to review \((\d+)\)$/, m => "Laporan untuk diperiksa (" + m[1] + ")"],
+ [/^Confirm real reports to raise their priority, or reject trolls and fake reports\. Reviews are overdue after (\d+) h\.$/, m => "Konfirmasi laporan asli untuk menaikkan prioritasnya, atau tolak laporan iseng dan palsu. Pemeriksaan terlambat setelah " + m[1] + " jam."],
+ [/^Overdue limits: Urgent (\d+) h, High (\d+) h, Normal (\d+) h\. Overdue jobs show first\.$/, m => "Batas keterlambatan: Mendesak " + m[1] + " jam, Tinggi " + m[2] + " jam, Normal " + m[3] + " jam. Pekerjaan terlambat tampil lebih dulu."],
+ [/^Overdue (\d+) h$/, m => "Terlambat " + m[1] + " jam"], [/^Overdue (\d+) d$/, m => "Terlambat " + m[1] + " hari"],
+ [/^Repeat flag: (\d+) rejected before$/, m => "Tanda berulang: " + m[1] + " ditolak sebelumnya"], [/^Add note \((\d+)\)$/, m => "Tambah catatan (" + m[1] + ")"],
+ [/^Mark (.+)$/, m => "Tandai " + (ID[m[1]] || m[1]).toLowerCase()], [/^(\d+(?:\.\d+)?) h$/, m => m[1] + " jam"],
+ [/^Accounts \((\d+) waiting\)$/, m => "Akun (" + m[1] + " menunggu)"], [/^Remove (.+)$/, m => "Hapus " + m[1]], [/^Free spaces on (.+)$/, m => "Ruang kosong di " + m[1]],
+ [/^Reports from the public \((\d+) open\)$/, m => "Laporan dari publik (" + m[1] + " terbuka)"], [/^Failed: (.+)$/, m => "Gagal: " + m[1]],
+ [/^\((.+) to (.+)\)$/, m => "(" + (ID[m[1]] || m[1]) + " menjadi " + (ID[m[2]] || m[2]) + ")"],
+ [/^Delete (MR-\d+)\? This cannot be undone\.$/, m => "Hapus " + m[1] + "? Tindakan ini tidak dapat dibatalkan."], [/^Remove parking level (.+)\?$/, m => "Hapus lantai parkir " + m[1] + "?"]
+];
+function tr(s) { const k = s.trim(); if (!k) return s; let o = ID[k]; if (!o) for (const [re, f] of RX) { const m = k.match(re); if (m) { o = f(m); break; } } if (!o) { const v = frag(k); if (v !== k) o = v; } return o ? s.replace(k, o) : s; }
+const PR = {Urgent: "Mendesak", High: "Tinggi", Normal: "Normal"};
+function frag(k) {
+  return k.replace(/^at /, "di ").replace(/, priority (Urgent|High|Normal)/, (m, p) => ", prioritas " + PR[p]).replace(/^Guest(?=,| \||$)/, "Tamu").replace(/^Tenant(?=,| \||$)/, "Penyewa")
+    .replace(", store: ", ", toko: ").replace(" | Contact: ", " | Kontak: ").replace(" | Technician: ", " | Teknisi: ").replace(/^Reporter contact: /, "Kontak pelapor: ")
+    .replace(/^(MR-\d+): (Lost item|Found item)( at )?/, (m, c, k, a) => c + ": " + ID[k] + (a ? " di " : ""));
+}
+const ask = s => window.confirm(LANG === "id" ? tr(s) : s);
+const ORIG = new WeakMap();
+function applyLang() {
+  const id = LANG === "id"; document.documentElement.lang = id ? "id" : "en";
+  document.querySelectorAll("option:not([value])").forEach(o => o.setAttribute("value", o.textContent));
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+  while ((n = w.nextNode())) {
+    const p = n.parentNode; if (p && (p.tagName === "SCRIPT" || p.tagName === "STYLE")) continue;
+    if (id) { const o = ORIG.has(n) ? ORIG.get(n) : n.data; ORIG.set(n, o); const v = tr(o); if (v !== n.data) n.data = v; }
+    else if (ORIG.has(n)) { n.data = ORIG.get(n); ORIG.delete(n); }
+  }
+  document.querySelectorAll("[placeholder],[aria-label]").forEach(el => ["placeholder", "aria-label"].forEach(a => {
+    if (!el.hasAttribute(a)) return; const k = "data-o-" + a;
+    if (id) { const o = el.hasAttribute(k) ? el.getAttribute(k) : el.getAttribute(a); el.setAttribute(k, o); el.setAttribute(a, tr(o)); }
+    else if (el.hasAttribute(k)) { el.setAttribute(a, el.getAttribute(k)); el.removeAttribute(k); }
+  }));
+  const lb = $("langtxt"); if (lb) lb.textContent = id ? "ID" : "EN";
+}
+function toast(m) { const d = document.createElement("div"); d.className = "toast"; d.textContent = LANG === "id" ? tr(m) : m; document.body.appendChild(d); setTimeout(() => d.remove(), 2600); }
+
+const SKEL = "<div class='sk' style='height:150px'></div><div class='sk' style='height:96px;margin-top:14px'></div><div class='sk' style='height:96px;margin-top:14px'></div>";
+let lastView = null;
+const SETUP = "<div class='panel setup'><h2>Connect your Supabase project</h2><p>This page needs two values before it can save data. Paste your Project URL and anon key into <code>SB_URL</code> and <code>SB_KEY</code> near the top of the script.</p></div>";
+
+/* ---------- Helpers: overdue, repeat flag, matching, CSV ---------- */
+function overdue(t) {
+  if (t.verification === "rejected" || t.status === "Completed" || t.status === "Resolved") return 0;
+  const age = (Date.now() - new Date(t.created_at)) / 36e5, lim = t.verification === "pending" ? REVIEW_SLA : SLA[t.urgency];
+  return age > lim ? age - lim : 0;
+}
+const prior = t => D.tickets.filter(x => x.id !== t.id && x.verification === "rejected" && ((t.device_id && x.device_id === t.device_id) || (t.contact && x.contact === t.contact))).length;
+const STOP = new Set("the and for with from near this that have has had was were are been lost found item there here some very got can please yang dan di ke dari ini itu saya ada dengan untuk".split(" "));
+const words = t => new Set((t.description + " " + (t.location || "")).toLowerCase().replace(/[^a-z0-9\u00c0-\u024f ]/g, " ").split(/\s+/).filter(w => w.length > 2 && !STOP.has(w)));
+function matches(t) {
+  const mine = words(t), opp = t.category === "Lost item" ? "Found item" : "Lost item";
+  return D.tickets.filter(x => x.id !== t.id && x.kind === "lost" && x.category === opp && x.verification !== "rejected" && x.status !== "Resolved").map(x => {
+    const w = words(x); let n = 0; mine.forEach(k => { if (w.has(k)) n++; });
+    return {x, n, sc: n + (t.store && t.store === x.store ? 2 : 0)};
+  }).filter(m => m.n >= 1 && m.sc >= 2).sort((a, b) => b.sc - a.sc).slice(0, 3);
+}
+function csv(rows, cols) {
+  const q = v => { v = v == null ? "" : String(v); if (/^[=+\-@]/.test(v)) v = "'" + v; return '"' + v.replace(/"/g, '""') + '"'; };
+  return [cols.join(",")].concat(rows.map(r => cols.map(c => q(r[c])).join(","))).join("\r\n");
+}
+function download(name, text) { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["\ufeff" + text], {type: "text/csv"})); a.download = name; document.body.appendChild(a); a.click(); a.remove(); }
+
+/* ---------- Shared pieces ---------- */
+const bcls = t => t.verification === "pending" ? "s-mute" : t.verification === "rejected" ? "s-bad" : ["Completed", "Resolved"].includes(t.status) ? "s-ok" : ["Assigned", "In Progress"].includes(t.status) ? "s-info" : "";
+function parkRow(l, ed) {
+  const taken = l.capacity ? Math.min(100, Math.round((l.capacity - l.free) / l.capacity * 100)) : 100, full = l.free === 0;
+  return "<div class='pk'><span><b>" + esc(l.level) + "</b>" + (l.direct_access ? "<br><span class='dtag'>Direct to mall</span>" : "") + "</span><span class='trk' style='background:var(--ok)'><i style='width:" + taken + "%;background:var(--bad)'></i></span>" +
+    (ed ? "<input type='number' min='0' max='" + l.capacity + "' value='" + l.free + "' data-act='park' data-id='" + esc(l.level) + "' aria-label='Free spaces on " + esc(l.level) + "'>" : "<span" + (full ? " style='color:var(--bad);font-weight:700'>Full" : ">" + l.free + " free") + "</span>") + "</div>";
+}
+function parkGroups(P) {
+  const bl = []; P.forEach(l => { if (!bl.includes(l.building)) bl.push(l.building); });
+  return bl.map(b => "<div class='pbld'>" + esc(b) + "</div>" + ["car", "motorcycle"].map(v => { const L = P.filter(l => l.building === b && l.vehicle === v); return L.length ? "<div class='pveh'>" + (v === "car" ? "Cars" : "Motorbikes") + "</div>" + L.map(l => parkRow(l, false)).join("") : ""; }).join("")).join("");
+}
+const parkBox = P => {
+  const cars = P.filter(l => l.vehicle === "car"), best = cars.slice().sort((a, b) => b.free - a.free)[0];
+  const free = cars.reduce((n, l) => n + l.free, 0), cap = cars.reduce((n, l) => n + l.capacity, 0);
+  return "<div class='panel hero'><h2>Parking availability</h2><div class='muted'>Free spaces on each level. Red is taken, green is free.</div>" +
+    (cap ? "<div class='bignum'>" + free.toLocaleString("en-US") + "</div><div class='bigsub'>car spaces free of " + cap.toLocaleString("en-US") + "</div><span class='trk' style='background:var(--ok);margin:10px 0 2px'><i style='width:" + Math.round((cap - free) / cap * 100) + "%;background:var(--bad)'></i></span>" : "") +
+    (best && best.free ? "<div class='best' style='margin-top:10px'><b>Most car space: " + esc(best.level) + "</b> (" + best.free + " free)</div>" : "") + (P.length ? parkGroups(P) : "<div class='muted'>No parking data yet.</div>") + "</div>";
+};
+const KIND = {info:"Notice", closure:"Closure", event:"Event"};
+const noticesBox = N => N.length ? sec("What's on", "Notices and events", "<div class='hscroll'>" + N.map(n => "<div class='ncard " + esc(n.kind) + "'><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") + "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + "</div></div>").join("") + "</div>") : "";
+const photoHtml = t => t.photo_url ? "<a href='" + esc(t.photo_url) + "' target='_blank' rel='noopener'><img class='ph' loading='lazy' alt='Attached photo' src='" + esc(t.photo_url) + "'></a>" : "";
+function notesBlock(t) {
+  const cs = D.comments.filter(c => c.ticket_id === t.id), op = openN.has(t.id);
+  let h = cs.map(c => "<div class='cm'><b>" + esc(c.author_label || "Staff") + "</b>" + (c.show_reporter ? " <span class='badge'>Visible to reporter</span>" : "") + " <span class='muted'>" + ago(c.created_at) + "</span><div>" + esc(c.body) + "</div></div>").join("");
+  h += op ? "<div class='cm'><textarea id='cm-" + t.id + "' maxlength='500' placeholder='Add a note, for example: the wallet is at our counter' style='min-height:70px'></textarea><label style='display:flex;gap:8px;align-items:center;font-weight:600;margin:8px 0'><input type='checkbox' id='cs-" + t.id + "' style='width:auto'> Show this note to the reporter</label><div class='acts'><button class='btn sm' data-act='addnote' data-id='" + t.id + "'>Save note</button><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Cancel</button></div></div>"
+    : "<div class='acts'><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Add note" + (cs.length ? " (" + cs.length + ")" : "") + "</button></div>";
+  return h;
+}
+
+/* ---------- Public report view ---------- */
+function myCard(t, MC) {
+  const full = codes().find(c => c.startsWith(t.code + "-")) || t.code;
+  return myCard0(t, MC).slice(0, -6) + "<div class='muted' style='margin-top:8px'>Tracking code:</div><div><b style='user-select:all;word-break:break-all'>" + esc(full) + "</b></div></div>";
+}
+function myCard0(t, MC) {
+  const pend = t.verification === "pending", rej = t.verification === "rejected", cm = MC.filter(c => c.code === t.code);
+  return "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge " + bcls(t) + "'>" + (pend ? "Awaiting review" : rej ? "Could not be confirmed" : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t) +
+    (!pend && !rej && t.kind === "fac" ? "<div class='muted'>Technician: " + (t.technician ? esc(t.technician) : "not assigned yet") + "</div>" : "") +
+    cm.map(c => "<div class='cm'><b>" + esc(c.author_label) + "</b> <span class='muted'>" + ago(c.created_at) + "</span><div>" + esc(c.body) + "</div></div>").join("") + "</div>";
+}
+async function pubData() {
+  const c = codes(), none = Promise.resolve({data: []});
+  const [pk, nt, mine, mc] = await Promise.all([sb.from("parking").select("*").order("sort").order("level"), sb.from("notices").select("*").order("created_at", {ascending: false}), c.length ? sb.rpc("my_tickets", {p_codes: c}) : none, c.length ? sb.rpc("my_comments", {p_codes: c}) : none]);
+  return {P: pk.data || [], N: nt.data || [], M: mine.data || [], MC: mc.data || []};
+}
+const prefillRef = {v: ""};
+const sentRef = {v: ""};
+const dir = {cat: null, sub: null, floor: "all", store: null, q: "", fl: null};
+const ICON = {
+  park: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M9.5 17V7.5h3.2a2.8 2.8 0 0 1 0 5.6H9.5"/></svg>',
+  report: '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+  lost: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>',
+  store: '<svg viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0A2.7 2.7 0 0 0 20 9"/><path d="M5 12v8h14v-8"/></svg>',
+  user: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
+  install: '<svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>'
+};
+ICON.pin = '<svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>';
+/* ----- store directory data ----- */
+const CATS = {
+  FASHION: ["Fashion", "Clothing, shoes, bags and accessories"], GOODS: ["Goods", "Beauty, electronics, books, toys and home items"],
+  FOOD: ["Food and drink", "Restaurants, cafes, bakeries and groceries"], SERVICE: ["Services", "Banks, salons, laundry and other services"], ENTERTAINMENT: ["Entertainment", "Cinema, games and play"]
+};
+const SUBN = {
+  FASHION: {
+    "Clothing and department stores": "AEON BSD CITY Dept Store 1F;AEON BSD CITY Dept Store 2F;180 SPM;Beatrice Clothing;Buttonscarves;Calvin Klein;Colorbox;Eprise;Et Cetera;Everbest;Executive;Facility;Giordano;Guess;H&M;Lacoste;Laxmi Tailor;Levi's;Lewis Emma;Love, Bonito;Max Fashions;Minoshe;Polo;Staccato;This Is April;Tommy Hilfiger;Urban & Co;Wacoal;Wood;Yayang;UNIQLO",
+    "Shoes, bags and sports": "Adidas;Asics;Birkenstock;Charles & Keith;Converse;Crocs;Foot Locker;Hush Puppies;Kluk Sandal;Melissa;My Feet;New Balance;New Era;Nike;Pedro;Planet Sports. Asia;Skechers;Steve Madden;VIVAIA",
+    "Kids and baby": "Baby Shop;Bobo Tokyo;Mooimom;Mothercare & Early Learning Center", "Eyewear": "Owndays"
+  },
+  GOODS: {
+    "Beauty and health": "Bath & Body Works;Beauty Scent;Botanical Essentials;C&F perfumery;Erha Store;Glam On;Guardian;L'Occitane;Mandalika Parfum;Sephora;Skinfood;Sociolla;The Bath Box;The Body Shop;Wardah;Watson;Yves Rocher",
+    "Phones and electronics": "Blibli;Digimap;Erafone;Huawei;Mi Home;Oppo;Samsung;Yamada Best;Garmin;COWAY",
+    "Watches, jewellery and eyewear": "Beluga Jewellery;Casio;Daniel Wellington;Frank & Co;Megane Prince;Optik Melawai;Optik Seis;OWL Eyewear",
+    "Books, toys and stationery": "Gramedia;Kidz Station;LEGO;M&G Life;Smiggle;Toys City;Playworks",
+    "Home and lifestyle": "Ace Hardware;Daiso Japan;Flying Tiger Copenhagen;Lock & Lock with Hello, Bebe;Miniso;Nespresso;Samsonite;Eka Karya Orchid;GS Shop"
+  },
+  FOOD: {
+    "Supermarket": "AEON BSD CITY Supermarket GF",
+    "Cafes and drinks": "Starbucks Coffee;Chatime;Chagee;Boost Juice;Koi Cafe;Kopi Kenangan;Megaze Coffee;Expat Roasters;Dum Dum Thai Tea;Bugatea;Bugatea (2nd outlet);Susu Mbok Darmi;Waroeng Teh Kotjok;Ice Gentong;Fruitylicious;Social Affair",
+    "Desserts, bakery and snacks": "Auntie Anne's;Beard Papa;Bungeoppang;Ch\u00e2terais\u00e9;Cold Stone;DORE by LeTAO;Dough Lab;D'Crepes;Fan Fries;Haagen-Dazs;Krispy Kreme;Maison Tatsuya;Pika Piku Ice Cream;Shihlin Taiwan Street Snacks;The RR Chocolate;Dear Butter;Soes Lelo;Puyo",
+    "Japanese and Korean": "Bijin Nabe;Edogawa Sushi;Gion Sushi;Gyukaku;Gyukatsu Kyoto Katsugyu;Ikkudo Ichi;Ichiro;Kaneko Hannosuke;Kimukatsu;Menya Sakura;Ootoya;Ramen Seirock-ya;Sai Ramen;Sukiya;Tokio Sushi;Yoshinoya;Zenbu;Pepperlunch;Rokurenya",
+    "Indonesian": "Bakmi Ayam Alok;Bakmi GM;Bakso Afung;Bakso Malang Cak Rosso;Dapur Solo;Nasgor Randang One;Pempek Hoi;Rujak Kolam Medan;Sate Dombud;Sate Padang Mak Syukur;Solaria;Sop Ikan Batam;Sop Konro Cendana;Soto Betawi H. Mamat;Soto Mie Pak Kadir;BASGOR 89;Rempah Bistro;Remboelan",
+    "Chinese and Southeast Asian": "Paradise Dynasty;Imperial Kitchen;Golden Lamian;YEN PAO;Jittlada Thai Cuisine;Miss Thai Boat Noodle;Pho Baba;Noodle King;The Chicken Rice Shop",
+    "Western and fast food": "Burger King;KFC;McDonald's;Wingstop;Pizza Marzano;Steak 21;Doner Kebab"
+  },
+  SERVICE: {
+    "Banks and ATMs": "ATM CENTER (3F);ATM CENTER (GF);Bank Mandiri;BCA;BNI;CIMB Niaga Digital Lounge",
+    "Health, beauty and wellness": "Ginza Nail;Haircode;Happy Dental Clinic;Kiddycuts;Kokuo Reflexology;Shortcut Barbershop;Skin+"
+  },
+  ENTERTAINMENT: {"Cinema": "Cinema XXI"}
+};
+const DEFSUB = {FASHION: "Clothing and department stores", GOODS: "Other goods", FOOD: "Other restaurants", SERVICE: "Other services", ENTERTAINMENT: "Games and play"};
+const REV = {}; for (const c in SUBN) for (const sb2 in SUBN[c]) SUBN[c][sb2].split(";").forEach(n => { REV[n] = sb2; });
+const subsOf = c => Object.keys(SUBN[c]).concat(DEFSUB[c] in SUBN[c] ? [] : [DEFSUB[c]]);
+const FLOORS = ["GF", "1F", "2F", "3F", "3MF"];
+const FLOOR_NAME = {GF: "Ground floor", "1F": "1st floor", "2F": "2nd floor", "3F": "3rd floor", "3MF": "Mezzanine near 3F", "n/a": "Floor not listed on the website"};
+const EXTRA = new Set(["UNIQLO", "Foot Locker", "Golden Lamian", "Rokurenya", "Dear Butter"]);
+const STORE_OBJ = STORE_DATA.map(([name, cat, floor], i) => ({i, name, cat, floor, sub: REV[name] || DEFSUB[cat], key: name + (floor === "n/a" ? "" : " (" + floor + ")")}));
+const fcls = f => f.replace("/", "");
+const CAT_ICON = {
+  FASHION: '<svg viewBox="0 0 24 24"><path d="M8 4l-5 3 2 4 3-1v10h8V10l3 1 2-4-5-3a4 4 0 0 1-8 0z"/></svg>',
+  GOODS: '<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+  FOOD: '<svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2 1.5-3 4-3 7h3"/></svg>',
+  SERVICE: '<svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18v3h3l6.7-6.7a4 4 0 0 0 5-5l-2.4 2.4-2.6-.6-.6-2.6z"/></svg>',
+  ENTERTAINMENT: '<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M7 6l2 4M12 6l2 4M17 6l2 4"/></svg>'
+};
+const CAT_STYLE = {FASHION: "background:rgba(214,43,140,.14);color:#c4217f", GOODS: "background:rgba(61,111,224,.14);color:#3d6fe0", FOOD: "background:rgba(217,130,0,.16);color:#d98200", SERVICE: "background:rgba(30,158,98,.16);color:#1e9e62", ENTERTAINMENT: "background:rgba(123,63,228,.14);color:#7b3fe4"};
+const floorTag = f => f === "n/a" ? "?" : f;
+const catName = c => CATS[c][0];
+const storeRow = x => "<button class='drow' data-act='dstore' data-i='" + x.i + "'><span><b>" + esc(x.name) + "</b><br><span class='muted'>" + catName(x.cat) + "</span> <span class='muted'>&rsaquo;</span> <span class='muted'>" + x.sub + "</span></span><span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span></button>";
+function floorChips() { return "<div class='muted' style='margin-top:14px'>Browse by floor</div><div class='chips'>" + FLOORS.map(f => "<button class='chip f-" + fcls(f) + "' data-act='dfloorview' data-f='" + f + "' aria-pressed='false'>" + f + "</button>").join("") + "</div>"; }
+function floorView() {
+  const L = STORE_OBJ.filter(x => x.floor === dir.fl), cs = Object.keys(CATS).filter(c => L.some(x => x.cat === c));
+  return "<div class='crumbs'><button data-act='dback' data-l='0'>All categories</button> &rsaquo; <b>" + FLOOR_NAME[dir.fl] + "</b></div>" + cs.map(c => "<div class='pgh'><span>" + catName(c) + "</span> <span class='muted'>" + L.filter(x => x.cat === c).length + "</span></div>" + L.filter(x => x.cat === c).sort((a, b) => a.name.localeCompare(b.name)).map(storeRow).join("")).join("");
+}
+const seg = cur => "<div class='segx'><button data-act='view' data-v='plan' aria-pressed='" + (cur === "plan") + "'>Plan my visit</button><button data-act='view' data-v='stores' aria-pressed='" + (cur === "stores") + "'>Store directory</button></div>";
+function dirBody() {
+  const st = STORE_OBJ;
+  if (dir.store !== null) {
+    const s0 = st[dir.store], same = st.filter(x => x.i !== s0.i && x.cat === s0.cat && x.sub === s0.sub && x.floor === s0.floor).slice(0, 5);
+    return "<div class='crumbs'><button data-act='dclose'>Back to the list</button></div><div class='panel'><div class='row' style='align-items:center'><h2 style='margin:0'>" + esc(s0.name) + "</h2><span class='badge floor f-" + fcls(s0.floor) + "'>" + floorTag(s0.floor) + "</span></div>" +
+      "<div class='muted'><span>" + catName(s0.cat) + "</span> &rsaquo; <span>" + s0.sub + "</span></div>" +
+      "<div class='bigfloor f-" + fcls(s0.floor) + "'>" + (s0.floor === "n/a" ? "?" : s0.floor) + "</div><div><b>" + FLOOR_NAME[s0.floor] + "</b></div>" +
+      "<p class='muted'>The mall website lists the floor only. It does not give a unit number or a spot on the floor, so use the directory boards in the mall or ask at the information desk to find the exact position.</p>" +
+      (same.length ? "<div class='muted' style='margin-top:10px'>Also on this floor in this group:</div><div>" + same.map(x => esc(x.name)).join(", ") + "</div>" : "") +
+      (EXTRA.has(s0.name) ? "<p class='muted'>This store was on the website list earlier but not in the latest copy. Check that it is still open.</p>" : "") +
+      "<div class='acts'><button class='btn sm' data-act='gostore' data-kind='report' data-store='" + esc(s0.key) + "'>Report a problem here</button><button class='btn alt sm' data-act='gostore' data-kind='lost' data-store='" + esc(s0.key) + "'>Lost or found something here</button></div></div>";
+  }
+  const q = dir.q.trim().toLowerCase();
+  if (q) {
+    const res = st.filter(x => x.name.toLowerCase().includes(q)).slice(0, 60);
+    return res.length ? res.map(storeRow).join("") : "<div class='muted' style='margin-top:12px'>No store found. Try a shorter name.</div>";
+  }
+  if (dir.fl) return floorView();
+  if (!dir.cat) return floorChips() + Object.keys(CATS).map(c => "<button class='dcard' data-act='dcat' data-c='" + c + "'><span class='ticon' style='" + CAT_STYLE[c] + "'>" + CAT_ICON[c] + "</span><span style='flex:1'><b>" + CATS[c][0] + "</b><br><span class='muted'>" + CATS[c][1] + "</span></span><span class='badge'>" + st.filter(x => x.cat === c).length + "</span></button>").join("");
+  const crumbs = "<div class='crumbs'><button data-act='dback' data-l='0'>All categories</button> &rsaquo; " + (dir.sub ? "<button data-act='dback' data-l='1'>" + catName(dir.cat) + "</button>" : "<b>" + catName(dir.cat) + "</b>") + (dir.sub && dir.sub !== "*" ? " &rsaquo; <b>" + dir.sub + "</b>" : "") + "</div>";
+  if (!dir.sub) return crumbs + "<button class='drow' data-act='dsub' data-s='*'><span><b>Show everything in this category</b></span><span class='badge'>" + st.filter(x => x.cat === dir.cat).length + "</span></button>" +
+    subsOf(dir.cat).map(sn => { const n = st.filter(x => x.cat === dir.cat && x.sub === sn).length; return n ? "<button class='drow' data-act='dsub' data-s='" + esc(sn) + "'><span>" + sn + "</span><span class='badge'>" + n + "</span></button>" : ""; }).join("");
+  const grp = st.filter(x => x.cat === dir.cat && (dir.sub === "*" || x.sub === dir.sub)), fl = FLOORS.concat(["n/a"]).filter(f => grp.some(x => x.floor === f));
+  const list = grp.filter(x => dir.floor === "all" || x.floor === dir.floor).sort((a, b) => (FLOORS.indexOf(a.floor) + 9 * (a.floor === "n/a")) - (FLOORS.indexOf(b.floor) + 9 * (b.floor === "n/a")) || a.name.localeCompare(b.name));
+  return crumbs + "<div class='chips'><button class='chip' data-act='dfloor' data-f='all' aria-pressed='" + (dir.floor === "all") + "'>All floors</button>" + fl.map(f => "<button class='chip f-" + fcls(f) + "' data-act='dfloor' data-f='" + f + "' aria-pressed='" + (dir.floor === f) + "'>" + floorTag(f) + "</button>").join("") + "</div>" + list.map(storeRow).join("");
+}
+function drawDir() { const el = $("dirbody"); if (el) { el.innerHTML = dirBody(); applyLang(); } }
+function storesView() {
+  return "<div style='max-width:760px;margin:0 auto'>" + seg("stores") + "<h2>Store directory</h2><div class='muted'>Find a store and see which floor it is on.</div>" +
+    "<input type='text' id='sq' placeholder='Search a store name' autocomplete='off' style='margin-top:12px' value='" + esc(dir.q) + "'><div id='dirbody' style='margin-top:6px'>" + dirBody() + "</div>" +
+    "<div class='muted' style='margin-top:18px'>Store names, categories and floors come from the AEON Mall BSD City website (collected in November 2026). The groups inside each category are our own, and the website does not give exact positions on a floor.</div>" +
+    "<div class='acts'><a class='btn alt sm' href='https://aeonmall-bsdcity.com/shopping.php' target='_blank' rel='noopener'>Open the official store guide</a></div></div>";
+}
+/* ----- home, parking, report and lost and found ----- */
+const MALL = {lat: -6.304709, lng: 106.641809, addr: "Jl. BSD Raya Utama, Sampora, Cisauk, Tangerang, Banten 15345"};
+function gettingView() {
+  const ll = MALL.lat + "," + MALL.lng, a = (href, txt, cls) => "<a class='btn " + (cls || "alt") + " sm' href='" + href + "' target='_blank' rel='noopener'>" + txt + "</a>";
+  const sec = (t, items) => "<div class='panel' style='margin-top:14px'><h3>" + t + "</h3><ul class='gl'>" + items.map(i => "<li>" + i + "</li>").join("") + "</ul></div>";
+  return "<div style='max-width:760px;margin:0 auto'><h2>Getting here</h2><div class='muted'>How to reach AEON Mall BSD City by car, train, shuttle or taxi.</div>" +
+    "<div class='panel' style='margin-top:12px'><h3>AEON Mall BSD City</h3><div>" + MALL.addr + "</div><div class='acts'>" + a("https://www.google.com/maps/dir/?api=1&destination=" + ll, "Directions in Google Maps", "") + a("https://waze.com/ul?ll=" + ll + "&navigate=yes", "Waze") + a("https://maps.apple.com/?daddr=" + ll + "&q=AEON%20Mall%20BSD%20City", "Apple Maps") + "</div></div>" +
+    "<iframe class='mapframe' title='Map of AEON Mall BSD City' loading='lazy' referrerpolicy='no-referrer-when-downgrade' src='https://www.google.com/maps?q=" + ll + "&z=16&output=embed'></iframe>" +
+    sec("By car and toll road", ["From South and Central Jakarta: take the Jakarta Outer Ring Road (JORR), then the Jakarta to Serpong toll, and exit at BSD Timur 2 (Serbaraja toll).", "From West, East and North Jakarta: use the Jakarta to Tangerang toll (reached through the inner-city toll via Tomang from the east, or via Cawang from the north) and exit at Alam Sutera. Then follow Jalan Raya Serpong towards Jalan Pahlawan Seribu."]) +
+    sec("By train (KRL Commuter Line)", ["Two stations are near the mall: Cisauk, about 3.5 km away, and Rawa Buntu, about 6 km away.", "From either station, take a taxi or an online taxi to the mall."]) +
+    sec("BSD Link shuttle bus (free)", ["A free shuttle run by Sinarmas Land. The shelter is across from Lobby Natsu, near the North parking.", "It also stops at The Breeze and ICE BSD City."]) +
+    sec("Taxi and online taxi", ["The Blue Bird taxi shelter is across from Lobby Natsu, near the North parking.", "Go-Car pickup and drop-off points are at several mall lobbies."]) +
+    "<div class='panel' style='margin-top:14px'><h3>Parking</h3><div>Cars and motorbikes park in the main or the new parking building. Levels marked Direct to mall connect straight to the mall.</div><div class='acts'><button class='btn sm' data-act='view' data-v='parking'>See free parking spaces</button></div></div>" +
+    "<div class='panel' style='margin-top:14px'><h3>Contact and opening hours</h3><div class='acts'>" + a("tel:+622129168585", "Call 021 2916 8585") + a("mailto:cs.aeonmallbsdcity@aeonmall.co.id", "Email customer service") + a("https://aeonmall-bsdcity.com/mallguide_03.php", "Opening hours (official site)") + "</div></div>" +
+    "<div class='muted' style='margin-top:16px'>Information from the official AEON Mall BSD City website (checked in November 2026). Routes and shuttle details can change, so check the official site before you travel.</div></div>";
+}
+const greet = () => { const h = new Date().getHours(); return h < 11 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening"; };
+const tile = (v, icon, title, desc, extra) => "<button class='tile" + (extra || "") + "' data-act='view' data-v='" + v + "'><span class='ticon'>" + icon + "</span><b>" + title + "</b><span class='tdesc'>" + desc + "</span></button>";
+function parkSummary(P) {
+  const best = P.filter(l => l.vehicle === "car").sort((a, b) => b.free - a.free)[0];
+  return !P.length ? "No parking data yet." : best && best.free ? "<b>Most car space: " + esc(best.level) + "</b> (" + best.free + " free)" : "All levels are full";
+}
+const FEATURED = ["UNIQLO", "H&M", "Nike", "Starbucks Coffee", "Cinema XXI", "Sephora", "Haagen-Dazs", "Samsung", "Krispy Kreme", "AEON BSD CITY Supermarket GF", "Gramedia", "Miniso"];
+const sec = (eyebrow, title, inner) => "<div class='sec'><div class='eyebrow'>" + eyebrow + "</div><h3 class='serif sech'>" + title + "</h3>" + inner + "</div>";
+async function homeView() {
+  const d = await pubData(), who = role === "tenant" && profile ? profile.store : (user ? user.email : "");
+  const chips = [["dessert", "Dessert"], ["savoury", "Savoury"], ["salty", "Salty snack"], ["drinks", "Drinks"], ["fashion", "Fashion"], ["movies", "Movies"]].map(([k, l]) => "<button data-act='quickplan' data-k='" + k + "'>" + l + "</button>").join("");
+  const hero = "<div class='welcome'><div class='hello'>" + greet() + "</div><h2 class='serif'>Welcome to AEON Mall BSD City</h2><div class='wsub'>What would you like to do today?</div>" + (who ? "<div class='who'>Welcome back, <b>" + esc(who) + "</b></div>" : "") +
+    "<div class='hsearch'><input type='text' id='hq' placeholder='Search a store name' autocomplete='off'><button data-act='hsearch' aria-label='Search'>" + ICON.lost + "</button></div><div class='hchips'>" + chips + "</div></div>";
+  const cta = "<div class='cta'><div><div class='eyebrow'>Plan your visit</div><h3 class='serif' style='margin:2px 0 4px'>Not sure where to go?</h3><div class='muted'>Tell us what you feel like, such as dessert, a savoury meal or some shopping, and we will suggest stores and show you the floor.</div></div><button class='btn' data-act='view' data-v='plan'>Plan my visit</button></div>";
+  const top = FEATURED.map(n => STORE_OBJ.find(x => x.name === n)).filter(Boolean);
+  const topSec = sec("Top picks", "Well-known stores", "<div class='hscroll'>" + top.map(x => "<button class='pcard' data-act='planstore' data-i='" + x.i + "'><span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span><b>" + esc(x.name) + "</b><span class='muted'>" + x.sub + "</span></button>").join("") + "</div>");
+  const catSec = sec("Explore", "Browse by category", "<div class='hscroll'>" + Object.keys(CATS).map(c => "<button class='ccard' data-act='homecat' data-c='" + c + "'><span class='ticon' style='" + CAT_STYLE[c] + "'>" + CAT_ICON[c] + "</span><b>" + CATS[c][0] + "</b><span class='muted'>" + STORE_OBJ.filter(x => x.cat === c).length + " stores</span></button>").join("") + "</div>");
+  const flSec = sec("Find your way", "Browse by floor", "<div class='floors'>" + FLOORS.map(f => {
+    const L = STORE_OBJ.filter(x => x.floor === f), cnt = {}; L.forEach(x => { cnt[x.cat] = (cnt[x.cat] || 0) + 1; }); const tc = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0];
+    return "<button class='fcard f-" + fcls(f) + "' data-act='dfloorview' data-f='" + f + "'><span class='fbig'>" + f + "</span><span class='muted'>" + FLOOR_NAME[f] + "</span><span><span class='muted'>Mostly</span> <b>" + catName(tc) + "</b></span><span class='muted'>" + L.length + " stores</span></button>"; }).join("") + "</div>");
+  const help = sec("Visit info", "Help and visit info", "<div class='tiles'>" + tile("parking", ICON.park, "Parking", "<span id='parksum'>" + parkSummary(d.P) + "</span>") + tile("report", ICON.report, "Report a problem", "Toilets, escalators, spills, AC and more") +
+    tile("lost", ICON.lost, "Lost and found", "Lost or found something? Tell us") + tile("getting", ICON.pin, "Getting here", "Directions, toll, train and shuttle") +
+    "<button class='tile hidden' id='installbtn' data-act='install'><span class='ticon'>" + ICON.install + "</span><b>Install the app</b><span class='tdesc'>Add it to your home screen</span></button>" + tile("account", ICON.user, user ? "Dashboard" : "Sign in", "Staff and tenants") + "</div>");
+  return hero + cta + "<div id='noticebox'>" + noticesBox(d.N) + "</div>" + topSec + catSec + flSec + help;
+}
+const plan = {acts: [], taste: "", cuisine: "any", more: {}, seed: 1};
+const ACTS = [["eat", "Eat or drink"], ["fashion", "Fashion"], ["beauty", "Beauty and health"], ["phones", "Phones and electronics"], ["kids", "Kids and family"], ["fun", "Movies and games"], ["services", "Banks and services"], ["grocery", "Groceries and home"]];
+const ACT_SUBS = {fashion: [["FASHION", "Clothing and department stores"], ["FASHION", "Shoes, bags and sports"]], beauty: [["GOODS", "Beauty and health"], ["SERVICE", "Health, beauty and wellness"]], phones: [["GOODS", "Phones and electronics"]],
+  kids: [["FASHION", "Kids and baby"], ["GOODS", "Books, toys and stationery"], ["ENTERTAINMENT", "Games and play"]], fun: [["ENTERTAINMENT", "*"]], services: [["SERVICE", "*"]], grocery: [["FOOD", "Supermarket"], ["GOODS", "Home and lifestyle"]]};
+const SWEET = new Set("Beard Papa;Bungeoppang;Ch\u00e2terais\u00e9;Cold Stone;DORE by LeTAO;Dough Lab;D'Crepes;Dear Butter;Haagen-Dazs;Krispy Kreme;Maison Tatsuya;Pika Piku Ice Cream;The RR Chocolate;Soes Lelo;Puyo".split(";"));
+const SALTY = new Set("Auntie Anne's;Fan Fries;Shihlin Taiwan Street Snacks;Wingstop;KFC;McDonald's;Burger King;Doner Kebab".split(";"));
+const POP = new Set("Starbucks Coffee;Krispy Kreme;Haagen-Dazs;Cold Stone;Chatime;Kopi Kenangan;Auntie Anne's;McDonald's;KFC;Burger King;Gyukaku;Yoshinoya;Sukiya;Ootoya;Pizza Marzano;Paradise Dynasty;Bakmi GM;Solaria;Cinema XXI;UNIQLO;H&M;Nike;Adidas;Sephora;Watson;Guardian;Samsung;Erafone;AEON BSD CITY Supermarket GF;AEON BSD CITY Dept Store 1F;AEON BSD CITY Dept Store 2F;Miniso;Daiso Japan;Gramedia;LEGO;Smiggle;Toys City;BCA;Bank Mandiri;BNI;Skechers;Charles & Keith;Levi's;Guess;Mothercare & Early Learning Center;Baby Shop;Playtopia;Beard Papa;DORE by LeTAO;Maison Tatsuya;Wingstop;Sociolla;The Body Shop;Haircode;Shortcut Barbershop;Ace Hardware;Daniel Wellington;Casio;Oppo;Huawei".split(";"));
+const TASTES = [["sweet", "Dessert (sweet)"], ["savoury", "Savoury meal"], ["salty", "Salty snack"], ["drinks", "Drinks and coffee"], ["any", "Surprise me"]];
+const CUIS = [["any", "Any cuisine"], ["Japanese and Korean", "Japanese and Korean"], ["Indonesian", "Indonesian"], ["Chinese and Southeast Asian", "Chinese and Southeast Asian"], ["Western and fast food", "Western"]];
+function eatList() {
+  const food = STORE_OBJ.filter(x => x.cat === "FOOD" && x.sub !== "Supermarket");
+  if (plan.taste === "sweet") return food.filter(x => SWEET.has(x.name));
+  if (plan.taste === "salty") return food.filter(x => SALTY.has(x.name));
+  if (plan.taste === "drinks") return food.filter(x => x.sub === "Cafes and drinks");
+  if (plan.taste === "savoury") return food.filter(x => !SWEET.has(x.name) && !SALTY.has(x.name) && x.sub !== "Cafes and drinks" && x.sub !== "Desserts, bakery and snacks" && (plan.cuisine === "any" || x.sub === plan.cuisine));
+  return food;
+}
+const actList = k => k === "eat" ? eatList() : ACT_SUBS[k].flatMap(([c, sb2]) => STORE_OBJ.filter(x => x.cat === c && (sb2 === "*" || x.sub === sb2)));
+const hash = str => { let h = plan.seed; for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) | 0; return h; };
+const ranked = (L, k) => L.slice().sort((a, b) => k === "eat" && plan.taste === "any" ? hash(a.name) - hash(b.name) : (POP.has(b.name) - POP.has(a.name)) || a.name.localeCompare(b.name));
+const planRow = x => "<button class='drow' data-act='planstore' data-i='" + x.i + "'><span><b>" + esc(x.name) + "</b>" + (POP.has(x.name) ? " <span class='wk'>Well known</span>" : "") + "<br><span class='muted'>" + x.sub + "</span></span><span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span></button>";
+function planBody() {
+  const chip = (act, k, label, on) => "<button class='chip big' data-act='" + act + "' data-k='" + esc(k) + "' aria-pressed='" + on + "'>" + label + "</button>";
+  let h = "<div class='pstep'><h3>1. What are you planning to do today?</h3><div class='muted'>You can pick more than one.</div><div class='chips'>" + ACTS.map(([k, l]) => chip("pact", k, l, plan.acts.includes(k))).join("") + "</div></div>";
+  if (plan.acts.includes("eat")) h += "<div class='pstep'><h3>2. What do you feel like?</h3><div class='chips'>" + TASTES.map(([k, l]) => chip("ptaste", k, l, plan.taste === k)).join("") + "</div>" +
+    (plan.taste === "savoury" ? "<div class='muted' style='margin-top:12px'>Which cuisine?</div><div class='chips'>" + CUIS.map(([k, l]) => chip("pcuis", k, l, plan.cuisine === k)).join("") + "</div>" : "") + "</div>";
+  if (!plan.acts.length) return h + "<div class='panel empty'><span class='ticon'>" + ICON.lost + "</span><div>Pick at least one activity to get suggestions.</div></div>";
+  const lab = k => ACTS.find(a => a[0] === k)[1], tops = [], blocks = [];
+  plan.acts.forEach(k => {
+    if (k === "eat" && !plan.taste) { blocks.push("<div class='pstep'><h3>" + lab(k) + "</h3><div class='muted'>Choose what you feel like above to see food suggestions.</div></div>"); return; }
+    const L = ranked(actList(k), k); if (!L.length) { blocks.push("<div class='pstep'><h3>" + lab(k) + "</h3><div class='muted'>No match found for this choice.</div></div>"); return; }
+    tops.push({k, x: L[0]}); const show = plan.more[k] ? L : L.slice(0, 4);
+    blocks.push("<div class='pstep'><h3>" + lab(k) + "</h3>" + show.map(planRow).join("") + (L.length > show.length ? "<button class='btn alt sm' style='margin-top:10px' data-act='pmore' data-k='" + k + "'>Show all " + L.length + "</button>" : "") + "</div>");
+  });
+  const byFloor = FLOORS.concat(["n/a"]).map(f => ({f, items: tops.filter(t => t.x.floor === f)})).filter(g => g.items.length);
+  const summary = tops.length ? "<div class='panel planbox'><h3>Your visit plan</h3><div class='muted'>The top pick for each thing you chose, grouped by floor so you walk less.</div><ol>" +
+    byFloor.map(g => g.items.map((t, i) => "<li><span class='badge floor f-" + fcls(g.f) + "'>" + floorTag(g.f) + "</span><span><button class='linkbtn' data-act='planstore' data-i='" + t.x.i + "'>" + esc(t.x.name) + "</button> <span class='muted'>(" + lab(t.k) + ")</span></span></li>").join("")).join("") + "</ol></div>" : "";
+  return h + summary + blocks.join("") + "<div class='muted' style='margin:6px 2px 0'>Well-known places are listed first. The mall website has no ratings, prices or opening hours, so suggestions are based on the type of store only.</div>";
+}
+function planView() { return "<div style='max-width:760px;margin:0 auto'>" + seg("plan") + "<h2 class='serif'>Plan your visit</h2><div class='muted'>Tell us what you feel like and we will suggest where to go.</div><div id='planbody' style='margin-top:12px'>" + planBody() + "</div></div>"; }
+function drawPlan() { const el = $("planbody"); if (el) { el.innerHTML = planBody(); applyLang(); } }
+function quick(k) {
+  const m = {dessert: ["eat", "sweet"], savoury: ["eat", "savoury"], salty: ["eat", "salty"], drinks: ["eat", "drinks"], fashion: ["fashion", ""], movies: ["fun", ""]}[k];
+  plan.acts = [m[0]]; plan.taste = m[1]; plan.cuisine = "any"; plan.more = {}; plan.seed = Math.floor(Math.random() * 1e6); view = "plan"; window.scrollTo(0, 0); render();
+}
+async function parkingView() {
+  const d = await pubData(), up = d.P.reduce((m, l) => (l.updated_at && l.updated_at > m ? l.updated_at : m), "");
+  return "<div style='max-width:640px;margin:0 auto'><h2>Parking</h2><div class='muted' style='margin-bottom:12px'>See which level has free spaces before you drive in.</div><div id='parkbox'>" + parkBox(d.P) + "</div>" +
+    (up ? "<div class='muted' style='margin-top:10px'>Updated <span>" + ago(up) + "</span></div>" : "") + "<div class='muted' style='margin-top:6px'>Numbers are updated by mall staff, so they can be a few minutes behind.</div><div class='acts'><button class='btn alt sm' data-act='view' data-v='getting'>How to get here</button></div></div>";
+}
+const myList = (d, kind) => { const M = d.M.filter(t => !kind || t.kind === kind); return M.length ? M.map(t => myCard(t, d.MC)).join("") : "<div class='panel empty'><span class='ticon'>" + ICON.report + "</span><div>No reports yet. Use the form to send your first one.</div></div>"; };
+async function reportView(mode) {
+  const d = await pubData(), lost = mode === "lost", pf = prefillRef.v; prefillRef.v = "";
+  const opts = lost ? "<option value='Lost item'>I lost something</option><option value='Found item'>I found something</option>" : GT_FAC.map(c => "<option>" + c + "</option>").join("");
+  return sentPanel() + "<div class='grid two'><div><h2>" + (lost ? "Lost and found" : "Report a problem") + "</h2><div class='muted' style='margin-bottom:12px'>" + (lost ? "Lost something, or found something someone may be looking for? Tell mall staff here. We check every report." : "Tell mall staff about a problem such as a broken escalator, a spill or a dirty toilet. We check every report.") + "</div>" +
+    "<div class='panel'><h2>Send a report</h2><div class='muted'>Staff check every report before acting on it.</div>" +
+    (role === "tenant" ? "<div class='muted' style='margin-top:8px'>Reporting as tenant: <b>" + esc(profile.store) + "</b>. Your reports go straight to mall staff.</div>" : "<label for='store'>Which store is it at? (optional)</label><input type='text' id='store' list='stores' placeholder='Start typing a store name' value='" + esc(pf) + "'><datalist id='stores'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist>") +
+    "<label for='cat'>" + (lost ? "What happened?" : "What are you reporting?") + "</label><select id='cat'>" + opts + "</select>" +
+    "<label for='loc'>Where? (floor, shop or area)</label><input type='text' id='loc' placeholder='For example: 2F near Gramedia'>" +
+    "<label for='desc'>Details</label><textarea id='desc' placeholder='" + (lost ? "Describe the item (colour, brand) and when you lost or found it" : "Describe the problem") + "'></textarea>" +
+    "<label for='ph'>Photo (optional)</label><input type='file' id='ph' accept='image/*'>" +
+    "<label for='con'>" + (lost ? "Contact number (so staff can reach you)" : "Contact number (optional)") + "</label><input type='text' id='con' inputmode='tel'><div class='muted' style='margin-top:8px'>Photos and contact details are used only to handle your report. Please do not include people's faces or ID cards.</div>" +
+    "<input type='text' id='website' tabindex='-1' autocomplete='off' aria-hidden='true' style='position:absolute;left:-9999px;width:1px;height:1px'>" +
+    "<div class='err' id='err' role='alert'></div><button class='btn' id='sendbtn' data-act='send'>Send report</button></div></div>" +
+    "<div><h2>Your reports</h2><div class='muted'>Reports are saved in this browser. Confirmed reports get higher priority.</div><div style='display:flex;gap:8px;margin-top:10px'><input type='text' id='track' placeholder='Have a tracking code? Paste it here' autocomplete='off' style='flex:1;min-width:0'><button class='btn sm' data-act='lookup'>Find</button></div><div class='err' id='terr' role='alert'></div><div id='mybox'>" + myList(d, lost ? "lost" : "fac") + "</div></div></div>";
+}
+function sentPanel() {
+  const c = sentRef.v; sentRef.v = ""; if (!c) return "";
+  return "<div class='panel sent'><div class='row' style='align-items:center;justify-content:flex-start;gap:12px'><span class='ticon ok'><svg viewBox='0 0 24 24'><path d='M5 12.5l4.5 4.5L19 7.5'/></svg></span><h3 style='margin:0'>Report sent</h3></div><div class='muted' style='margin-top:8px'>Keep this tracking code. You can use it to check your report from any device.</div><div class='codebox'><b>" + esc(c) + "</b><button class='btn sm' data-act='copycode' data-code='" + esc(c) + "'>Copy</button></div><div class='muted'>Staff will review your report. Confirmed reports get higher priority.</div></div>";
+}
+function goSearch() { dir.q = ($("hq").value || "").trim(); dir.store = null; dir.cat = null; dir.sub = null; view = "stores"; window.scrollTo(0, 0); render(); }
+document.addEventListener("keydown", e => { if (e.target.id === "hq" && e.key === "Enter") goSearch(); });
+const PUBVIEWS = ["home", "parking", "report", "lost"];
+async function refreshPublic() {
+  if (!PUBVIEWS.includes(view)) return;
+  const d = await pubData(); if (!PUBVIEWS.includes(view)) return;
+  if ($("noticebox")) $("noticebox").innerHTML = noticesBox(d.N);
+  if ($("parkbox")) $("parkbox").innerHTML = parkBox(d.P);
+  if ($("parksum")) $("parksum").innerHTML = parkSummary(d.P);
+  if ($("mybox")) $("mybox").innerHTML = myList(d, view === "lost" ? "lost" : "fac");
+  applyLang();
+}
+function compress(file) {
+  return new Promise((res, rej) => {
+    const img = new Image(), u = URL.createObjectURL(file);
+    img.onload = () => { const k = Math.min(1, 1280 / Math.max(img.width, img.height)), c = document.createElement("canvas"); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k); c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(u); c.toBlob(b => b ? res(b) : rej(new Error("Could not read the photo")), "image/jpeg", .8); };
+    img.onerror = () => rej(new Error("Could not read the photo")); img.src = u;
+  });
+}
+async function uploadPhoto(file) {
+  const blob = await compress(file), path = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2)) + ".jpg";
+  const {error} = await sb.storage.from("report-photos").upload(path, blob, {contentType: "image/jpeg"});
+  if (error) throw error; return sb.storage.from("report-photos").getPublicUrl(path).data.publicUrl;
+}
+async function send() {
+  const d = $("desc").value.trim(), store = role === "tenant" ? "" : $("store").value.trim(), f = $("ph").files[0], err = $("err"), btn = $("sendbtn");
+  err.textContent = "";
+  if (d.length < 10) { err.textContent = tr2("Add at least 10 characters so staff can check your report."); return; }
+  if (store && !STORES.includes(store)) { err.textContent = tr2("Pick the store from the list, or leave it empty."); return; }
+  if (f && f.size > 15e6) { err.textContent = tr2("That photo is too large. Choose one under 15 MB."); return; }
+  btn.disabled = true; btn.textContent = tr2("Sending...");
+  try {
+    const photo = f ? await uploadPhoto(f) : "";
+    const {data, error} = await sb.rpc("submit_ticket", {p_category: $("cat").value, p_store: store, p_location: $("loc").value.trim(), p_description: d, p_contact: $("con").value.trim(), p_photo: photo, p_device: DEV, p_hp: $("website").value});
+    if (error) throw error;
+    try { localStorage.setItem("aeon_codes", JSON.stringify([data, ...codes()].slice(0, 50))); } catch (e) {}
+    sentRef.v = data; toast("Report " + data + " sent"); window.scrollTo(0, 0); render();
+  } catch (e) { err.textContent = "Could not send: " + (e.message || e); btn.disabled = false; btn.textContent = tr2("Send report"); }
+}
+const tr2 = s => LANG === "id" ? tr(s) : s;
+let recovery = false;
+async function lookup() {
+  const v = $("track").value.trim().toUpperCase(), er = $("terr"); er.textContent = "";
+  if (!/^MR-\d+-[0-9A-F]{10}$/.test(v)) { er.textContent = tr2("That does not look like a tracking code. It looks like MR-1001-A1B2C3D4E5."); return; }
+  const {data, error} = await sb.rpc("my_tickets", {p_codes: [v]});
+  if (error || !data || !data.length) { er.textContent = tr2("No report found for that code."); return; }
+  try { localStorage.setItem("aeon_codes", JSON.stringify([v, ...codes().filter(c => c !== v)].slice(0, 50))); } catch (e) {}
+  toast("Report found"); const kv = data[0].kind === "lost" ? "lost" : "report"; if (view !== kv) { view = kv; render(); } else refreshPublic();
+}
+async function forgot() {
+  const em = $("em").value.trim(), el = $("lerr"); el.style.color = "";
+  if (!em) { el.textContent = tr2("Type your email above first."); return; }
+  const {error} = await sb.auth.resetPasswordForEmail(em, {redirectTo: location.origin + location.pathname});
+  if (error) { el.textContent = error.message; return; }
+  el.style.color = "var(--ok)"; el.textContent = tr2("If that email has an account, we sent a reset link. Check your inbox.");
+}
+const resetView = () => "<div class='panel' style='max-width:460px;margin:0 auto'><h2>Set a new password</h2><div class='muted'>Choose a new password for your account.</div><label for='np'>New password (6+ characters)</label><input type='password' id='np' autocomplete='new-password'><label for='np2'>Repeat the new password</label><input type='password' id='np2' autocomplete='new-password'><div class='err' id='rerr' role='alert'></div><button class='btn' data-act='setpw'>Save new password</button></div>";
+async function setpw() {
+  const a = $("np").value, b = $("np2").value, er = $("rerr");
+  if (a.length < 6) { er.textContent = tr2("Password must be at least 6 characters."); return; }
+  if (a !== b) { er.textContent = tr2("Passwords do not match."); return; }
+  const {error} = await sb.auth.updateUser({password: a});
+  if (error) { er.textContent = error.message; return; }
+  recovery = false; try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  await checkRole(); render(); toast("Password updated");
+}
+
+/* ---------- Login, roles ---------- */
+const loginView = () => "<div class='grid eq' style='max-width:900px;margin:0 auto'><div class='panel'><h2>Log in</h2><div class='muted'>For mall staff and tenants.</div><label for='em'>Email</label><input type='text' id='em' inputmode='email' autocomplete='username'><label for='pw'>Password</label><input type='password' id='pw' autocomplete='current-password'><div class='err' id='lerr' role='alert'></div><div class='acts'><button class='btn' data-act='login'>Log in</button><button class='btn alt sm' data-act='forgot'>Forgot password?</button></div></div>" +
+  "<div class='panel'><h2>New tenant? Create an account</h2><div class='muted'>Pick your store. A mall admin approves your account before you can see reports for it.</div><label for='sstore'>Your store</label><input type='text' id='sstore' list='stores2' placeholder='Start typing your store name'><datalist id='stores2'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist><label for='sem'>Email</label><input type='text' id='sem' inputmode='email' autocomplete='email'><label for='spw'>Password (6+ characters)</label><input type='password' id='spw' autocomplete='new-password'><div class='err' id='serr' role='alert'></div><button class='btn' data-act='signup'>Create tenant account</button></div></div>";
+const reload = () => role === "admin" ? loadAdmin() : role === "tenant" ? loadTenant() : Promise.resolve();
+async function checkRole() {
+  const {data: {session}} = await sb.auth.getSession();
+  user = session ? session.user : null; role = "none"; profile = null;
+  if (!user) return;
+  const a = await sb.from("admins").select("user_id").eq("user_id", user.id);
+  if (a.data && a.data.length) { role = "admin"; await loadAdmin(); return; }
+  const pr = await sb.from("profiles").select("*").eq("user_id", user.id);
+  profile = (pr.data && pr.data[0]) || null; role = profile && profile.approved ? "tenant" : "pending";
+  if (role === "tenant") await loadTenant();
+}
+async function loadAdmin() {
+  const [t, te, p, pr, ad, cm, ac, nt] = await Promise.all([
+    sb.from("tickets").select("*").order("created_at", {ascending: false}), sb.from("technicians").select("*").order("name"), sb.from("parking").select("*").order("sort").order("level"),
+    sb.from("profiles").select("*").order("created_at", {ascending: false}), sb.from("admins").select("user_id"), sb.from("comments").select("*").order("created_at"),
+    sb.from("activity").select("*").order("created_at", {ascending: false}).limit(200), sb.from("notices").select("*").order("created_at", {ascending: false})]);
+  D = {tickets: t.data || [], techs: te.data || [], parking: p.data || [], profiles: pr.data || [], admins: ad.data || [], comments: cm.data || [], activity: ac.data || [], notices: nt.data || []};
+}
+async function loadTenant() {
+  const [t, cm] = await Promise.all([sb.from("tickets").select("*").order("created_at", {ascending: false}), sb.from("comments").select("*").order("created_at")]);
+  D.tickets = t.data || []; D.comments = cm.data || [];
+}
+async function rpcAdmin(fn, id, msg) { const {error} = await sb.rpc(fn, {p_user: id}); if (error) toast("Failed: " + error.message); else { await reload(); render(); toast(msg); } }
+async function login() {
+  const {error} = await sb.auth.signInWithPassword({email: $("em").value.trim(), password: $("pw").value});
+  if (error) { $("lerr").textContent = error.message; return; }
+  await checkRole(); subscribe(); render();
+}
+async function signup() {
+  const store = $("sstore").value.trim(), em = $("sem").value.trim(), pw = $("spw").value, err = $("serr");
+  if (!STORES.includes(store)) { err.textContent = tr2("Pick your store from the list."); return; }
+  if (!em || pw.length < 6) { err.textContent = tr2("Enter an email and a password of at least 6 characters."); return; }
+  const {data, error} = await sb.auth.signUp({email: em, password: pw, options: {data: {store}}});
+  if (error) { err.textContent = error.message; return; }
+  if (data.session) { await checkRole(); render(); toast("Account created"); }
+  else { err.style.color = "var(--ok)"; err.textContent = tr2("Account created. Check your email to confirm it, then log in."); }
+}
+const topbar = (title, sub, extra) => "<div style='display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px'><div><h2 style='margin:0'>" + title + "</h2><div class='muted'>" + sub + "</div></div><span class='ctl'>" + (extra || "") + "<button class='btn alt sm' data-act='refresh'>Refresh</button><button class='btn alt sm' data-act='logout'>Log out</button></span></div>";
+function pendingView() {
+  return "<div class='panel' style='max-width:520px;margin:0 auto'><h2>" + (profile && profile.store ? "Waiting for approval" : "No access yet") + "</h2><p>" + (profile && profile.store ? "Your tenant account for <b>" + esc(profile.store) + "</b> is waiting for a mall admin to approve it. Until then you can still send reports as a guest." : "This account is not an admin or an approved tenant yet. An admin can promote it from the admin panel.") + "</p><p class='muted'>Setting this system up for the first time? The first account to claim admin access becomes the admin. This only works while no admin exists.</p><div class='acts'><button class='btn sm' data-act='claim'>Claim admin access</button><button class='btn alt sm' data-act='logout'>Log out</button></div></div>";
+}
+
+/* ---------- Tenant view ---------- */
+function tcard(t, mine) {
+  const lost = t.kind === "lost", done = t.status === "Resolved" || t.status === "Completed";
+  return "<div class='ticket " + t.urgency.toLowerCase() + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge " + bcls(t) + "'>" + (done ? (lost ? "Resolved" : "Done") : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t) +
+    (!mine && t.contact ? "<div class='muted'>Reporter contact: " + esc(t.contact) + "</div>" : "") + (mine && !lost && t.technician ? "<div class='muted'>Technician: " + esc(t.technician) + "</div>" : "") +
+    notesBlock(t) + (!mine && !done ? "<div class='acts'><button class='btn sm' data-act='tresolve' data-id='" + t.id + "'>Mark as done</button></div>" : "") + "</div>";
+}
+function tenantView() {
+  const pub = D.tickets.filter(t => t.source === "guest"), mine = D.tickets.filter(t => t.reporter_id === user.id), open = pub.filter(t => t.status !== "Resolved" && t.status !== "Completed").length;
+  return topbar(esc(profile.store), esc(user.email)) +
+    "<div class='panel' style='margin-bottom:20px'><h2>Reports from the public (" + open + " open)</h2><div class='muted'>Visitor reports about your store that mall staff confirmed. Add a note to tell the reporter what is happening, and mark it done once handled, for example when a lost item is returned.</div>" + (pub.length ? pub.map(t => tcard(t, false)).join("") : "<div class='muted' style='margin-top:10px'>Nothing yet. Confirmed reports about your store appear here.</div>") + "</div>" +
+    "<div class='panel'><h2>Your reports to mall staff</h2><div class='muted'>Use the Report tab to send a new one.</div>" + (mine.length ? mine.map(t => tcard(t, true)).join("") : "<div class='muted' style='margin-top:10px'>No reports yet.</div>") + "</div>";
+}
+
+/* ---------- Admin view ---------- */
+function card(t) {
+  const lost = t.kind === "lost", pend = t.verification === "pending", rej = t.verification === "rejected", ov = overdue(t), pr = prior(t);
+  let h = "<div class='ticket " + (rej ? "normal" : t.urgency.toLowerCase()) + (ov ? " overdue" : "") + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge " + bcls(t) + "'>" + (pend ? "Awaiting review" : rej ? "Rejected" : t.status) + "</span>" + (ov ? " <span class='badge bad'>Overdue " + fmtH(ov) + "</span>" : "") + (pr ? " <span class='badge warn'>Repeat flag: " + pr + " rejected before</span>" : "") + "</span><span class='muted'>" + ago(t.created_at) + "</span></div>";
+  h += "<div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + (t.urgency !== "Normal" ? ", priority " + t.urgency : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t);
+  h += "<div class='muted'>" + (t.source === "tenant" ? "Tenant" : "Guest") + (t.store ? ", store: " + esc(t.store) : "") + (t.contact ? " | Contact: " + esc(t.contact) : "") + (!lost && t.technician ? " | Technician: " + esc(t.technician) : "") + "</div>";
+  if (lost && !rej && t.status !== "Resolved") {
+    const m = matches(t);
+    if (m.length) h += "<div class='cm'><b>Possible match" + (m.length > 1 ? "es" : "") + "</b>" + m.map(({x}) => "<div class='row' style='align-items:center;margin-top:6px'><span>" + x.code + ": " + esc(x.category) + (x.store ? " at " + esc(x.store) : "") + ", " + esc(x.description.slice(0, 60)) + "</span><button class='btn alt sm' data-act='both' data-id='" + t.id + "' data-b='" + x.id + "'>Resolve both</button></div>").join("") + "</div>";
+  }
+  let a = "";
+  if (pend) a = "<button class='btn sm' data-act='verify' data-id='" + t.id + "'>Real report</button><button class='btn sm alt' data-act='reject' data-id='" + t.id + "'>Fake report</button>";
+  else if (!rej && !lost && !t.technician) a = D.techs.length ? "<select data-act='assign' data-id='" + t.id + "' aria-label='Assign technician'><option value=''>Assign technician</option>" + D.techs.map(x => "<option value='" + esc(x.name) + "'>" + esc(x.name) + (x.specialty ? " (" + esc(x.specialty) + ")" : "") + "</option>").join("") + "</select>" : "<span class='muted'>Add a technician first.</span>";
+  else if (!rej && !lost && t.status !== "Completed") a = "<button class='btn sm' data-act='advance' data-id='" + t.id + "'>Mark " + STAGES[STAGES.indexOf(t.status) + 1] + "</button>";
+  else if (lost && !rej && t.status !== "Resolved") a = "<button class='btn sm' data-act='resolve' data-id='" + t.id + "'>Mark resolved</button>";
+  a += "<button class='btn sm alt' data-act='del' data-id='" + t.id + "'>Delete</button>";
+  return h + notesBlock(t) + "<div class='acts'>" + a + "</div></div>";
+}
+const panel = (t, s, list) => "<div class='panel' style='margin-bottom:20px'><h2>" + t + "</h2><div class='muted'>" + s + "</div>" + (list.length ? list.map(card).join("") : "<div class='muted' style='margin-top:10px'>Nothing here yet.</div>") + "</div>";
+const techPanel = () => "<div class='panel'><h2>Technicians</h2>" + (D.techs.length ? D.techs.map(t => "<div class='row note' style='align-items:center'><span>" + esc(t.name) + " <span class='muted'>" + esc(t.specialty || "") + "</span></span><button class='btn alt sm' data-act='deltech' data-id='" + t.id + "'>Remove</button></div>").join("") : "<div class='muted'>No technicians yet.</div>") + "<label for='tn'>Add technician</label><input type='text' id='tn' placeholder='Name'><input type='text' id='ts' placeholder='Specialty' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addtech'>Add</button></div>";
+const parkEditor = () => "<div class='panel'><h2>Parking levels</h2><div class='muted'>Guests see these numbers live. Red is taken, green is free.</div>" + D.parking.map(l => parkRow(l, true) + "<div style='text-align:right;margin-top:-6px'><button class='btn alt sm' data-act='dellevel' data-id='" + esc(l.level) + "'>Remove " + esc(l.level) + "</button> <span class='muted'>" + esc(l.building) + (l.vehicle === "motorcycle" ? ", motorbikes" : "") + "</span></div>").join("") +
+  "<label for='pl'>Add level</label><input type='text' id='pl' placeholder='Level name, for example P4'><input type='text' id='pb' placeholder='Building, for example New parking building' style='margin-top:8px'><select id='pv' style='margin-top:8px'><option value='car'>Cars</option><option value='motorcycle'>Motorbikes</option></select><input type='number' id='pc' placeholder='Total spaces' min='0' style='margin-top:8px'><label style='display:flex;gap:8px;align-items:center;font-weight:600;margin:10px 0'><input type='checkbox' id='pd' style='width:auto'> Direct access to the mall</label><button class='btn sm' data-act='addlevel'>Add level</button></div>";
+const isAd = id => (D.admins || []).some(x => x.user_id === id);
+const tenantAccounts = () => "<div class='panel' style='margin-bottom:20px'><h2>Accounts (" + D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length + " waiting)</h2><div class='muted'>Every account you add in Supabase, or that signs up on the site, shows here. Approve tenants so they can see public reports for their store, or make someone an admin.</div>" +
+  D.profiles.map(x => { const ad = isAd(x.user_id), id = "data-id='" + x.user_id + "'"; return "<div class='row note' style='align-items:center'><span>" + (ad ? "<span class='badge'>Admin</span> " : "") + esc(x.store || "(no store)") + " <span class='muted'>" + esc(x.email || "") + "</span></span><span class='ctl'>" +
+    (ad ? (x.user_id === user.id ? "" : "<button class='btn alt sm' data-act='rmadmin' " + id + ">Remove admin</button>") : (x.approved ? "<button class='btn alt sm' data-act='revoke' " + id + ">Revoke tenant</button>" : "<button class='btn sm' data-act='approve' " + id + ">Approve tenant</button>") + "<button class='btn alt sm' data-act='mkadmin' " + id + ">Make admin</button><button class='btn alt sm' data-act='rmuser' " + id + ">Remove</button>") + "</span></div>"; }).join("") +
+  (D.profiles.length ? "" : "<div class='muted' style='margin-top:10px'>No accounts yet.</div>") + "</div>";
+const noticeAdmin = () => "<div class='panel' style='margin-bottom:20px'><h2>Notice board</h2><div class='muted'>Notices show at the top of the Report tab for every visitor.</div>" +
+  (D.notices.length ? D.notices.map(n => "<div class='row note' style='align-items:center'><span><span class='badge'>" + KIND[n.kind] + "</span> <b>" + esc(n.title) + "</b>" + (n.expires_at ? " <span class='muted'>until " + new Date(n.expires_at).toLocaleDateString() + "</span>" : "") + "</span><button class='btn alt sm' data-act='delnotice' data-id='" + n.id + "'>Delete</button></div>").join("") : "<div class='muted' style='margin-top:10px'>No notices yet.</div>") +
+  "<label for='nt'>Title</label><input type='text' id='nt' maxlength='80' placeholder='For example: Parking P3 closed on Saturday'><label for='nb'>Message (optional)</label><textarea id='nb' maxlength='300' style='min-height:70px'></textarea><label for='nk'>Type</label><select id='nk'><option value='info'>Notice</option><option value='closure'>Closure</option><option value='event'>Event</option></select><label for='nd'>Show for how many days? (empty = until you delete it)</label><input type='number' id='nd' min='1' placeholder='7'><button class='btn sm' style='margin-top:12px' data-act='addnotice'>Post notice</button></div>";
+const activityPanel = () => "<div class='panel' style='margin-bottom:20px'><h2>Activity log</h2><div class='muted'>Who did what to each report. Written by the database, so it cannot be edited here.</div>" +
+  (D.activity.length ? D.activity.slice(0, 40).map(a => "<div class='row note'><span><b>" + esc(a.actor_email || "system") + "</b> " + esc(a.action) + " <b>" + esc(a.ticket_code) + "</b>" + (a.detail ? " <span class='muted'>(" + esc(a.detail) + ")</span>" : "") + "</span><span class='muted'>" + ago(a.created_at) + "</span></div>").join("") : "<div class='muted' style='margin-top:10px'>No activity yet.</div>") + "</div>";
+function insights() {
+  const T = D.tickets, wk = 7 * 864e5, mon = new Date(); mon.setHours(0, 0, 0, 0); mon.setDate(mon.getDate() - ((mon.getDay() + 6) % 7));
+  const weeks = []; for (let i = 7; i >= 0; i--) weeks.push({s: new Date(mon.getTime() - i * wk), n: 0});
+  T.forEach(t => { const c = new Date(t.created_at); for (let i = weeks.length - 1; i >= 0; i--) if (c >= weeks[i].s) { weeks[i].n++; break; } });
+  const mx = Math.max(1, ...weeks.map(w => w.n)), cats = {}; T.forEach(t => { cats[t.category] = (cats[t.category] || 0) + 1; });
+  const top = Object.entries(cats).sort((a, b) => b[1] - a[1]).slice(0, 6), cm = Math.max(1, ...top.map(x => x[1]));
+  const hrs = (a, b) => (new Date(b) - new Date(a)) / 36e5, avg = a => a.length ? a.reduce((s, x) => s + x, 0) / a.length : 0;
+  const asg = avg(T.filter(t => t.assigned_at).map(t => hrs(t.created_at, t.assigned_at))), res = avg(T.filter(t => t.resolved_at).map(t => hrs(t.created_at, t.resolved_at)));
+  const rv = T.filter(t => t.source === "guest" && t.verification !== "pending"), real = rv.filter(t => t.verification === "verified").length, guests = T.filter(t => t.source === "guest").length;
+  return "<div class='panel' style='margin-bottom:20px'><h2>Insights</h2><div class='stat'><div><b>" + asg.toFixed(1) + " h</b>Average time to assign</div><div><b>" + res.toFixed(1) + " h</b>Average time to finish</div><div><b>" + (T.length ? Math.round(guests / T.length * 100) : 0) + "%</b>Reports from guests</div><div><b>" + (rv.length ? Math.round(real / rv.length * 100) : 0) + "%</b>Guest reports confirmed real</div></div>" +
+    "<h3>Reports per week</h3><div class='chart'>" + weeks.map(w => "<div><span>" + w.n + "</span><i style='height:" + Math.max(2, Math.round(w.n / mx * 90)) + "px'></i><span>" + w.s.getDate() + "/" + (w.s.getMonth() + 1) + "</span></div>").join("") + "</div>" +
+    "<h3 style='margin-top:18px'>Most common faults</h3>" + (top.length ? top.map(([k, v]) => "<div class='hb'><span>" + esc(k) + "</span><span class='b' style='width:" + Math.round(v / cm * 100) + "%'></span><b>" + v + "</b></div>").join("") : "<div class='muted'>No reports yet.</div>") + "</div>";
+}
+function adminView() {
+  const T = D.tickets, q = T.filter(t => t.verification === "pending").sort((a, b) => new Date(a.created_at) - new Date(b.created_at)), fac = T.filter(t => t.kind === "fac" && t.verification === "verified"), lf = T.filter(t => t.kind === "lost" && t.verification === "verified"), rej = T.filter(t => t.verification === "rejected");
+  const act = fac.filter(t => t.status !== "Completed").sort((a, b) => (!!overdue(b) - !!overdue(a)) || rank[a.urgency] - rank[b.urgency] || new Date(a.created_at) - new Date(b.created_at));
+  const late = T.filter(t => overdue(t) > 0).length;
+  return topbar("Admin panel", esc(user.email), "<button class='btn alt sm' data-act='exp'>Export CSV</button><button class='btn alt sm' data-act='expact'>Export log</button>") +
+    "<div class='stat'><div><b>" + q.length + "</b>Waiting for review</div><div><b style='" + (late ? "color:var(--bad)" : "") + "'>" + late + "</b>Overdue</div><div><b>" + act.length + "</b>Open facility jobs</div><div><b>" + act.filter(t => !t.technician).length + "</b>Need a technician</div></div>" +
+    "<div class='adm'><div class='adm-main'>" + panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports. Reviews are overdue after " + REVIEW_SLA + " h.", q) +
+    panel("Open facility jobs", "Overdue limits: Urgent " + SLA.Urgent + " h, High " + SLA.High + " h, Normal " + SLA.Normal + " h. Overdue jobs show first.", act) +
+    panel("Lost and found log", "Confirmed lost and found reports, with suggested matches.", lf) + panel("Rejected reports", "Kept for your records. Delete to remove.", rej) +
+    "</div><div class='adm-side'>" + insights() + parkEditor() + techPanel() + noticeAdmin() + tenantAccounts() + activityPanel() + "</div></div>";
+}
+async function mut(p) { const {error} = await p; if (error) { toast("Failed: " + error.message); return false; } await reload(); render(); return true; }
+const upd = (id, patch) => mut(sb.from("tickets").update(patch).eq("id", id));
+async function addNote(id) {
+  const ta = $("cm-" + id), body = ta ? ta.value.trim() : ""; if (!body) return;
+  const {error} = await sb.from("comments").insert({ticket_id: +id, author_id: user.id, body, show_reporter: $("cs-" + id).checked});
+  if (error) toast("Failed: " + error.message); else { openN.delete(+id); await reload(); render(); toast("Note saved"); }
+}
+
+/* ---------- Render and events ---------- */
+async function render() {
+  document.querySelectorAll(".tabs [data-act=view],.hbtn[data-act=view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === view || (b.dataset.v === "plan" && view === "stores")));
+  const ab = document.querySelector("[data-v=account]"); if (ab) ab.querySelector("span").textContent = user ? "Dashboard" : "Sign in";
+  if (!sb) { $("app").innerHTML = SETUP; applyLang(); return; }
+  const changed = lastView !== view; if (changed && view !== "account") $("app").innerHTML = SKEL;
+  if (view === "account") $("app").innerHTML = recovery ? resetView() : !user ? loginView() : role === "admin" ? adminView() : role === "tenant" ? "<div style='max-width:860px;margin:0 auto'>" + tenantView() + "</div>" : pendingView();
+  else $("app").innerHTML = await ({home: homeView, parking: parkingView, report: () => reportView("fac"), lost: () => reportView("lost"), stores: async () => storesView(), plan: async () => planView(), getting: async () => gettingView()}[view] || homeView)();
+  showInstall();
+  applyLang();
+  if (changed) { const ap = $("app"); ap.classList.remove("enter"); void ap.offsetWidth; ap.classList.add("enter"); lastView = view; }
+}
+document.addEventListener("click", async e => {
+  if (e.target.id === "sheet") { $("sheet").classList.add("hidden"); return; }
+  const b = e.target.closest("[data-act]"); if (!b) return;
+  const a = b.dataset.act, id = b.dataset.id, t = D.tickets.find(x => String(x.id) === id);
+  if (a === "view") { view = b.dataset.v; window.scrollTo(0, 0); if (view === "account" && sb && !user) await checkRole(); render(); }
+  else if (a === "send") send();
+  else if (a === "dcat") { dir.cat = b.dataset.c; dir.sub = null; dir.floor = "all"; drawDir(); }
+  else if (a === "dsub") { dir.sub = b.dataset.s; dir.floor = "all"; drawDir(); }
+  else if (a === "dfloor") { dir.floor = b.dataset.f; drawDir(); }
+  else if (a === "dstore") { dir.store = +b.dataset.i; drawDir(); window.scrollTo(0, 0); }
+  else if (a === "dclose") { dir.store = null; drawDir(); }
+  else if (a === "hsearch") goSearch();
+  else if (a === "pact") { const k = b.dataset.k, i = plan.acts.indexOf(k); if (i < 0) plan.acts.push(k); else plan.acts.splice(i, 1); drawPlan(); }
+  else if (a === "ptaste") { plan.taste = plan.taste === b.dataset.k ? "" : b.dataset.k; plan.seed = Math.floor(Math.random() * 1e6); drawPlan(); }
+  else if (a === "pcuis") { plan.cuisine = b.dataset.k; drawPlan(); }
+  else if (a === "pmore") { plan.more[b.dataset.k] = true; drawPlan(); }
+  else if (a === "planstore") { dir.store = +b.dataset.i; dir.q = ""; dir.fl = null; view = "stores"; window.scrollTo(0, 0); render(); }
+  else if (a === "quickplan") quick(b.dataset.k);
+  else if (a === "homecat") { dir.cat = b.dataset.c; dir.sub = null; dir.fl = null; dir.store = null; dir.q = ""; dir.floor = "all"; view = "stores"; window.scrollTo(0, 0); render(); }
+  else if (a === "dfloorview") { dir.fl = b.dataset.f; dir.cat = null; dir.sub = null; dir.store = null; dir.q = ""; if (view !== "stores") { view = "stores"; window.scrollTo(0, 0); render(); } else { if ($("sq")) $("sq").value = ""; drawDir(); } }
+  else if (a === "copycode") { const c = b.dataset.code; (navigator.clipboard ? navigator.clipboard.writeText(c) : Promise.reject()).then(() => toast("Copied"), () => toast(c)); }
+  else if (a === "dback") { const l = +b.dataset.l; if (l === 0) { dir.cat = null; dir.sub = null; dir.fl = null; } else dir.sub = null; dir.store = null; dir.q = ""; if ($("sq")) $("sq").value = ""; dir.floor = "all"; drawDir(); }
+  else if (a === "gostore") { prefillRef.v = b.dataset.store; view = b.dataset.kind; window.scrollTo(0, 0); render(); }
+  else if (a === "login") login();
+  else if (a === "signup") signup();
+  else if (a === "forgot") forgot();
+  else if (a === "setpw") setpw();
+  else if (a === "lookup") lookup();
+  else if (a === "logout") { await sb.auth.signOut(); user = null; role = "none"; profile = null; D = {tickets:[], techs:[], parking:[], profiles:[], admins:[], comments:[], activity:[], notices:[]}; render(); }
+  else if (a === "refresh") { await reload(); render(); toast("Refreshed"); }
+  else if (a === "claim" && user) { const {data, error} = await sb.rpc("claim_first_admin"); if (error) toast("Failed: " + error.message); else if (data) { await checkRole(); render(); toast("You are now the admin"); } else toast("An admin already exists. Ask them to approve you."); }
+  else if (a === "togglenote") { const k = +id; if (openN.has(k)) openN.delete(k); else openN.add(k); render(); }
+  else if (a === "addnote" && user) addNote(id);
+  else if (a === "tresolve" && role === "tenant") { const {error} = await sb.rpc("tenant_resolve", {p_id: +id}); if (error) toast("Failed: " + error.message); else { await reload(); render(); toast("Marked as done"); } }
+  else if (role !== "admin") return;
+  else if (a === "approve") mut(sb.from("profiles").update({approved: true}).eq("user_id", id));
+  else if (a === "revoke") mut(sb.from("profiles").update({approved: false}).eq("user_id", id));
+  else if (a === "mkadmin") rpcAdmin("make_admin", id, "Admin added");
+  else if (a === "rmadmin") { if (ask("Remove this admin?")) rpcAdmin("remove_admin", id, "Admin removed"); }
+  else if (a === "rmuser") { if (ask("Remove this account? They will no longer be able to log in.")) rpcAdmin("delete_account", id, "Account removed"); }
+  else if (a === "verify" && t) upd(t.id, {verification: "verified", urgency: {Normal: "High", High: "Urgent", Urgent: "Urgent"}[t.urgency], status: t.kind === "lost" ? "Verified" : t.status});
+  else if (a === "reject" && t) upd(t.id, {verification: "rejected"});
+  else if (a === "advance" && t) upd(t.id, {status: STAGES[STAGES.indexOf(t.status) + 1]});
+  else if (a === "resolve" && t) upd(t.id, {status: "Resolved"});
+  else if (a === "both" && t) { const o = b.dataset.b; mut(Promise.all([upd0(t.id), upd0(o)]).then(rs => rs.find(r => r.error) || {error: null})); }
+  else if (a === "del" && t) { if (ask("Delete " + t.code + "? This cannot be undone.")) { const m = (t.photo_url || "").match(/report-photos\/(.+)$/); if (m) sb.storage.from("report-photos").remove([decodeURIComponent(m[1])]); mut(sb.from("tickets").delete().eq("id", t.id)); } }
+  else if (a === "addtech") { const n = $("tn").value.trim(); if (n) mut(sb.from("technicians").insert({name: n, specialty: $("ts").value.trim()})); }
+  else if (a === "deltech") { if (ask("Remove this technician?")) mut(sb.from("technicians").delete().eq("id", id)); }
+  else if (a === "addlevel") { const n = $("pl").value.trim(), c = parseInt($("pc").value, 10), mx = Math.max(0, ...D.parking.map(l => l.sort || 0)); if (n && c >= 0) mut(sb.from("parking").insert({level: n, building: $("pb").value.trim() || "Parking", vehicle: $("pv").value, direct_access: $("pd").checked, capacity: c, free: c, sort: mx + 1})); }
+  else if (a === "dellevel") { if (ask("Remove parking level " + id + "?")) mut(sb.from("parking").delete().eq("level", id)); }
+  else if (a === "addnotice") { const ti = $("nt").value.trim(), d = parseInt($("nd").value, 10); if (ti) mut(sb.from("notices").insert({title: ti, body: $("nb").value.trim() || null, kind: $("nk").value, expires_at: d > 0 ? new Date(Date.now() + d * 864e5).toISOString() : null})); }
+  else if (a === "delnotice") { if (ask("Delete this notice?")) mut(sb.from("notices").delete().eq("id", id)); }
+  else if (a === "exp") download("aeon-reports-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.tickets, ["code","created_at","source","store","kind","category","location","description","contact","urgency","status","verification","technician","assigned_at","resolved_at","photo_url"]));
+  else if (a === "expact") download("aeon-activity-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.activity, ["created_at","ticket_code","actor_email","action","detail"]));
+});
+const upd0 = id => sb.from("tickets").update({status: "Resolved", verification: "verified"}).eq("id", id);
+document.addEventListener("input", e => { if (e.target.id === "sq") { dir.q = e.target.value; dir.store = null; drawDir(); } });
+document.addEventListener("change", async e => {
+  const b = e.target, a = b.dataset ? b.dataset.act : null;
+  if (role !== "admin") return;
+  if (a === "assign" && b.value) upd(b.dataset.id, {technician: b.value, status: "Assigned", assigned_at: new Date().toISOString()});
+  else if (a === "park") mut(sb.from("parking").update({free: Math.max(0, Math.min(+b.max, parseInt(b.value, 10) || 0)), updated_at: new Date().toISOString()}).eq("level", b.dataset.id));
+});
+
+/* ---------- Live updates ---------- */
+let ch = null;
+function subscribe() {
+  if (!sb || ch) return; let tm;
+  const go = () => { clearTimeout(tm); tm = setTimeout(live, 600); };
+  ch = sb.channel("aeon-live"); ["tickets", "parking", "notices", "comments"].forEach(tb => ch.on("postgres_changes", {event: "*", schema: "public", table: tb}, go)); ch.subscribe();
+}
+async function live() {
+  if (PUBVIEWS.includes(view)) await refreshPublic();
+  else if ((role === "admin" || role === "tenant") && !typing()) { await reload(); render(); }
+}
+setInterval(() => { if (!typing()) live(); }, 30000);
+if (sb) sb.auth.onAuthStateChange(ev => { if (ev === "PASSWORD_RECOVERY") { recovery = true; view = "account"; setTimeout(async () => { await checkRole(); render(); }, 0); } });
+(async () => { if (sb) { await checkRole(); subscribe(); } render(); })();
+
+/* ---------- Theme, language and install button ---------- */
+const SUN = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const MOON = '<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+function savedTheme() { try { return localStorage.getItem("aeon_theme"); } catch (e) { return null; } }
+function isDark() { const t = savedTheme(); return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
+function applyTheme() {
+  const t = savedTheme(); if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
+  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#5a0035" : "#a3005f";
+  const b = $("themebtn"); b.innerHTML = d ? SUN : MOON; b.setAttribute("aria-label", d ? "Switch to light mode" : "Switch to dark mode");
+}
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+applyTheme();
+let dip = null;
+const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent), isAndroid = /android/i.test(navigator.userAgent);
+function showInstall() { const b = $("installbtn"); if (b) b.classList.toggle("hidden", standalone()); }
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); dip = e; showInstall(); });
+addEventListener("appinstalled", () => { dip = null; showInstall(); toast("App installed"); });
+showInstall();
+const INST = {
+  en: {
+    inapp: ["This page is open inside another app, and apps like that cannot install websites.", "Tap the menu (three dots or Share) and choose <b>Open in browser</b>, <b>Open in Chrome</b> or <b>Open in Safari</b>.", "Then tap Install again."],
+    ios: ["Tap the <b>Share</b> button at the bottom of Safari.", "Scroll down and tap <b>Add to Home Screen</b>.", "Tap <b>Add</b>."],
+    ios_other: ["On iPhone and iPad, installing works best in Safari. Open this page in <b>Safari</b>.", "Tap <b>Share</b>, then <b>Add to Home Screen</b>.", "Tap <b>Add</b>."],
+    android: ["Tap the <b>three dots</b> menu in Chrome.", "Tap <b>Install app</b>. If you only see <b>Add to Home screen</b>, tap that instead. It works the same way.", "Tap <b>Install</b> or <b>Add</b>."],
+    samsung: ["Tap the <b>menu</b> (three lines) in Samsung Internet.", "Tap <b>Add page to</b>, then <b>Home screen</b>.", "Tap <b>Add</b>."],
+    ff_android: ["Tap the <b>three dots</b> menu in Firefox.", "Tap <b>Install</b>.", "Tap <b>Add</b>."],
+    chrome: ["Look for the <b>install icon</b> at the right end of the address bar, or open the Chrome menu.", "Choose <b>Cast, save and share</b>, then <b>Install page as app</b>.", "Click <b>Install</b>."],
+    edge: ["Click the <b>three dots</b> menu in Edge.", "Choose <b>Apps</b>, then <b>Install this site as an app</b>.", "Click <b>Install</b>."],
+    safari_mac: ["In Safari, open the <b>File</b> menu.", "Choose <b>Add to Dock</b>.", "Click <b>Add</b>."],
+    ff_desktop: ["Firefox on a computer cannot install websites as apps.", "Open this page in <b>Chrome</b> or <b>Edge</b> to install it, or bookmark this page."],
+    other: ["Open this page in <b>Chrome</b>, <b>Edge</b> or <b>Safari</b> to install it.", "You can also bookmark this page."]
+  },
+  id: {
+    inapp: ["Halaman ini terbuka di dalam aplikasi lain, dan aplikasi seperti itu tidak bisa memasang situs web.", "Ketuk menu (tiga titik atau Bagikan) lalu pilih <b>Buka di browser</b>, <b>Buka di Chrome</b> atau <b>Buka di Safari</b>.", "Lalu ketuk Pasang lagi."],
+    ios: ["Ketuk tombol <b>Bagikan</b> di bagian bawah Safari.", "Gulir ke bawah lalu ketuk <b>Tambah ke Layar Utama</b>.", "Ketuk <b>Tambah</b>."],
+    ios_other: ["Di iPhone dan iPad, pemasangan paling baik lewat Safari. Buka halaman ini di <b>Safari</b>.", "Ketuk <b>Bagikan</b>, lalu <b>Tambah ke Layar Utama</b>.", "Ketuk <b>Tambah</b>."],
+    android: ["Ketuk menu <b>tiga titik</b> di Chrome.", "Ketuk <b>Instal aplikasi</b>. Jika hanya ada <b>Tambahkan ke layar utama</b>, ketuk itu. Hasilnya sama.", "Ketuk <b>Instal</b> atau <b>Tambah</b>."],
+    samsung: ["Ketuk <b>menu</b> (tiga garis) di Samsung Internet.", "Ketuk <b>Tambahkan halaman ke</b>, lalu <b>Layar utama</b>.", "Ketuk <b>Tambah</b>."],
+    ff_android: ["Ketuk menu <b>tiga titik</b> di Firefox.", "Ketuk <b>Instal</b>.", "Ketuk <b>Tambah</b>."],
+    chrome: ["Cari <b>ikon pasang</b> di ujung kanan bilah alamat, atau buka menu Chrome.", "Pilih <b>Transmisi, simpan, dan bagikan</b>, lalu <b>Instal halaman sebagai aplikasi</b>.", "Klik <b>Instal</b>."],
+    edge: ["Klik menu <b>tiga titik</b> di Edge.", "Pilih <b>Aplikasi</b>, lalu <b>Instal situs ini sebagai aplikasi</b>.", "Klik <b>Instal</b>."],
+    safari_mac: ["Di Safari, buka menu <b>File</b>.", "Pilih <b>Tambahkan ke Dock</b>.", "Klik <b>Tambah</b>."],
+    ff_desktop: ["Firefox di komputer tidak bisa memasang situs web sebagai aplikasi.", "Buka halaman ini di <b>Chrome</b> atau <b>Edge</b> untuk memasangnya, atau simpan sebagai bookmark."],
+    other: ["Buka halaman ini di <b>Chrome</b>, <b>Edge</b> atau <b>Safari</b> untuk memasangnya.", "Anda juga bisa menyimpannya sebagai bookmark."]
+  }
+};
+async function installCheck() {
+  const miss = [];
+  for (const f of ["manifest.webmanifest", "icon-192.png", "icon-512.png", "sw.js"]) { try { const r = await fetch(f, {cache: "no-store"}); if (!r.ok) miss.push(f); } catch (e) { miss.push(f); } }
+  return miss;
+}
+async function doInstall() {
+  if (dip) { dip.prompt(); const r = await dip.userChoice; dip = null; showInstall(); if (r && r.outcome === "accepted") toast("App installed"); return; }
+  const ua = navigator.userAgent, ff = /Firefox|FxiOS/i.test(ua), inApp = /FBAN|FBAV|Instagram|Line\/|MicroMessenger|TikTok|Snapchat|; wv\)/i.test(ua);
+  const key = inApp ? "inapp" : isIOS ? (/CriOS|FxiOS|EdgiOS/i.test(ua) ? "ios_other" : "ios") : isAndroid ? (/SamsungBrowser/i.test(ua) ? "samsung" : ff ? "ff_android" : "android")
+    : /Edg\//i.test(ua) ? "edge" : /Chrome\//i.test(ua) ? "chrome" : /Macintosh/i.test(ua) && /Safari/i.test(ua) && !ff ? "safari_mac" : ff ? "ff_desktop" : "other";
+  $("sheetbody").innerHTML = INST[LANG === "id" ? "id" : "en"][key].map(x => "<li>" + x + "</li>").join(""); $("sheetnote").textContent = ""; $("sheet").classList.remove("hidden");
+  const miss = await installCheck();
+  if (miss.length) $("sheetnote").textContent = (LANG === "id" ? "Masalah pengaturan: file ini tidak ada di situs: " : "Setup problem: these files are missing from the website: ") + miss.join(", ") + (LANG === "id" ? ". Unggah ke folder yang sama dengan index.html." : ". Upload them to the same folder as index.html.");
+}
+function net() { $("offline").classList.toggle("hidden", navigator.onLine); }
+addEventListener("online", () => { net(); render(); }); addEventListener("offline", net); net();
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-act]"); if (!b) return; const a = b.dataset.act;
+  if (a === "theme") { try { localStorage.setItem("aeon_theme", isDark() ? "light" : "dark"); } catch (x) {} applyTheme(); }
+  else if (a === "lang") { LANG = LANG === "id" ? "en" : "id"; try { localStorage.setItem("aeon_lang", LANG); } catch (x) {} render(); }
+  else if (a === "install") {
+    await doInstall();
+  } else if (a === "closesheet") $("sheet").classList.add("hidden");
+});
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+
+</script>
+</body>
+</html>
