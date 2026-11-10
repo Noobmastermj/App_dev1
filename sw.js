@@ -1,10 +1,11 @@
 // Network first, so a new version pushed to GitHub shows up right away.
 // The cache is only a fallback so the app shell still opens without internet.
-const CACHE = "aeon-shell-v7";
+const CACHE = "aeon-shell-v9";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
+  // Add files one by one so a single missing file can never stop the app from installing.
+  e.waitUntil(caches.open(CACHE).then(c => Promise.all(SHELL.map(u => c.add(u).catch(() => null)))));
   self.skipWaiting();
 });
 self.addEventListener("activate", e => {
@@ -17,6 +18,6 @@ self.addEventListener("fetch", e => {
   if (r.method !== "GET" || new URL(r.url).origin !== location.origin) return;
   e.respondWith(
     fetch(r).then(res => { const copy = res.clone(); caches.open(CACHE).then(c => c.put(r, copy)); return res; })
-      .catch(() => caches.match(r).then(m => m || caches.match("./index.html")))
+      .catch(() => caches.match(r).then(m2 => m2 || caches.match("./index.html")))
   );
 });
