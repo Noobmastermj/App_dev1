@@ -6,13 +6,13 @@
 <title>AEON Mall BSD City | Reports and Admin</title>
 <script>try{var t=localStorage.getItem("aeon_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#a3005f">
+<meta name="theme-color" content="#8f1650">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="AEON Reports">
 <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2048%2048%22%3E%3Crect%20width=%2248%22%20height=%2248%22%20rx=%2212%22%20fill=%22%23a3005f%22/%3E%3Cpath%20d=%22M15%2020h18l-1%2016a2%202%200%200%201-2%202h-12a2%202%200%200%201-2-2z%22%20fill=%22%23fff%22/%3E%3Cpath%20d=%22M18.5%2020v-2.5a5.5%205.5%200%200%201%2011%200V20%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%222.5%22/%3E%3Cpath%20d=%22M19.5%2029l3.3%203.3L29%2026%22%20fill=%22none%22%20stroke=%22%23a3005f%22%20stroke-width=%222.6%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2048%2048%22%3E%3Crect%20width=%2248%22%20height=%2248%22%20rx=%2212%22%20fill=%22%238f1650%22/%3E%3Cpath%20d=%22M15%2020h18l-1%2016a2%202%200%200%201-2%202h-12a2%202%200%200%201-2-2z%22%20fill=%22%23fff%22/%3E%3Cpath%20d=%22M18.5%2020v-2.5a5.5%205.5%200%200%201%2011%200V20%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%222.5%22/%3E%3Cpath%20d=%22M19.5%2029l3.3%203.3L29%2026%22%20fill=%22none%22%20stroke=%22%238f1650%22%20stroke-width=%222.6%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -188,10 +188,62 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-conten
 .planbox{margin-bottom:12px;border-left:6px solid var(--gold)}.planbox ol{margin:10px 0 0;padding:0;list-style:none}.planbox li{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
 .linkbtn{background:none;border:0;padding:0;color:var(--ink);font:inherit;font-weight:800;text-align:left;cursor:pointer;text-decoration:underline;text-decoration-color:var(--line)}
 .wk{font-size:11px;font-weight:800;color:var(--warn);margin-left:4px}.pgh{font-weight:800;margin:18px 0 4px}
+/* ===== warm luxury theme ===== */
+:root{--bg:#faf6ef;--surface:#fffdf9;--ink:#2a1f1c;--muted:#7d6e66;--line:#eadfd0;--field:#f4ece0;--brand:#8f1650;--brand-dark:#4e0b2c;--soft:#f9e9ea;--gold:#c79a3b;--gold-d:#94681a;--hdr1:#8f1650;--hdr2:#3d0a22;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#150e0d;--surface:#221917;--ink:#f6ece3;--muted:#bba99d;--line:#3a2c27;--field:#2e2320;--brand:#d4327f;--soft:#3b1a26;--gold:#e4bb62;--gold-d:#e4bb62;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#6b0f3b;--hdr2:#1f0912;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#150e0d;--surface:#221917;--ink:#f6ece3;--muted:#bba99d;--line:#3a2c27;--field:#2e2320;--brand:#d4327f;--soft:#3b1a26;--gold:#e4bb62;--gold-d:#e4bb62;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#6b0f3b;--hdr2:#1f0912;color-scheme:dark}
+body{background:radial-gradient(900px 500px at 85% -5%,rgba(199,154,59,.13),transparent 60%),radial-gradient(700px 500px at -10% 30%,rgba(143,22,80,.06),transparent 60%),var(--bg);background-attachment:fixed}
+header{border-bottom:2px solid rgba(199,154,59,.6);transition:box-shadow .3s}
+header .bar,header .logo{transition:padding .3s,width .3s,height .3s}
+header.scrolled .bar{padding-top:8px;padding-bottom:8px}header.scrolled .logo{width:34px;height:34px}header.scrolled h1 small{display:none}
+h2{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:-.01em}
+.panel,.tile,.dcard,.pcard,.ccard,.fcard,.pstep,.cta,.glance,.notice,.stat div{border:1px solid rgba(199,154,59,.22);box-shadow:0 6px 24px rgba(90,45,25,.07)}
+.btn{background:linear-gradient(135deg,#a01c5c,#6a0f3a);box-shadow:0 4px 14px rgba(110,15,60,.25)}
+.btn.alt{background:transparent;box-shadow:none;border:1.5px solid rgba(199,154,59,.8);color:var(--brand)}
+.btn.gold{background:linear-gradient(135deg,#e8c068,#b98324);color:#2a1a00;box-shadow:0 6px 18px rgba(0,0,0,.28)}
+.sech::after{content:"";display:block;width:52px;height:2px;margin-top:10px;background:linear-gradient(90deg,var(--gold),transparent)}
+.eyebrow{color:var(--gold-d)}
+.ticon{background:rgba(199,154,59,.16);color:var(--gold-d)}
+.tabs{border-top:1px solid rgba(199,154,59,.4);background:var(--surface)}.tabs button[aria-pressed=true]{color:var(--brand)}.tabs button[aria-pressed=true]::before{background:var(--gold)}
+.chip[aria-pressed=true]{background:var(--brand);border-color:var(--brand)}
+.sliderwrap{position:relative}
+.slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:28px;box-shadow:0 16px 44px rgba(90,20,40,.3)}.slider::-webkit-scrollbar{display:none}
+.hslide{flex:0 0 100%;scroll-snap-align:center;min-height:372px;padding:34px 26px 58px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:4px}
+.hslide>*{position:relative;z-index:1}
+.hslide::before{content:"";position:absolute;right:-90px;top:-90px;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,rgba(232,192,104,.42),transparent 66%)}
+.hslide::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 14px);pointer-events:none}
+.s1{background:linear-gradient(135deg,#8f1650,#3a0920)}.s2{background:linear-gradient(135deg,#7a3a14,#2b120a)}.s3{background:linear-gradient(135deg,#5e1240,#1c0914)}.s4{background:linear-gradient(135deg,#6b4a12,#26180a)}
+.hslide .hello{color:#e8c068;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+.hslide h2{font-size:34px;line-height:1.12;margin:6px 0 8px;max-width:560px;color:#fff}.hslide .wsub{opacity:.92;max-width:520px}.hslide .who{margin-top:8px;font-size:14px;opacity:.9}
+.hslide .acts{margin-top:18px}.hslide .bignum{font-size:56px;margin-top:6px}
+.hslide .hsearch{width:100%;max-width:560px}.hslide .hchips{max-width:560px}
+.sdots{position:absolute;left:0;right:0;bottom:16px;display:flex;justify-content:center;gap:8px;z-index:2}.sdots button{width:9px;height:9px;border-radius:99px;border:0;padding:0;background:rgba(255,255,255,.45);cursor:pointer;transition:width .3s,background .3s}.sdots button[aria-current=true]{width:26px;background:#e8c068}
+.sarr{display:none}
+@media(hover:hover) and (pointer:fine){.sarr{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.28);color:#fff;font-size:26px;line-height:1;cursor:pointer;z-index:3;opacity:0;transition:opacity .25s}.sarr.l{left:12px}.sarr.r{right:12px}.sliderwrap:hover .sarr{opacity:1}}
+#hsug{width:100%;max-width:560px;margin-top:8px}.sug{display:flex;justify-content:space-between;align-items:center;width:100%;background:rgba(255,255,255,.96);color:#2a1f1c;border:0;border-radius:12px;padding:11px 14px;margin-bottom:6px;font:inherit;font-weight:700;cursor:pointer;text-align:left}.sug.none{cursor:default;font-weight:600}
+.glance{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border-radius:22px;padding:18px 6px;margin-top:18px;text-align:center}.glance>div+div{border-left:1px solid rgba(199,154,59,.35)}
+.glance b{display:block;font-family:"Playfair Display",Georgia,serif;font-size:32px;color:var(--gold-d);font-weight:700;line-height:1.1}.glance span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.cwrap{position:relative}.carr{display:none}
+@media(hover:hover) and (pointer:fine){.carr{position:absolute;top:42%;width:40px;height:40px;border-radius:50%;border:1px solid rgba(199,154,59,.7);background:var(--surface);color:var(--brand);font-size:24px;line-height:1;cursor:pointer;z-index:2;box-shadow:0 4px 14px rgba(90,45,25,.18);opacity:0;transition:opacity .2s}.carr.l{left:-8px}.carr.r{right:-8px}.cwrap:hover .carr{opacity:1}.hscroll.drag{cursor:grabbing;user-select:none}.hscroll{cursor:grab}}
+.ncard{background:linear-gradient(145deg,#9c1c5a,#46091f)}.ncard.closure{background:linear-gradient(145deg,#c93a3a,#6f1219)}.ncard.event{background:linear-gradient(145deg,#e8c068,#b4701a);color:#2a1a00}
+.hero{background:linear-gradient(145deg,#93185a 0%,#5a0f35 55%,#220915 100%)}
+.pcard,.ccard,.tile,.dcard,.fcard{transition:transform .25s,box-shadow .25s,border-color .25s}
+@media(hover:hover){.pcard:hover,.ccard:hover,.tile:hover,.dcard:hover,.fcard:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(90,45,25,.16);border-color:rgba(199,154,59,.6)}}
+.towerwrap{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}@media(min-width:760px){.towerwrap{grid-template-columns:300px minmax(0,1fr)}}
+.tower{display:flex;flex-direction:column;gap:6px}
+.tfloor{display:flex;align-items:center;gap:12px;border:1px solid rgba(199,154,59,.22);border-left:6px solid var(--fc);border-radius:14px;padding:14px 16px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;text-align:left;transition:transform .25s,box-shadow .25s,background .25s}
+.tfloor b{font-size:20px;min-width:42px;color:var(--fc);font-family:"Playfair Display",Georgia,serif}.tfloor .muted{flex:1}.tfloor.mez{padding:8px 16px;margin-left:26px}.tfloor.mez b{font-size:16px}
+.tfloor[aria-pressed=true]{transform:translateX(10px);background:var(--soft);box-shadow:0 10px 26px rgba(90,45,25,.14)}
+.fpanel{background:var(--surface);border:1px solid rgba(199,154,59,.22);border-radius:20px;padding:20px;box-shadow:0 6px 24px rgba(90,45,25,.07);min-height:300px}
+.fpanel .fbig{font-size:52px}.fpanel .hb{grid-template-columns:130px 1fr 30px}
+@media(prefers-reduced-motion:no-preference){.rvl{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}.rvl.in{opacity:1;transform:none}.hslide::before{animation:floaty 10s ease-in-out infinite}@keyframes floaty{50%{transform:translate(-26px,20px) scale(1.08)}}}
+@media(max-width:480px){.hslide{padding:28px 20px 56px;min-height:392px}.hslide h2{font-size:29px}.hslide .bignum{font-size:48px}}
+.glance{gap:0;grid-template-rows:auto;grid-auto-rows:auto;align-items:center}
+@media(min-width:900px){.tabs{background:none;border:0;box-shadow:none}.tabs button[aria-pressed=true]{color:#fff}.tabs button{color:#fff}}
 </style>
 </head>
 <body>
-<header><div class="bar"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><rect x="1.5" y="1.5" width="45" height="45" rx="12" fill="#a3005f" stroke="#fff" stroke-opacity=".85" stroke-width="2"/><path d="M15 20h18a1.5 1.5 0 0 1 1.5 1.6l-1 15A2 2 0 0 1 31.5 38h-15a2 2 0 0 1-2-1.9l-1-15A1.5 1.5 0 0 1 15 20z" fill="#fff"/><path d="M18.5 20v-2.5a5.5 5.5 0 0 1 11 0V20" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M19.5 29l3.3 3.3L29 26" fill="none" stroke="#a3005f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>AEON Mall BSD City<small>Reports and parking</small></h1><div class="hbtns"><button class="hbtn" data-act="view" data-v="account" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span class="hlabel">Sign in</span></button><button class="hbtn" id="langbtn" data-act="lang" aria-label="Change language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span id="langtxt">EN</span></button><button class="hbtn" id="themebtn" data-act="theme" aria-label="Switch theme"></button></div></div></header>
+<header><div class="bar"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><rect x="1.5" y="1.5" width="45" height="45" rx="12" fill="#8f1650" stroke="#fff" stroke-opacity=".85" stroke-width="2"/><path d="M15 20h18a1.5 1.5 0 0 1 1.5 1.6l-1 15A2 2 0 0 1 31.5 38h-15a2 2 0 0 1-2-1.9l-1-15A1.5 1.5 0 0 1 15 20z" fill="#fff"/><path d="M18.5 20v-2.5a5.5 5.5 0 0 1 11 0V20" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><path d="M19.5 29l3.3 3.3L29 26" fill="none" stroke="#8f1650" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><h1>AEON Mall BSD City<small>Reports and parking</small></h1><div class="hbtns"><button class="hbtn" data-act="view" data-v="account" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span class="hlabel">Sign in</span></button><button class="hbtn" id="langbtn" data-act="lang" aria-label="Change language"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span id="langtxt">EN</span></button><button class="hbtn" id="themebtn" data-act="theme" aria-label="Switch theme"></button></div></div></header>
 <div id="offline" class="hidden" style="background:var(--warn);color:#1a1a1a;text-align:center;padding:8px;font-weight:700">You are offline. Parking and reports need an internet connection.</div>
 <main id="app"><div class="sk" style="height:150px"></div><div class="sk" style="height:96px;margin-top:14px"></div><div class="sk" style="height:96px;margin-top:14px"></div></main>
 <div id="sheet" class="sheet hidden" role="dialog" aria-modal="true" aria-label="Install the app"><div class="sheet-card"><h2>Install the app</h2><ol id="sheetbody"></ol><div id="sheetnote" class="muted" style="margin-bottom:12px"></div><button class="btn" style="width:100%" data-act="closesheet">Got it</button></div></div>
@@ -274,10 +326,11 @@ Object.assign(ID, {"Home": "Beranda", "Stores": "Toko", "Lost & Found": "Hilang/
 Object.assign(ID, {"Cars": "Mobil", "Motorbikes": "Motor", "Direct to mall": "Langsung ke mal", "Main parking building": "Gedung parkir utama", "New parking building": "Gedung parkir baru", "Direct access to the mall": "Akses langsung ke mal", "Building, for example New parking building": "Gedung, contoh Gedung parkir baru", "How to get here": "Cara menuju ke sini", "Getting here": "Menuju ke sini", "Directions, toll, train and shuttle": "Petunjuk arah, tol, kereta dan shuttle", "How to reach AEON Mall BSD City by car, train, shuttle or taxi.": "Cara menuju AEON Mall BSD City dengan mobil, kereta, shuttle atau taksi.", "Directions in Google Maps": "Petunjuk arah di Google Maps", "Apple Maps": "Apple Maps", "By car and toll road": "Dengan mobil dan jalan tol", "By train (KRL Commuter Line)": "Dengan kereta (KRL Commuter Line)", "BSD Link shuttle bus (free)": "Bus shuttle BSD Link (gratis)", "Taxi and online taxi": "Taksi dan taksi online", "From South and Central Jakarta: take the Jakarta Outer Ring Road (JORR), then the Jakarta to Serpong toll, and exit at BSD Timur 2 (Serbaraja toll).": "Dari Jakarta Selatan dan Pusat: lewat Jakarta Outer Ring Road (JORR), lalu Tol Jakarta - Serpong, dan keluar di BSD Timur 2 (Tol Serbaraja).", "From West, East and North Jakarta: use the Jakarta to Tangerang toll (reached through the inner-city toll via Tomang from the east, or via Cawang from the north) and exit at Alam Sutera. Then follow Jalan Raya Serpong towards Jalan Pahlawan Seribu.": "Dari Jakarta Barat, Timur dan Utara: gunakan Tol Jakarta - Tangerang (lewat tol dalam kota via Tomang dari timur, atau via Cawang dari utara) dan keluar di Alam Sutera. Lanjutkan di Jalan Raya Serpong menuju Jalan Pahlawan Seribu.", "Two stations are near the mall: Cisauk, about 3.5 km away, and Rawa Buntu, about 6 km away.": "Ada dua stasiun di dekat mal: Cisauk, sekitar 3,5 km, dan Rawa Buntu, sekitar 6 km.", "From either station, take a taxi or an online taxi to the mall.": "Dari kedua stasiun, naik taksi atau taksi online menuju mal.", "A free shuttle run by Sinarmas Land. The shelter is across from Lobby Natsu, near the North parking.": "Shuttle gratis yang dikelola Sinarmas Land. Halte berada di seberang Lobby Natsu, dekat Parkir Utara.", "It also stops at The Breeze and ICE BSD City.": "Shuttle juga berhenti di The Breeze dan ICE BSD City.", "The Blue Bird taxi shelter is across from Lobby Natsu, near the North parking.": "Pangkalan taksi Blue Bird berada di seberang Lobby Natsu, dekat Parkir Utara.", "Go-Car pickup and drop-off points are at several mall lobbies.": "Titik jemput dan antar Go-Car ada di beberapa lobi mal.", "Cars and motorbikes park in the main or the new parking building. Levels marked Direct to mall connect straight to the mall.": "Mobil dan motor parkir di gedung parkir utama atau gedung parkir baru. Lantai bertanda Langsung ke mal terhubung langsung ke mal.", "See free parking spaces": "Lihat tempat parkir kosong", "Contact and opening hours": "Kontak dan jam buka", "Call 021 2916 8585": "Telepon 021 2916 8585", "Email customer service": "Email layanan pelanggan", "Opening hours (official site)": "Jam buka (situs resmi)", "Contact": "Kontak", "Information from the official AEON Mall BSD City website (checked in November 2026). Routes and shuttle details can change, so check the official site before you travel.": "Informasi dari situs resmi AEON Mall BSD City (dicek November 2026). Rute dan detail shuttle dapat berubah, jadi periksa situs resmi sebelum berangkat."});
 Object.assign(ID, {"Report sent": "Laporan terkirim", "Keep this tracking code. You can use it to check your report from any device.": "Simpan kode pelacakan ini. Anda dapat memakainya untuk memeriksa laporan dari perangkat mana pun.", "Copy": "Salin", "Copied": "Disalin", "Staff will review your report. Confirmed reports get higher priority.": "Petugas akan memeriksa laporan Anda. Laporan yang dikonfirmasi mendapat prioritas lebih tinggi.", "Search": "Cari"});
 Object.assign(ID, {"Explore": "Jelajahi", "Plan my visit": "Rencanakan kunjungan", "Plan your visit": "Rencanakan kunjungan Anda", "Tell us what you feel like and we will suggest where to go.": "Beri tahu apa yang Anda inginkan dan kami sarankan ke mana.", "Not sure where to go?": "Belum tahu mau ke mana?", "Tell us what you feel like, such as dessert, a savoury meal or some shopping, and we will suggest stores and show you the floor.": "Beri tahu apa yang Anda inginkan, misalnya makanan penutup, makanan gurih atau belanja, dan kami sarankan toko beserta lantainya.", "Dessert": "Makanan penutup", "Savoury": "Gurih", "Salty snack": "Camilan asin", "Drinks": "Minuman", "Movies": "Film", "Top picks": "Pilihan teratas", "Well-known stores": "Toko terkenal", "Browse by category": "Jelajahi menurut kategori", "Find your way": "Temukan jalan Anda", "Browse by floor": "Jelajahi menurut lantai", "Visit info": "Info kunjungan", "Help and visit info": "Bantuan dan info kunjungan", "What's on": "Sedang berlangsung", "Notices and events": "Pengumuman dan acara", "Mostly": "Sebagian besar", "Posted": "Diposting", "Browse by floor ": "Jelajahi menurut lantai", "1. What are you planning to do today?": "1. Apa rencana Anda hari ini?", "You can pick more than one.": "Anda dapat memilih lebih dari satu.", "2. What do you feel like?": "2. Anda ingin yang mana?", "Which cuisine?": "Masakan apa?", "Eat or drink": "Makan atau minum", "Beauty and health": "Kecantikan dan kesehatan", "Phones and electronics": "Ponsel dan elektronik", "Kids and family": "Anak dan keluarga", "Movies and games": "Film dan permainan", "Banks and services": "Bank dan layanan", "Groceries and home": "Bahan makanan dan rumah", "Dessert (sweet)": "Makanan penutup (manis)", "Savoury meal": "Makanan gurih", "Drinks and coffee": "Minuman dan kopi", "Surprise me": "Kejutkan saya", "Any cuisine": "Semua masakan", "Western": "Barat", "Pick at least one activity to get suggestions.": "Pilih minimal satu kegiatan untuk mendapat saran.", "Choose what you feel like above to see food suggestions.": "Pilih yang Anda inginkan di atas untuk melihat saran makanan.", "No match found for this choice.": "Tidak ada yang cocok untuk pilihan ini.", "Your visit plan": "Rencana kunjungan Anda", "The top pick for each thing you chose, grouped by floor so you walk less.": "Pilihan teratas untuk setiap hal yang Anda pilih, dikelompokkan per lantai agar Anda tidak banyak berjalan.", "Well known": "Terkenal", "Well-known places are listed first. The mall website has no ratings, prices or opening hours, so suggestions are based on the type of store only.": "Tempat terkenal ditampilkan lebih dulu. Situs mal tidak punya penilaian, harga atau jam buka, jadi saran hanya berdasarkan jenis toko.", "Setup problem: these files are missing from the website: ": "Masalah pengaturan: file ini tidak ada di situs: "});
+Object.assign(ID, {"Previous": "Sebelumnya", "Next": "Berikutnya", "stores": "toko", "levels": "lantai", "car spaces": "tempat parkir mobil", "Popular here": "Populer di sini", "What are you craving today?": "Anda sedang ingin apa hari ini?", "Dessert, a savoury meal or some shopping? Tell us and we will suggest where to go.": "Makanan penutup, makanan gurih atau belanja? Beri tahu kami dan kami sarankan ke mana.", "Find a space before you arrive": "Temukan tempat parkir sebelum tiba", "Check parking": "Cek parkir", "See what's on": "Lihat yang sedang berlangsung"});
 const RX = [
  [/^(\d+) free$/, m => m[1] + " kosong"], [/^\((\d+) free\)$/, m => "(" + m[1] + " kosong)"], [/^Most space: (.+)$/, m => "Paling lega: " + m[1]], [/^car spaces free of (.+)$/, m => "tempat parkir mobil kosong dari " + m[1]], [/^Most car space: (.+)$/, m => "Mobil paling lega: " + m[1]],
  [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], 
- [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-[\w-]+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]], [/^Posted (.+)$/, m => "Diposting " + tr(m[1])], [/^(\d+) stores$/, m => m[1] + " toko"], [/^Show all (\d+)$/, m => "Tampilkan semua " + m[1]],
+ [/^Technician: (.+)$/, m => "Teknisi: " + m[1]], [/^Report (MR-[\w-]+) sent$/, m => "Laporan " + m[1] + " terkirim"], [/^Until (.+)$/, m => "Sampai " + m[1]], [/^Posted (.+)$/, m => "Diposting " + tr(m[1])], [/^(\d+) stores$/, m => m[1] + " toko"], [/^Browse all (\d+) stores$/, m => "Lihat semua " + m[1] + " toko"], [/^Slide (\d+)$/, m => "Slide " + m[1]], [/^Show all (\d+)$/, m => "Tampilkan semua " + m[1]],
  [/^until (.+)$/, m => "sampai " + m[1]], [/^Reports to review \((\d+)\)$/, m => "Laporan untuk diperiksa (" + m[1] + ")"],
  [/^Confirm real reports to raise their priority, or reject trolls and fake reports\. Reviews are overdue after (\d+) h\.$/, m => "Konfirmasi laporan asli untuk menaikkan prioritasnya, atau tolak laporan iseng dan palsu. Pemeriksaan terlambat setelah " + m[1] + " jam."],
  [/^Overdue limits: Urgent (\d+) h, High (\d+) h, Normal (\d+) h\. Overdue jobs show first\.$/, m => "Batas keterlambatan: Mendesak " + m[1] + " jam, Tinggi " + m[2] + " jam, Normal " + m[3] + " jam. Pekerjaan terlambat tampil lebih dulu."],
@@ -361,7 +414,7 @@ const parkBox = P => {
     (best && best.free ? "<div class='best' style='margin-top:10px'><b>Most car space: " + esc(best.level) + "</b> (" + best.free + " free)</div>" : "") + (P.length ? parkGroups(P) : "<div class='muted'>No parking data yet.</div>") + "</div>";
 };
 const KIND = {info:"Notice", closure:"Closure", event:"Event"};
-const noticesBox = N => N.length ? sec("What's on", "Notices and events", "<div class='hscroll'>" + N.map(n => "<div class='ncard " + esc(n.kind) + "'><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") + "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + "</div></div>").join("") + "</div>") : "";
+const noticesBox = N => N.length ? "<div class='sec rvl' id='whatson'><div class='eyebrow'>What's on</div><h3 class='serif sech'>Notices and events</h3>" + carousel(N.map(n => "<div class='ncard " + esc(n.kind) + "'><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") + "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + "</div></div>").join("")) + "</div>" : "";
 const photoHtml = t => t.photo_url ? "<a href='" + esc(t.photo_url) + "' target='_blank' rel='noopener'><img class='ph' loading='lazy' alt='Attached photo' src='" + esc(t.photo_url) + "'></a>" : "";
 function notesBlock(t) {
   const cs = D.comments.filter(c => c.ticket_id === t.id), op = openN.has(t.id);
@@ -513,23 +566,37 @@ function parkSummary(P) {
   return !P.length ? "No parking data yet." : best && best.free ? "<b>Most car space: " + esc(best.level) + "</b> (" + best.free + " free)" : "All levels are full";
 }
 const FEATURED = ["UNIQLO", "H&M", "Nike", "Starbucks Coffee", "Cinema XXI", "Sephora", "Haagen-Dazs", "Samsung", "Krispy Kreme", "AEON BSD CITY Supermarket GF", "Gramedia", "Miniso"];
-const sec = (eyebrow, title, inner) => "<div class='sec'><div class='eyebrow'>" + eyebrow + "</div><h3 class='serif sech'>" + title + "</h3>" + inner + "</div>";
+const carousel = inner => "<div class='cwrap'><button class='carr l' data-act='carr' data-d='-1' aria-label='Previous'>&#8249;</button><div class='hscroll'>" + inner + "</div><button class='carr r' data-act='carr' data-d='1' aria-label='Next'>&#8250;</button></div>";
+const sec = (eyebrow, title, inner) => "<div class='sec rvl'><div class='eyebrow'>" + eyebrow + "</div><h3 class='serif sech'>" + title + "</h3>" + inner + "</div>";
+let towerSel = "GF";
+function towerPanel(f) {
+  const L = STORE_OBJ.filter(x => x.floor === f), cnt = {}; L.forEach(x => { cnt[x.cat] = (cnt[x.cat] || 0) + 1; });
+  const cs = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a]), mx = cnt[cs[0]] || 1, pop = L.filter(x => POP.has(x.name)).slice(0, 5);
+  return "<div class='fbig f-" + fcls(f) + "'>" + f + "</div><div class='muted'>" + FLOOR_NAME[f] + "</div><div style='margin-top:10px'>" + cs.map(c => "<div class='hb'><span>" + catName(c) + "</span><span class='b' style='width:" + Math.round(cnt[c] / mx * 100) + "%'></span><b>" + cnt[c] + "</b></div>").join("") + "</div>" +
+    (pop.length ? "<div class='muted' style='margin-top:12px'>Popular here</div><div class='chips'>" + pop.map(x => "<button class='chip' data-act='planstore' data-i='" + x.i + "' aria-pressed='false'>" + esc(x.name) + "</button>").join("") + "</div>" : "") +
+    "<div class='acts'><button class='btn sm' data-act='dfloorview' data-f='" + f + "'>Browse all " + L.length + " stores</button></div>";
+}
 async function homeView() {
   const d = await pubData(), who = role === "tenant" && profile ? profile.store : (user ? user.email : "");
+  const cars = d.P.filter(l => l.vehicle === "car"), free = cars.reduce((n, l) => n + l.free, 0), cap = cars.reduce((n, l) => n + l.capacity, 0), nt = d.N[0];
   const chips = [["dessert", "Dessert"], ["savoury", "Savoury"], ["salty", "Salty snack"], ["drinks", "Drinks"], ["fashion", "Fashion"], ["movies", "Movies"]].map(([k, l]) => "<button data-act='quickplan' data-k='" + k + "'>" + l + "</button>").join("");
-  const hero = "<div class='welcome'><div class='hello'>" + greet() + "</div><h2 class='serif'>Welcome to AEON Mall BSD City</h2><div class='wsub'>What would you like to do today?</div>" + (who ? "<div class='who'>Welcome back, <b>" + esc(who) + "</b></div>" : "") +
-    "<div class='hsearch'><input type='text' id='hq' placeholder='Search a store name' autocomplete='off'><button data-act='hsearch' aria-label='Search'>" + ICON.lost + "</button></div><div class='hchips'>" + chips + "</div></div>";
-  const cta = "<div class='cta'><div><div class='eyebrow'>Plan your visit</div><h3 class='serif' style='margin:2px 0 4px'>Not sure where to go?</h3><div class='muted'>Tell us what you feel like, such as dessert, a savoury meal or some shopping, and we will suggest stores and show you the floor.</div></div><button class='btn' data-act='view' data-v='plan'>Plan my visit</button></div>";
+  const slides = [
+    "<div class='hslide s1'><div class='hello'>" + greet() + "</div><h2 class='serif'>Welcome to AEON Mall BSD City</h2><div class='wsub'>What would you like to do today?</div>" + (who ? "<div class='who'>Welcome back, <b>" + esc(who) + "</b></div>" : "") +
+      "<div class='hsearch'><input type='text' id='hq' placeholder='Search a store name' autocomplete='off'><button data-act='hsearch' aria-label='Search'>" + ICON.lost + "</button></div><div id='hsug'></div><div class='hchips' id='hchips'>" + chips + "</div></div>",
+    "<div class='hslide s2'><div class='hello'>Plan your visit</div><h2 class='serif'>What are you craving today?</h2><div class='wsub'>Dessert, a savoury meal or some shopping? Tell us and we will suggest where to go.</div><div class='acts'><button class='btn gold' data-act='view' data-v='plan'>Plan my visit</button></div></div>"];
+  if (cap) slides.push("<div class='hslide s3'><div class='hello'>Parking</div><h2 class='serif'>Find a space before you arrive</h2><div class='bignum'>" + free.toLocaleString("en-US") + "</div><div class='bigsub'>car spaces free of " + cap.toLocaleString("en-US") + "</div><div class='acts'><button class='btn gold' data-act='view' data-v='parking'>Check parking</button></div></div>");
+  if (nt) slides.push("<div class='hslide s4'><div class='hello'>" + KIND[nt.kind] + "</div><h2 class='serif'>" + esc(nt.title) + "</h2>" + (nt.body ? "<div class='wsub'>" + esc(nt.body) + "</div>" : "") + "<div class='acts'><button class='btn gold' data-act='gotonotices'>See what's on</button></div></div>");
+  const hero = "<div class='sliderwrap'><div class='slider' id='slider'>" + slides.join("") + "</div><button class='sarr l' id='sprev' aria-label='Previous'>&#8249;</button><button class='sarr r' id='snext' aria-label='Next'>&#8250;</button><div class='sdots' id='sdots'>" + slides.map((_, i) => "<button aria-label='Slide " + (i + 1) + "' aria-current='" + (i === 0) + "'></button>").join("") + "</div></div>";
+  const glance = "<div class='glance rvl'><div><b class='cnt' data-n='" + STORE_OBJ.length + "'>0</b><span>stores</span></div><div><b class='cnt' data-n='4'>0</b><span>levels</span></div><div><b class='cnt' data-n='" + (cap || 0) + "'>0</b><span>car spaces</span></div></div>";
   const top = FEATURED.map(n => STORE_OBJ.find(x => x.name === n)).filter(Boolean);
-  const topSec = sec("Top picks", "Well-known stores", "<div class='hscroll'>" + top.map(x => "<button class='pcard' data-act='planstore' data-i='" + x.i + "'><span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span><b>" + esc(x.name) + "</b><span class='muted'>" + x.sub + "</span></button>").join("") + "</div>");
-  const catSec = sec("Explore", "Browse by category", "<div class='hscroll'>" + Object.keys(CATS).map(c => "<button class='ccard' data-act='homecat' data-c='" + c + "'><span class='ticon' style='" + CAT_STYLE[c] + "'>" + CAT_ICON[c] + "</span><b>" + CATS[c][0] + "</b><span class='muted'>" + STORE_OBJ.filter(x => x.cat === c).length + " stores</span></button>").join("") + "</div>");
-  const flSec = sec("Find your way", "Browse by floor", "<div class='floors'>" + FLOORS.map(f => {
-    const L = STORE_OBJ.filter(x => x.floor === f), cnt = {}; L.forEach(x => { cnt[x.cat] = (cnt[x.cat] || 0) + 1; }); const tc = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0];
-    return "<button class='fcard f-" + fcls(f) + "' data-act='dfloorview' data-f='" + f + "'><span class='fbig'>" + f + "</span><span class='muted'>" + FLOOR_NAME[f] + "</span><span><span class='muted'>Mostly</span> <b>" + catName(tc) + "</b></span><span class='muted'>" + L.length + " stores</span></button>"; }).join("") + "</div>");
+  const topSec = sec("Top picks", "Well-known stores", carousel(top.map(x => "<button class='pcard' data-act='planstore' data-i='" + x.i + "'><span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span><b>" + esc(x.name) + "</b><span class='muted'>" + x.sub + "</span></button>").join("")));
+  const catSec = sec("Explore", "Browse by category", carousel(Object.keys(CATS).map(c => "<button class='ccard' data-act='homecat' data-c='" + c + "'><span class='ticon' style='" + CAT_STYLE[c] + "'>" + CAT_ICON[c] + "</span><b>" + CATS[c][0] + "</b><span class='muted'>" + STORE_OBJ.filter(x => x.cat === c).length + " stores</span></button>").join("")));
+  const tower = "<div class='towerwrap'><div class='tower'>" + ["3F", "3MF", "2F", "1F", "GF"].map(f => "<button class='tfloor f-" + fcls(f) + (f === "3MF" ? " mez" : "") + "' data-act='tsel' data-f='" + f + "' aria-pressed='" + (f === towerSel) + "'><b>" + f + "</b><span class='muted'>" + FLOOR_NAME[f] + "</span><span class='badge'>" + STORE_OBJ.filter(x => x.floor === f).length + "</span></button>").join("") + "</div><div class='fpanel' id='towerpanel'>" + towerPanel(towerSel) + "</div></div>";
+  const flSec = sec("Find your way", "Browse by floor", tower);
   const help = sec("Visit info", "Help and visit info", "<div class='tiles'>" + tile("parking", ICON.park, "Parking", "<span id='parksum'>" + parkSummary(d.P) + "</span>") + tile("report", ICON.report, "Report a problem", "Toilets, escalators, spills, AC and more") +
     tile("lost", ICON.lost, "Lost and found", "Lost or found something? Tell us") + tile("getting", ICON.pin, "Getting here", "Directions, toll, train and shuttle") +
     "<button class='tile hidden' id='installbtn' data-act='install'><span class='ticon'>" + ICON.install + "</span><b>Install the app</b><span class='tdesc'>Add it to your home screen</span></button>" + tile("account", ICON.user, user ? "Dashboard" : "Sign in", "Staff and tenants") + "</div>");
-  return hero + cta + "<div id='noticebox'>" + noticesBox(d.N) + "</div>" + topSec + catSec + flSec + help;
+  return hero + glance + "<div id='noticebox'>" + noticesBox(d.N) + "</div>" + topSec + catSec + flSec + help;
 }
 const plan = {acts: [], taste: "", cuisine: "any", more: {}, seed: 1};
 const ACTS = [["eat", "Eat or drink"], ["fashion", "Fashion"], ["beauty", "Beauty and health"], ["phones", "Phones and electronics"], ["kids", "Kids and family"], ["fun", "Movies and games"], ["services", "Banks and services"], ["grocery", "Groceries and home"]];
@@ -802,7 +869,53 @@ async function render() {
   showInstall();
   applyLang();
   if (changed) { const ap = $("app"); ap.classList.remove("enter"); void ap.offsetWidth; ap.classList.add("enter"); lastView = view; }
+  initUI();
 }
+/* ---------- Interactive touches: reveal on scroll, hero slider, drag carousels, search suggestions ---------- */
+let io = null, dragEl = null, dragX = 0, dragL = 0, dragMoved = false;
+function countUp(root) {
+  root.querySelectorAll(".cnt").forEach(el => {
+    const n = +el.dataset.n, t0 = performance.now();
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !n) { el.textContent = n.toLocaleString("en-US"); return; }
+    const step = t => { const p = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(n * e).toLocaleString("en-US"); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
+function initReveal() {
+  const els = document.querySelectorAll(".rvl:not(.in)");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { els.forEach(e => { e.classList.add("in"); countUp(e); }); return; }
+  io = io || new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); countUp(en.target); } }), {threshold: .12});
+  els.forEach(e => io.observe(e));
+}
+function initHome() {
+  const sl = $("slider"); clearInterval(window.__sl); if (!sl) return;
+  const dots = [...document.querySelectorAll("#sdots button")]; let cur = 0, paused = false, resume = null;
+  const go = i => { cur = (i + dots.length) % dots.length; sl.scrollTo({left: sl.clientWidth * cur, behavior: "smooth"}); };
+  sl.addEventListener("scroll", () => { const i = Math.round(sl.scrollLeft / sl.clientWidth); if (i !== cur) { cur = i; dots.forEach((d, k) => d.setAttribute("aria-current", k === cur)); } }, {passive: true});
+  dots.forEach((d, k) => { d.onclick = () => go(k); });
+  $("sprev").onclick = () => go(cur - 1); $("snext").onclick = () => go(cur + 1);
+  const hold = () => { paused = true; clearTimeout(resume); resume = setTimeout(() => { paused = false; }, 9000); };
+  ["pointerdown", "focusin", "input"].forEach(ev => sl.addEventListener(ev, hold)); sl.addEventListener("mouseenter", () => { paused = true; }); sl.addEventListener("mouseleave", () => { paused = false; });
+  window.__sl = setInterval(() => { if (!paused && view === "home" && !typing() && !document.hidden) go(cur + 1); }, 7000);
+}
+function initDrag() {
+  if (window.__drag) return; window.__drag = true;
+  document.addEventListener("pointerdown", e => { const el = e.target.closest(".hscroll"); if (!el || e.pointerType !== "mouse") return; dragEl = el; dragX = e.clientX; dragL = el.scrollLeft; dragMoved = false; });
+  window.addEventListener("pointermove", e => { if (!dragEl) return; const dx = e.clientX - dragX; if (Math.abs(dx) > 5) { dragMoved = true; dragEl.style.scrollSnapType = "none"; dragEl.classList.add("drag"); } if (dragMoved) dragEl.scrollLeft = dragL - dx; });
+  window.addEventListener("pointerup", () => { if (!dragEl) return; dragEl.style.scrollSnapType = ""; dragEl.classList.remove("drag"); dragEl = null; setTimeout(() => { dragMoved = false; }, 0); });
+  document.addEventListener("click", e => { if (dragMoved) { e.stopPropagation(); e.preventDefault(); dragMoved = false; } }, true);
+  addEventListener("scroll", () => document.querySelector("header").classList.toggle("scrolled", scrollY > 24), {passive: true});
+  document.addEventListener("input", e => {
+    if (e.target.id !== "hq") return; const q = e.target.value.trim().toLowerCase(), box = $("hsug"), ch = $("hchips");
+    if (!q) { box.innerHTML = ""; if (ch) ch.style.display = ""; return; }
+    const r = STORE_OBJ.filter(x => x.name.toLowerCase().includes(q)).slice(0, 4);
+    if (ch) ch.style.display = "none";
+    box.innerHTML = r.length ? r.map(x => "<button class='sug' data-act='planstore' data-i='" + x.i + "'><span>" + esc(x.name) + "</span><span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span></button>").join("") : "<div class='sug none'>No store found. Try a shorter name.</div>";
+    applyLang();
+  });
+  document.addEventListener("mouseover", e => { const b = e.target.closest(".tfloor"); if (b && matchMedia("(hover:hover)").matches && b.dataset.f !== towerSel) b.click(); });
+}
+const initUI = () => { initReveal(); initHome(); initDrag(); };
 document.addEventListener("click", async e => {
   if (e.target.id === "sheet") { $("sheet").classList.add("hidden"); return; }
   const b = e.target.closest("[data-act]"); if (!b) return;
@@ -815,6 +928,9 @@ document.addEventListener("click", async e => {
   else if (a === "dstore") { dir.store = +b.dataset.i; drawDir(); window.scrollTo(0, 0); }
   else if (a === "dclose") { dir.store = null; drawDir(); }
   else if (a === "hsearch") goSearch();
+  else if (a === "carr") { const hs = b.parentElement.querySelector(".hscroll"); hs.scrollBy({left: +b.dataset.d * hs.clientWidth * .85, behavior: "smooth"}); }
+  else if (a === "tsel") { towerSel = b.dataset.f; if ($("towerpanel")) { $("towerpanel").innerHTML = towerPanel(towerSel); document.querySelectorAll(".tfloor").forEach(x => x.setAttribute("aria-pressed", x.dataset.f === towerSel)); applyLang(); } }
+  else if (a === "gotonotices") { const w = $("whatson"); if (w) w.scrollIntoView({behavior: "smooth", block: "start"}); }
   else if (a === "pact") { const k = b.dataset.k, i = plan.acts.indexOf(k); if (i < 0) plan.acts.push(k); else plan.acts.splice(i, 1); drawPlan(); }
   else if (a === "ptaste") { plan.taste = plan.taste === b.dataset.k ? "" : b.dataset.k; plan.seed = Math.floor(Math.random() * 1e6); drawPlan(); }
   else if (a === "pcuis") { plan.cuisine = b.dataset.k; drawPlan(); }
@@ -889,7 +1005,7 @@ function savedTheme() { try { return localStorage.getItem("aeon_theme"); } catch
 function isDark() { const t = savedTheme(); return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
 function applyTheme() {
   const t = savedTheme(); if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
-  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#5a0035" : "#a3005f";
+  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#2a0a17" : "#8f1650";
   const b = $("themebtn"); b.innerHTML = d ? SUN : MOON; b.setAttribute("aria-label", d ? "Switch to light mode" : "Switch to dark mode");
 }
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
