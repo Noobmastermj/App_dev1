@@ -1,6 +1,6 @@
 // Network first, so a new version pushed to GitHub shows up right away.
 // The cache is only a fallback so the app shell still opens without internet.
-const CACHE = "aeon-shell-v12";
+const CACHE = "aeon-shell-v13";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", e => {
