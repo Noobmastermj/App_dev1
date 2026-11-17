@@ -407,6 +407,22 @@ h1,h2,h3,.sech,.tfloor b,.kpi b,.glance b,.pcard b,.ncard h4{font-family:"Zen Ka
 @media(hover:hover){.tcard{transition:transform .25s}.tcard:hover{transform:translateY(-4px)}}
 .tile{min-height:200px;padding:22px}
 .tile .ticon{width:56px;height:56px}.tile b{font-size:19px}
+
+/* ===== admin: one section at a time ===== */
+.abar{padding:14px 16px;margin-bottom:12px}
+.kpis{margin-top:10px}.kpi{padding:8px 12px}.kpi b{font-size:22px}
+.abnav{position:static;top:auto;z-index:auto;background:none;backdrop-filter:none;margin:0 0 14px;padding:2px 0 6px;overflow-x:auto;align-items:center}
+@media(min-width:900px){.abnav{flex-wrap:wrap;overflow:visible}}
+.abdiv{width:1px;height:22px;background:var(--line);margin:0 4px;flex:none}
+.adbody .panel{margin-bottom:0!important}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-top:12px}
+@media(max-width:420px){.tgrid{grid-template-columns:minmax(0,1fr)}}
+.tgrid .ticket{margin-top:0;display:flex;flex-direction:column;gap:2px}
+.tgrid .ticket .acts{margin-top:auto;padding-top:10px}
+.adpair{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));align-items:start}
+.pkedit{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:4px 32px;margin-top:8px}
+.pkedit .pk{grid-template-columns:110px 1fr 84px auto;margin:8px 0}
+.pkedit h3{margin:12px 0 0}
 </style>
 </head>
 <body>
@@ -608,11 +624,12 @@ const parkBox = P => {
 const KIND = {info:"Notice", closure:"Closure", event:"Event"};
 const noticesBox = N => N.length ? "<div class='sec rvl' id='whatson'><div class='eyebrow'>What's on<span class='jp'>お知らせ</span></div><h3 class='serif sech'>Notices and events</h3>" + carousel(N.map(n => "<div class='ncard " + esc(n.kind) + "'><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") + "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + "</div></div>").join("")) + "</div>" : "";
 const photoHtml = t => t.photo_url ? "<a href='" + esc(t.photo_url) + "' target='_blank' rel='noopener'><img class='ph' loading='lazy' alt='Attached photo' src='" + esc(t.photo_url) + "'></a>" : "";
-function notesBlock(t) {
+function notesBlock(t, extra) {
+  extra = extra || "";
   const cs = D.comments.filter(c => c.ticket_id === t.id), op = openN.has(t.id);
   let h = cs.map(c => "<div class='cm'><b>" + esc(c.author_label || "Staff") + "</b>" + (c.show_reporter ? " <span class='badge'>Visible to reporter</span>" : "") + " <span class='muted'>" + ago(c.created_at) + "</span><div>" + esc(c.body) + "</div></div>").join("");
-  h += op ? "<div class='cm'><textarea id='cm-" + t.id + "' maxlength='500' placeholder='Add a note, for example: the wallet is at our counter' style='min-height:70px'></textarea><label style='display:flex;gap:8px;align-items:center;font-weight:600;margin:8px 0'><input type='checkbox' id='cs-" + t.id + "' style='width:auto'> Show this note to the reporter</label><div class='acts'><button class='btn sm' data-act='addnote' data-id='" + t.id + "'>Save note</button><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Cancel</button></div></div>"
-    : "<div class='acts'><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Add note" + (cs.length ? " (" + cs.length + ")" : "") + "</button></div>";
+  h += op ? "<div class='cm'><textarea id='cm-" + t.id + "' maxlength='500' placeholder='Add a note, for example: the wallet is at our counter' style='min-height:70px'></textarea><label style='display:flex;gap:8px;align-items:center;font-weight:600;margin:8px 0'><input type='checkbox' id='cs-" + t.id + "' style='width:auto'> Show this note to the reporter</label><div class='acts'><button class='btn sm' data-act='addnote' data-id='" + t.id + "'>Save note</button><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Cancel</button></div></div>" + (extra ? "<div class='acts'>" + extra + "</div>" : "")
+    : "<div class='acts'><button class='btn alt sm' data-act='togglenote' data-id='" + t.id + "'>Add note" + (cs.length ? " (" + cs.length + ")" : "") + "</button>" + extra + "</div>";
   return h;
 }
 
@@ -1135,7 +1152,7 @@ function tcard(t, mine) {
   const lost = t.kind === "lost", done = t.status === "Resolved" || t.status === "Completed";
   return "<div class='ticket " + t.urgency.toLowerCase() + "'><div class='row'><span><span class='id'>" + t.code + "</span> <span class='badge " + bcls(t) + "'>" + (done ? (lost ? "Resolved" : "Done") : t.status) + "</span></span><span class='muted'>" + ago(t.created_at) + "</span></div><div><b>" + esc(t.category) + "</b>" + (t.location ? " at " + esc(t.location) : "") + "</div><div>" + esc(t.description) + "</div>" + photoHtml(t) +
     (!mine && t.contact ? "<div class='muted'>Reporter contact: " + esc(t.contact) + "</div>" : "") + (mine && !lost && t.technician ? "<div class='muted'>Technician: " + esc(t.technician) + "</div>" : "") +
-    notesBlock(t) + (!mine && !done ? "<div class='acts'><button class='btn sm' data-act='tresolve' data-id='" + t.id + "'>Mark as done</button></div>" : "") + "</div>";
+    notesBlock(t, !mine && !done ? "<button class='btn sm' data-act='tresolve' data-id='" + t.id + "'>Mark as done</button>" : "") + "</div>";
 }
 function tenantView() {
   const pub = D.tickets.filter(t => t.source === "guest"), mine = D.tickets.filter(t => t.reporter_id === user.id), open = pub.filter(t => t.status !== "Resolved" && t.status !== "Completed").length;
@@ -1160,16 +1177,18 @@ function card(t) {
   else if (!rej && !lost && t.status !== "Completed") a = "<button class='btn sm' data-act='advance' data-id='" + t.id + "'>Mark " + STAGES[STAGES.indexOf(t.status) + 1] + "</button>";
   else if (lost && !rej && t.status !== "Resolved") a = "<button class='btn sm' data-act='resolve' data-id='" + t.id + "'>Mark resolved</button>";
   a += "<button class='btn sm alt' data-act='del' data-id='" + t.id + "'>Delete</button>";
-  return h + notesBlock(t) + "<div class='acts'>" + a + "</div></div>";
+  return h + notesBlock(t, a) + "</div>";
 }
 const adLimit = {}, adKey = t => t.replace(/\s*\(\d+\)$/, "");
 const panel = (t, s, list) => {
   const lim = adLimit[adKey(t)] || 12, shown = list.slice(0, lim);
   return "<div class='panel' style='margin-bottom:20px'><h2>" + t + "</h2><div class='muted'>" + s + "</div>" +
-    (list.length ? shown.map(card).join("") + (list.length > lim ? "<div class='acts'><button class='btn alt sm' data-act='admore' data-k='" + esc(t) + "'>Show " + (list.length - lim) + " more</button></div>" : "") : "<div class='muted' style='margin-top:10px'>Nothing here yet.</div>") + "</div>";
+    (list.length ? "<div class='tgrid'>" + shown.map(card).join("") + "</div>" + (list.length > lim ? "<div class='acts'><button class='btn alt sm' data-act='admore' data-k='" + esc(t) + "'>Show " + (list.length - lim) + " more</button></div>" : "") : "<div class='muted' style='margin-top:10px'>Nothing here yet.</div>") + "</div>";
 };
 const techPanel = () => "<div class='panel'><h2>Technicians</h2>" + (D.techs.length ? D.techs.map(t => "<div class='row note' style='align-items:center'><span>" + esc(t.name) + " <span class='muted'>" + esc(t.specialty || "") + "</span></span><button class='btn alt sm' data-act='deltech' data-id='" + t.id + "'>Remove</button></div>").join("") : "<div class='muted'>No technicians yet.</div>") + "<label for='tn'>Add technician</label><input type='text' id='tn' placeholder='Name'><input type='text' id='ts' placeholder='Specialty' style='margin-top:8px'><button class='btn sm' style='margin-top:10px' data-act='addtech'>Add</button></div>";
-const parkEditor = () => "<div class='panel'><h2>Parking levels</h2><div class='muted'>Guests see these numbers live. Red is taken, green is free.</div>" + D.parking.map(l => parkRow(l, true) + "<div style='text-align:right;margin-top:-6px'><button class='btn alt sm' data-act='dellevel' data-id='" + esc(l.level) + "'>Remove " + esc(l.level) + "</button> <span class='muted'>" + esc(l.building) + (l.vehicle === "motorcycle" ? ", motorbikes" : "") + "</span></div>").join("") +
+const parkEdRows = () => { const bl = []; D.parking.forEach(l => { if (!bl.includes(l.building)) bl.push(l.building); });
+  return "<div class='pkedit'>" + bl.map(b => "<div><h3>" + esc(b) + "</h3>" + D.parking.filter(l => l.building === b).map(l => parkRow(l, true).replace("<b>" + esc(l.level) + "</b>", "<b>" + esc(l.level) + "</b>" + (l.vehicle === "motorcycle" ? " <span class='muted'>Motorbikes</span>" : "")).replace(/<\/div>$/, "<button class='btn alt sm' data-act='dellevel' data-id='" + esc(l.level) + "'>Remove</button></div>")).join("") + "</div>").join("") + "</div>"; };
+const parkEditor = () => "<div class='panel'><h2>Parking levels</h2><div class='muted'>Guests see these numbers live. Red is taken, green is free.</div>" + parkEdRows() +
   "<label for='pl'>Add level</label><input type='text' id='pl' placeholder='Level name, for example P4'><input type='text' id='pb' placeholder='Building, for example New parking building' style='margin-top:8px'><select id='pv' style='margin-top:8px'><option value='car'>Cars</option><option value='motorcycle'>Motorbikes</option></select><input type='number' id='pc' placeholder='Total spaces' min='0' style='margin-top:8px'><label style='display:flex;gap:8px;align-items:center;font-weight:600;margin:10px 0'><input type='checkbox' id='pd' style='width:auto'> Direct access to the mall</label><button class='btn sm' data-act='addlevel'>Add level</button></div>";
 const isAd = id => (D.admins || []).some(x => x.user_id === id);
 const tenantAccounts = () => "<div class='panel' style='margin-bottom:20px'><h2>Accounts (" + D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length + " waiting)</h2><div class='muted'>Every account you add in Supabase, or that signs up on the site, shows here. Approve tenants so they can see public reports for their store, or make someone an admin.</div>" +
@@ -1196,23 +1215,29 @@ function insights() {
 }
 let lastLoad = Date.now(), liveOk = false;
 const ago2 = ms => { const x = Math.round((Date.now() - ms) / 1000); return x < 5 ? "just now" : x < 60 ? x + " s ago" : Math.round(x / 60) + " min ago"; };
-function adminBar(q, act, late, lf, rej) {
+let adTab = null;
+const AD_TABS = [["ad-review", "Review"], ["ad-jobs", "Jobs"], ["ad-lf", "Lost & found"], ["ad-rej", "Rejected"], ["|"], ["ad-insights", "Insights"], ["ad-parking", "Parking"], ["ad-tech", "Technicians"], ["ad-notices", "Notices"], ["ad-stores", "Stores"], ["ad-accounts", "Accounts"], ["ad-activity", "Activity"]];
+function adminBar(q, act, late, lf, rej, tab) {
   const kpi = (n, label, target, warn) => "<button class='kpi" + (warn ? " warn" : "") + "' data-act='adgo' data-t='" + target + "'><b>" + n + "</b><span>" + label + "</span></button>";
-  const chips = [["ad-review", "Review", q.length], ["ad-jobs", "Jobs", act.length], ["ad-lf", "Lost & found", lf.length], ["ad-rej", "Rejected", rej.length], ["ad-insights", "Insights", 0], ["ad-parking", "Parking", 0], ["ad-tech", "Technicians", 0], ["ad-notices", "Notices", 0], ["ad-stores", "Stores", 0], ["ad-accounts", "Accounts", D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length], ["ad-activity", "Activity", 0]];
+  const cnt = {"ad-review": q.length, "ad-jobs": act.length, "ad-lf": lf.length, "ad-rej": rej.length, "ad-accounts": D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length};
   return "<div class='abar'><div class='abar-top'><div class='abar-id'><span class='livedot" + (liveOk ? "" : " off") + "' title='Live updates'></span><div><h2 style='margin:0'>Admin panel</h2><div class='muted'>" + esc(user.email) + " &middot; <span id='abupd'>Updated " + ago2(lastLoad) + "</span></div></div></div>" +
     "<div class='abar-actions'><button class='btn alt sm' data-act='refresh'>Refresh</button><details class='menu'><summary class='btn alt sm' aria-label='More actions'>More</summary><div class='menu-list'><button data-act='exp'>Export CSV</button><button data-act='expact'>Export log</button><button data-act='logout'>Log out</button></div></details></div></div>" +
     "<div class='kpis'>" + kpi(q.length, "Waiting for review", "ad-review", false) + kpi(late, "Overdue", "ad-jobs", late > 0) + kpi(act.length, "Open facility jobs", "ad-jobs", false) + kpi(act.filter(t => !t.technician).length, "Need a technician", "ad-jobs", false) + "</div></div>" +
-    "<nav class='abnav' id='abnav' aria-label='Admin sections'>" + chips.map(([id, l, n]) => "<button data-act='adgo' data-t='" + id + "'>" + l + (n ? "<i>" + n + "</i>" : "") + "</button>").join("") + "</nav>";
+    "<nav class='abnav' id='abnav' aria-label='Admin sections'>" + AD_TABS.map(([id, l]) => id === "|" ? "<span class='abdiv'></span>" : "<button data-act='adgo' data-t='" + id + "' aria-current='" + (id === tab) + "'>" + l + (cnt[id] ? "<i>" + cnt[id] + "</i>" : "") + "</button>").join("") + "</nav>";
 }
 function adminView() {
   const T = D.tickets, q = T.filter(t => t.verification === "pending").sort((a, b) => new Date(a.created_at) - new Date(b.created_at)), fac = T.filter(t => t.kind === "fac" && t.verification === "verified"), lf = T.filter(t => t.kind === "lost" && t.verification === "verified"), rej = T.filter(t => t.verification === "rejected");
   const act = fac.filter(t => t.status !== "Completed").sort((a, b) => (!!overdue(b) - !!overdue(a)) || rank[a.urgency] - rank[b.urgency] || new Date(a.created_at) - new Date(b.created_at));
-  const late = T.filter(t => overdue(t) > 0).length, S = (id, inner) => "<section class='adsec' id='" + id + "'>" + inner + "</section>";
-  return adminBar(q, act, late, lf, rej) +
-    "<div class='adm'><div class='adm-main'>" + S("ad-review", panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports. Reviews are overdue after " + REVIEW_SLA + " h.", q)) +
-    S("ad-jobs", panel("Open facility jobs", "Overdue limits: Urgent " + SLA.Urgent + " h, High " + SLA.High + " h, Normal " + SLA.Normal + " h. Overdue jobs show first.", act)) +
-    S("ad-lf", panel("Lost and found log", "Confirmed lost and found reports, with suggested matches.", lf)) + S("ad-rej", panel("Rejected reports", "Kept for your records. Delete to remove.", rej)) +
-    "</div><div class='adm-side'>" + S("ad-insights", insights()) + S("ad-parking", parkEditor()) + S("ad-tech", techPanel()) + S("ad-notices", noticeAdmin()) + S("ad-stores", storeInfoPanel() + pinPanel()) + S("ad-accounts", tenantAccounts()) + S("ad-activity", activityPanel()) + "</div></div>";
+  const late = T.filter(t => overdue(t) > 0).length, tab = AD_TABS.some(t => t[0] === adTab) ? adTab : (q.length ? "ad-review" : "ad-jobs");
+  const body = {
+    "ad-review": () => panel("Reports to review (" + q.length + ")", "Confirm real reports to raise their priority, or reject trolls and fake reports. Reviews are overdue after " + REVIEW_SLA + " h.", q),
+    "ad-jobs": () => panel("Open facility jobs", "Overdue limits: Urgent " + SLA.Urgent + " h, High " + SLA.High + " h, Normal " + SLA.Normal + " h. Overdue jobs show first.", act),
+    "ad-lf": () => panel("Lost and found log", "Confirmed lost and found reports, with suggested matches.", lf),
+    "ad-rej": () => panel("Rejected reports", "Kept for your records. Delete to remove.", rej),
+    "ad-insights": insights, "ad-parking": parkEditor, "ad-tech": techPanel, "ad-notices": noticeAdmin,
+    "ad-stores": () => "<div class='adpair'>" + storeInfoPanel() + pinPanel() + "</div>", "ad-accounts": tenantAccounts, "ad-activity": activityPanel
+  }[tab]();
+  return adminBar(q, act, late, lf, rej, tab) + "<div class='adbody'>" + body + "</div>";
 }
 async function mut(p) { const {error} = await p; if (error) { toast("Failed: " + error.message); return false; } await reload(); render(); return true; }
 const upd = (id, patch) => mut(sb.from("tickets").update(patch).eq("id", id));
@@ -1297,6 +1322,7 @@ function ease(el, to, dur) {
   requestAnimationFrame(f);
 }
 function initAdminNav() {
+  if (window.__spy) { window.__spy.disconnect(); window.__spy = null; } return;
   const nav = $("abnav"); if (window.__spy) { window.__spy.disconnect(); window.__spy = null; } if (!nav || !("IntersectionObserver" in window)) return;
   window.__spy = new IntersectionObserver(es => es.forEach(en => {
     if (!en.isIntersecting) return; nav.querySelectorAll("button").forEach(b => b.removeAttribute("aria-current"));
@@ -1329,7 +1355,7 @@ document.addEventListener("click", async e => {
   else if (a === "mapfloor") { mapSel.f = b.dataset.f; mapSel.i = null; drawMap(); }
   else if (a === "mappin") { mapSel.i = +b.dataset.i; drawMap(); }
   else if (a === "mic") listen(b.dataset.t)
-  else if (a === "adgo") { const el = $(b.dataset.t); if (el) el.scrollIntoView({behavior: "smooth", block: "start"}); }
+  else if (a === "adgo") { adTab = b.dataset.t; render(); const n = $("abnav"); if (n && n.getBoundingClientRect().top < 0) n.scrollIntoView({block: "start"}); }
   else if (a === "admore") { adLimit[adKey(b.dataset.k)] = 1e9; render(); }
   else if (a === "pkveh") { parkVeh = b.dataset.k; if ($("parkbox")) { $("parkbox").innerHTML = parkBox(lastPark); applyLang(); } }
   else if (a === "carr") { const hs = b.parentElement.querySelector(".hscroll"); hs.scrollBy({left: +b.dataset.d * hs.clientWidth * .85, behavior: "smooth"}); }
