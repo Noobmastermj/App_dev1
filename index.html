@@ -6,7 +6,7 @@
 <title>AEON Mall BSD City | Reports and Admin</title>
 <script>try{var t=localStorage.getItem("aeon_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#8f1650">
+<meta name="theme-color" content="#ffffff">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2048%2048%22%3E%3Crect%20width=%2248%22%20height=%2248%22%20rx=%2212%22%20fill=%22%238f1650%22/%3E%3Cpath%20d=%22M15%2020h18l-1%2016a2%202%200%200%201-2%202h-12a2%202%200%200%201-2-2z%22%20fill=%22%23fff%22/%3E%3Cpath%20d=%22M18.5%2020v-2.5a5.5%205.5%200%200%201%2011%200V20%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%222.5%22/%3E%3Cpath%20d=%22M19.5%2029l3.3%203.3L29%2026%22%20fill=%22none%22%20stroke=%22%238f1650%22%20stroke-width=%222.6%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f6f2f5;--surface:#fff;--ink:#221a20;--muted:#7a6f76;--line:#e9e2e7;--field:#f3eff2;--brand:#a3005f;--brand-dark:#6e003f;--soft:#fbe6f1;--gold:#f2b01e;--ok:#1e9e62;--warn:#d98200;--bad:#d6303f;--hdr1:#a3005f;--hdr2:#6e003f;color-scheme:light}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#150f14;--surface:#221a20;--ink:#f4edf1;--muted:#b4a7ae;--line:#3a2e36;--field:#2e232b;--brand:#d62b8c;--soft:#3d1a2d;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#7a0047;--hdr2:#3a0023;color-scheme:dark}}
@@ -327,6 +327,145 @@ header .bar{height:70px;padding-top:0;padding-bottom:0;gap:14px;transition:heigh
 details.menu{position:relative}details.menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center}details.menu summary::-webkit-details-marker{display:none}
 .menu-list{position:absolute;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid rgba(199,154,59,.35);border-radius:14px;box-shadow:0 14px 34px rgba(90,45,25,.2);padding:6px;min-width:170px;z-index:6;display:flex;flex-direction:column}
 .menu-list button{background:none;border:0;text-align:left;padding:10px 12px;border-radius:10px;font:inherit;font-weight:700;color:var(--ink);cursor:pointer}.menu-list button:hover{background:var(--soft)}
+/* ===== Westfield-style theme for AEON Mall BSD City ===== */
+
+:root{--bg:#fff;--surface:#fff;--ink:#0d0d0d;--muted:#6b6b6b;--line:#e6e6e6;--field:#f3f3f3;--soft:#f3f3f3;
+ --brand:#0d0d0d;--gold:#0d0d0d;--gold-d:#6b6b6b;--accent:#0d0d0d;--btn:#0d0d0d;--btn-ink:#fff;--hdr1:#fff;--hdr2:#fff;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0c0c0c;--surface:#161616;--ink:#f5f5f5;--muted:#a3a3a3;--line:#2a2a2a;--field:#202020;--soft:#202020;--brand:#f5f5f5;--gold:#f5f5f5;--gold-d:#a3a3a3;--accent:#f5f5f5;--btn:#f5f5f5;--btn-ink:#0d0d0d;--hdr1:#0c0c0c;--hdr2:#0c0c0c;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0c0c0c;--surface:#161616;--ink:#f5f5f5;--muted:#a3a3a3;--line:#2a2a2a;--field:#202020;--soft:#202020;--brand:#f5f5f5;--gold:#f5f5f5;--gold-d:#a3a3a3;--accent:#f5f5f5;--btn:#f5f5f5;--btn-ink:#0d0d0d;--hdr1:#0c0c0c;--hdr2:#0c0c0c;color-scheme:dark}
+
+/* base */
+body{font-family:"Inter","Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);overflow-x:hidden;letter-spacing:-.005em}
+body::before{display:none}
+h1,h2,h3,.serif,.sech,.tfloor b,.lv-top b,.kpi b,.glance b{font-family:inherit}
+h2{font-weight:800;letter-spacing:-.025em}
+main{padding-top:0}
+#app>*:first-child:not(.sliderwrap){margin-top:24px}
+
+/* header: clean white bar */
+header{background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line);box-shadow:none}
+header.scrolled{box-shadow:0 1px 0 var(--line)}
+h1{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+h1 small{opacity:.6;font-weight:600}
+.hbtn{background:transparent;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px}
+@media(hover:hover){.hbtn:hover{background:var(--ink);color:var(--bg)}}
+@media(min-width:900px){
+ .tabs button,.tabs button[aria-pressed=true]{color:var(--ink)}
+ .tabs button{border-radius:999px;opacity:.7}
+ .tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg);opacity:1}
+ .tabs button:hover{background:var(--field);opacity:1}
+ .tabs button[aria-pressed=true]:hover{background:var(--ink)}
+}
+.tabs{border-top:1px solid var(--line)}
+.tabs button[aria-pressed=true]::before{background:var(--ink)}
+
+/* buttons: black pills */
+.btn{background:var(--btn);color:var(--btn-ink);border-radius:999px;box-shadow:none;padding:13px 24px;letter-spacing:0}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.alt:hover{background:var(--ink);color:var(--bg)}
+.btn.gold{background:#fff;color:#0d0d0d;box-shadow:none}
+.chip{border-radius:999px;border-color:var(--line)}
+.chip[aria-pressed=true],.chip.f-GF[aria-pressed=true],.chip[class*=f-][aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* hero: full-bleed photo, big white headline */
+.sliderwrap{width:100vw;margin-left:calc(50% - 50vw)}
+.slider{border-radius:0;box-shadow:none}
+.hslide{min-height:min(80vh,680px);justify-content:flex-end;padding:48px max(22px,calc((100vw - 1240px)/2 + 14px)) 84px}
+.hslide::before{display:none}
+.s1,.s2,.s3,.s4{background-blend-mode:normal}
+.s1{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/evening.jpg) center/cover no-repeat,#222}
+.s2{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/food-culture.jpg) center/cover no-repeat,#222}
+.s3{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/aerial.jpg) center/cover no-repeat,#222}
+.s4{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/atrium.jpg) center/cover no-repeat,#222}
+.hslide .hello{color:#fff;opacity:.85;text-transform:none;letter-spacing:0;font-size:15px;font-weight:700}
+.hslide h2{font-size:clamp(38px,7vw,84px);line-height:1.02;letter-spacing:-.035em;font-weight:800;max-width:900px}
+.hslide .wsub{font-size:clamp(16px,2vw,20px);max-width:620px}
+.hslide .bignum{font-size:clamp(56px,10vw,120px);letter-spacing:-.04em}
+.hsearch input{border-radius:999px;padding:16px 22px}
+.hsearch button{border-radius:999px;background:#fff;color:#0d0d0d;width:56px}
+.hchips button{border-radius:999px;background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6)}
+.sdots{bottom:26px}.sdots button[aria-current=true]{background:#fff}
+.sliderwrap::after{display:none}
+
+/* section headings: big and quiet */
+.sec{margin-top:64px}
+.sech{font-size:clamp(28px,4.4vw,48px);letter-spacing:-.03em;font-weight:800;margin:4px 0 20px}
+.sech::after{display:none}
+.eyebrow{color:var(--muted);text-transform:none;letter-spacing:0;font-size:14px;font-weight:700}
+
+/* stats: huge numbers, no box */
+.glance{background:transparent;border:0;box-shadow:none;padding:56px 0 8px;margin-top:0}
+.glance>div+div{border-left:1px solid var(--line)}
+.glance b{font-size:clamp(40px,8vw,96px);letter-spacing:-.04em;font-weight:800;color:var(--ink)}
+.glance span{text-transform:none;letter-spacing:0;font-size:15px;font-weight:600}
+
+/* cards: flat, soft grey, generous radius, no gold borders */
+.panel,.tile,.dcard,.pcard,.ccard,.fcard,.pstep,.cta,.notice,.stat div,.lv,.fpanel,.pkbest,.abar,.drow{border:1px solid var(--line);box-shadow:none;border-radius:24px}
+.pcard,.ccard,.tile,.dcard,.fcard{background:var(--field);border-color:transparent}
+.pcard,.ccard{width:200px;padding:18px;min-height:190px}
+.pcard{justify-content:flex-end}
+.pcard b{font-size:17px;letter-spacing:-.01em}
+.ticon{background:var(--surface);color:var(--ink);border-radius:50%}
+@media(hover:hover){.pcard:hover,.ccard:hover,.tile:hover,.dcard:hover,.fcard:hover{transform:translateY(-3px);box-shadow:none;border-color:var(--ink)}}
+.av{border-radius:50%}
+.badge{background:var(--surface);color:var(--ink)}
+.badge.floor{color:#fff}
+
+/* notices and events: tall photo-style cards like "Trending" */
+.ncard{width:300px;min-height:400px;border-radius:24px;justify-content:flex-end;padding:22px;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78)),linear-gradient(145deg,#2b2b2b,#000);color:#fff}
+.ncard.closure{background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78)),linear-gradient(145deg,#1a1a1a,#000)}
+.ncard.event{background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78)),linear-gradient(145deg,#3a3a3a,#0d0d0d);color:#fff}
+.ncard .kind{text-transform:none;letter-spacing:0;font-size:13px}
+.ncard h4{font-size:24px;letter-spacing:-.02em;font-weight:800}
+.ncard .nd{margin-top:8px}
+
+/* floor tower, parking, banners */
+.tfloor{border-radius:18px;border-color:var(--line)}
+.tfloor[aria-pressed=true]{background:var(--ink);color:var(--bg);box-shadow:none}
+.tfloor[aria-pressed=true] b,.tfloor[aria-pressed=true] .muted{color:var(--bg)}
+.pbanner{border-radius:28px;box-shadow:none;min-height:240px}
+.pbanner h2{font-size:clamp(30px,5vw,52px);letter-spacing:-.03em}
+.segx{border-radius:999px}.segx button{border-radius:999px}
+.segx button[aria-pressed=true]{background:var(--ink);color:var(--bg);box-shadow:none}
+.lv{border-top:0;border-left:6px solid var(--sc,var(--ok))}
+.pkbest{border-left:0;background:var(--field);border-color:transparent}
+
+/* forms */
+select,input[type=text],input[type=password],input[type=number],textarea{border-radius:14px;background-color:var(--field)}
+select:focus,input:focus,textarea:focus{border-color:var(--ink)}
+.sqwrap input{border-radius:999px;padding-left:20px}
+input[type=file]::file-selector-button{background:var(--ink);color:var(--bg);border-radius:999px}
+input[type=checkbox]{accent-color:var(--ink)}
+
+/* admin */
+.kpi{border-radius:18px}.kpi b{color:var(--ink)}
+.abnav button{border-radius:999px}
+.abnav button[aria-current=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.abnav i{background:var(--ink);color:var(--bg)}
+.menu-list{border-color:var(--line);border-radius:16px}
+
+/* keyboard focus stays visible */
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ===== strict black / white / grey, like Westfield ===== */
+.logo rect{fill:#0d0d0d}
+.logo path:last-child{stroke:#0d0d0d}
+.f-GF,.f-1F,.f-2F,.f-3F,.f-3MF,.f-na{--fc:#0d0d0d}
+.badge.floor{background:#0d0d0d;color:#fff}
+.ticon[style],.av.mono{background:var(--field)!important;color:var(--ink)!important}
+.ticon.ok{background:var(--field);color:var(--ink)}
+.hero,.welcome{background:#0d0d0d}
+.s1,.s2,.s3,.s4{background-color:#0d0d0d}
+.pbanner{background-color:#0d0d0d}
+.heart.on{color:#0d0d0d}
+:root[data-theme=dark] .heart.on,:root:not([data-theme=light]) .heart.on{color:#f5f5f5}
+.hscroll .wk,.dtag,.hero .dtag{color:var(--muted)}
+.pin{background:#0d0d0d}.pin.on{background:#fff;color:#0d0d0d;outline:2px solid #0d0d0d}
+.slider .sdots button[aria-current=true]{background:#fff}
+a{color:inherit}
+
+
+@media(min-width:900px){.tabs{border-top:0}.tabs button{text-transform:none;letter-spacing:0;font-size:14px}}
 </style>
 </head>
 <body>
@@ -1329,7 +1468,7 @@ function savedTheme() { try { return localStorage.getItem("aeon_theme"); } catch
 function isDark() { const t = savedTheme(); return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
 function applyTheme() {
   const t = savedTheme(); if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
-  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#2a0a17" : "#8f1650";
+  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#0c0c0c" : "#ffffff";
   const b = $("themebtn"); b.innerHTML = d ? SUN : MOON; b.setAttribute("aria-label", d ? "Switch to light mode" : "Switch to dark mode");
 }
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
