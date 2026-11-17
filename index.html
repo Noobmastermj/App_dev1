@@ -423,6 +423,12 @@ h1,h2,h3,.sech,.tfloor b,.kpi b,.glance b,.pcard b,.ncard h4{font-family:"Zen Ka
 .pkedit{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:4px 32px;margin-top:8px}
 .pkedit .pk{grid-template-columns:110px 1fr 84px auto;margin:8px 0}
 .pkedit h3{margin:12px 0 0}
+
+/* ===== demo mode ===== */
+.simbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between;background:var(--soft);border:1.5px dashed var(--brand);border-radius:18px;padding:12px 16px;margin-bottom:14px}
+.simbar.off{border-style:solid;border-color:var(--line);background:var(--field)}
+.simflag{position:fixed;left:14px;bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:15;border:0;border-radius:999px;background:#d98200;color:#1a1000;padding:8px 14px;font:inherit;font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+@media(min-width:900px){.simflag{bottom:20px}}
 </style>
 </head>
 <body>
@@ -510,6 +516,7 @@ Object.assign(ID, {"Cars": "Mobil", "Motorbikes": "Motor", "Direct to mall": "La
 Object.assign(ID, {"Report sent": "Laporan terkirim", "Keep this tracking code. You can use it to check your report from any device.": "Simpan kode pelacakan ini. Anda dapat memakainya untuk memeriksa laporan dari perangkat mana pun.", "Copy": "Salin", "Copied": "Disalin", "Staff will review your report. Confirmed reports get higher priority.": "Petugas akan memeriksa laporan Anda. Laporan yang dikonfirmasi mendapat prioritas lebih tinggi.", "Search": "Cari"});
 Object.assign(ID, {"Explore": "Jelajahi", "Plan my visit": "Rencanakan kunjungan", "Plan your visit": "Rencanakan kunjungan Anda", "Tell us what you feel like and we will suggest where to go.": "Beri tahu apa yang Anda inginkan dan kami sarankan ke mana.", "Not sure where to go?": "Belum tahu mau ke mana?", "Tell us what you feel like, such as dessert, a savoury meal or some shopping, and we will suggest stores and show you the floor.": "Beri tahu apa yang Anda inginkan, misalnya makanan penutup, makanan gurih atau belanja, dan kami sarankan toko beserta lantainya.", "Dessert": "Makanan penutup", "Savoury": "Gurih", "Salty snack": "Camilan asin", "Drinks": "Minuman", "Movies": "Film", "Top picks": "Pilihan teratas", "Well-known stores": "Toko terkenal", "Browse by category": "Jelajahi menurut kategori", "Find your way": "Temukan jalan Anda", "Browse by floor": "Jelajahi menurut lantai", "Visit info": "Info kunjungan", "Help and visit info": "Bantuan dan info kunjungan", "What's on": "Sedang berlangsung", "Notices and events": "Pengumuman dan acara", "Mostly": "Sebagian besar", "Posted": "Diposting", "Browse by floor ": "Jelajahi menurut lantai", "1. What are you planning to do today?": "1. Apa rencana Anda hari ini?", "You can pick more than one.": "Anda dapat memilih lebih dari satu.", "2. What do you feel like?": "2. Anda ingin yang mana?", "Which cuisine?": "Masakan apa?", "Eat or drink": "Makan atau minum", "Beauty and health": "Kecantikan dan kesehatan", "Phones and electronics": "Ponsel dan elektronik", "Kids and family": "Anak dan keluarga", "Movies and games": "Film dan permainan", "Banks and services": "Bank dan layanan", "Groceries and home": "Bahan makanan dan rumah", "Dessert (sweet)": "Makanan penutup (manis)", "Savoury meal": "Makanan gurih", "Drinks and coffee": "Minuman dan kopi", "Surprise me": "Kejutkan saya", "Any cuisine": "Semua masakan", "Western": "Barat", "Pick at least one activity to get suggestions.": "Pilih minimal satu kegiatan untuk mendapat saran.", "Choose what you feel like above to see food suggestions.": "Pilih yang Anda inginkan di atas untuk melihat saran makanan.", "No match found for this choice.": "Tidak ada yang cocok untuk pilihan ini.", "Your visit plan": "Rencana kunjungan Anda", "The top pick for each thing you chose, grouped by floor so you walk less.": "Pilihan teratas untuk setiap hal yang Anda pilih, dikelompokkan per lantai agar Anda tidak banyak berjalan.", "Well known": "Terkenal", "Well-known places are listed first. The mall website has no ratings, prices or opening hours, so suggestions are based on the type of store only.": "Tempat terkenal ditampilkan lebih dulu. Situs mal tidak punya penilaian, harga atau jam buka, jadi saran hanya berdasarkan jenis toko.", "Setup problem: these files are missing from the website: ": "Masalah pengaturan: file ini tidak ada di situs: "});
 Object.assign(ID, {"Shop, eat, play": "Belanja, makan, bermain", "Everything under one roof": "Semuanya di bawah satu atap", "Shop": "Belanja", "Eat": "Makan", "Fashion, beauty, books and gifts": "Fashion, kecantikan, buku dan hadiah", "Restaurants, cafes and sweets": "Restoran, kafe dan makanan manis", "Browse shops": "Lihat toko", "Find food": "Cari makanan", "Movies and games": "Film dan permainan"});
+Object.assign(ID, {"Demo mode": "Mode demo", "Simulated numbers. Nothing here is real or saved.": "Angka simulasi. Tidak ada yang nyata atau disimpan.", "Quiet": "Sepi", "Normal": "Normal", "Rush hour": "Jam sibuk", "Stop demo": "Hentikan demo", "Start demo": "Mulai demo", "Start demo mode": "Mulai mode demo", "Stop demo mode": "Hentikan mode demo", "Demo mode on": "Mode demo aktif", "Demo mode off": "Mode demo mati", "Demo mode on. Tap to stop": "Mode demo aktif. Ketuk untuk berhenti", "Presenting? Simulate live parking. It changes only this device and saves nothing.": "Sedang presentasi? Simulasikan parkir langsung. Hanya mengubah perangkat ini dan tidak menyimpan apa pun."});
 Object.assign(ID, {"Previous": "Sebelumnya", "Next": "Berikutnya", "stores": "toko", "levels": "lantai", "car spaces": "tempat parkir mobil", "Popular here": "Populer di sini", "What are you craving today?": "Anda sedang ingin apa hari ini?", "Dessert, a savoury meal or some shopping? Tell us and we will suggest where to go.": "Makanan penutup, makanan gurih atau belanja? Beri tahu kami dan kami sarankan ke mana.", "Find a space before you arrive": "Temukan tempat parkir sebelum tiba", "Check parking": "Cek parkir", "See what's on": "Lihat yang sedang berlangsung"});
 Object.assign(ID, {"Mezzanine above 3F": "Mezanin di atas 3F", "Store logos and descriptions": "Logo dan deskripsi toko", "Add a logo and a short description for a store. Both show on the store page for everyone.": "Tambahkan logo dan deskripsi singkat untuk toko. Keduanya tampil di halaman toko untuk semua orang.", "Description (English)": "Deskripsi (Inggris)", "Description (Bahasa Indonesia)": "Deskripsi (Bahasa Indonesia)", "Logo (PNG or JPG, square works best)": "Logo (PNG atau JPG, persegi paling baik)", "Save store info": "Simpan info toko", "Store": "Toko", "Store info saved": "Info toko disimpan"});
 Object.assign(ID, {"Where should I park?": "Di mana saya harus parkir?", "Best place to park right now": "Tempat parkir terbaik saat ini", "Most space for motorbikes right now": "Tempat motor paling lega saat ini", "Plenty of space": "Masih banyak", "Filling up": "Mulai penuh", "Almost full": "Hampir penuh", "free": "kosong", "free spaces": "tempat kosong", "Right now": "Saat ini", "All car levels are full right now. Try again in a few minutes, or use the motorbike levels.": "Semua lantai mobil penuh saat ini. Coba lagi beberapa menit lagi, atau gunakan lantai motor.", "All motorbike levels are full right now. Try again in a few minutes.": "Semua lantai motor penuh saat ini. Coba lagi beberapa menit lagi.", "Walk straight into the mall from this level.": "Berjalan langsung masuk ke mal dari lantai ini.", "This level has the most free spaces right now.": "Lantai ini punya tempat kosong terbanyak saat ini.", "Levels marked Direct to mall connect straight into the mall.": "Lantai bertanda Langsung ke mal terhubung langsung ke mal.", "How to read this page": "Cara membaca halaman ini", "Each card is one parking level.": "Setiap kartu adalah satu lantai parkir.", "The bar shows how full it is. Green is free space and red is taken space.": "Bilah menunjukkan seberapa penuh. Hijau adalah tempat kosong dan merah adalah tempat terisi.", "Mall staff update the numbers by hand, so they can be a few minutes behind.": "Petugas mal memperbarui angka secara manual, jadi bisa tertinggal beberapa menit.", "Last updated": "Terakhir diperbarui", "These numbers were last updated": "Angka ini terakhir diperbarui", ". Ask at the information desk if you need to be sure.": ". Tanyakan di meja informasi jika Anda ingin memastikan.", "car spaces free of": "tempat parkir mobil kosong dari", "motorbike spaces free of": "tempat parkir motor kosong dari"});
@@ -647,8 +654,38 @@ function myCard0(t, MC) {
 async function pubData() {
   const c = codes(), none = Promise.resolve({data: []});
   const [pk, nt, mine, mc] = await Promise.all([sb.from("parking").select("*").order("sort").order("level"), sb.from("notices").select("*").order("created_at", {ascending: false}), c.length ? sb.rpc("my_tickets", {p_codes: c}) : none, c.length ? sb.rpc("my_comments", {p_codes: c}) : none]);
-  return {P: pk.data || [], N: nt.data || [], M: mine.data || [], MC: mc.data || []};
+  return {P: SIM ? simRows(pk.data || []) : (pk.data || []), N: nt.data || [], M: mine.data || [], MC: mc.data || []};
 }
+/* ---------- Demo mode: simulated live parking (this device only, nothing is saved) ---------- */
+let SIM = false, simMode = "normal", simBase = [], simFree = {};
+try { SIM = localStorage.getItem("aeon_sim") === "1" || /[?&]demo\b/.test(location.search); } catch (e) {}
+const canDemo = () => role === "admin" || /[?&]demo\b/.test(location.search);
+function simRows(base) {
+  simBase = base;
+  base.forEach(l => { if (!(l.level in simFree)) simFree[l.level] = Math.round(l.capacity * (.25 + Math.random() * .5)); });
+  return base.map(l => Object.assign({}, l, {free: Math.min(l.capacity, simFree[l.level]), updated_at: new Date().toISOString()}));
+}
+function simStep() {
+  const bias = {quiet: .6, normal: 0, rush: -.8}[simMode];
+  simBase.forEach(l => { const step = Math.max(1, Math.round(l.capacity * .012)); simFree[l.level] = Math.max(0, Math.min(l.capacity, simFree[l.level] + Math.round((Math.random() * 2 - 1 + bias) * step * 2))); });
+}
+const simBar = () => SIM
+  ? "<div class='simbar'><span><b>Demo mode</b> Simulated numbers. Nothing here is real or saved.</span><span class='chips' style='margin:0'>" + [["quiet", "Quiet"], ["normal", "Normal"], ["rush", "Rush hour"]].map(([k, l]) => "<button class='chip' data-act='simmode' data-k='" + k + "' aria-pressed='" + (simMode === k) + "'>" + l + "</button>").join("") + "</span><button class='btn sm' data-act='simtoggle'>Stop demo</button></div>"
+  : canDemo() ? "<div class='simbar off'><span>Presenting? Simulate live parking. It changes only this device and saves nothing.</span><button class='btn alt sm' data-act='simtoggle'>Start demo</button></div>" : "";
+function updSimFlag() {
+  let f = $("simflag");
+  if (!SIM) { if (f) f.remove(); return; }
+  if (!f) { f = document.createElement("button"); f.id = "simflag"; f.className = "simflag"; f.dataset.act = "simtoggle"; document.body.appendChild(f); }
+  f.textContent = tr2("Demo mode on. Tap to stop");
+}
+setInterval(() => {
+  if (!SIM || !simBase.length || document.hidden) return; simStep();
+  if (!PUBVIEWS.includes(view)) return; const P = simRows(simBase);
+  if ($("parkbox")) $("parkbox").innerHTML = parkBox(P);
+  if ($("parksum")) $("parksum").innerHTML = parkSummary(P);
+  if ($("simfree")) $("simfree").textContent = P.filter(l => l.vehicle === "car").reduce((n, l) => n + l.free, 0).toLocaleString("en-US");
+  if (LANG === "id") applyLang();
+}, 2500);
 const prefillRef = {v: ""};
 const sentRef = {v: ""};
 const dir = {cat: null, sub: null, floor: "all", store: null, q: "", fl: null};
@@ -794,7 +831,7 @@ async function homeView() {
     "<div class='hslide s1'><div class='hello'>" + greet() + "</div><h2 class='serif'>Welcome to AEON Mall BSD City</h2><div class='wsub'>What would you like to do today?</div>" + (who ? "<div class='who'>Welcome back, <b>" + esc(who) + "</b></div>" : "") +
       "<div class='hsearch'><input type='text' id='hq' placeholder='Search a store name' autocomplete='off'>" + micBtn("hq") + "<button data-act='hsearch' aria-label='Search'>" + ICON.lost + "</button></div><div id='hsug'></div><div class='hchips' id='hchips'>" + chips + "</div></div>",
     "<div class='hslide s2'><div class='hello'>Plan your visit</div><h2 class='serif'>What are you craving today?</h2><div class='wsub'>Dessert, a savoury meal or some shopping? Tell us and we will suggest where to go.</div><div class='acts'><button class='btn gold' data-act='view' data-v='plan'>Plan my visit</button></div></div>"];
-  if (cap) slides.push("<div class='hslide s3'><div class='hello'>Parking</div><h2 class='serif'>Find a space before you arrive</h2><div class='bignum'>" + free.toLocaleString("en-US") + "</div><div class='bigsub'>car spaces free of " + cap.toLocaleString("en-US") + "</div><div class='acts'><button class='btn gold' data-act='view' data-v='parking'>Check parking</button></div></div>");
+  if (cap) slides.push("<div class='hslide s3'><div class='hello'>Parking</div><h2 class='serif'>Find a space before you arrive</h2><div class='bignum' id='simfree'>" + free.toLocaleString("en-US") + "</div><div class='bigsub'>car spaces free of " + cap.toLocaleString("en-US") + "</div><div class='acts'><button class='btn gold' data-act='view' data-v='parking'>Check parking</button></div></div>");
   if (nt) slides.push("<div class='hslide s4'><div class='hello'>" + KIND[nt.kind] + "</div><h2 class='serif'>" + esc(nt.title) + "</h2>" + (nt.body ? "<div class='wsub'>" + esc(nt.body) + "</div>" : "") + "<div class='acts'><button class='btn gold' data-act='gotonotices'>See what's on</button></div></div>");
   const hero = "<div class='sliderwrap'><div class='slider' id='slider'>" + slides.join("") + "</div><button class='sarr l' id='sprev' aria-label='Previous'>&#8249;</button><button class='sarr r' id='snext' aria-label='Next'>&#8250;</button><div class='sdots' id='sdots'>" + slides.map((_, i) => "<button aria-label='Slide " + (i + 1) + "' aria-current='" + (i === 0) + "'></button>").join("") + "</div></div>";
   const glance = "<div class='glance rvl'><div><b class='cnt' data-n='" + STORE_OBJ.length + "'>0</b><span>stores</span></div><div><b class='cnt' data-n='4'>0</b><span>levels</span></div><div><b class='cnt' data-n='" + (cap || 0) + "'>0</b><span>car spaces</span></div></div>";
@@ -858,7 +895,7 @@ function quick(k) {
 }
 async function parkingView() {
   const d = await pubData(), up = d.P.reduce((m, l) => (l.updated_at && l.updated_at > m ? l.updated_at : m), "");
-  return "<div style='max-width:720px;margin:0 auto'><div class='pbanner' style='--img:url(images/aerial.jpg);--pos:center 60%'><h2>Where should I park?</h2><div class='sub'>See which level has free spaces before you drive in.</div></div><div id='parkbox'>" + parkBox(d.P) + "</div>" +
+  return "<div style='max-width:720px;margin:0 auto'><div class='pbanner' style='--img:url(images/aerial.jpg);--pos:center 60%'><h2>Where should I park?</h2><div class='sub'>See which level has free spaces before you drive in.</div></div>" + simBar() + "<div id='parkbox'>" + parkBox(d.P) + "</div>" +
     "<div class='panel' style='margin-top:18px'><h3>How to read this page</h3><ul class='gl'><li>Each card is one parking level.</li><li>The bar shows how full it is. Green is free space and red is taken space.</li><li>Levels marked Direct to mall connect straight into the mall.</li><li>Mall staff update the numbers by hand, so they can be a few minutes behind.</li></ul></div>" +
     (up ? "<div class='muted' style='margin-top:10px'>Last updated <span>" + ago(up) + "</span></div>" : "") +
     "<div class='acts'><button class='btn alt sm' data-act='view' data-v='getting'>How to get here</button></div></div>";
@@ -1221,7 +1258,7 @@ function adminBar(q, act, late, lf, rej, tab) {
   const kpi = (n, label, target, warn) => "<button class='kpi" + (warn ? " warn" : "") + "' data-act='adgo' data-t='" + target + "'><b>" + n + "</b><span>" + label + "</span></button>";
   const cnt = {"ad-review": q.length, "ad-jobs": act.length, "ad-lf": lf.length, "ad-rej": rej.length, "ad-accounts": D.profiles.filter(x => !x.approved && !isAd(x.user_id)).length};
   return "<div class='abar'><div class='abar-top'><div class='abar-id'><span class='livedot" + (liveOk ? "" : " off") + "' title='Live updates'></span><div><h2 style='margin:0'>Admin panel</h2><div class='muted'>" + esc(user.email) + " &middot; <span id='abupd'>Updated " + ago2(lastLoad) + "</span></div></div></div>" +
-    "<div class='abar-actions'><button class='btn alt sm' data-act='refresh'>Refresh</button><details class='menu'><summary class='btn alt sm' aria-label='More actions'>More</summary><div class='menu-list'><button data-act='exp'>Export CSV</button><button data-act='expact'>Export log</button><button data-act='logout'>Log out</button></div></details></div></div>" +
+    "<div class='abar-actions'><button class='btn alt sm' data-act='refresh'>Refresh</button><details class='menu'><summary class='btn alt sm' aria-label='More actions'>More</summary><div class='menu-list'><button data-act='simtoggle'>" + (SIM ? "Stop demo mode" : "Start demo mode") + "</button><button data-act='exp'>Export CSV</button><button data-act='expact'>Export log</button><button data-act='logout'>Log out</button></div></details></div></div>" +
     "<div class='kpis'>" + kpi(q.length, "Waiting for review", "ad-review", false) + kpi(late, "Overdue", "ad-jobs", late > 0) + kpi(act.length, "Open facility jobs", "ad-jobs", false) + kpi(act.filter(t => !t.technician).length, "Need a technician", "ad-jobs", false) + "</div></div>" +
     "<nav class='abnav' id='abnav' aria-label='Admin sections'>" + AD_TABS.map(([id, l]) => id === "|" ? "<span class='abdiv'></span>" : "<button data-act='adgo' data-t='" + id + "' aria-current='" + (id === tab) + "'>" + l + (cnt[id] ? "<i>" + cnt[id] + "</i>" : "") + "</button>").join("") + "</nav>";
 }
@@ -1332,7 +1369,7 @@ function initAdminNav() {
 }
 setInterval(() => { const e = $("abupd"); if (e) { const t = ago2(lastLoad); e.textContent = (LANG === "id" ? "Diperbarui " + tr(t) : "Updated " + t); } }, 5000);
 document.addEventListener("click", e => { document.querySelectorAll("details.menu[open]").forEach(d => { if (!d.contains(e.target) || e.target.closest("[data-act]")) d.open = false; }); });
-const initUI = () => { initReveal(); initHome(); initDrag(); initAdminNav(); };
+const initUI = () => { initReveal(); initHome(); initDrag(); initAdminNav(); updSimFlag(); };
 document.addEventListener("click", async e => {
   if (e.target.id === "sheet") { $("sheet").classList.add("hidden"); return; }
   const b = e.target.closest("[data-act]"); if (!b) return;
@@ -1357,6 +1394,8 @@ document.addEventListener("click", async e => {
   else if (a === "mic") listen(b.dataset.t)
   else if (a === "adgo") { adTab = b.dataset.t; render(); const n = $("abnav"); if (n && n.getBoundingClientRect().top < 0) n.scrollIntoView({block: "start"}); }
   else if (a === "admore") { adLimit[adKey(b.dataset.k)] = 1e9; render(); }
+  else if (a === "simtoggle") { SIM = !SIM; if (SIM) simFree = {}; try { localStorage.setItem("aeon_sim", SIM ? "1" : "0"); } catch (x) {} render(); toast(SIM ? "Demo mode on" : "Demo mode off"); }
+  else if (a === "simmode") { simMode = b.dataset.k; document.querySelectorAll("[data-act=simmode]").forEach(x => x.setAttribute("aria-pressed", x.dataset.k === simMode)); }
   else if (a === "pkveh") { parkVeh = b.dataset.k; if ($("parkbox")) { $("parkbox").innerHTML = parkBox(lastPark); applyLang(); } }
   else if (a === "carr") { const hs = b.parentElement.querySelector(".hscroll"); hs.scrollBy({left: +b.dataset.d * hs.clientWidth * .85, behavior: "smooth"}); }
   else if (a === "tsel") { towerSel = b.dataset.f; if ($("towerpanel")) { $("towerpanel").innerHTML = towerPanel(towerSel); document.querySelectorAll(".tfloor").forEach(x => x.setAttribute("aria-pressed", x.dataset.f === towerSel)); applyLang(); } }
