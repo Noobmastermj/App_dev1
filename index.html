@@ -6,7 +6,7 @@
 <title>AEON Mall BSD City | Reports and Admin</title>
 <script>try{var t=localStorage.getItem("aeon_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#8f1650">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2048%2048%22%3E%3Crect%20width=%2248%22%20height=%2248%22%20rx=%2212%22%20fill=%22%238f1650%22/%3E%3Cpath%20d=%22M15%2020h18l-1%2016a2%202%200%200%201-2%202h-12a2%202%200%200%201-2-2z%22%20fill=%22%23fff%22/%3E%3Cpath%20d=%22M18.5%2020v-2.5a5.5%205.5%200%200%201%2011%200V20%22%20fill=%22none%22%20stroke=%22%23fff%22%20stroke-width=%222.5%22/%3E%3Cpath%20d=%22M19.5%2029l3.3%203.3L29%2026%22%20fill=%22none%22%20stroke=%22%238f1650%22%20stroke-width=%222.6%22%20stroke-linecap=%22round%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f6f2f5;--surface:#fff;--ink:#221a20;--muted:#7a6f76;--line:#e9e2e7;--field:#f3eff2;--brand:#a3005f;--brand-dark:#6e003f;--soft:#fbe6f1;--gold:#f2b01e;--ok:#1e9e62;--warn:#d98200;--bad:#d6303f;--hdr1:#a3005f;--hdr2:#6e003f;color-scheme:light}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#150f14;--surface:#221a20;--ink:#f4edf1;--muted:#b4a7ae;--line:#3a2e36;--field:#2e232b;--brand:#d62b8c;--soft:#3d1a2d;--ok:#3ddc97;--warn:#f0a33a;--bad:#ff6b78;--hdr1:#7a0047;--hdr2:#3a0023;color-scheme:dark}}
@@ -327,145 +327,86 @@ header .bar{height:70px;padding-top:0;padding-bottom:0;gap:14px;transition:heigh
 details.menu{position:relative}details.menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center}details.menu summary::-webkit-details-marker{display:none}
 .menu-list{position:absolute;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid rgba(199,154,59,.35);border-radius:14px;box-shadow:0 14px 34px rgba(90,45,25,.2);padding:6px;min-width:170px;z-index:6;display:flex;flex-direction:column}
 .menu-list button{background:none;border:0;text-align:left;padding:10px 12px;border-radius:10px;font:inherit;font-weight:700;color:var(--ink);cursor:pointer}.menu-list button:hover{background:var(--soft)}
-/* ===== Westfield-style theme for AEON Mall BSD City ===== */
-
-:root{--bg:#fff;--surface:#fff;--ink:#0d0d0d;--muted:#6b6b6b;--line:#e6e6e6;--field:#f3f3f3;--soft:#f3f3f3;
- --brand:#0d0d0d;--gold:#0d0d0d;--gold-d:#6b6b6b;--accent:#0d0d0d;--btn:#0d0d0d;--btn-ink:#fff;--hdr1:#fff;--hdr2:#fff;color-scheme:light}
-@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0c0c0c;--surface:#161616;--ink:#f5f5f5;--muted:#a3a3a3;--line:#2a2a2a;--field:#202020;--soft:#202020;--brand:#f5f5f5;--gold:#f5f5f5;--gold-d:#a3a3a3;--accent:#f5f5f5;--btn:#f5f5f5;--btn-ink:#0d0d0d;--hdr1:#0c0c0c;--hdr2:#0c0c0c;color-scheme:dark}}
-:root[data-theme=dark]{--bg:#0c0c0c;--surface:#161616;--ink:#f5f5f5;--muted:#a3a3a3;--line:#2a2a2a;--field:#202020;--soft:#202020;--brand:#f5f5f5;--gold:#f5f5f5;--gold-d:#a3a3a3;--accent:#f5f5f5;--btn:#f5f5f5;--btn-ink:#0d0d0d;--hdr1:#0c0c0c;--hdr2:#0c0c0c;color-scheme:dark}
-
-/* base */
-body{font-family:"Inter","Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);overflow-x:hidden;letter-spacing:-.005em}
-body::before{display:none}
+/* ===== Westfield-style layout, original AEON pink colours ===== */
+body{font-family:"Inter","Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden;letter-spacing:-.005em}
 h1,h2,h3,.serif,.sech,.tfloor b,.lv-top b,.kpi b,.glance b{font-family:inherit}
-h2{font-weight:800;letter-spacing:-.025em}
+h1,h2{letter-spacing:-.025em;font-weight:800}
 main{padding-top:0}
 #app>*:first-child:not(.sliderwrap){margin-top:24px}
+header{border-bottom:0}
 
-/* header: clean white bar */
-header{background:var(--surface);color:var(--ink);border-bottom:1px solid var(--line);box-shadow:none}
-header.scrolled{box-shadow:0 1px 0 var(--line)}
-h1{font-weight:800;letter-spacing:-.02em;color:var(--ink)}
-h1 small{opacity:.6;font-weight:600}
-.hbtn{background:transparent;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px}
-@media(hover:hover){.hbtn:hover{background:var(--ink);color:var(--bg)}}
-@media(min-width:900px){
- .tabs button,.tabs button[aria-pressed=true]{color:var(--ink)}
- .tabs button{border-radius:999px;opacity:.7}
- .tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg);opacity:1}
- .tabs button:hover{background:var(--field);opacity:1}
- .tabs button[aria-pressed=true]:hover{background:var(--ink)}
-}
-.tabs{border-top:1px solid var(--line)}
-.tabs button[aria-pressed=true]::before{background:var(--ink)}
+/* pill shapes */
+.btn,.btn.alt,.hbtn,.chip,.segx,.segx button,.abnav button,.sqwrap input,.hsearch input,.hsearch button,.hchips button{border-radius:999px}
+.btn{padding:13px 24px;letter-spacing:0}
+@media(min-width:900px){.tabs{border-top:0}.tabs button{border-radius:999px;text-transform:none;letter-spacing:0;font-size:14px}}
 
-/* buttons: black pills */
-.btn{background:var(--btn);color:var(--btn-ink);border-radius:999px;box-shadow:none;padding:13px 24px;letter-spacing:0}
-.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-.btn.alt:hover{background:var(--ink);color:var(--bg)}
-.btn.gold{background:#fff;color:#0d0d0d;box-shadow:none}
-.chip{border-radius:999px;border-color:var(--line)}
-.chip[aria-pressed=true],.chip.f-GF[aria-pressed=true],.chip[class*=f-][aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-
-/* hero: full-bleed photo, big white headline */
+/* hero: full-bleed photo, very large headline */
 .sliderwrap{width:100vw;margin-left:calc(50% - 50vw)}
 .slider{border-radius:0;box-shadow:none}
 .hslide{min-height:min(80vh,680px);justify-content:flex-end;padding:48px max(22px,calc((100vw - 1240px)/2 + 14px)) 84px}
-.hslide::before{display:none}
-.s1,.s2,.s3,.s4{background-blend-mode:normal}
-.s1{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/evening.jpg) center/cover no-repeat,#222}
-.s2{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/food-culture.jpg) center/cover no-repeat,#222}
-.s3{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/aerial.jpg) center/cover no-repeat,#222}
-.s4{background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.72) 100%),url(images/atrium.jpg) center/cover no-repeat,#222}
-.hslide .hello{color:#fff;opacity:.85;text-transform:none;letter-spacing:0;font-size:15px;font-weight:700}
 .hslide h2{font-size:clamp(38px,7vw,84px);line-height:1.02;letter-spacing:-.035em;font-weight:800;max-width:900px}
 .hslide .wsub{font-size:clamp(16px,2vw,20px);max-width:620px}
 .hslide .bignum{font-size:clamp(56px,10vw,120px);letter-spacing:-.04em}
-.hsearch input{border-radius:999px;padding:16px 22px}
-.hsearch button{border-radius:999px;background:#fff;color:#0d0d0d;width:56px}
-.hchips button{border-radius:999px;background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.6)}
-.sdots{bottom:26px}.sdots button[aria-current=true]{background:#fff}
+.hslide .hello{text-transform:none;letter-spacing:0;font-size:15px}
+.sdots{bottom:26px}
 .sliderwrap::after{display:none}
 
-/* section headings: big and quiet */
+/* sections and stats */
 .sec{margin-top:64px}
 .sech{font-size:clamp(28px,4.4vw,48px);letter-spacing:-.03em;font-weight:800;margin:4px 0 20px}
-.sech::after{display:none}
-.eyebrow{color:var(--muted);text-transform:none;letter-spacing:0;font-size:14px;font-weight:700}
-
-/* stats: huge numbers, no box */
+.eyebrow{text-transform:none;letter-spacing:0;font-size:14px}
 .glance{background:transparent;border:0;box-shadow:none;padding:56px 0 8px;margin-top:0}
-.glance>div+div{border-left:1px solid var(--line)}
-.glance b{font-size:clamp(40px,8vw,96px);letter-spacing:-.04em;font-weight:800;color:var(--ink)}
+.glance b{font-size:clamp(40px,8vw,96px);letter-spacing:-.04em;font-weight:800;color:var(--brand)}
 .glance span{text-transform:none;letter-spacing:0;font-size:15px;font-weight:600}
 
-/* cards: flat, soft grey, generous radius, no gold borders */
-.panel,.tile,.dcard,.pcard,.ccard,.fcard,.pstep,.cta,.notice,.stat div,.lv,.fpanel,.pkbest,.abar,.drow{border:1px solid var(--line);box-shadow:none;border-radius:24px}
-.pcard,.ccard,.tile,.dcard,.fcard{background:var(--field);border-color:transparent}
+/* flat roomy cards */
+.panel,.tile,.dcard,.pcard,.ccard,.fcard,.pstep,.cta,.notice,.lv,.fpanel,.pkbest,.abar,.drow,.stat div{box-shadow:none;border-radius:24px}
 .pcard,.ccard{width:200px;padding:18px;min-height:190px}
 .pcard{justify-content:flex-end}
 .pcard b{font-size:17px;letter-spacing:-.01em}
-.ticon{background:var(--surface);color:var(--ink);border-radius:50%}
-@media(hover:hover){.pcard:hover,.ccard:hover,.tile:hover,.dcard:hover,.fcard:hover{transform:translateY(-3px);box-shadow:none;border-color:var(--ink)}}
+@media(hover:hover){.pcard:hover,.ccard:hover,.tile:hover,.dcard:hover,.fcard:hover{box-shadow:none;transform:translateY(-3px)}}
 .av{border-radius:50%}
-.badge{background:var(--surface);color:var(--ink)}
-.badge.floor{color:#fff}
 
-/* notices and events: tall photo-style cards like "Trending" */
-.ncard{width:300px;min-height:400px;border-radius:24px;justify-content:flex-end;padding:22px;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78)),linear-gradient(145deg,#2b2b2b,#000);color:#fff}
-.ncard.closure{background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78)),linear-gradient(145deg,#1a1a1a,#000)}
-.ncard.event{background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.78)),linear-gradient(145deg,#3a3a3a,#0d0d0d);color:#fff}
+/* notices like "Trending" cards */
+.ncard{width:300px;min-height:400px;border-radius:24px;justify-content:flex-end;padding:22px}
 .ncard .kind{text-transform:none;letter-spacing:0;font-size:13px}
 .ncard h4{font-size:24px;letter-spacing:-.02em;font-weight:800}
-.ncard .nd{margin-top:8px}
-
-/* floor tower, parking, banners */
-.tfloor{border-radius:18px;border-color:var(--line)}
-.tfloor[aria-pressed=true]{background:var(--ink);color:var(--bg);box-shadow:none}
-.tfloor[aria-pressed=true] b,.tfloor[aria-pressed=true] .muted{color:var(--bg)}
 .pbanner{border-radius:28px;box-shadow:none;min-height:240px}
 .pbanner h2{font-size:clamp(30px,5vw,52px);letter-spacing:-.03em}
-.segx{border-radius:999px}.segx button{border-radius:999px}
-.segx button[aria-pressed=true]{background:var(--ink);color:var(--bg);box-shadow:none}
-.lv{border-top:0;border-left:6px solid var(--sc,var(--ok))}
-.pkbest{border-left:0;background:var(--field);border-color:transparent}
+.tfloor{border-radius:18px}
+.kpi{border-radius:18px}
+select,input[type=text],input[type=password],input[type=number],textarea{border-radius:14px}
 
-/* forms */
-select,input[type=text],input[type=password],input[type=number],textarea{border-radius:14px;background-color:var(--field)}
-select:focus,input:focus,textarea:focus{border-color:var(--ink)}
-.sqwrap input{border-radius:999px;padding-left:20px}
-input[type=file]::file-selector-button{background:var(--ink);color:var(--bg);border-radius:999px}
-input[type=checkbox]{accent-color:var(--ink)}
+/* ===== Japanese touches, headings and nav ===== */
+h1,h2,h3,.sech,.tfloor b,.kpi b,.glance b,.pcard b,.ncard h4{font-family:"Zen Kaku Gothic New","Inter",sans-serif}
+.hslide h2,.sech,.glance b{font-weight:900}
+.jp{font-family:"Zen Kaku Gothic New","Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;font-weight:700;letter-spacing:.12em;font-size:13px;color:var(--brand);margin-left:10px;display:inline-flex;align-items:center;gap:6px}
+.jp::before{content:"";width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24'%3E%3Cg fill='%23ee86b6'%3E%3Cellipse cy='-6' rx='4' ry='6'/%3E%3Cellipse cy='-6' rx='4' ry='6' transform='rotate(72)'/%3E%3Cellipse cy='-6' rx='4' ry='6' transform='rotate(144)'/%3E%3Cellipse cy='-6' rx='4' ry='6' transform='rotate(216)'/%3E%3Cellipse cy='-6' rx='4' ry='6' transform='rotate(288)'/%3E%3C/g%3E%3Ccircle r='2' fill='%23f2b01e'/%3E%3C/svg%3E") center/contain no-repeat}
 
-/* admin */
-.kpi{border-radius:18px}.kpi b{color:var(--ink)}
-.abnav button{border-radius:999px}
-.abnav button[aria-current=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.abnav i{background:var(--ink);color:var(--bg)}
-.menu-list{border-color:var(--line);border-radius:16px}
+/* hero: vertical greeting (tategaki) and wave band (seigaiha) */
+.s1::after{display:block;content:"いらっしゃいませ";position:absolute;right:max(22px,calc((100vw - 1240px)/2 + 14px));top:48px;writing-mode:vertical-rl;font-family:"Zen Kaku Gothic New","Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;font-weight:700;font-size:clamp(18px,3vw,34px);letter-spacing:.4em;color:#fff;opacity:.92;background:none;left:auto;bottom:auto;pointer-events:none}
+@media(max-width:600px){.s1::after{top:24px;right:18px}}
+.sliderwrap::after{display:block;content:"";position:absolute;left:0;right:0;bottom:0;height:38px;pointer-events:none;z-index:1;opacity:1;border-radius:0;inset:auto 0 0 0;
+ background:radial-gradient(circle at 50% 100%,transparent 36%,rgba(255,255,255,.34) 37% 41%,transparent 42% 52%,rgba(255,255,255,.34) 53% 57%,transparent 58% 67%,rgba(255,255,255,.34) 68% 72%,transparent 73%) 0 0/46px 23px,
+ radial-gradient(circle at 50% 100%,transparent 36%,rgba(255,255,255,.34) 37% 41%,transparent 42% 52%,rgba(255,255,255,.34) 53% 57%,transparent 58% 67%,rgba(255,255,255,.34) 68% 72%,transparent 73%) 23px 11px/46px 23px}
 
-/* keyboard focus stays visible */
-button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+/* nav: Japanese sub-labels */
+.tabs button span::after{display:block;font-family:"Zen Kaku Gothic New","Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.75;line-height:1.3}
+.tabs [data-v=home] span::after{content:"ホーム"}.tabs [data-v=parking] span::after{content:"駐車場"}.tabs [data-v=report] span::after{content:"ご報告"}.tabs [data-v=lost] span::after{content:"落とし物"}.tabs [data-v=plan] span::after{content:"さがす"}
+@media(min-width:900px){.tabs button span{text-align:left}}
 
-/* ===== strict black / white / grey, like Westfield ===== */
-.logo rect{fill:#0d0d0d}
-.logo path:last-child{stroke:#0d0d0d}
-.f-GF,.f-1F,.f-2F,.f-3F,.f-3MF,.f-na{--fc:#0d0d0d}
-.badge.floor{background:#0d0d0d;color:#fff}
-.ticon[style],.av.mono{background:var(--field)!important;color:var(--ink)!important}
-.ticon.ok{background:var(--field);color:var(--ink)}
-.hero,.welcome{background:#0d0d0d}
-.s1,.s2,.s3,.s4{background-color:#0d0d0d}
-.pbanner{background-color:#0d0d0d}
-.heart.on{color:#0d0d0d}
-:root[data-theme=dark] .heart.on,:root:not([data-theme=light]) .heart.on{color:#f5f5f5}
-.hscroll .wk,.dtag,.hero .dtag{color:var(--muted)}
-.pin{background:#0d0d0d}.pin.on{background:#fff;color:#0d0d0d;outline:2px solid #0d0d0d}
-.slider .sdots button[aria-current=true]{background:#fff}
-a{color:inherit}
-
-
-@media(min-width:900px){.tabs{border-top:0}.tabs button{text-transform:none;letter-spacing:0;font-size:14px}}
+/* "Shop, eat, play" photo trio and bigger quick tiles */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media(max-width:760px){.trio{grid-template-columns:1fr}}
+.tcard{position:relative;min-height:420px;border:0;border-radius:28px;overflow:hidden;padding:24px;color:#fff;text-align:left;font:inherit;cursor:pointer;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;background:linear-gradient(180deg,rgba(40,6,22,.1) 20%,rgba(40,6,22,.88)),var(--img) center/cover no-repeat,linear-gradient(145deg,#8f1650,#3a0920)}
+@media(max-width:760px){.tcard{min-height:300px}}
+.tcard .jp{color:#fff;margin:0;opacity:.9}
+.tcard b{font-size:clamp(28px,3.4vw,40px);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+.tcard>span:not(.jp):not(.go){opacity:.9;max-width:280px}
+.tcard .go{align-self:flex-start;margin-top:10px;background:#fff;color:#2a1f1c;border-radius:999px;padding:10px 18px;font-weight:800;font-size:14px}
+@media(hover:hover){.tcard{transition:transform .25s}.tcard:hover{transform:translateY(-4px)}}
+.tile{min-height:200px;padding:22px}
+.tile .ticon{width:56px;height:56px}.tile b{font-size:19px}
 </style>
 </head>
 <body>
@@ -552,6 +493,7 @@ Object.assign(ID, {"Home": "Beranda", "Stores": "Toko", "Lost & Found": "Hilang/
 Object.assign(ID, {"Cars": "Mobil", "Motorbikes": "Motor", "Direct to mall": "Langsung ke mal", "Main parking building": "Gedung parkir utama", "New parking building": "Gedung parkir baru", "Direct access to the mall": "Akses langsung ke mal", "Building, for example New parking building": "Gedung, contoh Gedung parkir baru", "How to get here": "Cara menuju ke sini", "Getting here": "Menuju ke sini", "Directions, toll, train and shuttle": "Petunjuk arah, tol, kereta dan shuttle", "How to reach AEON Mall BSD City by car, train, shuttle or taxi.": "Cara menuju AEON Mall BSD City dengan mobil, kereta, shuttle atau taksi.", "Directions in Google Maps": "Petunjuk arah di Google Maps", "Apple Maps": "Apple Maps", "By car and toll road": "Dengan mobil dan jalan tol", "By train (KRL Commuter Line)": "Dengan kereta (KRL Commuter Line)", "BSD Link shuttle bus (free)": "Bus shuttle BSD Link (gratis)", "Taxi and online taxi": "Taksi dan taksi online", "From South and Central Jakarta: take the Jakarta Outer Ring Road (JORR), then the Jakarta to Serpong toll, and exit at BSD Timur 2 (Serbaraja toll).": "Dari Jakarta Selatan dan Pusat: lewat Jakarta Outer Ring Road (JORR), lalu Tol Jakarta - Serpong, dan keluar di BSD Timur 2 (Tol Serbaraja).", "From West, East and North Jakarta: use the Jakarta to Tangerang toll (reached through the inner-city toll via Tomang from the east, or via Cawang from the north) and exit at Alam Sutera. Then follow Jalan Raya Serpong towards Jalan Pahlawan Seribu.": "Dari Jakarta Barat, Timur dan Utara: gunakan Tol Jakarta - Tangerang (lewat tol dalam kota via Tomang dari timur, atau via Cawang dari utara) dan keluar di Alam Sutera. Lanjutkan di Jalan Raya Serpong menuju Jalan Pahlawan Seribu.", "Two stations are near the mall: Cisauk, about 3.5 km away, and Rawa Buntu, about 6 km away.": "Ada dua stasiun di dekat mal: Cisauk, sekitar 3,5 km, dan Rawa Buntu, sekitar 6 km.", "From either station, take a taxi or an online taxi to the mall.": "Dari kedua stasiun, naik taksi atau taksi online menuju mal.", "A free shuttle run by Sinarmas Land. The shelter is across from Lobby Natsu, near the North parking.": "Shuttle gratis yang dikelola Sinarmas Land. Halte berada di seberang Lobby Natsu, dekat Parkir Utara.", "It also stops at The Breeze and ICE BSD City.": "Shuttle juga berhenti di The Breeze dan ICE BSD City.", "The Blue Bird taxi shelter is across from Lobby Natsu, near the North parking.": "Pangkalan taksi Blue Bird berada di seberang Lobby Natsu, dekat Parkir Utara.", "Go-Car pickup and drop-off points are at several mall lobbies.": "Titik jemput dan antar Go-Car ada di beberapa lobi mal.", "Cars and motorbikes park in the main or the new parking building. Levels marked Direct to mall connect straight to the mall.": "Mobil dan motor parkir di gedung parkir utama atau gedung parkir baru. Lantai bertanda Langsung ke mal terhubung langsung ke mal.", "See free parking spaces": "Lihat tempat parkir kosong", "Contact and opening hours": "Kontak dan jam buka", "Call 021 2916 8585": "Telepon 021 2916 8585", "Email customer service": "Email layanan pelanggan", "Opening hours (official site)": "Jam buka (situs resmi)", "Contact": "Kontak", "Information from the official AEON Mall BSD City website (checked in November 2026). Routes and shuttle details can change, so check the official site before you travel.": "Informasi dari situs resmi AEON Mall BSD City (dicek November 2026). Rute dan detail shuttle dapat berubah, jadi periksa situs resmi sebelum berangkat."});
 Object.assign(ID, {"Report sent": "Laporan terkirim", "Keep this tracking code. You can use it to check your report from any device.": "Simpan kode pelacakan ini. Anda dapat memakainya untuk memeriksa laporan dari perangkat mana pun.", "Copy": "Salin", "Copied": "Disalin", "Staff will review your report. Confirmed reports get higher priority.": "Petugas akan memeriksa laporan Anda. Laporan yang dikonfirmasi mendapat prioritas lebih tinggi.", "Search": "Cari"});
 Object.assign(ID, {"Explore": "Jelajahi", "Plan my visit": "Rencanakan kunjungan", "Plan your visit": "Rencanakan kunjungan Anda", "Tell us what you feel like and we will suggest where to go.": "Beri tahu apa yang Anda inginkan dan kami sarankan ke mana.", "Not sure where to go?": "Belum tahu mau ke mana?", "Tell us what you feel like, such as dessert, a savoury meal or some shopping, and we will suggest stores and show you the floor.": "Beri tahu apa yang Anda inginkan, misalnya makanan penutup, makanan gurih atau belanja, dan kami sarankan toko beserta lantainya.", "Dessert": "Makanan penutup", "Savoury": "Gurih", "Salty snack": "Camilan asin", "Drinks": "Minuman", "Movies": "Film", "Top picks": "Pilihan teratas", "Well-known stores": "Toko terkenal", "Browse by category": "Jelajahi menurut kategori", "Find your way": "Temukan jalan Anda", "Browse by floor": "Jelajahi menurut lantai", "Visit info": "Info kunjungan", "Help and visit info": "Bantuan dan info kunjungan", "What's on": "Sedang berlangsung", "Notices and events": "Pengumuman dan acara", "Mostly": "Sebagian besar", "Posted": "Diposting", "Browse by floor ": "Jelajahi menurut lantai", "1. What are you planning to do today?": "1. Apa rencana Anda hari ini?", "You can pick more than one.": "Anda dapat memilih lebih dari satu.", "2. What do you feel like?": "2. Anda ingin yang mana?", "Which cuisine?": "Masakan apa?", "Eat or drink": "Makan atau minum", "Beauty and health": "Kecantikan dan kesehatan", "Phones and electronics": "Ponsel dan elektronik", "Kids and family": "Anak dan keluarga", "Movies and games": "Film dan permainan", "Banks and services": "Bank dan layanan", "Groceries and home": "Bahan makanan dan rumah", "Dessert (sweet)": "Makanan penutup (manis)", "Savoury meal": "Makanan gurih", "Drinks and coffee": "Minuman dan kopi", "Surprise me": "Kejutkan saya", "Any cuisine": "Semua masakan", "Western": "Barat", "Pick at least one activity to get suggestions.": "Pilih minimal satu kegiatan untuk mendapat saran.", "Choose what you feel like above to see food suggestions.": "Pilih yang Anda inginkan di atas untuk melihat saran makanan.", "No match found for this choice.": "Tidak ada yang cocok untuk pilihan ini.", "Your visit plan": "Rencana kunjungan Anda", "The top pick for each thing you chose, grouped by floor so you walk less.": "Pilihan teratas untuk setiap hal yang Anda pilih, dikelompokkan per lantai agar Anda tidak banyak berjalan.", "Well known": "Terkenal", "Well-known places are listed first. The mall website has no ratings, prices or opening hours, so suggestions are based on the type of store only.": "Tempat terkenal ditampilkan lebih dulu. Situs mal tidak punya penilaian, harga atau jam buka, jadi saran hanya berdasarkan jenis toko.", "Setup problem: these files are missing from the website: ": "Masalah pengaturan: file ini tidak ada di situs: "});
+Object.assign(ID, {"Shop, eat, play": "Belanja, makan, bermain", "Everything under one roof": "Semuanya di bawah satu atap", "Shop": "Belanja", "Eat": "Makan", "Fashion, beauty, books and gifts": "Fashion, kecantikan, buku dan hadiah", "Restaurants, cafes and sweets": "Restoran, kafe dan makanan manis", "Browse shops": "Lihat toko", "Find food": "Cari makanan", "Movies and games": "Film dan permainan"});
 Object.assign(ID, {"Previous": "Sebelumnya", "Next": "Berikutnya", "stores": "toko", "levels": "lantai", "car spaces": "tempat parkir mobil", "Popular here": "Populer di sini", "What are you craving today?": "Anda sedang ingin apa hari ini?", "Dessert, a savoury meal or some shopping? Tell us and we will suggest where to go.": "Makanan penutup, makanan gurih atau belanja? Beri tahu kami dan kami sarankan ke mana.", "Find a space before you arrive": "Temukan tempat parkir sebelum tiba", "Check parking": "Cek parkir", "See what's on": "Lihat yang sedang berlangsung"});
 Object.assign(ID, {"Mezzanine above 3F": "Mezanin di atas 3F", "Store logos and descriptions": "Logo dan deskripsi toko", "Add a logo and a short description for a store. Both show on the store page for everyone.": "Tambahkan logo dan deskripsi singkat untuk toko. Keduanya tampil di halaman toko untuk semua orang.", "Description (English)": "Deskripsi (Inggris)", "Description (Bahasa Indonesia)": "Deskripsi (Bahasa Indonesia)", "Logo (PNG or JPG, square works best)": "Logo (PNG atau JPG, persegi paling baik)", "Save store info": "Simpan info toko", "Store": "Toko", "Store info saved": "Info toko disimpan"});
 Object.assign(ID, {"Where should I park?": "Di mana saya harus parkir?", "Best place to park right now": "Tempat parkir terbaik saat ini", "Most space for motorbikes right now": "Tempat motor paling lega saat ini", "Plenty of space": "Masih banyak", "Filling up": "Mulai penuh", "Almost full": "Hampir penuh", "free": "kosong", "free spaces": "tempat kosong", "Right now": "Saat ini", "All car levels are full right now. Try again in a few minutes, or use the motorbike levels.": "Semua lantai mobil penuh saat ini. Coba lagi beberapa menit lagi, atau gunakan lantai motor.", "All motorbike levels are full right now. Try again in a few minutes.": "Semua lantai motor penuh saat ini. Coba lagi beberapa menit lagi.", "Walk straight into the mall from this level.": "Berjalan langsung masuk ke mal dari lantai ini.", "This level has the most free spaces right now.": "Lantai ini punya tempat kosong terbanyak saat ini.", "Levels marked Direct to mall connect straight into the mall.": "Lantai bertanda Langsung ke mal terhubung langsung ke mal.", "How to read this page": "Cara membaca halaman ini", "Each card is one parking level.": "Setiap kartu adalah satu lantai parkir.", "The bar shows how full it is. Green is free space and red is taken space.": "Bilah menunjukkan seberapa penuh. Hijau adalah tempat kosong dan merah adalah tempat terisi.", "Mall staff update the numbers by hand, so they can be a few minutes behind.": "Petugas mal memperbarui angka secara manual, jadi bisa tertinggal beberapa menit.", "Last updated": "Terakhir diperbarui", "These numbers were last updated": "Angka ini terakhir diperbarui", ". Ask at the information desk if you need to be sure.": ". Tanyakan di meja informasi jika Anda ingin memastikan.", "car spaces free of": "tempat parkir mobil kosong dari", "motorbike spaces free of": "tempat parkir motor kosong dari"});
@@ -664,7 +606,7 @@ const parkBox = P => {
     (old ? "<div class='pkwarn'>These numbers were last updated <span>" + ago(up) + "</span>. Ask at the information desk if you need to be sure.</div>" : "");
 }
 const KIND = {info:"Notice", closure:"Closure", event:"Event"};
-const noticesBox = N => N.length ? "<div class='sec rvl' id='whatson'><div class='eyebrow'>What's on</div><h3 class='serif sech'>Notices and events</h3>" + carousel(N.map(n => "<div class='ncard " + esc(n.kind) + "'><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") + "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + "</div></div>").join("")) + "</div>" : "";
+const noticesBox = N => N.length ? "<div class='sec rvl' id='whatson'><div class='eyebrow'>What's on<span class='jp'>お知らせ</span></div><h3 class='serif sech'>Notices and events</h3>" + carousel(N.map(n => "<div class='ncard " + esc(n.kind) + "'><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") + "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + "</div></div>").join("")) + "</div>" : "";
 const photoHtml = t => t.photo_url ? "<a href='" + esc(t.photo_url) + "' target='_blank' rel='noopener'><img class='ph' loading='lazy' alt='Attached photo' src='" + esc(t.photo_url) + "'></a>" : "";
 function notesBlock(t) {
   const cs = D.comments.filter(c => c.ticket_id === t.id), op = openN.has(t.id);
@@ -817,7 +759,8 @@ function parkSummary(P) {
 }
 const FEATURED = ["UNIQLO", "H&M", "Nike", "Starbucks Coffee", "Cinema XXI", "Sephora", "Haagen-Dazs", "Samsung", "Krispy Kreme", "AEON BSD CITY Supermarket GF", "Gramedia", "Miniso"];
 const carousel = inner => "<div class='cwrap'><button class='carr l' data-act='carr' data-d='-1' aria-label='Previous'>&#8249;</button><div class='hscroll'>" + inner + "</div><button class='carr r' data-act='carr' data-d='1' aria-label='Next'>&#8250;</button></div>";
-const sec = (eyebrow, title, inner) => "<div class='sec rvl'><div class='eyebrow'>" + eyebrow + "</div><h3 class='serif sech'>" + title + "</h3>" + inner + "</div>";
+const JP = {"Top picks": "おすすめ", "Explore": "カテゴリー", "Find your way": "フロアガイド", "Visit info": "ご案内", "Shop, eat, play": "ショップ・グルメ・エンタメ"};
+const sec = (eyebrow, title, inner) => "<div class='sec rvl'><div class='eyebrow'>" + eyebrow + (JP[eyebrow] ? "<span class='jp'>" + JP[eyebrow] + "</span>" : "") + "</div><h3 class='serif sech'>" + title + "</h3>" + inner + "</div>";
 let towerSel = "GF";
 function towerPanel(f) {
   const L = STORE_OBJ.filter(x => x.floor === f), cnt = {}; L.forEach(x => { cnt[x.cat] = (cnt[x.cat] || 0) + 1; });
@@ -843,10 +786,12 @@ async function homeView() {
   const catSec = sec("Explore", "Browse by category", carousel(Object.keys(CATS).map(c => "<button class='ccard' data-act='homecat' data-c='" + c + "'><span class='ticon' style='" + CAT_STYLE[c] + "'>" + CAT_ICON[c] + "</span><b>" + CATS[c][0] + "</b><span class='muted'>" + STORE_OBJ.filter(x => x.cat === c).length + " stores</span></button>").join("")));
   const tower = "<div class='towerwrap'><div class='tower'>" + ["3MF", "3F", "2F", "1F", "GF"].map(f => "<button class='tfloor f-" + fcls(f) + (f === "3MF" ? " mez" : "") + "' data-act='tsel' data-f='" + f + "' aria-pressed='" + (f === towerSel) + "'><b>" + f + "</b><span class='muted'>" + FLOOR_NAME[f] + "</span><span class='badge'>" + STORE_OBJ.filter(x => x.floor === f).length + "</span></button>").join("") + "</div><div class='fpanel' id='towerpanel'>" + towerPanel(towerSel) + "</div></div>";
   const flSec = sec("Find your way", "Browse by floor", tower);
+  const TR = [["FASHION", "ショッピング", "Shop", "Fashion, beauty, books and gifts", "Browse shops", "atrium"], ["FOOD", "グルメ", "Eat", "Restaurants, cafes and sweets", "Find food", "food-culture"], ["ENTERTAINMENT", "エンタメ", "Play", "Cinema, games and play", "Movies and games", "evening"]];
+  const trio = sec("Shop, eat, play", "Everything under one roof", "<div class='trio'>" + TR.map(t => "<button class='tcard' data-act='homecat' data-c='" + t[0] + "' style='--img:url(images/" + t[5] + ".jpg)'><span class='jp'>" + t[1] + "</span><b>" + t[2] + "</b><span>" + t[3] + "</span><span class='go'>" + t[4] + "</span></button>").join("") + "</div>");
   const help = sec("Visit info", "Help and visit info", "<div class='tiles'>" + tile("parking", ICON.park, "Parking", "<span id='parksum'>" + parkSummary(d.P) + "</span>") + tile("report", ICON.report, "Report a problem", "Toilets, escalators, spills, AC and more") +
     tile("lost", ICON.lost, "Lost and found", "Lost or found something? Tell us") + tile("getting", ICON.pin, "Getting here", "Directions, toll, train and shuttle") +
     "<button class='tile hidden' id='installbtn' data-act='install'><span class='ticon'>" + ICON.install + "</span><b>Install the app</b><span class='tdesc'>Add it to your home screen</span></button>" + tile("account", ICON.user, user ? "Dashboard" : "Sign in", "Staff and tenants") + "</div>");
-  return hero + glance + "<div id='noticebox'>" + noticesBox(d.N) + "</div>" + topSec + catSec + flSec + help;
+  return hero + glance + trio + "<div id='noticebox'>" + noticesBox(d.N) + "</div>" + topSec + catSec + flSec + help;
 }
 const plan = {acts: [], taste: "", cuisine: "any", more: {}, seed: 1, occ: ""};
 const ACTS = [["eat", "Eat or drink"], ["fashion", "Fashion"], ["beauty", "Beauty and health"], ["phones", "Phones and electronics"], ["kids", "Kids and family"], ["fun", "Movies and games"], ["services", "Banks and services"], ["grocery", "Groceries and home"]];
@@ -1468,7 +1413,7 @@ function savedTheme() { try { return localStorage.getItem("aeon_theme"); } catch
 function isDark() { const t = savedTheme(); return t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
 function applyTheme() {
   const t = savedTheme(); if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
-  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#0c0c0c" : "#ffffff";
+  const d = isDark(), m = document.querySelector("meta[name=theme-color]"); if (m) m.content = d ? "#2a0a17" : "#8f1650";
   const b = $("themebtn"); b.innerHTML = d ? SUN : MOON; b.setAttribute("aria-label", d ? "Switch to light mode" : "Switch to dark mode");
 }
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
