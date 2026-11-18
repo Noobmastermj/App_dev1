@@ -441,6 +441,13 @@ h1,h2,h3,.sech,.tfloor b,.kpi b,.glance b,.pcard b,.ncard h4{font-family:"Zen Ka
 .planbox ol{position:relative}.planbox ol::before{content:"";position:absolute;left:17px;top:18px;bottom:18px;width:2px;background:var(--line)}
 .planbox li{border-top:0;position:relative}.planbox li .badge.floor{position:relative;z-index:1}
 zapier-interfaces-chatbot-embed{z-index:9}
+
+/* ===== store dropdown ===== */
+input[data-sl]{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%238a7d85' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+#sdd{position:fixed;z-index:50;background:var(--surface);border:1px solid rgba(199,154,59,.45);border-radius:18px;box-shadow:0 16px 40px rgba(60,20,45,.28);max-height:min(300px,45vh);overflow:auto;padding:6px;overscroll-behavior:contain}
+.sdi{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:0;background:none;color:var(--ink);font:inherit;font-weight:700;padding:11px 12px;border-radius:12px;cursor:pointer;text-align:left}
+.sdi[aria-selected=true],.sdi[data-k]:hover{background:var(--soft)}
+.sdi .badge{flex:none}
 </style>
 </head>
 <body>
@@ -1419,7 +1426,46 @@ function initAdminNav() {
 }
 setInterval(() => { const e = $("abupd"); if (e) { const t = ago2(lastLoad); e.textContent = (LANG === "id" ? "Diperbarui " + tr(t) : "Updated " + t); } }, 5000);
 document.addEventListener("click", e => { document.querySelectorAll("details.menu[open]").forEach(d => { if (!d.contains(e.target) || e.target.closest("[data-act]")) d.open = false; }); });
-const initUI = () => { initReveal(); initHome(); initDrag(); initAdminNav(); updSimFlag(); };
+/* ---------- Store dropdown (replaces the plain browser list) ---------- */
+let sdd = null, sdIn = null, sdSel = -1;
+function enhanceStoreInputs() {
+  document.querySelectorAll("input[list^=stores]").forEach(i => { i.dataset.sl = "1"; i.removeAttribute("list"); i.setAttribute("autocomplete", "off"); i.setAttribute("role", "combobox"); });
+  document.querySelectorAll("datalist[id^=stores]").forEach(d => d.remove());
+}
+function sdMatches(q) {
+  q = q.trim().toLowerCase(); const st = s => s.toLowerCase().startsWith(q) ? 0 : 1;
+  return STORE_OBJ.filter(x => !q || x.key.toLowerCase().includes(q)).sort((a, b) => st(a.key) - st(b.key) || a.key.localeCompare(b.key)).slice(0, 40);
+}
+function sdClose() { if (sdd) { sdd.remove(); sdd = null; } sdIn = null; sdSel = -1; }
+function sdPlace() {
+  if (!sdd || !sdIn) return; const r = sdIn.getBoundingClientRect(), below = innerHeight - r.bottom;
+  sdd.style.left = r.left + "px"; sdd.style.width = r.width + "px";
+  if (below < 220 && r.top > below) { sdd.style.top = "auto"; sdd.style.bottom = (innerHeight - r.top + 6) + "px"; } else { sdd.style.bottom = "auto"; sdd.style.top = (r.bottom + 6) + "px"; }
+}
+function sdDraw() {
+  if (!sdIn) return; const L = sdMatches(sdIn.value);
+  if (!sdd) { sdd = document.createElement("div"); sdd.id = "sdd"; sdd.setAttribute("role", "listbox"); document.body.appendChild(sdd); }
+  const st = sdd.scrollTop; sdSel = Math.min(sdSel, L.length - 1);
+  sdd.innerHTML = L.length ? L.map((x, k) => "<button type='button' class='sdi' role='option' data-k='" + esc(x.key) + "' aria-selected='" + (k === sdSel) + "'><span>" + esc(x.name) + "</span><span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span></button>").join("") : "<div class='sdi' style='cursor:default'><span class='muted'>" + tr2("No store found. Try a shorter name.") + "</span></div>";
+  sdd.scrollTop = st; sdPlace();
+  const el = sdd.querySelector("[aria-selected=true]"); if (el) el.scrollIntoView({block: "nearest"});
+}
+function sdPick(key) { const i = sdIn; if (!i) return; i.value = key; sdClose(); i.dispatchEvent(new Event("change", {bubbles: true})); }
+document.addEventListener("focusin", e => { if (e.target.dataset && e.target.dataset.sl) { sdIn = e.target; sdSel = -1; sdDraw(); } });
+document.addEventListener("input", e => { if (e.target.dataset && e.target.dataset.sl) { sdIn = e.target; sdSel = -1; sdDraw(); } });
+document.addEventListener("mousedown", e => {
+  const b = e.target.closest && e.target.closest(".sdi[data-k]");
+  if (b) { e.preventDefault(); sdPick(b.dataset.k); } else if (sdd && e.target !== sdIn && !(e.target.closest && e.target.closest("#sdd"))) sdClose();
+});
+document.addEventListener("focusout", e => { if (e.target === sdIn) setTimeout(() => { if (document.activeElement !== sdIn) sdClose(); }, 150); });
+document.addEventListener("keydown", e => {
+  if (!sdd || e.target !== sdIn) return; const n = sdd.querySelectorAll(".sdi[data-k]").length;
+  if ((e.key === "ArrowDown" || e.key === "ArrowUp") && n) { e.preventDefault(); sdSel = (sdSel + (e.key === "ArrowDown" ? 1 : -1) + n) % n; sdDraw(); }
+  else if (e.key === "Enter" && sdSel >= 0) { e.preventDefault(); const b = sdd.querySelectorAll(".sdi[data-k]")[sdSel]; if (b) sdPick(b.dataset.k); }
+  else if (e.key === "Escape") sdClose();
+});
+addEventListener("scroll", sdPlace, true); addEventListener("resize", sdPlace);
+const initUI = () => { initReveal(); initHome(); initDrag(); initAdminNav(); updSimFlag(); sdClose(); enhanceStoreInputs(); };
 document.addEventListener("click", async e => {
   if (e.target.id === "sheet") { $("sheet").classList.add("hidden"); return; }
   const b = e.target.closest("[data-act]"); if (!b) return;
