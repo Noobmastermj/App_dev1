@@ -448,6 +448,13 @@ input[data-sl]{-webkit-appearance:none;appearance:none;background-image:url("dat
 .sdi{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:0;background:none;color:var(--ink);font:inherit;font-weight:700;padding:11px 12px;border-radius:12px;cursor:pointer;text-align:left}
 .sdi[aria-selected=true],.sdi[data-k]:hover{background:var(--soft)}
 .sdi .badge{flex:none}
+
+/* ===== mobile: keep the chatbot bubble clear of the tab bar ===== */
+@media(max-width:899px){
+.tabs{padding-right:78px}
+.tabs button{min-width:0;padding-left:0;padding-right:0}
+.tabs button span{text-align:center;line-height:1.15}
+}
 </style>
 </head>
 <body>
