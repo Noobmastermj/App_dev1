@@ -449,12 +449,15 @@ input[data-sl]{-webkit-appearance:none;appearance:none;background-image:url("dat
 .sdi[aria-selected=true],.sdi[data-k]:hover{background:var(--soft)}
 .sdi .badge{flex:none}
 
-/* ===== mobile: keep the chatbot bubble clear of the tab bar ===== */
-@media(max-width:899px){
-.tabs{padding-right:78px}
-.tabs button{min-width:0;padding-left:0;padding-right:0}
-.tabs button span{text-align:center;line-height:1.15}
-}
+/* ===== chat launcher and panel ===== */
+.chatfab{position:fixed;right:16px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:12;width:56px;height:56px;border-radius:50%;border:0;background:linear-gradient(135deg,#a01c5c,#6a0f3a);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 24px rgba(110,15,60,.4)}
+.chatfab svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.chatpanel{position:fixed;z-index:40;left:8px;right:8px;bottom:calc(70px + env(safe-area-inset-bottom,0px));height:min(560px,calc(100vh - 150px));background:var(--surface);border:1px solid rgba(199,154,59,.4);border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden}
+.chathead{display:flex;justify-content:space-between;align-items:center;padding:8px 10px 8px 18px;color:#fff;background:linear-gradient(135deg,var(--hdr1),var(--hdr2))}
+.chatbody{flex:1;min-height:0;overflow:hidden}
+.chatbody zapier-interfaces-chatbot-embed{display:block}
+@media(max-width:899px){body.chat-open .chatfab{display:none}}
+@media(min-width:900px){.chatfab{bottom:20px;right:20px}.chatpanel{left:auto;right:20px;bottom:88px;width:400px;height:min(600px,calc(100vh - 120px))}}
 </style>
 </head>
 <body>
@@ -550,6 +553,7 @@ Object.assign(ID, {"Where should I park?": "Di mana saya harus parkir?", "Best p
 Object.assign(ID, {"Plan": "Rencana", "Directory": "Direktori", "Map": "Peta", "Saved": "Tersimpan", "My visit": "Kunjungan saya", "Stores you saved, grouped by floor so you can plan your walk. Tap the heart on any store to save it.": "Toko yang Anda simpan, dikelompokkan per lantai agar mudah merencanakan jalan. Ketuk hati pada toko mana pun untuk menyimpannya.", "Share my list": "Bagikan daftar saya", "WhatsApp": "WhatsApp", "Clear list": "Hapus daftar", "Nothing saved yet. Tap the heart on a store to add it here.": "Belum ada yang disimpan. Ketuk hati pada toko untuk menambahkannya di sini.", "Save to favourites": "Simpan ke favorit", "Saved to favourites": "Disimpan ke favorit", "Removed from favourites": "Dihapus dari favorit", "Pick an occasion": "Pilih suasana", "Get a ready-made plan in one tap.": "Dapatkan rencana siap pakai dengan satu ketukan.", "Date night": "Malam kencan", "Family day": "Hari keluarga", "Quick bite": "Makan cepat", "Rainy day": "Hari hujan", "Friends hangout": "Nongkrong bareng teman", "Shopping spree": "Puas belanja", "Gift hunting": "Cari hadiah", "Dinner, a movie and a sweet finish.": "Makan malam, film dan penutup yang manis.", "A relaxed meal, play for the kids and treats.": "Makan santai, bermain untuk anak dan camilan manis.", "Something salty and a drink, fast.": "Sesuatu yang asin dan minuman, dengan cepat.", "A movie, coffee and a bookshop browse.": "Film, kopi dan melihat-lihat toko buku.", "Drinks, games and a shared meal.": "Minuman, permainan dan makan bersama.", "Clothes, shoes and a coffee break.": "Pakaian, sepatu dan istirahat kopi.", "Beauty, watches or jewellery, and a dessert box.": "Kecantikan, jam tangan atau perhiasan, dan kotak makanan penutup.", "Dinner": "Makan malam", "Movie": "Film", "Dessert": "Makanan penutup", "Lunch": "Makan siang", "Play": "Bermain", "Treat": "Camilan manis", "Bite": "Camilan", "Drink": "Minuman", "Coffee": "Kopi", "Browse": "Lihat-lihat", "Clothes": "Pakaian", "Shoes": "Sepatu", "Coffee break": "Istirahat kopi", "Beauty": "Kecantikan", "Watches or jewellery": "Jam tangan atau perhiasan", "Home gift": "Hadiah rumah", "Dessert box": "Kotak makanan penutup", "Shuffle ideas": "Acak ide", "Share": "Bagikan", "Save all": "Simpan semua", "Nothing to share yet.": "Belum ada yang dibagikan.", "Copied": "Disalin", "My saved stores": "Toko tersimpan saya", "My visit plan": "Rencana kunjungan saya", "Mall map": "Peta mal", "Pick a floor and tap a pin to see the store.": "Pilih lantai dan ketuk pin untuk melihat toko.", "Find a store on the map": "Cari toko di peta", "The floor plan for this floor has not been added yet.": "Denah lantai ini belum ditambahkan.", "No stores are pinned on this floor yet.": "Belum ada toko yang dipin di lantai ini.", "This store is not pinned on the map yet.": "Toko ini belum dipin di peta.", "Open store page": "Buka halaman toko", "Floor plan": "Denah lantai", "Search by voice": "Cari dengan suara", "Listening...": "Mendengarkan...", "Voice search is not available here.": "Pencarian suara tidak tersedia di sini.", "Floor map pins": "Pin peta lantai", "Save pin": "Simpan pin", "Remove pin": "Hapus pin", "Pin saved": "Pin disimpan", "Pin removed": "Pin dihapus"});
 Object.assign(ID, {"Review": "Periksa", "Jobs": "Pekerjaan", "Lost & found": "Barang hilang", "Notices": "Pengumuman", "Accounts": "Akun", "Activity": "Aktivitas", "More": "Lainnya", "Admin sections": "Bagian admin", "More actions": "Aksi lainnya", "Live updates": "Pembaruan langsung"});
 Object.assign(ID, {"Or build your own": "Atau susun sendiri", "Plan your day": "Rencanakan hari Anda", "Pick an occasion and get a ready-made route, grouped by floor.": "Pilih suasana dan dapatkan rute siap pakai, dikelompokkan per lantai.", "Reporting as tenant:": "Melapor sebagai penyewa:", "Your reports go straight to mall staff.": "Laporan Anda langsung ke petugas mal."});
+Object.assign(ID, {"Chat with us": "Chat dengan kami", "Assistant": "Asisten", "Close": "Tutup"});
 const RX = [
  [/^(\d+) free$/, m => m[1] + " kosong"], [/^\((\d+) free\)$/, m => "(" + m[1] + " kosong)"], [/^Most space: (.+)$/, m => "Paling lega: " + m[1]], [/^car spaces free of (.+)$/, m => "tempat parkir mobil kosong dari " + m[1]], [/^Best for cars: (.+)$/, m => "Terbaik untuk mobil: " + m[1]], [/^([\d,.]+) taken$/, m => m[1] + " terisi"], [/^([\d,.]+) total$/, m => m[1] + " total"], [/^Most car space: (.+)$/, m => "Mobil paling lega: " + m[1]],
  [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], 
@@ -1640,6 +1644,14 @@ async function doInstall() {
   const miss = await installCheck();
   if (miss.length) $("sheetnote").textContent = (LANG === "id" ? "Masalah pengaturan: file ini tidak ada di situs: " : "Setup problem: these files are missing from the website: ") + miss.join(", ") + (LANG === "id" ? ". Unggah ke folder yang sama dengan index.html." : ". Upload them to the same folder as index.html.");
 }
+let chatMounted = false;
+function openChat() {
+  const p = $("chatpanel"); p.classList.remove("hidden"); document.body.classList.add("chat-open");
+  if (!chatMounted) { const b = $("chatbody"), el = document.createElement("zapier-interfaces-chatbot-embed"); el.setAttribute("is-popup", "false"); el.setAttribute("chatbot-id", "cmwkea2l0001efp3laedziidg"); el.setAttribute("height", b.clientHeight + "px"); el.setAttribute("width", b.clientWidth + "px"); b.appendChild(el); chatMounted = true; }
+}
+function closeChat() { $("chatpanel").classList.add("hidden"); document.body.classList.remove("chat-open"); }
+function toggleChat() { $("chatpanel").classList.contains("hidden") ? openChat() : closeChat(); }
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("chatpanel").classList.contains("hidden")) closeChat(); });
 function net() { $("offline").classList.toggle("hidden", navigator.onLine); }
 addEventListener("online", () => { net(); render(); }); addEventListener("offline", net); net();
 document.addEventListener("click", async e => {
@@ -1648,12 +1660,13 @@ document.addEventListener("click", async e => {
   else if (a === "lang") { LANG = LANG === "id" ? "en" : "id"; try { localStorage.setItem("aeon_lang", LANG); } catch (x) {} render(); }
   else if (a === "install") {
     await doInstall();
-  } else if (a === "closesheet") $("sheet").classList.add("hidden");
+  } else if (a === "closesheet") $("sheet").classList.add("hidden"); else if (a === "chat") toggleChat(); else if (a === "chatclose") closeChat();
 });
 if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
 
 </script>
 <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
-<zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cmwkea2l0001efp3laedziidg'></zapier-interfaces-chatbot-embed>
+<button id="chatfab" class="chatfab" data-act="chat" aria-label="Chat with us"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.7 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/></svg></button>
+<div id="chatpanel" class="chatpanel hidden" role="dialog" aria-label="Assistant"><div class="chathead"><b>Assistant</b><button class="hbtn" data-act="chatclose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div id="chatbody" class="chatbody"></div></div>
 </body>
 </html>
