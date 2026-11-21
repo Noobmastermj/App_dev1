@@ -458,6 +458,83 @@ input[data-sl]{-webkit-appearance:none;appearance:none;background-image:url("dat
 .chatbody zapier-interfaces-chatbot-embed{display:block}
 @media(max-width:899px){body.chat-open .chatfab{display:none}}
 @media(min-width:900px){.chatfab{bottom:20px;right:20px}.chatpanel{left:auto;right:20px;bottom:88px;width:400px;height:min(600px,calc(100vh - 120px))}}
+
+/* ===== warmer, softer look ===== */
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#fff7f3;--surface:#fffefc;--ink:#3a2a28;--muted:#8a7570;--line:#f3dfd7;--field:#fcf0ea;--brand:#b3195f;--soft:#fde9ef;--gold:#e9a23b;--gold-d:#b97a16;--hdr1:#c2206b;--hdr2:#8f1650}}
+:root[data-theme=light]{--bg:#fff7f3;--surface:#fffefc;--ink:#3a2a28;--muted:#8a7570;--line:#f3dfd7;--field:#fcf0ea;--brand:#b3195f;--soft:#fde9ef;--gold:#e9a23b;--gold-d:#b97a16;--hdr1:#c2206b;--hdr2:#8f1650}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--brand);border-radius:16px;box-shadow:0 3px 0 rgba(110,10,55,.28);letter-spacing:.01em}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(110,10,55,.28)}
+.btn:not(.alt):not(.gold):not(.sm)::after{content:"\203A";font-size:1.35em;line-height:1;margin-left:2px}
+.btn.alt{background:var(--surface);border:2px solid var(--brand);color:var(--brand);box-shadow:none}
+.btn.alt:hover{background:var(--soft)}
+.btn.gold{background:#f7b955;color:#4a2a00;box-shadow:0 3px 0 rgba(150,90,10,.35)}
+.chip,.abnav button,.segx,.segx button,.hchips button{border-radius:999px}
+.chip{background:var(--soft);border-color:transparent;color:var(--brand)}
+.chip[aria-pressed=true]{background:var(--brand);color:#fff}
+.panel,.tile,.dcard,.pcard,.ccard,.fcard,.pstep,.cta,.notice,.lv,.fpanel,.pkbest,.abar,.drow,.stat div,.occ,.tfloor,.kpi{border:1px solid var(--line);border-radius:20px;box-shadow:0 4px 16px rgba(190,90,70,.08)}
+.occ[aria-pressed=true]{background:var(--brand);border-color:var(--brand)}
+.tile{background:var(--surface)}
+.ticon{background:var(--soft);color:var(--brand)}
+.tabs{background:var(--surface);border-top:1px solid var(--line)}
+.sech::after{background:linear-gradient(90deg,var(--brand),transparent)}
+.eyebrow{color:var(--brand)}
+select,input[type=text],input[type=password],input[type=number],textarea{border-radius:14px}
+select:focus,input:focus,textarea:focus{border-color:var(--brand)}
+
+/* ===== AEON Japan style: white, magenta outlines, centred headings ===== */
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#fff;--surface:#fff;--ink:#333;--muted:#777;--line:#e4e4e4;--field:#f4f4f4;--brand:#b0007a;--soft:#fbe6f3;--hdr1:#b0007a;--hdr2:#7a0055}}
+:root[data-theme=light]{--bg:#fff;--surface:#fff;--ink:#333;--muted:#777;--line:#e4e4e4;--field:#f4f4f4;--brand:#b0007a;--soft:#fbe6f3;--hdr1:#b0007a;--hdr2:#7a0055}
+body::before{display:none}
+.sec>.eyebrow,.sec>.sech{text-align:center}
+.sec>.eyebrow{text-transform:lowercase;letter-spacing:.22em;font-size:15px;font-weight:500;color:var(--ink)}
+.sec>.eyebrow .jp{display:none}
+.sech{color:var(--brand);font-size:clamp(28px,7vw,44px);font-weight:900;letter-spacing:.04em}
+.sech::after{margin-left:auto;margin-right:auto}
+.qgrid,.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:14px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.ccard,.tile{width:auto;min-height:150px;border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:18px 6px}
+.ccard b,.tile b{color:var(--brand);font-size:15px;font-weight:800;line-height:1.25}
+.ccard .muted,.tile .tdesc{font-size:11px;color:var(--muted)}
+.ccard .ticon,.tile .ticon{width:68px;height:68px;border-radius:50%;background:transparent;border:2px solid var(--brand);color:var(--brand)}
+.ccard .ticon svg,.tile .ticon svg{width:30px;height:30px}
+@media(hover:hover){.ccard:hover,.tile:hover{transform:none;box-shadow:none;background:var(--soft)}}
+.pcard{background:var(--surface);border:2px solid var(--brand);border-radius:16px;box-shadow:none}
+.pcard b{color:var(--brand)}
+
+/* ===== map amenities, event cards, alignment ===== */
+.am{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;color:#fff;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.am svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.am-lift{background:#2b6fd6}.am-steps{background:#e07b00}.am-toilet{background:#1e9e62}
+.am.near{width:30px;height:30px;box-shadow:0 0 0 3px var(--gold),0 2px 8px rgba(0,0,0,.4);z-index:2}.am.near svg{width:17px;height:17px}
+.amlines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.amlines line{stroke:var(--brand);stroke-width:2;stroke-dasharray:4 4}
+a.ncard{text-decoration:none;color:#fff}a.ncard.event{color:#2a1a00}
+.ncard.hasimg{color:#fff;background:linear-gradient(180deg,rgba(20,5,12,.05) 25%,rgba(20,5,12,.86)),var(--nimg) center/cover no-repeat}
+.ngo{font-weight:800;margin-left:8px}
+.ccard,.tile{justify-content:flex-start}
+.ccard b,.tile b{min-height:2.5em;display:flex;align-items:center;justify-content:center}
+.tiles:has(#installbtn.hidden)::after{content:"";border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media(max-width:480px){.tabs button{font-size:9px}.tabs button span{white-space:nowrap}}
+
+/* ===== digital map and warmer parking ===== */
+.mapscroll{overflow:auto;max-height:74vh;margin-top:12px;border-radius:18px;border:1px solid var(--line);background:#fffaf4;-webkit-overflow-scrolling:touch}
+.mapscroll .mapwrap{margin-top:0;border:0;border-radius:0;background:transparent}
+.maplegend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;font-weight:700}
+.maplegend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:6px;vertical-align:-1px}
+.st-ok{--sc:#3f9b63;--sbg:rgba(63,155,99,.16)}.st-warn{--sc:#e09a14;--sbg:rgba(224,154,20,.18)}.st-low{--sc:#e0661f;--sbg:rgba(224,102,31,.16)}.st-full{--sc:#d6303f;--sbg:rgba(214,48,63,.14)}
+.lv{background:color-mix(in srgb,var(--sc) 9%,var(--surface));border:1.5px solid color-mix(in srgb,var(--sc) 30%,var(--line));border-top:6px solid var(--sc);border-radius:22px;padding:16px;gap:8px;box-shadow:none}
+.lv-top b{font-size:22px}
+.lv-num b{font-size:42px;letter-spacing:-.02em}.lv-num span{font-size:15px}
+.stchip{font-size:12px;padding:4px 11px}
+.trk.fr{height:14px;border-radius:7px;background:rgba(120,80,50,.14)}.trk.fr i{background:var(--sc);border-radius:7px}
+.pkbest{background:linear-gradient(135deg,color-mix(in srgb,var(--sc) 16%,var(--surface)),var(--surface));border-radius:26px}
+.pkbig b{font-size:54px}.pkline{font-size:17px}
+.pkgrid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px}
+
+/* ===== store pins ===== */
+.minimap{margin-top:14px}.minimap .mapwrap{margin-top:0}
+.youpin{position:absolute;width:26px;height:26px;border-radius:50%;background:var(--bad);border:3px solid #fff;transform:translate(-50%,-50%);box-shadow:0 2px 8px rgba(0,0,0,.45);z-index:3;pointer-events:none}
+.youpin::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:3px solid var(--bad);opacity:0}
+@media(prefers-reduced-motion:no-preference){.youpin::after{animation:ping 1.6s ease-out infinite}@keyframes ping{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.3);opacity:0}}}
+.pindot{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(60,30,40,.55);border:2px solid #fff;transform:translate(-50%,-50%);pointer-events:none}
 </style>
 </head>
 <body>
@@ -478,7 +555,7 @@ input[data-sl]{-webkit-appearance:none;appearance:none;background-image:url("dat
 const SB_URL = "https://smgxmflhgdrubmyufxft.supabase.co";
 const SB_KEY = "sb_publishable_ADxUBk5XdjwSgicntwWFgg_BJIcNwsh";
 
-const STORE_DATA = "180 SPM|FASHION|GF;Ace Hardware|GOODS|n/a;Adidas|FASHION|GF;AEON BSD CITY Dept Store 1F|FASHION|1F;AEON BSD CITY Dept Store 2F|FASHION|2F;AEON BSD CITY Supermarket GF|FOOD|GF;Asics|FASHION|GF;ATM CENTER (3F)|SERVICE|3F;ATM CENTER (GF)|SERVICE|GF;Auntie Anne's|FOOD|GF;B-Quik|SERVICE|GF;Baby Shop|FASHION|2F;Bakmi Ayam Alok|FOOD|3F;Bakmi GM|FOOD|2F;Bakso Afung|FOOD|3F;Bakso Malang Cak Rosso|FOOD|3F;Ban ban|FOOD|GF;Bank Mandiri|SERVICE|GF;BASGOR 89|FOOD|3F;Bath & Body Works|GOODS|GF;BCA|SERVICE|GF;Beard Papa|FOOD|GF;Beatrice Clothing|FASHION|2F;Beauty Scent|GOODS|GF;Bellamama|FOOD|GF;Beluga Jewellery|GOODS|1F;Bijin Nabe|FOOD|GF;Birkenstock|FASHION|1F;Blibli|GOODS|3F;BNI|SERVICE|GF;Bobo Tokyo|FASHION|1F;Boost Juice|FOOD|GF;Botanical Essentials|GOODS|1F;BRANZ (Property)|SERVICE|GF;Bugatea|FOOD|3F;Bugatea (2nd outlet)|FOOD|3F;Bungeoppang|FOOD|3F;Burger King|FOOD|3F;Burger King|FOOD|3MF;Buttonscarves|FASHION|2F;C&F perfumery|GOODS|GF;Calvin Klein|FASHION|GF;Casio|GOODS|1F;Chagee|FOOD|GF;Charles & Keith|FASHION|1F;Châteraisé|FOOD|GF;Chatime|FOOD|GF;CIMB Niaga Digital Lounge|SERVICE|GF;Cindy|GOODS|2F;Cinema XXI|ENTERTAINMENT|3F;Cold Stone|FOOD|GF;Colorbox|FASHION|2F;Converse|FASHION|GF;COWAY|GOODS|1F;Crocs|FASHION|1F;D'Crepes|FOOD|2F;Daiso Japan|GOODS|2F;Daniel Wellington|GOODS|1F;Dapur Solo|FOOD|2F;De Wasz Laundry|SERVICE|GF;Di Bawah Tangga|FOOD|2F;Digimap|GOODS|GF;Doner Kebab|FOOD|3F;DORE by LeTAO|FOOD|GF;Dough Lab|FOOD|GF;Dparis|GOODS|1F;Dum Dum Thai Tea|FOOD|3F;Dwidaya Tour|SERVICE|3F;Edogawa Sushi|FOOD|n/a;Eka Karya Orchid|GOODS|GF;Eprise|FASHION|2F;Erafone|GOODS|3F;Erha Store|GOODS|GF;Et Cetera|FASHION|1F;Everbest|FASHION|1F;Executive|FASHION|1F;Expat Roasters|FOOD|GF;Eyes Spice|GOODS|1F;Facility|FASHION|2F;Fan Fries|FOOD|3F;Fat Duck|FOOD|GF;Fitflop|GOODS|1F;Flying Tiger Copenhagen|GOODS|1F;Frank & Co|GOODS|GF;Fruitylicious|FOOD|3F;Garmin|GOODS|1F;Ginza Nail|SERVICE|1F;Gion Sushi|FOOD|GF;Giordano|FASHION|1F;Glam On|GOODS|2F;GMS BSD|SERVICE|1F;Gococo|FOOD|3F;Gramedia|GOODS|2F;Greyhound|FOOD|GF;GS Shop|GOODS|2F;Guardian|GOODS|GF;Guess|FASHION|GF;Guldens Mice|FOOD|3F;Gyukaku|FOOD|GF;Gyukatsu Kyoto Katsugyu|FOOD|GF;H&M|FASHION|1F;Haagen-Dazs|FOOD|3F;Haircode|SERVICE|2F;Happy Dental Clinic|SERVICE|n/a;Havaianas|GOODS|1F;Huawei|GOODS|3F;Hush Puppies|FASHION|1F;I Love Emas|SERVICE|2F;Ice Gentong|FOOD|3F;Ichiro|FOOD|3F;Ikkudo Ichi|FOOD|3F;Imperial Kitchen|FOOD|3F;Iqos|GOODS|GF;Itsu|GOODS|3F;Jewel Cafe|SERVICE|1F;Jittlada Thai Cuisine|FOOD|GF;Jolly Time|FOOD|3F;Kaneko Hannosuke|FOOD|GF;KFC|FOOD|3F;KFC|FOOD|3MF;Kiddycuts|SERVICE|2F;Kidz Station|GOODS|2F;Kimukatsu|FOOD|3F;Kluk Sandal|FASHION|GF;Koi Cafe|FOOD|1F;Kokuo Reflexology|SERVICE|3MF;Kopi Kenangan|FOOD|1F;Krispy Kreme|FOOD|GF;L'Occitane|GOODS|GF;Lacoste|FASHION|GF;Laxmi Tailor|FASHION|1F;LEGO|GOODS|1F;Levi's|FASHION|1F;Lewis Emma|FASHION|2F;Lock & Lock with Hello, Bebe|GOODS|2F;Loly Poly|GOODS|3F;Love, Bonito|FASHION|1F;M&G Life|GOODS|2F;Maison Tatsuya|FOOD|GF;Mama Roz|FOOD|1F;Mandalika Parfum|GOODS|2F;Marco Chop Shop|SERVICE|2F;Max Fashions|FASHION|2F;McDonald's|FOOD|3F;Megane Prince|GOODS|2F;Megaze Coffee|FOOD|3F;Melissa|FASHION|1F;Menya Sakura|FOOD|3F;Mi Home|GOODS|3F;Miniso|GOODS|2F;Minoshe|FASHION|2F;Miss Thai Boat Noodle|FOOD|3F;Moo Chuu|GOODS|2F;Mooimom|FASHION|2F;Mothercare & Early Learning Center|FASHION|2F;My Feet|FASHION|2F;Nanny's Pavillon|FOOD|GF;Nasgor Randang One|FOOD|3F;Nespresso|GOODS|GF;New Balance|FASHION|GF;New Era|FASHION|1F;Nike|FASHION|GF;Noodle King|FOOD|3F;Noodle King|FOOD|3MF;Nuansa Musik|SERVICE|3MF;Oh! Some|GOODS|2F;Ootoya|FOOD|GF;Oppo|GOODS|3F;Optik Melawai|GOODS|1F;Optik Seis|GOODS|1F;OWL Eyewear|GOODS|2F;Owndays|FASHION|2F;Paradise Dynasty|FOOD|GF;Pedro|FASHION|1F;Pempek Hoi|FOOD|3F;Pepperlunch|FOOD|3F;Pho Baba|FOOD|GF;Pika Piku Ice Cream|FOOD|3F;Pizza Marzano|FOOD|GF;Planet Sports. Asia|FASHION|1F;Playtopia|ENTERTAINMENT|3F;Playworks|GOODS|3F;Pokemon Mezastar|ENTERTAINMENT|3F;Polo|FASHION|1F;Puyo|FOOD|2F;Ramen Seirock-ya|FOOD|3F;Rejuve|FOOD|3F;Relx|GOODS|1F;Remboelan|FOOD|GF;Rempah Bistro|FOOD|GF;Rockstar Academy|SERVICE|3F;Rujak Kolam Medan|FOOD|3F;Sai Ramen|FOOD|3F;Samsonite|GOODS|1F;Samsung|GOODS|3F;Sate Dombud|FOOD|3F;Sate Padang Mak Syukur|FOOD|3F;Saturdays|GOODS|1F;Scandia|GOODS|2F;Secret Garden|GOODS|1F;Sephora|GOODS|1F;Shake Shake|FOOD|3F;Shihlin Taiwan Street Snacks|FOOD|GF;Shortcut Barbershop|SERVICE|2F;Shu Shu|FOOD|3F;Simply|FOOD|3F;Skechers|FASHION|GF;Skin+|SERVICE|2F;Skinfood|GOODS|GF;Smart Hand DIY|ENTERTAINMENT|2F;Smiggle|GOODS|2F;Social Affair|FOOD|GF;Sociolla|GOODS|GF;Soes Lelo|FOOD|3F;Solaria|FOOD|3F;Sop Ikan Batam|FOOD|3F;Sop Konro Cendana|FOOD|3F;Soto Betawi H. Mamat|FOOD|3F;Soto Mie Pak Kadir|FOOD|3F;Staccato|FASHION|1F;Starbucks Coffee|FOOD|GF;Steak 21|FOOD|3F;Steve Madden|FASHION|1F;Stop n Go|SERVICE|GF;Sukiya|FOOD|3F;Susu Mbok Darmi|FOOD|3F;Taucy|FOOD|3F;Tawan|FOOD|3F;The Bath Box|GOODS|GF;The Body Shop|GOODS|GF;The Chicken Rice Shop|FOOD|3F;The Palace|GOODS|GF;The RR Chocolate|FOOD|GF;This Is April|FASHION|2F;Tiga Semut|FOOD|3F;Tokio Sushi|FOOD|3F;Tokyo Belle|SERVICE|3F;Tommy Hilfiger|FASHION|GF;Toys City|GOODS|2F;Urban & Co|FASHION|2F;Urban Beats|GOODS|3F;Vans|GOODS|GF;Vines|FOOD|GF;VIVAIA|FASHION|1F;Wacoal|FASHION|2F;Wardah|GOODS|1F;Waroeng Teh Kotjok|FOOD|3F;Watson|GOODS|2F;White Noise|GOODS|GF;Wingstop|FOOD|3F;Wood|FASHION|1F;Yamada Best|GOODS|3F;Yayang|FASHION|2F;YEN PAO|FOOD|3F;Yole|FOOD|GF;Yoshinoya|FOOD|2F;Yves Rocher|GOODS|GF;Zenbu|FOOD|GF;Zoomoov|SERVICE|2F;UNIQLO|FASHION|1F;Foot Locker|FASHION|GF;Golden Lamian|FOOD|3F;Rokurenya|FOOD|3F;Dear Butter|FOOD|3F".split(";").map(x => x.split("|"));
+const STORE_DATA = "180 SPM|FASHION|GF;Ace Hardware|GOODS|3MF;Adidas|FASHION|GF;AEON BSD CITY Dept Store 1F|FASHION|1F;AEON BSD CITY Dept Store 2F|FASHION|2F;AEON BSD CITY Supermarket GF|FOOD|GF;Asics|FASHION|GF;ATM CENTER (3F)|SERVICE|3F;ATM CENTER (GF)|SERVICE|GF;Auntie Anne's|FOOD|GF;B-Quik|SERVICE|GF;Baby Shop|FASHION|2F;Bakmi Ayam Alok|FOOD|3F;Bakmi GM|FOOD|2F;Bakso Afung|FOOD|3F;Bakso Malang Cak Rosso|FOOD|3F;Ban ban|FOOD|GF;Bank Mandiri|SERVICE|GF;BASGOR 89|FOOD|3F;Bath & Body Works|GOODS|GF;BCA|SERVICE|GF;Beard Papa|FOOD|GF;Beatrice Clothing|FASHION|2F;Beauty Scent|GOODS|GF;Bellamama|FOOD|GF;Beluga Jewellery|GOODS|1F;Bijin Nabe|FOOD|GF;Birkenstock|FASHION|1F;Blibli|GOODS|3F;BNI|SERVICE|GF;Bobo Tokyo|FASHION|1F;Boost Juice|FOOD|GF;Botanical Essentials|GOODS|1F;BRANZ (Property)|SERVICE|GF;Bugatea|FOOD|3F;Bugatea (2nd outlet)|FOOD|3F;Bungeoppang|FOOD|3F;Burger King|FOOD|3F;Burger King|FOOD|3MF;Buttonscarves|FASHION|2F;C&F perfumery|GOODS|GF;Calvin Klein|FASHION|GF;Casio|GOODS|1F;Chagee|FOOD|GF;Charles & Keith|FASHION|1F;Châteraisé|FOOD|GF;Chatime|FOOD|GF;CIMB Niaga Digital Lounge|SERVICE|GF;Cindy|GOODS|2F;Cinema XXI|ENTERTAINMENT|3F;Cold Stone|FOOD|GF;Colorbox|FASHION|2F;Converse|FASHION|GF;COWAY|GOODS|1F;Crocs|FASHION|1F;D'Crepes|FOOD|2F;Daiso Japan|GOODS|2F;Daniel Wellington|GOODS|1F;Dapur Solo|FOOD|2F;De Wasz Laundry|SERVICE|GF;Di Bawah Tangga|FOOD|2F;Digimap|GOODS|GF;Doner Kebab|FOOD|3F;DORE by LeTAO|FOOD|GF;Dough Lab|FOOD|GF;Dparis|GOODS|1F;Dum Dum Thai Tea|FOOD|3F;Dwidaya Tour|SERVICE|3F;Edogawa Sushi|FOOD|n/a;Eka Karya Orchid|GOODS|GF;Eprise|FASHION|2F;Erafone|GOODS|3F;Erha Store|GOODS|GF;Et Cetera|FASHION|1F;Everbest|FASHION|1F;Executive|FASHION|1F;Expat Roasters|FOOD|GF;Eyes Spice|GOODS|1F;Facility|FASHION|2F;Fan Fries|FOOD|3F;Fat Duck|FOOD|GF;Fitflop|GOODS|1F;Flying Tiger Copenhagen|GOODS|1F;Frank & Co|GOODS|GF;Fruitylicious|FOOD|3F;Garmin|GOODS|1F;Ginza Nail|SERVICE|1F;Gion Sushi|FOOD|GF;Giordano|FASHION|1F;Glam On|GOODS|2F;GMS BSD|SERVICE|1F;Gococo|FOOD|3F;Gramedia|GOODS|2F;Greyhound|FOOD|GF;GS Shop|GOODS|2F;Guardian|GOODS|GF;Guess|FASHION|GF;Guldens Mice|FOOD|3F;Gyukaku|FOOD|GF;Gyukatsu Kyoto Katsugyu|FOOD|GF;H&M|FASHION|1F;Haagen-Dazs|FOOD|3F;Haircode|SERVICE|2F;Happy Dental Clinic|SERVICE|n/a;Havaianas|GOODS|1F;Huawei|GOODS|3F;Hush Puppies|FASHION|1F;I Love Emas|SERVICE|2F;Ice Gentong|FOOD|3F;Ichiro|FOOD|3F;Ikkudo Ichi|FOOD|3F;Imperial Kitchen|FOOD|3F;Iqos|GOODS|GF;Itsu|GOODS|3F;Jewel Cafe|SERVICE|1F;Jittlada Thai Cuisine|FOOD|GF;Jolly Time|FOOD|3F;Kaneko Hannosuke|FOOD|GF;KFC|FOOD|3F;KFC|FOOD|3MF;Kiddycuts|SERVICE|2F;Kidz Station|GOODS|2F;Kimukatsu|FOOD|3F;Kluk Sandal|FASHION|GF;Koi Cafe|FOOD|1F;Kokuo Reflexology|SERVICE|3MF;Kopi Kenangan|FOOD|1F;Krispy Kreme|FOOD|GF;L'Occitane|GOODS|GF;Lacoste|FASHION|GF;Laxmi Tailor|FASHION|1F;LEGO|GOODS|1F;Levi's|FASHION|1F;Lewis Emma|FASHION|2F;Lock & Lock with Hello, Bebe|GOODS|2F;Loly Poly|GOODS|3F;Love, Bonito|FASHION|1F;M&G Life|GOODS|2F;Maison Tatsuya|FOOD|GF;Mama Roz|FOOD|1F;Mandalika Parfum|GOODS|2F;Marco Chop Shop|SERVICE|2F;Max Fashions|FASHION|2F;McDonald's|FOOD|3F;Megane Prince|GOODS|2F;Megaze Coffee|FOOD|3F;Melissa|FASHION|1F;Menya Sakura|FOOD|3F;Mi Home|GOODS|3F;Miniso|GOODS|2F;Minoshe|FASHION|2F;Miss Thai Boat Noodle|FOOD|3F;Moo Chuu|GOODS|2F;Mooimom|FASHION|2F;Mothercare & Early Learning Center|FASHION|2F;My Feet|FASHION|2F;Nanny's Pavillon|FOOD|GF;Nasgor Randang One|FOOD|3F;Nespresso|GOODS|GF;New Balance|FASHION|GF;New Era|FASHION|1F;Nike|FASHION|GF;Noodle King|FOOD|3F;Noodle King|FOOD|3MF;Nuansa Musik|SERVICE|3MF;Oh! Some|GOODS|2F;Ootoya|FOOD|GF;Oppo|GOODS|3F;Optik Melawai|GOODS|1F;Optik Seis|GOODS|1F;OWL Eyewear|GOODS|2F;Owndays|FASHION|2F;Paradise Dynasty|FOOD|GF;Pedro|FASHION|1F;Pempek Hoi|FOOD|3F;Pepperlunch|FOOD|3F;Pho Baba|FOOD|GF;Pika Piku Ice Cream|FOOD|3F;Pizza Marzano|FOOD|GF;Planet Sports. Asia|FASHION|1F;Playtopia|ENTERTAINMENT|3F;Playworks|GOODS|3F;Pokemon Mezastar|ENTERTAINMENT|3F;Polo|FASHION|1F;Puyo|FOOD|2F;Ramen Seirock-ya|FOOD|3F;Rejuve|FOOD|3F;Relx|GOODS|1F;Remboelan|FOOD|GF;Rempah Bistro|FOOD|GF;Rockstar Academy|SERVICE|3F;Rujak Kolam Medan|FOOD|3F;Sai Ramen|FOOD|3F;Samsonite|GOODS|1F;Samsung|GOODS|3F;Sate Dombud|FOOD|3F;Sate Padang Mak Syukur|FOOD|3F;Saturdays|GOODS|1F;Scandia|GOODS|2F;Secret Garden|GOODS|1F;Sephora|GOODS|1F;Shake Shake|FOOD|3F;Shihlin Taiwan Street Snacks|FOOD|GF;Shortcut Barbershop|SERVICE|2F;Shu Shu|FOOD|3F;Simply|FOOD|3F;Skechers|FASHION|GF;Skin+|SERVICE|2F;Skinfood|GOODS|GF;Smart Hand DIY|ENTERTAINMENT|2F;Smiggle|GOODS|2F;Social Affair|FOOD|GF;Sociolla|GOODS|GF;Soes Lelo|FOOD|3F;Solaria|FOOD|3F;Sop Ikan Batam|FOOD|3F;Sop Konro Cendana|FOOD|3F;Soto Betawi H. Mamat|FOOD|3F;Soto Mie Pak Kadir|FOOD|3F;Staccato|FASHION|1F;Starbucks Coffee|FOOD|GF;Steak 21|FOOD|3F;Steve Madden|FASHION|1F;Stop n Go|SERVICE|GF;Sukiya|FOOD|3F;Susu Mbok Darmi|FOOD|3F;Taucy|FOOD|3F;Tawan|FOOD|3F;The Bath Box|GOODS|GF;The Body Shop|GOODS|GF;The Chicken Rice Shop|FOOD|3F;The Palace|GOODS|GF;The RR Chocolate|FOOD|GF;This Is April|FASHION|2F;Tiga Semut|FOOD|3F;Tokio Sushi|FOOD|3F;Tokyo Belle|SERVICE|3F;Tommy Hilfiger|FASHION|GF;Toys City|GOODS|2F;Urban & Co|FASHION|2F;Urban Beats|GOODS|3F;Vans|GOODS|GF;Vines|FOOD|GF;VIVAIA|FASHION|1F;Wacoal|FASHION|2F;Wardah|GOODS|1F;Waroeng Teh Kotjok|FOOD|3F;Watson|GOODS|2F;White Noise|GOODS|GF;Wingstop|FOOD|3F;Wood|FASHION|1F;Yamada Best|GOODS|3F;Yayang|FASHION|2F;YEN PAO|FOOD|3F;Yole|FOOD|GF;Yoshinoya|FOOD|2F;Yves Rocher|GOODS|GF;Zenbu|FOOD|GF;Zoomoov|SERVICE|2F;UNIQLO|FASHION|1F;Foot Locker|FASHION|GF;Golden Lamian|FOOD|3F;Rokurenya|FOOD|3F;Dear Butter|FOOD|3F".split(";").map(x => x.split("|"));
 const ok = /^https:\/\//.test(SB_URL) && SB_KEY.length > 20;
 const sb = ok ? supabase.createClient(SB_URL, SB_KEY) : null;
 const GT_FAC = ["Toilet or cleanliness","Escalator or elevator","Spill or safety","Air conditioning","Electrical","Plumbing","Lighting","Other facility problem"];
@@ -554,6 +631,8 @@ Object.assign(ID, {"Plan": "Rencana", "Directory": "Direktori", "Map": "Peta", "
 Object.assign(ID, {"Review": "Periksa", "Jobs": "Pekerjaan", "Lost & found": "Barang hilang", "Notices": "Pengumuman", "Accounts": "Akun", "Activity": "Aktivitas", "More": "Lainnya", "Admin sections": "Bagian admin", "More actions": "Aksi lainnya", "Live updates": "Pembaruan langsung"});
 Object.assign(ID, {"Or build your own": "Atau susun sendiri", "Plan your day": "Rencanakan hari Anda", "Pick an occasion and get a ready-made route, grouped by floor.": "Pilih suasana dan dapatkan rute siap pakai, dikelompokkan per lantai.", "Reporting as tenant:": "Melapor sebagai penyewa:", "Your reports go straight to mall staff.": "Laporan Anda langsung ke petugas mal."});
 Object.assign(ID, {"Chat with us": "Chat dengan kami", "Assistant": "Asisten", "Close": "Tutup"});
+Object.assign(ID, {"Open full map": "Buka peta penuh", "The red pin shows where this store is. Dotted lines go to the closest lift, stairs or escalator and toilet.": "Pin merah menunjukkan lokasi toko ini. Garis putus-putus menuju lift, tangga atau eskalator, dan toilet terdekat.", "This store is not pinned on the map yet. Ask at the information desk.": "Toko ini belum dipin di peta. Tanyakan di meja informasi.", "Floor map pins": "Pin peta lantai", "Save and next": "Simpan dan lanjut", "Show on map": "Lihat di peta", "Lift": "Lift", "Stairs or escalator": "Tangga atau eskalator", "Toilet": "Toilet", "Dotted lines go to the closest lift, stairs or escalator and toilet on this floor.": "Garis putus-putus menuju lift, tangga atau eskalator, dan toilet terdekat di lantai ini.", "Learn more": "Selengkapnya", "Link (optional)": "Tautan (opsional)", "Event image (optional)": "Gambar acara (opsional)", "The link must start with https://": "Tautan harus diawali https://"});
+Object.assign(ID, {"Digital": "Digital", "Photo": "Foto", "The bar shows free space. The longer the bar, the more room there is.": "Bilah menunjukkan tempat kosong. Semakin panjang bilah, semakin banyak ruang."});
 const RX = [
  [/^(\d+) free$/, m => m[1] + " kosong"], [/^\((\d+) free\)$/, m => "(" + m[1] + " kosong)"], [/^Most space: (.+)$/, m => "Paling lega: " + m[1]], [/^car spaces free of (.+)$/, m => "tempat parkir mobil kosong dari " + m[1]], [/^Best for cars: (.+)$/, m => "Terbaik untuk mobil: " + m[1]], [/^([\d,.]+) taken$/, m => m[1] + " terisi"], [/^([\d,.]+) total$/, m => m[1] + " total"], [/^Most car space: (.+)$/, m => "Mobil paling lega: " + m[1]],
  [/^(\d+) h ago$/, m => m[1] + " jam lalu"], [/^(\d+) d ago$/, m => m[1] + " hari lalu"], 
@@ -635,9 +714,9 @@ function stat(l) {
   return l.free === 0 ? ["full", "Full"] : r < .1 ? ["low", "Almost full"] : r < .3 ? ["warn", "Filling up"] : ["ok", "Plenty of space"];
 }
 function lvCard(l) {
-  const st = stat(l), taken = Math.max(0, l.capacity - l.free), pct = l.capacity ? Math.min(100, Math.round(taken / l.capacity * 100)) : 100;
+  const st = stat(l), taken = Math.max(0, l.capacity - l.free), fp = l.capacity ? Math.max(0, Math.min(100, Math.round(l.free / l.capacity * 100))) : 0;
   return "<div class='lv st-" + st[0] + "'><div class='lv-top'><b>" + esc(l.level) + "</b><span class='stchip'>" + st[1] + "</span></div>" + (l.direct_access ? "<div class='dtag'>Direct to mall</div>" : "") +
-    "<div class='lv-num'><b>" + l.free.toLocaleString("en-US") + "</b> <span>free</span></div><span class='trk' style='background:var(--ok)'><i style='width:" + pct + "%;background:var(--bad)'></i></span>" +
+    "<div class='lv-num'><b>" + l.free.toLocaleString("en-US") + "</b> <span>free</span></div><span class='trk fr'><i style='width:" + fp + "%'></i></span>" +
     "<div class='lv-foot'><span>" + taken.toLocaleString("en-US") + " taken</span> &middot; <span>" + l.capacity.toLocaleString("en-US") + " total</span></div></div>";
 }
 function bestSpot(L) {
@@ -661,7 +740,15 @@ const parkBox = P => {
     (old ? "<div class='pkwarn'>These numbers were last updated <span>" + ago(up) + "</span>. Ask at the information desk if you need to be sure.</div>" : "");
 }
 const KIND = {info:"Notice", closure:"Closure", event:"Event"};
-const noticesBox = N => N.length ? "<div class='sec rvl' id='whatson'><div class='eyebrow'>What's on<span class='jp'>お知らせ</span></div><h3 class='serif sech'>Notices and events</h3>" + carousel(N.map(n => "<div class='ncard " + esc(n.kind) + "'><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") + "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + "</div></div>").join("")) + "</div>" : "";
+const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "";
+const safeImg = u => typeof u === "string" && u.startsWith(SB_URL + "/storage/v1/object/public/") ? u : "";
+const cssUrl = u => encodeURI(u).replace(/['()]/g, c => "%" + c.charCodeAt(0).toString(16));
+function ncardHtml(n) {
+  const link = safeUrl(n.link_url), img = safeImg(n.image_url), tag = link ? "a" : "div";
+  return "<" + tag + " class='ncard " + esc(n.kind) + (img ? " hasimg" : "") + "'" + (link ? " href='" + esc(link) + "' target='_blank' rel='noopener'" : "") + (img ? " style=\"--nimg:url(" + cssUrl(img) + ")\"" : "") + "><span class='kind'>" + KIND[n.kind] + "</span><h4 class='serif'>" + esc(n.title) + "</h4>" + (n.body ? "<div class='nb'>" + esc(n.body) + "</div>" : "") +
+    "<div class='nd'>" + (n.expires_at ? "Until " + new Date(n.expires_at).toLocaleDateString() : "Posted " + ago(n.created_at)) + (link ? " <span class='ngo'>Learn more &rsaquo;</span>" : "") + "</div></" + tag + ">";
+}
+const noticesBox = N => N.length ? "<div class='sec rvl' id='whatson'><div class='eyebrow'>What's on<span class='jp'>お知らせ</span></div><h3 class='serif sech'>Notices and events</h3>" + carousel(N.map(ncardHtml).join("")) + "</div>" : "";
 const photoHtml = t => t.photo_url ? "<a href='" + esc(t.photo_url) + "' target='_blank' rel='noopener'><img class='ph' loading='lazy' alt='Attached photo' src='" + esc(t.photo_url) + "'></a>" : "";
 function notesBlock(t, extra) {
   extra = extra || "";
@@ -801,7 +888,7 @@ function dirBody() {
     return "<div class='crumbs'><button data-act='dclose'>Back to the list</button></div><div class='panel'><div class='row' style='align-items:center;justify-content:flex-start;gap:14px;flex-wrap:nowrap'>" + av(s0, true) + "<h2 style='margin:0;flex:1'>" + esc(s0.name) + "</h2>" + heart(s0) + "<span class='badge floor f-" + fcls(s0.floor) + "'>" + floorTag(s0.floor) + "</span></div>" +
       "<div class='muted'><span>" + catName(s0.cat) + "</span> &rsaquo; <span>" + s0.sub + "</span></div><p class='sdesc'>" + esc(desc(s0)) + "</p>" +
       "<div class='bigfloor f-" + fcls(s0.floor) + "'>" + (s0.floor === "n/a" ? "?" : s0.floor) + "</div><div><b>" + FLOOR_NAME[s0.floor] + "</b></div>" +
-      "<p class='muted'>The mall website lists the floor only. It does not give a unit number or a spot on the floor, so use the directory boards in the mall or ask at the information desk to find the exact position.</p>" +
+      unitLine(s0) + miniMap(s0) + "<p class='muted'>The mall website lists the floor only. It does not give a unit number or a spot on the floor, so use the directory boards in the mall or ask at the information desk to find the exact position.</p>" +
       (same.length ? "<div class='muted' style='margin-top:10px'>Also on this floor in this group:</div><div>" + same.map(x => esc(x.name)).join(", ") + "</div>" : "") +
       (EXTRA.has(s0.name) ? "<p class='muted'>This store was on the website list earlier but not in the latest copy. Check that it is still open.</p>" : "") +
       "<div class='acts'><button class='btn sm' data-act='gostore' data-kind='report' data-store='" + esc(s0.key) + "'>Report a problem here</button><button class='btn alt sm' data-act='gostore' data-kind='lost' data-store='" + esc(s0.key) + "'>Lost or found something here</button></div></div>";
@@ -870,12 +957,12 @@ async function homeView() {
       "<div class='hsearch'><input type='text' id='hq' placeholder='Search a store name' autocomplete='off'>" + micBtn("hq") + "<button data-act='hsearch' aria-label='Search'>" + ICON.lost + "</button></div><div id='hsug'></div><div class='hchips' id='hchips'>" + chips + "</div></div>",
     "<div class='hslide s2'><div class='hello'>Plan your visit</div><h2 class='serif'>What are you craving today?</h2><div class='wsub'>Dessert, a savoury meal or some shopping? Tell us and we will suggest where to go.</div><div class='acts'><button class='btn gold' data-act='view' data-v='plan'>Plan my visit</button></div></div>"];
   if (cap) slides.push("<div class='hslide s3'><div class='hello'>Parking</div><h2 class='serif'>Find a space before you arrive</h2><div class='bignum' id='simfree'>" + free.toLocaleString("en-US") + "</div><div class='bigsub'>car spaces free of " + cap.toLocaleString("en-US") + "</div><div class='acts'><button class='btn gold' data-act='view' data-v='parking'>Check parking</button></div></div>");
-  if (nt) slides.push("<div class='hslide s4'><div class='hello'>" + KIND[nt.kind] + "</div><h2 class='serif'>" + esc(nt.title) + "</h2>" + (nt.body ? "<div class='wsub'>" + esc(nt.body) + "</div>" : "") + "<div class='acts'><button class='btn gold' data-act='gotonotices'>See what's on</button></div></div>");
+  if (nt) slides.push("<div class='hslide s4'" + (safeImg(nt.image_url) ? " style=\"background:linear-gradient(100deg,rgba(40,6,20,.9) 0%,rgba(40,6,20,.55) 60%,rgba(40,6,20,.25) 100%),url(" + cssUrl(safeImg(nt.image_url)) + ") center/cover no-repeat\"" : "") + "><div class='hello'>" + KIND[nt.kind] + "</div><h2 class='serif'>" + esc(nt.title) + "</h2>" + (nt.body ? "<div class='wsub'>" + esc(nt.body) + "</div>" : "") + "<div class='acts'><button class='btn gold' data-act='gotonotices'>See what's on</button></div></div>");
   const hero = "<div class='sliderwrap'><div class='slider' id='slider'>" + slides.join("") + "</div><button class='sarr l' id='sprev' aria-label='Previous'>&#8249;</button><button class='sarr r' id='snext' aria-label='Next'>&#8250;</button><div class='sdots' id='sdots'>" + slides.map((_, i) => "<button aria-label='Slide " + (i + 1) + "' aria-current='" + (i === 0) + "'></button>").join("") + "</div></div>";
   const glance = "<div class='glance rvl'><div><b class='cnt' data-n='" + STORE_OBJ.length + "'>0</b><span>stores</span></div><div><b class='cnt' data-n='4'>0</b><span>levels</span></div><div><b class='cnt' data-n='" + (cap || 0) + "'>0</b><span>car spaces</span></div></div>";
   const top = FEATURED.map(n => STORE_OBJ.find(x => x.name === n)).filter(Boolean);
   const topSec = sec("Top picks", "Well-known stores", carousel(top.map(x => "<button class='pcard' data-act='planstore' data-i='" + x.i + "'>" + av(x) + "<span class='badge floor f-" + fcls(x.floor) + "'>" + floorTag(x.floor) + "</span><b>" + esc(x.name) + "</b><span class='muted'>" + x.sub + "</span></button>").join("")));
-  const catSec = sec("Explore", "Browse by category", carousel(Object.keys(CATS).map(c => "<button class='ccard' data-act='homecat' data-c='" + c + "'><span class='ticon' style='" + CAT_STYLE[c] + "'>" + CAT_ICON[c] + "</span><b>" + CATS[c][0] + "</b><span class='muted'>" + STORE_OBJ.filter(x => x.cat === c).length + " stores</span></button>").join("")));
+  const catSec = sec("Explore", "Browse by category", "<div class='qgrid'>" + Object.keys(CATS).map(c => "<button class='ccard' data-act='homecat' data-c='" + c + "'><span class='ticon'>" + CAT_ICON[c] + "</span><b>" + CATS[c][0] + "</b><span class='muted'>" + STORE_OBJ.filter(x => x.cat === c).length + " stores</span></button>").join("") + "<button class='ccard' data-act='view' data-v='map'><span class='ticon'>" + ICON.pin + "</span><b>Mall map</b><span class='muted'>Find your way</span></button></div>");
   const tower = "<div class='towerwrap'><div class='tower'>" + ["3MF", "3F", "2F", "1F", "GF"].map(f => "<button class='tfloor f-" + fcls(f) + (f === "3MF" ? " mez" : "") + "' data-act='tsel' data-f='" + f + "' aria-pressed='" + (f === towerSel) + "'><b>" + f + "</b><span class='muted'>" + FLOOR_NAME[f] + "</span><span class='badge'>" + STORE_OBJ.filter(x => x.floor === f).length + "</span></button>").join("") + "</div><div class='fpanel' id='towerpanel'>" + towerPanel(towerSel) + "</div></div>";
   const flSec = sec("Find your way", "Browse by floor", tower);
   const TR = [["FASHION", "ショッピング", "Shop", "Fashion, beauty, books and gifts", "Browse shops", "atrium"], ["FOOD", "グルメ", "Eat", "Restaurants, cafes and sweets", "Find food", "food-culture"], ["ENTERTAINMENT", "エンタメ", "Play", "Cinema, games and play", "Movies and games", "evening"]];
@@ -936,7 +1023,7 @@ function quick(k) {
 async function parkingView() {
   const d = await pubData(), up = d.P.reduce((m, l) => (l.updated_at && l.updated_at > m ? l.updated_at : m), "");
   return "<div style='max-width:720px;margin:0 auto'><div class='pbanner' style='--img:url(images/aerial.jpg);--pos:center 60%'><h2>Where should I park?</h2><div class='sub'>See which level has free spaces before you drive in.</div></div>" + simBar() + "<div id='parkbox'>" + parkBox(d.P) + "</div>" +
-    "<div class='panel' style='margin-top:18px'><h3>How to read this page</h3><ul class='gl'><li>Each card is one parking level.</li><li>The bar shows how full it is. Green is free space and red is taken space.</li><li>Levels marked Direct to mall connect straight into the mall.</li><li>Mall staff update the numbers by hand, so they can be a few minutes behind.</li></ul></div>" +
+    "<div class='panel' style='margin-top:18px'><h3>How to read this page</h3><ul class='gl'><li>Each card is one parking level.</li><li>The bar shows free space. The longer the bar, the more room there is.</li><li>Levels marked Direct to mall connect straight into the mall.</li><li>Mall staff update the numbers by hand, so they can be a few minutes behind.</li></ul></div>" +
     (up ? "<div class='muted' style='margin-top:10px'>Last updated <span>" + ago(up) + "</span></div>" : "") +
     "<div class='acts'><button class='btn alt sm' data-act='view' data-v='getting'>How to get here</button></div></div>";
 }
@@ -1075,6 +1162,37 @@ function shareText(src) {
   return "AEON Mall BSD City - " + T(ttl) + "\n" + items.map((it, i) => (i + 1) + ". " + it.x.name + " (" + T(FLOOR_NAME[it.x.floor]) + ")" + (it.label ? " - " + T(it.label) : "")).join("\n") + "\n" + location.origin + location.pathname;
 }
 /* floor map */
+/* Lifts, stairs or escalators and toilets: add positions here as percentages of each floor plan image, for example GF: {lift: [[30,45]], steps: [], toilet: []}. Empty until the official plans are added. */
+const AMEN = {};
+const AR = {GF: 1200 / 896, "1F": 1290 / 1010, "2F": 1200 / 896, "3F": 1200 / 896};
+const mapSrc = f => "images/map-" + f + ".jpg";
+const AM_LABEL = {lift: "Lift", steps: "Stairs or escalator", toilet: "Toilet"};
+const AM_ICON = {
+  lift: "<svg viewBox='0 0 24 24'><path d='M8 4L4.5 9h7zM16 20l-3.5-5h7z' fill='currentColor' stroke='none'/><path d='M8 10v10M16 4v10'/></svg>",
+  steps: "<svg viewBox='0 0 24 24'><path d='M3 19h5v-5h5V9h5V5h3'/></svg>",
+  toilet: "<svg viewBox='0 0 24 24'><circle cx='12' cy='5' r='2.3' fill='currentColor' stroke='none'/><path d='M8.5 21v-8l1.5-3h4l1.5 3v8M12 10v11'/></svg>"
+};
+const mapAm = {lift: true, steps: false, toilet: false};
+const mapOpt = {mode: "digital", z: 1};
+const MAP_COL = {FASHION: "#8fc99a", GOODS: "#7fbfe3", FOOD: "#f2a65a", SERVICE: "#b39ddb", ENTERTAINMENT: "#e56aa3"};
+function nearestAm(f, px, py) {
+  const out = {}, A = AMEN[f]; if (!A) return out;
+  for (const t in A) { let b = null, bd = 1e9; A[t].forEach(q => { const d = Math.hypot((q[0] - px) * AR[f], q[1] - py); if (d < bd) { bd = d; b = q; } }); if (b) out[t] = b; }
+  return out;
+}
+function miniMap(x) {
+  const f = x.floor, i = INFO[x.key], pin = !!(i && i.map_x != null);
+  if (f === "n/a") return "";
+  const near = pin ? nearestAm(f, +i.map_x, +i.map_y) : {};
+  const ams = Object.keys(near).map(t => "<span class='am am-" + t + " near' style='left:" + near[t][0] + "%;top:" + near[t][1] + "%'>" + AM_ICON[t] + "</span>").join("");
+  const lines = pin ? "<svg class='amlines' viewBox='0 0 100 100' preserveAspectRatio='none'>" + Object.values(near).map(q => "<line x1='" + i.map_x + "' y1='" + i.map_y + "' x2='" + q[0] + "' y2='" + q[1] + "' vector-effect='non-scaling-stroke'/>").join("") + "</svg>" : "";
+  return "<div class='minimap'><div class='mapwrap'><img class='mapimg' src='" + mapSrc(f) + "' alt='Floor plan' onerror=\"var m=this.closest('.minimap');if(m)m.remove()\">" + lines + ams + (pin ? "<span class='youpin' style='left:" + i.map_x + "%;top:" + i.map_y + "%'></span>" : "") + "<div class='nomsg'>The floor plan for this floor has not been added yet.</div></div>" +
+    "<div class='muted' style='margin-top:8px'>" + (pin ? "The red pin shows where this store is. Dotted lines go to the closest lift, stairs or escalator and toilet." : "This store is not pinned on the map yet. Ask at the information desk.") + "</div>" +
+    "<div class='acts'><button class='btn sm' data-act='showmap' data-i='" + x.i + "'>Open full map</button></div></div>";
+}
+/* Unit numbers read from the mall's directory boards (Oct 2026). Used to help place pins. */
+const UNITS = {"AEON BSD CITY Supermarket GF (GF)": "001", "Rempah Bistro (GF)": "002, 003", "Gion Sushi (GF)": "005, 038", "Pizza Marzano (GF)": "007", "Starbucks Coffee (GF)": "008", "Social Affair (GF)": "009", "Maison Tatsuya (GF)": "010", "Nanny's Pavillon (GF)": "011", "The RR Chocolate (GF)": "012, 015", "Zenbu (GF)": "017", "Jittlada Thai Cuisine (GF)": "018", "Ootoya (GF)": "022", "Ban ban (GF)": "039", "Auntie Anne's (GF)": "042", "Beard Papa (GF)": "043", "Boost Juice (GF)": "045", "Chatime (GF)": "046", "Shihlin Taiwan Street Snacks (GF)": "047", "Châteraisé (GF)": "048", "Cold Stone (GF)": "049", "Pho Baba (GF)": "082", "Gyukaku (GF)": "083, 085", "Expat Roasters (GF)": "FC01", "Gyukatsu Kyoto Katsugyu (GF)": "FC02", "Paradise Dynasty (GF)": "FC03", "Remboelan (GF)": "FC05", "Bijin Nabe (GF)": "FC06", "Fat Duck (GF)": "FC07", "Chagee (GF)": "FC08A", "Kaneko Hannosuke (GF)": "FC08B", "Greyhound (GF)": "FC09", "Dough Lab (GF)": "FC10", "DORE by LeTAO (GF)": "FC10B", "Yole (GF)": "CLG03B", "L'Occitane (GF)": "027", "The Palace (GF)": "030", "Frank & Co (GF)": "031A, 031B", "180 SPM (GF)": "032", "C&F perfumery (GF)": "033, 035", "Sociolla (GF)": "036, 037", "Vines (GF)": "058", "Guardian (GF)": "059", "Beauty Scent (GF)": "060", "Yves Rocher (GF)": "061", "Skinfood (GF)": "062", "Erha Store (GF)": "063", "Bath & Body Works (GF)": "065", "The Body Shop (GF)": "066, 067", "Digimap (GF)": "079A", "Eka Karya Orchid (GF)": "IC06", "White Noise (GF)": "CLG10", "Nespresso (GF)": "CLG11", "ATM CENTER (GF) (GF)": "041A", "De Wasz Laundry (GF)": "041", "Stop n Go (GF)": "050", "CIMB Niaga Digital Lounge (GF)": "052", "BNI (GF)": "055, 057", "Bank Mandiri (GF)": "079B", "BCA (GF)": "080A, 081A", "B-Quik (GF)": "P01", "BRANZ (Property) (GF)": "IC03", "Iqos (GF)": "CLG06B", "Asics (GF)": "023", "Adidas (GF)": "025", "Guess (GF)": "029", "Tommy Hilfiger (GF)": "068, 069", "Calvin Klein (GF)": "070", "Lacoste (GF)": "071, 072", "Foot Locker (GF)": "073, 075", "Vans (GF)": "077", "New Balance (GF)": "078A, 078B", "Converse (GF)": "080", "AEON BSD CITY Dept Store 1F (1F)": "101", "Hush Puppies (1F)": "103", "Giordano (1F)": "105", "Optik Seis (1F)": "106", "Optik Melawai (1F)": "107", "LEGO (1F)": "108", "VIVAIA (1F)": "109", "Charles & Keith (1F)": "110", "Garmin (1F)": "110A", "H&M (1F)": "111, 119", "UNIQLO (1F)": "121, 122", "Planet Sports. Asia (1F)": "123", "Skechers (GF)": "125", "Executive (1F)": "126, 127", "Saturdays (1F)": "128", "New Era (1F)": "129", "Fitflop (1F)": "130", "Staccato (1F)": "131", "Bobo Tokyo (1F)": "132", "Flying Tiger Copenhagen (1F)": "133", "Sephora (1F)": "135, 136, 137A", "Ginza Nail (1F)": "137", "Birkenstock (1F)": "138A", "Steve Madden (1F)": "138B", "Love, Bonito (1F)": "139", "Pedro (1F)": "140", "Wood (1F)": "141", "Laxmi Tailor (1F)": "142", "Polo (1F)": "143", "Samsonite (1F)": "145", "Crocs (1F)": "146", "Et Cetera (1F)": "147", "Everbest (1F)": "148", "Melissa (1F)": "149", "Levi's (1F)": "106A", "Havaianas (1F)": "IC103", "COWAY (1F)": "IC105", "Daniel Wellington (1F)": "IC105A", "Koi Cafe (1F)": "IC102", "Relx (1F)": "IC107", "Beluga Jewellery (1F)": "CL101", "Casio (1F)": "CL102", "Dparis (1F)": "CL107", "Eyes Spice (1F)": "CL108", "Wardah (1F)": "CL109", "Secret Garden (1F)": "CL110", "Botanical Essentials (1F)": "CL111", "Kopi Kenangan (1F)": "120", "Jewel Cafe (1F)": "OD1", "AEON BSD CITY Dept Store 2F (2F)": "201", "Toys City (2F)": "205", "Wacoal (2F)": "209", "Minoshe (2F)": "210", "Lewis Emma (2F)": "211", "Mothercare & Early Learning Center (2F)": "219, 220", "Max Fashions (2F)": "221, 227", "Facility (2F)": "228", "Baby Shop (2F)": "245, 246", "This Is April (2F)": "252", "Buttonscarves (2F)": "260", "Beatrice Clothing (2F)": "261", "Colorbox (2F)": "262, 263", "My Feet (2F)": "265A", "Urban & Co (2F)": "266", "Eprise (2F)": "267", "Smiggle (2F)": "212", "Smart Hand DIY (2F)": "215", "GS Shop (2F)": "216", "Lock & Lock with Hello, Bebe (2F)": "217", "Kidz Station (2F)": "218", "M&G Life (2F)": "229, 230", "Yayang (2F)": "231", "Cindy (2F)": "232", "Scandia (2F)": "235, 237", "Gramedia (2F)": "238", "Glam On (2F)": "249", "Megane Prince (2F)": "253", "Owndays (2F)": "255", "OWL Eyewear (2F)": "268", "Miniso (2F)": "269, 270", "Mandalika Parfum (2F)": "CL208", "Moo Chuu (2F)": "CL209", "Zoomoov (2F)": "CL201", "Kiddycuts (2F)": "241", "Haircode (2F)": "242", "Watson (2F)": "247", "Skin+ (2F)": "248", "Shortcut Barbershop (2F)": "250", "I Love Emas (2F)": "258", "Happy Dental Clinic": "258A", "Marco Chop Shop (2F)": "259", "Bakmi GM (2F)": "202, 203", "Yoshinoya (2F)": "240", "Dapur Solo (2F)": "257", "D'Crepes (2F)": "IC205", "Puyo (2F)": "CL207", "Rockstar Academy (3F)": "301", "Yamada Best (3F)": "302, 303", "The Chicken Rice Shop (3F)": "305", "Solaria (3F)": "306", "Noodle King (3F)": "307", "Burger King (3F)": "309", "KFC (3F)": "310", "Erafone (3F)": "312", "Samsung (3F)": "315", "Playtopia (3F)": "322, 323", "Playworks (3F)": "319", "Blibli (3F)": "320", "Cinema XXI (3F)": "321", "Loly Poly (3F)": "325", "Huawei (3F)": "327", "Itsu (3F)": "328", "Mi Home (3F)": "330", "Oppo (3F)": "332, 333", "Dwidaya Tour (3F)": "335", "Tokyo Belle (3F)": "336", "Pepperlunch (3F)": "338", "Kimukatsu (3F)": "340", "Imperial Kitchen (3F)": "341", "Tawan (3F)": "343", "Steak 21 (3F)": "345, 346", "Wingstop (3F)": "347", "Sukiya (3F)": "348", "Fan Fries (3F)": "349", "ATM CENTER (3F) (3F)": "350", "Bakso Malang Cak Rosso (3F)": "FC01", "Bakmi Ayam Alok (3F)": "FC02", "Sop Ikan Batam (3F)": "FC03", "Doner Kebab (3F)": "FC05", "Soto Mie Pak Kadir (3F)": "FC06", "Sate Padang Mak Syukur (3F)": "FC10", "Soto Betawi H. Mamat (3F)": "FC11", "Rujak Kolam Medan (3F)": "FC12", "Sate Dombud (3F)": "FC15", "Nasgor Randang One (3F)": "FC16", "Sop Konro Cendana (3F)": "FC17", "Miss Thai Boat Noodle (3F)": "FC20", "Megaze Coffee (3F)": "FC21", "Shake Shake (3F)": "FC102", "Pika Piku Ice Cream (3F)": "FC103", "Shu Shu (3F)": "FC105", "Ice Gentong (3F)": "FC106", "Pempek Hoi (3F)": "FC107", "Simply (3F)": "FC108", "Guldens Mice (3F)": "FC110", "YEN PAO (3F)": "FC111", "Fruitylicious (3F)": "FC112", "Bungeoppang (3F)": "FC115", "Susu Mbok Darmi (3F)": "FC116", "Dum Dum Thai Tea (3F)": "FC117", "BASGOR 89 (3F)": "FC118", "Sai Ramen (3F)": "RV01", "Ichiro (3F)": "RV02", "Ikkudo Ichi (3F)": "RV03", "Ramen Seirock-ya (3F)": "RV05", "Menya Sakura (3F)": "RV07", "Tokio Sushi (3F)": "RV08", "Gococo (3F)": "IC302", "Jolly Time (3F)": "IC305", "Waroeng Teh Kotjok (3F)": "IC306", "Taucy (3F)": "IC307", "Bugatea (3F)": "CL301", "McDonald's (3F)": "CL306", "Haagen-Dazs (3F)": "CL307", "Soes Lelo (3F)": "CL308", "Rejuve (3F)": "CL309", "Dear Butter (3F)": "CL310", "Tiga Semut (3F)": "CL311"};
+const unitLine = x => UNITS[x.key] ? "<div class='muted' style='margin-top:6px'>Unit " + esc(UNITS[x.key]) + "</div>" : "";
 const mapSel = {f: "GF", i: null};
 function mapCard() {
   if (mapSel.i === null) return ""; const x = STORE_OBJ[mapSel.i], has = INFO[x.key] && INFO[x.key].map_x != null;
@@ -1082,10 +1200,16 @@ function mapCard() {
 }
 function mapBody() {
   const f = mapSel.f, sel = mapSel.i !== null ? STORE_OBJ[mapSel.i] : null, pins = STORE_OBJ.filter(x => x.floor === f && INFO[x.key] && INFO[x.key].map_x != null);
+  const dig = mapOpt.mode === "digital" || role !== "admin", si = sel && sel.floor === f && INFO[sel.key] && INFO[sel.key].map_x != null ? INFO[sel.key] : null, near = si ? nearestAm(f, +si.map_x, +si.map_y) : {}, A = AMEN[f] || {};
+  const ams = Object.keys(AM_LABEL).map(t => (mapAm[t] ? (A[t] || []) : (near[t] ? [near[t]] : [])).map(q => "<span class='am am-" + t + (near[t] === q ? " near" : "") + "' style='left:" + q[0] + "%;top:" + q[1] + "%'>" + AM_ICON[t] + "</span>").join("")).join("");
+  const lines = si ? "<svg class='amlines' viewBox='0 0 100 100' preserveAspectRatio='none'>" + Object.values(near).map(q => "<line x1='" + si.map_x + "' y1='" + si.map_y + "' x2='" + q[0] + "' y2='" + q[1] + "' vector-effect='non-scaling-stroke'/>").join("") + "</svg>" : "";
   return "<div class='chips'>" + FLOORS.map(g => "<button class='chip f-" + fcls(g) + "' data-act='mapfloor' data-f='" + g + "' aria-pressed='" + (g === f) + "'>" + g + "</button>").join("") + "</div>" +
-    "<div class='mapwrap'><img class='mapimg' src='images/map-" + f + ".jpg' alt='Floor plan' onerror=\"this.parentNode.classList.add('nomap')\">" +
+    (A.lift ? "<div class='chips' style='margin-top:0'>" + Object.keys(AM_LABEL).map(t => "<button class='chip' data-act='mapam' data-k='" + t + "' aria-pressed='" + mapAm[t] + "'>" + AM_LABEL[t] + "</button>").join("") + "</div>" : "") +
+    "<div class='chips' style='margin-top:0'>" + [].map(([k, l]) => "<button class='chip' data-act='mapmode' data-k='" + k + "' aria-pressed='" + ((k === "digital") === dig) + "'>" + l + "</button>").join("") + "<button class='chip' data-act='mapzoom' data-d='-1' aria-label='Zoom out'>&minus;</button><button class='chip' data-act='mapzoom' data-d='1' aria-label='Zoom in'>+</button></div>" +
+    "<div class='mapscroll'><div class='mapwrap' style='width:" + (mapOpt.z * 100) + "%'><img class='mapimg' src='" + mapSrc(f) + "' alt='Floor plan' onerror=\"this.parentNode.classList.add('nomap')\">" + lines + ams +
     pins.map(x => "<button class='pin" + (sel && sel.i === x.i ? " on" : "") + "' style='left:" + INFO[x.key].map_x + "%;top:" + INFO[x.key].map_y + "%' data-act='mappin' data-i='" + x.i + "' aria-label='" + esc(x.name) + "'><span>" + esc(initials(x.name)) + "</span></button>").join("") +
-    "<div class='nomsg'>The floor plan for this floor has not been added yet.</div></div>" + (pins.length ? "" : "<div class='muted' style='margin-top:10px'>No stores are pinned on this floor yet.</div>") + mapCard();
+    "<div class='nomsg'>The floor plan for this floor has not been added yet.</div></div></div>" + (pins.length ? "" : "<div class='muted' style='margin-top:10px'>No stores are pinned on this floor yet.</div>") +
+    (dig ? "<div class='maplegend'>" + Object.keys(CATS).map(c => "<span><i style='background:" + MAP_COL[c] + "'></i>" + CATS[c][0] + "</span>").join("") + "</div>" : "") + (si ? "<div class='muted' style='margin-top:10px'>Dotted lines go to the closest lift, stairs or escalator and toilet on this floor.</div>" : "") + mapCard();
 }
 function mapView() {
   return "<div style='max-width:900px;margin:0 auto'>" + seg("map") + "<h2 class='serif'>Mall map</h2><div class='muted'>Pick a floor and tap a pin to see the store.</div>" +
@@ -1093,20 +1217,33 @@ function mapView() {
 }
 function drawMap() { const el = $("mapbody"); if (el) { el.innerHTML = mapBody(); applyLang(); } }
 /* admin: place pins on the floor plans */
-const pinEd = {key: "", x: null, y: null};
-const pinPanel = () => "<div class='panel' style='margin-bottom:20px'><h2>Floor map pins</h2><div class='muted'>Choose a store, then tap its spot on the floor plan, and save. Floor plan pictures go in the images folder as map-GF.jpg, map-1F.jpg, map-2F.jpg, map-3F.jpg and map-3MF.jpg.</div><label for='pst'>Store</label><input type='text' id='pst' list='stores5' placeholder='Start typing a store name' autocomplete='off'><datalist id='stores5'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist><div id='pinbox'></div><div class='err' id='pinerr' role='alert'></div><div class='acts'><button class='btn sm' data-act='savepin'>Save pin</button><button class='btn alt sm' data-act='delpin'>Remove pin</button></div></div>";
+const pinEd = {key: "", x: null, y: null, mode: "photo", z: 1};
+const pinPanel = () => "<div class='panel' style='margin-bottom:20px'><h2>Floor map pins</h2><div class='muted'>Choose a store, tap its spot on the floor plan, then save. Guests see this pin when they open the store. Use Save and next to pin the next store on the same floor.</div><label for='pst'>Store</label><input type='text' id='pst' list='stores5' placeholder='Start typing a store name' autocomplete='off'><datalist id='stores5'>" + STORES.map(x => "<option value='" + esc(x) + "'>").join("") + "</datalist><div id='pinbox'></div><div class='err' id='pinerr' role='alert'></div><div class='acts'><button class='btn sm' data-act='savepin'>Save pin</button><button class='btn sm' data-act='savepinnext'>Save and next</button><button class='btn alt sm' data-act='delpin'>Remove pin</button></div></div>";
 function drawPin() {
   const x = STORE_OBJ.find(o => o.key === pinEd.key), box = $("pinbox"); if (!box) return;
   if (!x) { box.innerHTML = ""; return; }
-  box.innerHTML = "<div class='muted' style='margin-top:10px'>Tap the spot for <b>" + esc(x.name) + "</b> on the " + FLOOR_NAME[x.floor] + " plan.</div><div class='mapwrap' id='pinwrap'><img class='mapimg' src='images/map-" + x.floor + ".jpg' alt='Floor plan' onerror=\"this.parentNode.classList.add('nomap')\"><div class='nomsg'>Add images/map-" + x.floor + ".jpg to the website first.</div>" + (pinEd.x != null ? "<span class='pinmark' style='left:" + pinEd.x + "%;top:" + pinEd.y + "%'></span>" : "") + "</div>";
+  const f = x.floor;
+  if (f === "n/a") { box.innerHTML = "<div class='muted' style='margin-top:10px'>There is no floor plan for this floor yet.</div>"; return; }
+  const onF = STORE_OBJ.filter(o => o.floor === f), pinned = onF.filter(o => INFO[o.key] && INFO[o.key].map_x != null), ext = pinEd.mode === "digital" ? ".svg" : ".jpg";
+  const dots = pinned.filter(o => o.key !== x.key).map(o => "<span class='pindot' title='" + esc(o.name) + "' style='left:" + INFO[o.key].map_x + "%;top:" + INFO[o.key].map_y + "%'></span>").join("");
+  box.innerHTML = "<div class='muted' style='margin-top:10px'>Tap the spot for <b>" + esc(x.name) + "</b> on the " + FLOOR_NAME[f] + " plan." + (UNITS[x.key] ? " Look for unit <b>" + esc(UNITS[x.key]) + "</b> on the floor plan." : "") + " " + pinned.length + " of " + onF.length + " stores on this floor are pinned (grey dots).</div>" +
+    "<div class='chips' style='margin-top:8px'>" + "<button class='chip' data-act='pinzoom' data-d='-1' aria-label='Zoom out'>&minus;</button><button class='chip' data-act='pinzoom' data-d='1' aria-label='Zoom in'>+</button></div>" +
+    "<div class='mapscroll'><div class='mapwrap' id='pinwrap' style='width:" + (pinEd.z * 100) + "%'><img class='mapimg' src='" + mapSrc(f) + "' alt='Floor plan' onerror=\"this.parentNode.classList.add('nomap')\">" + dots + (pinEd.x != null ? "<span class='pinmark' style='left:" + pinEd.x + "%;top:" + pinEd.y + "%'></span>" : "") + "<div class='nomsg'>Add " + mapSrc(f) + " to the website first.</div></div></div>";
 }
-async function savePin(clear) {
+async function savePin(clear, next) {
   const x = STORE_OBJ.find(o => o.key === pinEd.key), er = $("pinerr"); er.textContent = "";
   if (!x) { er.textContent = "Pick a store from the list."; return; }
   if (!clear && pinEd.x == null) { er.textContent = "Tap the spot on the plan first."; return; }
   const {error} = await sb.from("store_info").upsert({store: x.key, map_x: clear ? null : pinEd.x, map_y: clear ? null : pinEd.y, updated_at: new Date().toISOString()});
   if (error) { er.textContent = "Could not save: " + error.message; return; }
-  if (clear) { pinEd.x = null; pinEd.y = null; } await loadInfo(); drawPin(); toast(clear ? "Pin removed" : "Pin saved");
+  if (clear) { pinEd.x = null; pinEd.y = null; }
+  await loadInfo();
+  if (next && !clear) {
+    const L = STORE_OBJ.filter(o => o.floor === x.floor).sort((a, b) => a.name.localeCompare(b.name)), un = L.filter(o => !(INFO[o.key] && INFO[o.key].map_x != null)), at = L.findIndex(o => o.key === x.key);
+    const n = un.find(o => L.indexOf(o) > at) || un[0];
+    if (n) { pinEd.key = n.key; pinEd.x = null; pinEd.y = null; if ($("pst")) $("pst").value = n.key; } else toast("Every store on this floor is pinned");
+  }
+  drawPin(); toast(clear ? "Pin removed" : "Pin saved");
 }
 document.addEventListener("click", e => {
   const w = e.target.closest("#pinwrap"); if (!w || w.classList.contains("nomap")) return; const img = w.querySelector(".mapimg"), r = img.getBoundingClientRect();
@@ -1301,8 +1438,8 @@ const tenantAccounts = () => "<div class='panel' style='margin-bottom:20px'><h2>
     (ad ? (x.user_id === user.id ? "" : "<button class='btn alt sm' data-act='rmadmin' " + id + ">Remove admin</button>") : (x.approved ? "<button class='btn alt sm' data-act='revoke' " + id + ">Revoke tenant</button>" : "<button class='btn sm' data-act='approve' " + id + ">Approve tenant</button>") + "<button class='btn alt sm' data-act='mkadmin' " + id + ">Make admin</button><button class='btn alt sm' data-act='rmuser' " + id + ">Remove</button>") + "</span></div>"; }).join("") +
   (D.profiles.length ? "" : "<div class='muted' style='margin-top:10px'>No accounts yet.</div>") + "</div>";
 const noticeAdmin = () => "<div class='panel' style='margin-bottom:20px'><h2>Notice board</h2><div class='muted'>Notices show at the top of the Report tab for every visitor.</div>" +
-  (D.notices.length ? D.notices.map(n => "<div class='row note' style='align-items:center'><span><span class='badge'>" + KIND[n.kind] + "</span> <b>" + esc(n.title) + "</b>" + (n.expires_at ? " <span class='muted'>until " + new Date(n.expires_at).toLocaleDateString() + "</span>" : "") + "</span><button class='btn alt sm' data-act='delnotice' data-id='" + n.id + "'>Delete</button></div>").join("") : "<div class='muted' style='margin-top:10px'>No notices yet.</div>") +
-  "<label for='nt'>Title</label><input type='text' id='nt' maxlength='80' placeholder='For example: Parking P3 closed on Saturday'><label for='nb'>Message (optional)</label><textarea id='nb' maxlength='300' style='min-height:70px'></textarea><label for='nk'>Type</label><select id='nk'><option value='info'>Notice</option><option value='closure'>Closure</option><option value='event'>Event</option></select><label for='nd'>Show for how many days? (empty = until you delete it)</label><input type='number' id='nd' min='1' placeholder='7'><button class='btn sm' style='margin-top:12px' data-act='addnotice'>Post notice</button></div>";
+  (D.notices.length ? D.notices.map(n => "<div class='row note' style='align-items:center'><span><span class='badge'>" + KIND[n.kind] + "</span> <b>" + esc(n.title) + "</b>" + (n.image_url ? " <span class='badge'>Image</span>" : "") + (n.link_url ? " <span class='badge'>Link</span>" : "") + (n.expires_at ? " <span class='muted'>until " + new Date(n.expires_at).toLocaleDateString() + "</span>" : "") + "</span><button class='btn alt sm' data-act='delnotice' data-id='" + n.id + "'>Delete</button></div>").join("") : "<div class='muted' style='margin-top:10px'>No notices yet.</div>") +
+  "<label for='nt'>Title</label><input type='text' id='nt' maxlength='80' placeholder='For example: Parking P3 closed on Saturday'><label for='nb'>Message (optional)</label><textarea id='nb' maxlength='300' style='min-height:70px'></textarea><label for='nk'>Type</label><select id='nk'><option value='info'>Notice</option><option value='closure'>Closure</option><option value='event'>Event</option></select><label for='nd'>Show for how many days? (empty = until you delete it)</label><input type='number' id='nd' min='1' placeholder='7'><label for='nl'>Link (optional)</label><input type='text' id='nl' placeholder='https://...' inputmode='url'><label for='ni'>Event image (optional)</label><input type='file' id='ni' accept='image/*'><div class='err' id='nerr' role='alert'></div><button class='btn sm' style='margin-top:12px' data-act='addnotice'>Post notice</button></div>";
 const activityPanel = () => "<div class='panel' style='margin-bottom:20px'><h2>Activity log</h2><div class='muted'>Who did what to each report. Written by the database, so it cannot be edited here.</div>" +
   (D.activity.length ? D.activity.slice(0, 40).map(a => "<div class='row note'><span><b>" + esc(a.actor_email || "system") + "</b> " + esc(a.action) + " <b>" + esc(a.ticket_code) + "</b>" + (a.detail ? " <span class='muted'>(" + esc(a.detail) + ")</span>" : "") + "</span><span class='muted'>" + ago(a.created_at) + "</span></div>").join("") : "<div class='muted' style='margin-top:10px'>No activity yet.</div>") + "</div>";
 function insights() {
@@ -1343,6 +1480,17 @@ function adminView() {
     "ad-stores": () => "<div class='adpair'>" + storeInfoPanel() + pinPanel() + "</div>" + storeManagePanel(), "ad-accounts": tenantAccounts, "ad-activity": activityPanel
   }[tab]();
   return adminBar(q, act, late, lf, rej, tab) + "<div class='adbody'>" + body + "</div>";
+}
+async function addNotice() {
+  const ti = $("nt").value.trim(), d = parseInt($("nd").value, 10), link = $("nl").value.trim(), f = $("ni").files[0], er = $("nerr"); er.textContent = "";
+  if (!ti) return;
+  if (link && !safeUrl(link)) { er.textContent = tr2("The link must start with https://"); return; }
+  if (f && f.size > 15e6) { er.textContent = tr2("That photo is too large. Choose one under 15 MB."); return; }
+  try {
+    let img = null;
+    if (f) { const blob = await compress(f), path = "event-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + ".jpg"; const up = await sb.storage.from("store-logos").upload(path, blob, {contentType: "image/jpeg"}); if (up.error) throw up.error; img = sb.storage.from("store-logos").getPublicUrl(path).data.publicUrl; }
+    await mut(sb.from("notices").insert({title: ti, body: $("nb").value.trim() || null, kind: $("nk").value, expires_at: d > 0 ? new Date(Date.now() + d * 864e5).toISOString() : null, link_url: link || null, image_url: img}));
+  } catch (e) { er.textContent = "Could not post: " + (e.message || e); }
 }
 async function mut(p) { const {error} = await p; if (error) { toast("Failed: " + error.message); return false; } await reload(); render(); return true; }
 const upd = (id, patch) => mut(sb.from("tickets").update(patch).eq("id", id));
@@ -1478,7 +1626,7 @@ document.addEventListener("keydown", e => {
   else if (e.key === "Escape") sdClose();
 });
 addEventListener("scroll", sdPlace, true); addEventListener("resize", sdPlace);
-const initUI = () => { initReveal(); initHome(); initDrag(); initAdminNav(); updSimFlag(); sdClose(); enhanceStoreInputs(); };
+const initUI = () => { initReveal(); initHome(); initDrag(); initAdminNav(); updSimFlag(); sdClose(); enhanceStoreInputs(); if ($("pst") && pinEd.key) { $("pst").value = pinEd.key; drawPin(); } };
 document.addEventListener("click", async e => {
   if (e.target.id === "sheet") { $("sheet").classList.add("hidden"); return; }
   const b = e.target.closest("[data-act]"); if (!b) return;
@@ -1499,6 +1647,10 @@ document.addEventListener("click", async e => {
   else if (a === "shareplan") { if (!planItems(b.dataset.src).length) { toast("Nothing to share yet."); return; } const t = shareText(b.dataset.src); if (navigator.share) navigator.share({title: "AEON Mall BSD City", text: t}).catch(() => {}); else if (navigator.clipboard) navigator.clipboard.writeText(t).then(() => toast("Copied"), () => toast(t)); else toast(t); }
   else if (a === "wa") { if (!planItems(b.dataset.src).length) { toast("Nothing to share yet."); return; } window.open("https://wa.me/?text=" + encodeURIComponent(shareText(b.dataset.src)), "_blank", "noopener"); }
   else if (a === "mapfloor") { mapSel.f = b.dataset.f; mapSel.i = null; drawMap(); }
+  else if (a === "mapmode") { mapOpt.mode = b.dataset.k; drawMap(); }
+  else if (a === "mapzoom") { mapOpt.z = Math.max(1, Math.min(3, mapOpt.z + (+b.dataset.d) * .5)); drawMap(); }
+  else if (a === "mapam") { mapAm[b.dataset.k] = !mapAm[b.dataset.k]; drawMap(); }
+  else if (a === "showmap") { const x = STORE_OBJ[+b.dataset.i]; if (x) { if (x.floor !== "n/a") mapSel.f = x.floor; mapSel.i = x.i; view = "map"; window.scrollTo(0, 0); render(); } }
   else if (a === "mappin") { mapSel.i = +b.dataset.i; drawMap(); }
   else if (a === "mic") listen(b.dataset.t)
   else if (a === "adgo") { adTab = b.dataset.t; render(); const n = $("abnav"); if (n && n.getBoundingClientRect().top < 0) n.scrollIntoView({block: "start"}); }
@@ -1549,12 +1701,15 @@ document.addEventListener("click", async e => {
   else if (a === "dellevel") { if (ask("Remove parking level " + id + "?")) mut(sb.from("parking").delete().eq("level", id)); }
   else if (a === "savestore") saveStore();
   else if (a === "savepin") savePin(false);
+  else if (a === "savepinnext") savePin(false, true);
+  else if (a === "pinmode") { pinEd.mode = b.dataset.k; drawPin(); }
+  else if (a === "pinzoom") { pinEd.z = Math.max(1, Math.min(3, pinEd.z + (+b.dataset.d) * .5)); drawPin(); }
   else if (a === "smdel") { const x = ALL_STORES.find(o => o.key === b.dataset.k); if (x && ask("Delete this store from the directory? You can restore it later.")) setStore(x.key, {hidden: true}, "Store deleted"); }
   else if (a === "smrestore") setStore(b.dataset.k, {hidden: false}, "Store restored");
   else if (a === "smreset") setStore(b.dataset.k, {floor: null, map_x: null, map_y: null}, "Store floor updated");
   else if (a === "smmore") { SM.all = true; drawSM(); }
   else if (a === "delpin") savePin(true);
-  else if (a === "addnotice") { const ti = $("nt").value.trim(), d = parseInt($("nd").value, 10); if (ti) mut(sb.from("notices").insert({title: ti, body: $("nb").value.trim() || null, kind: $("nk").value, expires_at: d > 0 ? new Date(Date.now() + d * 864e5).toISOString() : null})); }
+  else if (a === "addnotice") addNotice();
   else if (a === "delnotice") { if (ask("Delete this notice?")) mut(sb.from("notices").delete().eq("id", id)); }
   else if (a === "exp") download("aeon-reports-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.tickets, ["code","created_at","source","store","kind","category","location","description","contact","urgency","status","verification","technician","assigned_at","resolved_at","photo_url"]));
   else if (a === "expact") download("aeon-activity-" + new Date().toISOString().slice(0, 10) + ".csv", csv(D.activity, ["created_at","ticket_code","actor_email","action","detail"]));
